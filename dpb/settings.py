@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'polls',
     'login',
+    'archive',
 )
 
 MIDDLEWARE_CLASSES = (
