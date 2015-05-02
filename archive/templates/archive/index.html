@@ -33,9 +33,7 @@
                 {{ item.author }}
               </td>
               <td>
-                {% if item.year == 0 %}
-
-                {% else %}
+                {% if not item.year == 0 %}
                   {{ item.year }}
                 {% endif %}
               </td>
