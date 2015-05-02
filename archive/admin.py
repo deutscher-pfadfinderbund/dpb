@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import Item
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('signature', 'title', 'public','pub_date')
+    list_display = ('signature', 'title', 'active', 'reviewed', 'pub_date')
     list_filter = ['pub_date']
     search_fields = ['signature', 'title']
 
