@@ -15,8 +15,10 @@ def index(request):
         results = None
     if query:
         try:
-            # Query comes here!
-            results = Item.objects.filter(title__contains=query).values()
+            # Specify which fields are searchable
+            results = Item.objects.filter(
+                Q(title__iexact=query) |        # '|' = OR; ',' = AND
+                Q(signature__iexact=query)).exclude(public=False)
         except Item.DoesNotExist:
             results = None
     context = RequestContext(request)

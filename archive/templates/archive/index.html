@@ -11,10 +11,28 @@
       </form>
     </p>
     <p>
+      <!-- Exclude items where item.public is False -->
       {% if results %}
-        {% for result in results %}
-          {{ result.title }}
-        {% endfor %}
+        <table class="table table-bordered table-striped table-hover">
+          <tr>
+            <th>
+              Signatur
+            </th>
+            <th>
+              Titel
+            </th>
+          </tr>
+          {% for item in results %}
+            <tr>
+              <td>
+                {{ item.signature }}
+              </td>
+              <td>
+                {{ item.title }}
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
       {% else %}
         Keine Einträge gefunden.
       {% endif %}
