@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Bundesarchiv</h1>
+    <p>
+      <form method="get" action="/archive/" class="form-inline">
+        <div class="form-group">
+          <input type="text" name="q" id="id_q" value="{{ query }}" class="form-control" placeholder="Kompassnadel, ..."/>
+        </div>
+        <input type="submit" value="Suchen" class="btn btn-default"/>
+      </form>
+    </p>
+    <p>
+      {% if results %}
+        {% for result in results %}
+          {{ result.title }}
+        {% endfor %}
+      {% else %}
+        Keine Einträge gefunden.
+      {% endif %}
+    </p>
+
+{% endblock %}
