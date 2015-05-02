@@ -15,19 +15,29 @@
         <table class="table table-bordered table-condensed table-striped table-hover">
           <tr>
             <th>
-              Signatur
+              Titel
             </th>
             <th>
-              Titel
+              Autor
+            </th>
+            <th data-sortable="true">
+              Jahr
             </th>
           </tr>
           {% for item in results %}
             <tr>
               <td>
-                {{ item.signature }}
+                {{ item.title }}
               </td>
               <td>
-                {{ item.title }}
+                {{ item.author }}
+              </td>
+              <td>
+                {% if item.year == 0 %}
+
+                {% else %}
+                  {{ item.year }}
+                {% endif %}
               </td>
             </tr>
           {% endfor %}
