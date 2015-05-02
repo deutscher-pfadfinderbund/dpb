@@ -6,13 +6,17 @@ from .models import Item
 
 
 def index(request):
-    query = request.GET.get('q')
+    req = request.GET.get('q')
+    query = None
     results = None
+    if req:
+        query = req
+    else:
+        query = ""
     try:
         query = str(query)
     except ValueError:
-        query = None
-        results = None
+        query = ""
     if query:
         try:
             # Specify which fields are searchable
