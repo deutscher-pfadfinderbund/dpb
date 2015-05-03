@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Bundesarchiv</h1>
     <p>
-      <form method="get" action="/archive/" class="form-inline">
+      <form method="get" action="archive/" class="form-inline">
         <div class="form-group">
           <input type="text" name="q" id="id_q" value="{{ query|default_if_none:'' }}" class="form-control" placeholder="Kompassnadel, ..."/>
         </div>
