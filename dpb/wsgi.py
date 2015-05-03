@@ -7,7 +7,8 @@ For more information on this file, see
 https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/
 """
 
-import os, sys
+import os, sys, site
+site.addsitedir('/home/n1o/.virtualenvs/dpb/lib/python3.4/site-packages')
 sys.path.append('/usr/share/django/dpb')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dpb.settings")
 
