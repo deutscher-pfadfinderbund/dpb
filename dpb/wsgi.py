@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/
 """
 
 import os, sys
-sys.append('/usr/share/django/dpb')
+sys.path.append('/usr/share/django/dpb')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dpb.settings")
 
 from django.core.wsgi import get_wsgi_application
