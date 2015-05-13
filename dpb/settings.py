@@ -122,9 +122,6 @@ PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
 
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
 
-PIPELINE = True             # Enable Pipeline in DEBUG and mode
-PIPELINE_VERSION_REMOVE_OLD = True  # Remove old compressed files
-
 PIPELINE_CSS = {
     'master': {
         'source_filenames': (
