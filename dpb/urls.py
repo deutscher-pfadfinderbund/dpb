@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^pages/', include('django.contrib.flatpages.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^account/', include('login.urls', namespace='login')),
+    url(r'^accounts/', include('login.urls', namespace='login')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
