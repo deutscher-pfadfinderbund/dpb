@@ -53,6 +53,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'pipeline.middleware.MinifyHTMLMiddleware',
 )
 
 ROOT_URLCONF = 'dpb.urls'
@@ -87,10 +88,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_URL = '/dpbstatic/'
+STATIC_URL = '/static/'
 
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = "/var/www/dpbstatic/"
+STATIC_ROOT = "static/"
 
 # Define Paths for Pipeline
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
@@ -104,7 +106,6 @@ STATICFILES_FINDERS = (
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'media'),
     os.path.join(BASE_DIR, 'templates/dpb'),
-    os.path.join(BASE_DIR, 'static'),
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -117,18 +118,33 @@ PIPELINE_COMPILERS = (
   'pipeline.compilers.sass.SASSCompiler',
 )
 
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
+
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
+
+PIPELINE = True             # Enable Pipeline in DEBUG and mode
+PIPELINE_VERSION_REMOVE_OLD = True  # Remove old compressed files
+
 PIPELINE_CSS = {
-    'colors': {
+    'master': {
         'source_filenames': (
-          'css/core.css',
-          'css/colors/*.css',
-          'css/layers.css'
+          'css/*.css',
+          'css/*.scss',
         ),
-        'output_filename': 'css/colors.css',
+        'output_filename': 'compressed/master.css',
         'extra_context': {
-            'media': 'screen,projection',
+            'media': 'screen, projection',
         },
     },
+}
+
+PIPELINE_JS = {
+  'master': {
+    'source_filenames': (
+      'js/*.js',
+    ),
+    'output_filename': 'compressed/master.js'
+  }
 }
 
 ### END Pipeline ###

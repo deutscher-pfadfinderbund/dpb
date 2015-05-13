@@ -13,19 +13,16 @@
 
     {% load staticfiles %}
     {% load pipeline %}
-    {% stylesheet 'group' %}
 
     <!-- Bootstrap core CSS -->
-    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="{% static 'dpb/css/bootstrap.min.css' %}" media="screen" title="no title" charset="utf-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="{% static 'dpb/css/bootstrap.min.css' %}" media="screen" title="no title" charset="utf-8"> -->
     <!-- Bootstrap theme -->
-    <!-- <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/simplex/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="{% static 'dpb/css/bootswatch.min.css' %}" media="screen" title="no title" charset="utf-8">
-
-    <link rel="stylesheet" href="{% static 'dpb/css/style.css' %}" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/simplex/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="{% static 'dpb/css/bootswatch.min.css' %}" media="screen" title="no title" charset="utf-8"> -->
 
     <!-- Fontawesome CSS-->
-    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -33,8 +30,11 @@
       <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- <script src="//code.jquery.com/jquery-2.1.3.min.js"></script> -->
-    <script src="{% static 'dpb/js/jquery.min.js' %}"></script>
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!-- <script src="{% static 'dpb/js/jquery.min.js' %}"></script> -->
+    
+    <link rel="stylesheet" href="{% static 'compressed/master.css' %}" media="screen" title="no title" charset="utf-8">
+    <script src="{% static 'compressed/master.js' %}"></script>
   </head>
 
   <body role="document">
@@ -75,7 +75,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
-    <script src="{% static 'dpb/js/bootstrap.min.js' %}"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <!-- <script src="{% static 'dpb/js/bootstrap.min.js' %}"></script> -->
   </body>
 </html>
