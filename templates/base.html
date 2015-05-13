@@ -11,10 +11,14 @@
 
     <title>Deutscher Pfadfinderbund</title>
 
+    {% load staticfiles %}
+
     <!-- Bootstrap core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap theme -->
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/flatly/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/simplex/bootstrap.min.css">
+
+    <link rel="stylesheet" href="{% static 'dpb/css/style.css' %}" media="screen" title="no title" charset="utf-8">
 
     <!-- Fontawesome CSS-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -26,8 +30,6 @@
     <![endif]-->
 
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-
-    {% load staticfiles %}
   </head>
 
   <body role="document">
