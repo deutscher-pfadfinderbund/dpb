@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'polls',
     'login',
     'archive',
+    'pipeline',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -91,6 +92,15 @@ STATIC_URL = '/dpbstatic/'
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = "/var/www/dpbstatic/"
 
+# Define Paths for Pipeline
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
+)
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'media'),
     os.path.join(BASE_DIR, 'templates/dpb'),
@@ -99,6 +109,29 @@ STATICFILES_DIRS = (
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+### Pipeline ###
+
+# Set Pipeline Compilers
+PIPELINE_COMPILERS = (
+  'pipeline.compilers.sass.SASSCompiler',
+)
+
+PIPELINE_CSS = {
+    'colors': {
+        'source_filenames': (
+          'css/core.css',
+          'css/colors/*.css',
+          'css/layers.css'
+        ),
+        'output_filename': 'css/colors.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+}
+
+### END Pipeline ###
 
 # Configure Templates
 TEMPLATES = [
