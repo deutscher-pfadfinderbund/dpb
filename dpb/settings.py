@@ -122,11 +122,12 @@ PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
 
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
 
+PIPELINE_ENABLED = True
+
 PIPELINE_CSS = {
     'master': {
         'source_filenames': (
-          'css/*.css',
-          'css/*.scss',
+          'css/*.sass',
         ),
         'output_filename': 'compressed/master.css',
         'extra_context': {
