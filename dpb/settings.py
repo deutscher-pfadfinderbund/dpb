@@ -122,7 +122,7 @@ PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
 
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
 
-PIPELINE_ENABLED = True
+#PIPELINE_ENABLED = True
 
 PIPELINE_CSS = {
     'master': {

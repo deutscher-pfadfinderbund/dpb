@@ -13,6 +13,8 @@
 
     {% load staticfiles %}
     {% load pipeline %}
+    {% stylesheet 'master' %}
+    {% javascript 'master' %}
 
     <!-- Bootstrap core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -32,8 +34,9 @@
 
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
     <!-- <script src="{% static 'dpb/js/jquery.min.js' %}"></script> -->
-    
-    <link rel="stylesheet" href="{% static 'compressed/master.css' %}" media="screen" title="no title" charset="utf-8">
+
+    <!-- Load compressed CSS and JS -->
+    <!-- <link rel="stylesheet" href="{% static 'compressed/master.css' %}" media="screen" title="no title" charset="utf-8"> -->
     <script src="{% static 'compressed/master.js' %}"></script>
   </head>
 
