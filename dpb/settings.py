@@ -149,6 +149,18 @@ PIPELINE_JS = {
 ### END Pipeline ###
 
 # Configure TinyMCE
+TINYMCE_JS_URL = "plugins/tinymce/tinymce.min.js"
+TINYMCE_JS_ROOT = "plugins/tinymce"
+
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table, spellchecker, paste, searchreplace",
+    'theme': "advanced",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+}
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = True
+
 
 # Configure Templates
 TEMPLATES = [
