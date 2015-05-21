@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'login',
     'archive',
     'pipeline',
+    'tinymce',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -146,6 +147,8 @@ PIPELINE_JS = {
 }
 
 ### END Pipeline ###
+
+# Configure TinyMCE
 
 # Configure Templates
 TEMPLATES = [
