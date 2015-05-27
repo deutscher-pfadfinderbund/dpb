@@ -25,12 +25,6 @@
     <!-- Fontawesome CSS-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
     <!-- <script src="{% static 'dpb/js/jquery.min.js' %}"></script> -->
 
@@ -41,7 +35,20 @@
 
   <body role="document">
 
-    <!-- Fixed navbar -->
+    <div class="container" id="header-wrapper">
+      <header>
+        <div class="row">
+          <div class="col-md-1">
+            <img src="{% static 'img/lilie100.png' %}" alt="Lilie"/>
+          </div>
+          <div class="col-md-11">
+            <h1>Deutscher Pfadfinderbund</h1>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <!-- navbar -->
     <nav class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">
@@ -58,25 +65,9 @@
             <li><a href="/bundesarchiv">Bundesarchiv</a></li>
             <li><a href="/selbstdarstellung">Selbstdarstellung</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/account">Login</a></li>
-            <li><a href="/account/register">Registrieren</a></li>
-          </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <div class="container">
-      <header>
-        <div class="row">
-          <div class="col-md-2">
-            <img src="{% static 'img/lilie130.png' %}" alt="Lilie"/>
-          </div>
-          <div class="col-md-10">
-            Deutscher Pfadfinderbund
-          </div>
-        </div>
-      </header>
-    </div>
 
     <div class="container">
       {% block heading %}{% endblock %}
