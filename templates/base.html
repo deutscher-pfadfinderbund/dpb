@@ -69,23 +69,25 @@
       </div>
     </nav>
 
-    <div class="container">
+    <div id="main">
       {% block carousel %}{% endblock %}
-    </div>
 
-    <div class="container">
-      {% block heading %}{% endblock %}
-    </div>
-
-    <div class="container" role="main">
-      {% block content %}{% endblock %}
-    </div>
-
-    <footer class="stripe">
       <div class="container">
-        {% include 'footer.html' %}
+        {% block heading %}{% endblock %}
       </div>
-    </footer>
+
+      <div class="container" role="main">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+
+    <div class="wrapper-footer">
+      <footer class="stripe">
+        <div class="container">
+          {% include 'footer.html' %}
+        </div>
+      </footer>
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

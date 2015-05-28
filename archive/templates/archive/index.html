@@ -1,48 +1,51 @@
 {% extends "base.html" %}
 
+{% block heading %}
+  <h1>Bundesarchiv</h1>
+{% endblock %}
+
 {% block content %}
-    <h1>Bundesarchiv</h1>
-    <p>
-      <form method="get" action="" class="form-inline">
-        <div class="form-group">
-          <input type="text" name="q" id="id_q" value="{{ query|default_if_none:'' }}" class="form-control" placeholder="Kompassnadel, ..."/>
-        </div>
-        <input type="submit" value="Suchen" class="btn btn-default"/>
-      </form>
-    </p>
-    <p>
-      {% if results %}
-        <table class="table table-bordered table-condensed table-striped table-hover">
+  <p>
+    <form method="get" action="" class="form-inline">
+      <div class="form-group">
+        <input type="text" name="q" id="id_q" value="{{ query|default_if_none:'' }}" class="form-control" placeholder="Kompassnadel, ..."/>
+      </div>
+      <input type="submit" value="Suchen" class="btn btn-default"/>
+    </form>
+  </p>
+  <p>
+    {% if results %}
+      <table class="table table-bordered table-condensed table-striped table-hover">
+        <tr>
+          <th>
+            Titel
+          </th>
+          <th>
+            Autor
+          </th>
+          <th data-sortable="true">
+            Jahr
+          </th>
+        </tr>
+        {% for item in results %}
           <tr>
-            <th>
-              Titel
-            </th>
-            <th>
-              Autor
-            </th>
-            <th data-sortable="true">
-              Jahr
-            </th>
+            <td>
+              {{ item.title }}
+            </td>
+            <td>
+              {{ item.author }}
+            </td>
+            <td>
+              {% if not item.year == 0 %}
+                {{ item.year }}
+              {% endif %}
+            </td>
           </tr>
-          {% for item in results %}
-            <tr>
-              <td>
-                {{ item.title }}
-              </td>
-              <td>
-                {{ item.author }}
-              </td>
-              <td>
-                {% if not item.year == 0 %}
-                  {{ item.year }}
-                {% endif %}
-              </td>
-            </tr>
-          {% endfor %}
-        </table>
-      {% elif query != "" %}
-        Keine Einträge gefunden.
-      {% endif %}
-    </p>
+        {% endfor %}
+      </table>
+    {% elif query != "" %}
+      Keine Einträge gefunden.
+    {% endif %}
+  </p>
 
 {% endblock %}

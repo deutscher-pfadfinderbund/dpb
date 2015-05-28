@@ -6,6 +6,10 @@ body
   color: $grey
   background-color: $background-color
 
+.stripe
+  background-color: white
+  border-color: #eeeeee
+
 // Header
 header
   h1
@@ -42,11 +46,31 @@ header
 .navbar .container
   padding-bottom: 0
 
-
-.stripe
-  background-color: white
-  border-color: #eeeeee
-
 // Footer
 .stripe .container
   padding-top: 1em
+
+/* Make footer sticky */
+/* Sticky footer styles */
+html
+  position: relative
+  min-height: 100%
+
+#main
+  /* Margin bottom by footer height */
+  @media only screen and (min-width: 1000px)
+    margin-bottom: 125px
+
+
+.wrapper-footer
+  margin-top: 50px
+
+  @media only screen and (min-width: 1000px)
+    position: absolute
+    bottom: 0
+    width: 100%
+    /* Set the fixed height of the footer here */
+    height: 125px
+
+
+/* END Make footer sticky */
