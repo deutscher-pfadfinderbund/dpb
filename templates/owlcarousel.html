@@ -1,0 +1,41 @@
+{% load staticfiles %}
+
+<script src="{% static 'assets/owl-carousel/owl.carousel.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'assets/owl-carousel/owl.carousel.css' %}"/>
+<link rel="stylesheet" href="{% static 'assets/owl-carousel/owl.theme.css' %}"/>
+<link rel="stylesheet" href="{% static 'assets/owl-carousel/owl.transitions.css' %}"/>
+
+<style>
+  #owl-demo .item img{
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>
+
+<div id="owl-demo" class="owl-carousel owl-theme">
+  <div class="item"><img src="{% static 'img/carousel/bundeslager2015.jpg' %}" alt="Bundeslager2015"></div>
+  <div class="item"><img src="{% static 'img/carousel/bundeslager2015.jpg' %}" alt="Bundeslager2015"></div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $("#owl-demo").owlCarousel({
+
+        navigation : true, // Show next and prev buttons
+        slideSpeed : 300,
+        paginationSpeed : 400,
+        singleItem: true,
+        autoPlay: 5000,
+        navigation: false,
+        transitionStyle: "fade",
+
+        // "singleItem:true" is a shortcut for:
+        // items : 1,
+        // itemsDesktop : false,
+        // itemsDesktopSmall : false,
+        // itemsTablet: false,
+        // itemsMobile : false
+    });
+  });
+</script>
