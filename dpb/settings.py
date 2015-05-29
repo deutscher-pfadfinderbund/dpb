@@ -125,15 +125,25 @@ PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
 #PIPELINE_ENABLED = True
 
 PIPELINE_CSS = {
-    'master': {
-        'source_filenames': (
-          'css/*.sass',
-        ),
-        'output_filename': 'compressed/master.css',
-        'extra_context': {
-            'media': 'screen, projection',
-        },
+  'master': {
+    'source_filenames': (
+      'css/*.sass',
+    ),
+    'output_filename': 'compressed/master.css',
+    'extra_context': {
+      'media': 'screen, projection',
     },
+  },
+  'vendor': {
+    'source_filenames': (
+      'assets/bootstrap/css/bootstrap.min.css',
+      'assets/bootstrap/css/bootstrap-theme.min.css',
+      'assets/bootswatch/bootswatch.min.css',
+      #'assets/fontawesome/css/font-awesome.min.css',
+      'assets/fontawesome/css/font-awesome.min.css',
+    ),
+    'output_filename': 'compressed/vendor.css'
+  }
 }
 
 PIPELINE_JS = {
@@ -142,6 +152,12 @@ PIPELINE_JS = {
       'js/*.js',
     ),
     'output_filename': 'compressed/master.js'
+  },
+  'vendor': {
+    'source_filenames': (
+      'assets/jquery/jquery.min.js',
+    ),
+    'output_filename': 'compressed/vendor.js'
   }
 }
 
