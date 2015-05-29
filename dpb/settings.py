@@ -140,7 +140,7 @@ PIPELINE_CSS = {
       'assets/bootstrap/css/bootstrap-theme.min.css',
       'assets/bootswatch/bootswatch.min.css',
       #'assets/fontawesome/css/font-awesome.min.css',
-      'assets/fontawesome/css/font-awesome.min.css',
+
     ),
     'output_filename': 'compressed/vendor.css'
   }
@@ -156,6 +156,7 @@ PIPELINE_JS = {
   'vendor': {
     'source_filenames': (
       'assets/jquery/jquery.min.js',
+      'assets/bootstrap/js/bootstrap.min.js',
     ),
     'output_filename': 'compressed/vendor.js'
   }
