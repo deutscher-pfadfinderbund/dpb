@@ -39,12 +39,18 @@
               <img class="navbar-brand navbar-brand-img" src="{% static 'img/lilie100.png' %}" alt="Lilie"/>
               DPB
             </a>
-
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li><a href="/bundesarchiv">Bundesarchiv</a></li>
-              <li><a href="/selbstdarstellung">Selbstdarstellung</a></li>
+
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Selbstdarstellung <span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="themes">
+                  <li><a href="/geschichte">Der Deutsche Pfadfinderbund</a></li>
+                  <li><a href="/was-sind-pfadfinder">Was sind (bündische) Pfadfinder</a></li>
+                </ul>
+              </li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
