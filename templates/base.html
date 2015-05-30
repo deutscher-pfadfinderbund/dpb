@@ -26,15 +26,34 @@
           width: 1470px;
         }
       }
-      .content-wrapper {
-{% comment %}        background-color: white;
-        margin: 1em auto;
-        box-shadow: 0 1px 2px #aaa;{% endcomment %}
-      }
 
       .footer-wrapper {
         border-top: 20px solid #FFFFFF;
         box-shadow: 0 1px 2px #aaa;
+      }
+
+      .navbar-nav > li > a, .navbar-brand {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        line-height: 80px;
+      }
+
+      @media (max-width: 767px) {
+        .navbar-nav > li > a {
+          line-height: 20px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+
+      .navbar-brand {
+        height: 80px;
+      }
+      .navbar-brand {
+        padding-left: 1em;
+      }
+      .navbar-brand img {
+        padding: 0.1em 1em;
       }
     </style>
 
@@ -53,7 +72,12 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">DPB</a>
+
+            <a class="navbar-brand" href="/">
+              <img class="navbar-brand navbar-brand-img" src="{% static 'img/lilie100.png' %}" alt="Lilie"/>
+              DPB
+            </a>
+
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -62,19 +86,6 @@
             </ul>
           </div><!--/.nav-collapse -->
         </div>
-      </div>
-
-      <div class="container" id="header-wrapper">
-        <header>
-          <div class="row">
-            <div class="col-md-1">
-              <img src="{% static 'img/lilie100.png' %}" alt="Lilie"/>
-            </div>
-            <div class="col-md-11">
-              <h1>Deutscher Pfadfinderbund</h1>
-            </div>
-          </div>
-        </header>
       </div>
 
       <div id="main">
