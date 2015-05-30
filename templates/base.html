@@ -11,65 +11,88 @@
     {% load staticfiles %}
 
     {% load pipeline %}
-    {% stylesheet 'master' %}
     {% stylesheet 'vendor' %}
-    {% javascript 'master' %}
+    {% stylesheet 'master' %}
     {% javascript 'vendor' %}
+    {% javascript 'master' %}
 
     <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
     <title>Deutscher Pfadfinderbund</title>
+
+    <style>
+      @media (min-width: 1500px) {
+        .container {
+          width: 1470px;
+        }
+      }
+      .content-wrapper {
+{% comment %}        background-color: white;
+        margin: 1em auto;
+        box-shadow: 0 1px 2px #aaa;{% endcomment %}
+      }
+
+      .footer-wrapper {
+        border-top: 20px solid #FFFFFF;
+        box-shadow: 0 1px 2px #aaa;
+      }
+    </style>
+
   </head>
 
   <body role="document">
+    <!--<div class="container content-wrapper">-->
 
-    <div class="container" id="header-wrapper">
-      <header>
-        <div class="row">
-          <div class="col-md-1">
-            <img src="{% static 'img/lilie100.png' %}" alt="Lilie"/>
+      <!-- navbar -->
+      <div class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">DPB</a>
           </div>
-          <div class="col-md-11">
-            <h1>Deutscher Pfadfinderbund</h1>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="/bundesarchiv">Bundesarchiv</a></li>
+              <li><a href="/selbstdarstellung">Selbstdarstellung</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+
+      <div class="container" id="header-wrapper">
+        <header>
+          <div class="row">
+            <div class="col-md-1">
+              <img src="{% static 'img/lilie100.png' %}" alt="Lilie"/>
+            </div>
+            <div class="col-md-11">
+              <h1>Deutscher Pfadfinderbund</h1>
+            </div>
           </div>
+        </header>
+      </div>
+
+      <div id="main">
+        <div class="container">
+         {% block carousel %}{% endblock %}
         </div>
-      </header>
-    </div>
 
-    <!-- navbar -->
-    <nav class="navbar navbar-default">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">DPB</a>
+        <div class="container">
+          {% block heading %}{% endblock %}
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/bundesarchiv">Bundesarchiv</a></li>
-            <li><a href="/selbstdarstellung">Selbstdarstellung</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+
+        <div class="container" role="main">
+          {% block content %}{% endblock %}
+        </div>
       </div>
-    </nav>
+    <!--</div>-->
 
-    <div id="main">
-      {% block carousel %}{% endblock %}
-
-      <div class="container">
-        {% block heading %}{% endblock %}
-      </div>
-
-      <div class="container" role="main">
-        {% block content %}{% endblock %}
-      </div>
-    </div>
-
-    <div class="wrapper-footer">
+    <div class="footer-wrapper">
       <footer class="stripe">
         <div class="container">
           {% include 'footer.html' %}
