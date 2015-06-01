@@ -1,26 +1,21 @@
+from django.core.urlresolvers import reverse
 from django.contrib import admin
-from django.contrib.flatpages.admin import FlatpageForm, FlatPageAdmin
+from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
-## OOPS this is a custom widget that works for initializing
-## tinymce instances on stacked and tabular inlines
-## for flatpages, just use the tinymce packaged one.
-#from content.widgets import TinyMCE 
+
 from tinymce.widgets import TinyMCE
 
-class FlatPageCustom(FlatpageForm):
+from django import forms
+from django.contrib.flatpages.models import FlatPage
+from tinymce.widgets import TinyMCE
+
+
+class FlatPageForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
     class Meta:
         model = FlatPage
-        widgets = {
-            'content' : TinyMCE(attrs={'cols': 100, 'rows': 15}),
-        }
-
-
-class PageAdmin(FlatPageAdmin):
-    """
-    Page Admin
-    """
-    form = PageForm
 
 
 admin.site.unregister(FlatPage)
-admin.site.register(FlatPage, FlatPageCustom)
+admin.site.register(FlatPage, FlatPageForm)
