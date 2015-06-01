@@ -1,3 +1,8 @@
 Django==1.8.2
+django-appconf==1.0.1
+django-pagedown==0.1.0
 django-pipeline==1.5.0
+django-tinymce==1.5.3
 futures==3.0.2
+six==1.9.0
+vboxapi==1.0
