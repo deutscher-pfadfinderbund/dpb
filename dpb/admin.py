@@ -7,8 +7,7 @@ from django.contrib.flatpages.models import FlatPage
 #from content.widgets import TinyMCE 
 from tinymce.widgets import TinyMCE
 
-class PageForm(FlatpageForm):
-
+class FlatPageCustom(FlatpageForm):
     class Meta:
         model = FlatPage
         widgets = {
@@ -24,4 +23,4 @@ class PageAdmin(FlatPageAdmin):
 
 
 admin.site.unregister(FlatPage)
-admin.site.register(FlatPage, PageAdmin)
+admin.site.register(FlatPage, FlatPageCustom)
