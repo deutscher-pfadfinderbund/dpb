@@ -1,0 +1,24 @@
+{% load staticfiles %}
+
+<script src="{% static 'assets/owl-carousel/owl.carousel.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'assets/owl-carousel/owl.carousel.css' %}"/>
+<link rel="stylesheet" href="{% static 'assets/owl-carousel/owl.theme.css' %}"/>
+<link rel="stylesheet" href="{% static 'assets/owl-carousel/owl.transitions.css' %}"/>
+
+<div id="dpb-carousel" class="owl-carousel owl-theme">
+  <div class="item"><img src="{% static 'img/carousel/bundeslager2015.jpg' %}" alt="Bundeslager2015"></div>
+  <div class="item"><img src="{% static 'img/carousel/bundeslager2015.jpg' %}" alt="Bundeslager2015"></div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $("#dpb-carousel").owlCarousel({
+      navigation : false, // Show next and prev buttons
+      slideSpeed : 300,
+      paginationSpeed : 400,
+      singleItem: true,
+      autoPlay: 5000,
+      transitionStyle: "fade",
+    });
+  });
+</script>

@@ -7,76 +7,76 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <!--<link rel="icon" href="../../favicon.ico">-->
-
-    <title>Deutscher Pfadfinderbund</title>
 
     {% load staticfiles %}
+
     {% load pipeline %}
+    {% stylesheet 'vendor' %}
+    {% stylesheet 'master' %}
+    {% javascript 'vendor' %}
+    {% javascript 'master' %}
 
-    <!-- Bootstrap core CSS -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="{% static 'dpb/css/bootstrap.min.css' %}" media="screen" title="no title" charset="utf-8"> -->
-    <!-- Bootstrap theme -->
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/simplex/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="{% static 'dpb/css/bootswatch.min.css' %}" media="screen" title="no title" charset="utf-8"> -->
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
-    <!-- Fontawesome CSS-->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-    <!-- <script src="{% static 'dpb/js/jquery.min.js' %}"></script> -->
-
-    <!-- Load compressed CSS and JS -->
-    <link rel="stylesheet" href="{% static 'compressed/master.css' %}" media="screen" title="no title" charset="utf-8">
-    <script src="{% static 'compressed/master.js' %}"></script>
+    <title>Deutscher Pfadfinderbund</title>
   </head>
 
   <body role="document">
+    <!--<div class="container content-wrapper">-->
 
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-default">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">DPB</a>
+      <!-- navbar -->
+      <div class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="/">
+              <img class="navbar-brand navbar-brand-img" src="{% static 'img/lilie100.png' %}" alt="Lilie"/>
+              DPB
+            </a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="/bundesarchiv">Bundesarchiv</a></li>
+
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Selbstdarstellung <span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="themes">
+                  <li><a href="/geschichte">Der Deutsche Pfadfinderbund</a></li>
+                  <li><a href="/was-sind-pfadfinder">Was sind (bündische) Pfadfinder</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!--/.nav-collapse -->
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/bundesarchiv">Bundesarchiv</a></li>
-            <li><a href="/selbstdarstellung">Selbstdarstellung</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/account">Login</a></li>
-            <li><a href="/account/register">Registrieren</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
       </div>
-    </nav>
 
-    <div class="container">
-      {% block heading %}{% endblock %}
+      <div id="main">
+        <div class="container" id="owl-container">
+         {% block carousel %}{% endblock %}
+        </div>
+
+        <div class="container">
+          {% block heading %}{% endblock %}
+        </div>
+
+        <div class="container" role="main">
+          {% block content %}{% endblock %}
+        </div>
+      </div>
+    <!--</div>-->
+
+    <div class="footer-wrapper">
+      <footer class="stripe">
+        <div class="container">
+          {% include 'footer.html' %}
+        </div>
+      </footer>
     </div>
-
-    <div class="container" role="main">
-      {% block content %}{% endblock %}
-    </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <!-- <script src="{#% static 'dpb/js/bootstrap.min.js' %#}"></script> -->
   </body>
 </html>
