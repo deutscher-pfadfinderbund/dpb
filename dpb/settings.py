@@ -23,7 +23,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['christian-meter.de', 'localhost']
+ALLOWED_HOSTS = ['christian-meter.de', 'localhost', 'deutscher-pfadfinderbund.de']
 
 SITE_ID = 1
 
@@ -166,22 +166,18 @@ PIPELINE_JS = {
 ### END Pipeline ###
 
 # Configure TinyMCE
-TINYMCE_JS_URL = "plugins/tinymce/tinymce.min.js"
-TINYMCE_JS_ROOT = "plugins/tinymce"
-
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': "table, spellchecker, paste, searchreplace",
     'theme': "advanced",
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 10,
 }
-TINYMCE_SPELLCHECKER = True
-TINYMCE_COMPRESSOR = True
+#TINYMCE_SPELLCHECKER = True
+#TINYMCE_COMPRESSOR = True
 
 
 # Configure Templates
-TEMPLATES = [
-    {
+TEMPLATES = [{
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
