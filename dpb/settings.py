@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'login',
     'archive',
     'pipeline',
-    'tinymce',
 )
 
 MIDDLEWARE_CLASSES = (
