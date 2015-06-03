@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'login',
     'archive',
     'pipeline',
+    'easy_thumbnails',
 )
 
 MIDDLEWARE_CLASSES = (

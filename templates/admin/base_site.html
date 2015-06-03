@@ -20,9 +20,11 @@
       spellchecker_languages : "de",
       spellchecker_rpc_url : "{% static 'assets/tinymce/langs/de.js' %}",
       bootstrapConfig: {
-        'imagesPath': "{% static 'assets/tinymce/plugins/bootstrap/img' %}"
+        'imagesPath': "{% static 'assets/tinymce/plugins/bootstrap/img' %}",
       },
-      toolbar: "bootstrap"
+      toolbar: "bootstrap",
+      fullpage_default_encoding: "UTF-8",
+      entity_encoding : "raw",
     });
   </script>
 {% endblock %}
