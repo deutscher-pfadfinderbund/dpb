@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'login',
     'archive',
     'pipeline',
-    'easy_thumbnails',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -110,7 +109,7 @@ STATICFILES_DIRS = (
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 
 ### Pipeline ###
 
