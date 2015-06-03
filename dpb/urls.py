@@ -12,13 +12,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^account/', include('login.urls', namespace='login')),
     url(r'^accounts/', include('login.urls', namespace='login')),
-    url(r'^tinymce/', include('tinymce.urls')),
     url(r'^(?P<url>.*/)$', flatpageviews.flatpage),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-# Short URLs for Flatpages
-#urlpatterns += patterns('django.contrib.flatpages.views',
-#    url(r'^geschichte/$', 'flatpage', {'url': '/geschichte/'}, name='geschichte'),
-#    url(r'^was-sind-pfadfinder/$', 'flatpage', {'url': '/was-sind-pfadfinder/'}, name='was-sind-pfadfinder'),
-#    url(r'^bundesordnung/$', 'flatpage', {'url': '/bundesordnung/'}, name='bundesordnung'),
-#)
