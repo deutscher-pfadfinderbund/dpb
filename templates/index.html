@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
 {% block carousel %}
   {% include "owlcarousel.html" %}
 {% endblock %}
@@ -9,5 +11,30 @@
 {% endblock %}
 
 {% block content %}
-  <p> {{ flatpage.content }}</p>
+  <p>{{ flatpage.content }}</p>
+{% endblock %}
+
+{% block content_extended %}
+  <div class="row">
+    <div class="col-md-2 col-sm-3 col-xs-4">
+      <a href="#" class="thumbnail">
+        <img src="{% static 'img/bundesordnung_200px.png' %}" alt="Bundesordnung"/>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <h4>Bundesordnung</h4>
+      <p>
+        In diesem Abschnitt geben wir Einblick in unsere Bundesordnung. Hier sind die Grundlagen des Bundes in Worte gefasst.
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-9">
+
+    </div>
+  </div>
 {% endblock %}
