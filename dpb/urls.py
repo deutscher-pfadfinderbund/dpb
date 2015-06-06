@@ -6,7 +6,7 @@ from django.contrib.flatpages import views as flatpageviews
 from . import views
 
 urlpatterns = [
-    #url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^polls/', include('polls.urls', namespace='polls')),
     url(r'^bundesarchiv/', include('archive.urls', namespace='archive')),
     url(r'^admin/', include(admin.site.urls)),
@@ -14,3 +14,5 @@ urlpatterns = [
     url(r'^accounts/', include('login.urls', namespace='login')),
     url(r'^(?P<url>.*/)$', flatpageviews.flatpage),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# Named Staticpages

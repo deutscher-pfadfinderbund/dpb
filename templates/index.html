@@ -11,10 +11,17 @@
 {% endblock %}
 
 {% block content %}
-  <p>{{ flatpage.content }}</p>
-{% endblock %}
+  <p>
+    Der Deutsche Pfadfinderbund (DPB) ist ein unabhängiger, interkonfessioneller und bündisch geprägter Pfadfinderbund. Er dient gemeinnützigen Zwecken und wird ehrenamtlich getragen. Der Bund ist Mitglied des Ringes junger Bünde (RjB).
+  </p>
+  <p>
+    Der Deutsche Pfadfinderbund will seine jungen Menschen vor einseitiger Beeinflussung bewahren, sie jedoch zur Kritikfähigkeit erziehen und ihnen zur Selbstentwicklung ihrer Anlagen Wege weisen, die sie zu weltoffenen, selbständig denkenden Menschen und mündigen Staatsbürgern werden lässt. Wegweiser hierfür bilden Gesetz und Versprechen der Pfadfinder sowie die Meißnerformel.
+  </p>
+  <p>
+    In der Erkenntnis, dass das Wesentliche im Zusammenleben der Menschen nicht die Betonung des Trennenden, sondern die des Gemeinsamen und die Achtung vor der freien, menschlichen Persönlichkeit ist, sieht der Deutsche Pfadfinderbund eine seiner gesellschaftlichen Aufgaben darin, eine demokratische Gesinnung zu fördern und totalitären Bestrebungen entgegenzuwirken.
+  </p>
 
-{% block content_extended %}
+  <h3>Wir über uns</h3>
   <div class="row">
     <div class="col-md-2 col-sm-3 col-xs-4">
       <a href="#" class="thumbnail">
@@ -25,6 +32,24 @@
       <h4>Bundesordnung</h4>
       <p>
         In diesem Abschnitt geben wir Einblick in unsere Bundesordnung. Hier sind die Grundlagen des Bundes in Worte gefasst.
+      </p>
+      <p>
+        <button type="button" class="btn btn-default btn-sm">Weiterlesen</button>
+      </p>
+    </div>
+
+    <div class="col-md-2 col-sm-3 col-xs-4">
+      <a href="#" class="thumbnail">
+        <img src="{% static 'img/irland2012_200px.jpg' %}" alt="Großfahrt Irland"/>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <h4>Kurze Geschichte</h4>
+      <p>
+        Der Deutsche Pfadfinderbund wurde kurz nach dem Zweiten Weltkrieg von Walther Jansen (genannt Michael) in Berlin gegründet. Zwar gab es schon vor dem Krieg einen "Deutschen Pfadfinderbund". Dieser hat jedoch mit dem heutigen DPB kaum mehr als den Namen gemeinsam.
+      </p>
+      <p>
+        <button type="button" class="btn btn-default btn-sm">Weiterlesen</button>
       </p>
     </div>
   </div>
