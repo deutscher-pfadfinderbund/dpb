@@ -1,0 +1,19 @@
+.glyphicon.active, .btn.active {
+    position: relative;
+}
+
+.glyphicon.active:after, .btn.active:after {
+    content: ' ';
+    display: block;
+    border: 1px dashed #aaa;
+    width: 120%;
+    height: 140%;
+    position: absolute;
+    top: -20%;
+    left: -10%;
+}
+
+#tinymce .row {
+    margin-left: 0;
+    margin-right: 0;
+}
