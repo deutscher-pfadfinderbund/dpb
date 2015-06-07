@@ -40,15 +40,15 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="{% url 'archive:index' %}">Bundesarchiv</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Selbstdarstellung <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
-                <li><a href="/geschichte">Der Deutsche Pfadfinderbund</a></li>
-                <li><a href="/was-sind-pfadfinder">Was sind (bündische) Pfadfinder</a></li>
+                <li><a href="{% url 'geschichte' %}">Der Deutsche Pfadfinderbund</a></li>
+                <li><a href="{% url 'was-sind-pfadfinder' %}">Was sind (bündische) Pfadfinder</a></li>
               </ul>
             </li>
-            <li><a href="/bundesordnung">Bundesordnung</a></li>
+            <li><a href="{% url 'bundesordnung' %}">Bundesordnung</a></li>
+            <li><a href="{% url 'archive:index' %}">Bundesarchiv</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
