@@ -33,7 +33,7 @@
             <span class="icon-bar"></span>
           </button>
 
-          <a class="navbar-brand" href="/">
+          <a class="navbar-brand" href="{% url 'index' %}">
             <img class="navbar-brand navbar-brand-img" src="{% static 'img/lilie100.png' %}" alt="Lilie"/>
             DPB
           </a>
@@ -43,12 +43,12 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Selbstdarstellung <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
-                <li><a href="/geschichte/">Der Deutsche Pfadfinderbund</a></li>
-                <li><a href="/was-sind-pfadfinder/">Was sind (bündische) Pfadfinder</a></li>
+                <li><a href="{% url 'geschichte' %}">Der Deutsche Pfadfinderbund</a></li>
+                <li><a href="{% url 'was-sind-pfadfinder' %}">Was sind (bündische) Pfadfinder</a></li>
               </ul>
             </li>
-            <li><a href="/bundesordnung/">Bundesordnung</a></li>
-            <li><a href="/bundesarchiv/">Bundesarchiv</a></li>
+            <li><a href="{% url 'bundesordnung' %}">Bundesordnung</a></li>
+            <li><a href="{% url 'archive:index' %}">Bundesarchiv</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
