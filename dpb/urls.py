@@ -12,12 +12,12 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^account/', include('login.urls', namespace='login')),
     url(r'^accounts/', include('login.urls', namespace='login')),
-    #url(r'^(?P<url>.*/)$', flatpageviews.flatpage),
+    url(r'^(?P<url>.*/)$', flatpageviews.flatpage),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # Named Staticpages
-#urlpatterns += [
-#    url(r'^geschichte/$', flatpageviews.flatpage, {'url': '/geschichte/'}, name='geschichte'),
-#    url(r'^bundesordnung/$', flatpageviews.flatpage, {'url': '/bundesordnung/'}, name='bundesordnung'),
-#    url(r'^was-sind-pfadfinder/$', flatpageviews.flatpage, {'url': '/was-sind-pfadfinder/'}, name='was-sind-pfadfinder'),
-#]
+urlpatterns += [
+    url(r'^geschichte/$', flatpageviews.flatpage, {'url': '/geschichte/'}, name='geschichte'),
+    url(r'^bundesordnung/$', flatpageviews.flatpage, {'url': '/bundesordnung/'}, name='bundesordnung'),
+    url(r'^was-sind-pfadfinder/$', flatpageviews.flatpage, {'url': '/was-sind-pfadfinder/'}, name='was-sind-pfadfinder'),
+]
