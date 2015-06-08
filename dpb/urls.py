@@ -16,8 +16,8 @@ urlpatterns = [
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # Named Staticpages
-urlpatterns += [
-    url(r'^geschichte/$', flatpageviews.flatpage, {'url': '/geschichte/'}, name='geschichte'),
-    url(r'^bundesordnung/$', flatpageviews.flatpage, {'url': '/bundesordnung/'}, name='bundesordnung'),
-    url(r'^was-sind-pfadfinder/$', flatpageviews.flatpage, {'url': '/was-sind-pfadfinder/'}, name='was-sind-pfadfinder'),
-]
+#urlpatterns += [
+#    url(r'^geschichte/$', flatpageviews.flatpage, {'url': '/geschichte/'}, name='geschichte'),
+#    url(r'^bundesordnung/$', flatpageviews.flatpage, {'url': '/bundesordnung/'}, name='bundesordnung'),
+#    url(r'^was-sind-pfadfinder/$', flatpageviews.flatpage, {'url': '/was-sind-pfadfinder/'}, name='was-sind-pfadfinder'),
+#]
