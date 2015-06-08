@@ -2,6 +2,9 @@ body {
   color: #333;
   background-color: #f6f6f6; }
 
+h4 {
+  padding-top: 1em; }
+
 hr {
   margin: 3em 0; }
 
