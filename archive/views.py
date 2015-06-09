@@ -1,10 +1,11 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 from .models import Item
 
-
+@login_required
 def index(request):
     req = request.GET.get('q')
     query = None

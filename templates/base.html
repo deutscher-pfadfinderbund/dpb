@@ -48,7 +48,16 @@
               </ul>
             </li>
             <li><a href="{% url 'bundesordnung' %}">Bundesordnung</a></li>
-            <li><a href="{% url 'archive:index' %}">Bundesarchiv</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="{% url 'archive:index' %}">Bundesarchiv</a></li>
+            {% endif %}
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+              <li><a href="#">Eingeloggt als {{ user }}</a></li>
+            {% else %}
+              <li><a href="">Login</a></li>
+            {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>
