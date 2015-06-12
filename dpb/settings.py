@@ -45,7 +45,7 @@ INSTALLED_APPS = (
     'filer',
     'mptt',
     'easy_thumbnails',
-)
+)   
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
