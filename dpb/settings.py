@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'filer',
     'mptt',
     'easy_thumbnails',
+    'dpbflatpages',
 )   
 
 MIDDLEWARE_CLASSES = (
