@@ -4,7 +4,7 @@ from django.contrib.flatpages.models import FlatPage
 from django.utils.translation import ugettext, ugettext_lazy as _
 
 
-class FlatpageForm(forms.ModelForm):
+class PageForm(forms.ModelForm):
     url = forms.RegexField(label=_("URL"), max_length=100, regex=r'^[-\w/\.~]+$',
         help_text=_("Example: '/about/contact/'. Make sure to have leading"
                     " and trailing slashes."),
@@ -46,9 +46,9 @@ class FlatpageForm(forms.ModelForm):
             for site in sites:
                 if same_url.filter(sites=site).exists():
                     raise forms.ValidationError(
-                        _('Flatpage with url %(url)s already exists for site %(site)s'),
+                        _('Page with url %(url)s already exists for site %(site)s'),
                         code='duplicate_url',
                         params={'url': url, 'site': site},
                     )
 
-        return super(FlatpageForm, self).clean()
+        return super(PageForm, self).clean()

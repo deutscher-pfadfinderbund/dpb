@@ -19,7 +19,7 @@ DEFAULT_TEMPLATE = 'flatpages/default.html'
 # CSRF protect the internal implementation.
 
 
-def flatpage(request, url):
+def page(request, url):
     """
     Public interface to the flat page view.
 
@@ -44,11 +44,11 @@ def flatpage(request, url):
             return HttpResponsePermanentRedirect('%s/' % request.path)
         else:
             raise
-    return render_flatpage(request, f)
+    return render_page(request, f)
 
 
 @csrf_protect
-def render_flatpage(request, f):
+def render_page(request, f):
     """
     Internal interface to the flat page view.
     """
@@ -68,5 +68,5 @@ def render_flatpage(request, f):
     f.title = mark_safe(f.title)
     f.content = mark_safe(f.content)
 
-    response = HttpResponse(template.render({'flatpage': f}, request))
+    response = HttpResponse(template.render({'page': f}, request))
     return response

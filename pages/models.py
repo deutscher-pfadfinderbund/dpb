@@ -10,7 +10,7 @@ from filer.fields.image import FilerImageField
 from filer.fields.file import FilerFileField
 
 @python_2_unicode_compatible
-class DPBFlatPage(models.Model):
+class Page(models.Model):
     url = models.CharField(_('URL'), max_length=100, db_index=True)
     title = models.CharField(_('title'), max_length=200)
     content = models.TextField(_('content'), blank=True)
@@ -30,8 +30,8 @@ class DPBFlatPage(models.Model):
 
     class Meta:
         db_table = 'pages'
-        verbose_name = _('flat page')
-        verbose_name_plural = _('flat pages')
+        verbose_name = _('page')
+        verbose_name_plural = _('pages')
         ordering = ('url',)
 
     def __str__(self):
