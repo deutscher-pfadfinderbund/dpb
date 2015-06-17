@@ -1,7 +1,8 @@
 from django import forms
 from django.conf import settings
-from django.contrib.flatpages.models import FlatPage
 from django.utils.translation import ugettext, ugettext_lazy as _
+
+from .models import Page
 
 
 class PageForm(forms.ModelForm):
@@ -15,7 +16,7 @@ class PageForm(forms.ModelForm):
     )
 
     class Meta:
-        model = FlatPage
+        model = Page
         fields = '__all__'
 
     def clean_url(self):
@@ -38,7 +39,7 @@ class PageForm(forms.ModelForm):
         url = self.cleaned_data.get('url', None)
         sites = self.cleaned_data.get('sites', None)
 
-        same_url = FlatPage.objects.filter(url=url)
+        same_url = Page.objects.filter(url=url)
         if self.instance.pk:
             same_url = same_url.exclude(pk=self.instance.pk)
 
