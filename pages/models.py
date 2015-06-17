@@ -30,8 +30,8 @@ class Page(models.Model):
 
     class Meta:
         db_table = 'pages'
-        verbose_name = _('page')
-        verbose_name_plural = _('pages')
+        verbose_name = _('Beitrag')
+        verbose_name_plural = _('Beiträge')
         ordering = ('url',)
 
     def __str__(self):

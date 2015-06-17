@@ -5,6 +5,8 @@ from django.conf.urls.static import static
 from django.contrib.flatpages import views as flatpageviews
 from . import views
 
+from pages import views as pageviews
+
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^polls/', include('polls.urls', namespace='polls')),
@@ -22,5 +24,8 @@ urlpatterns += [
     url(r'^geschichte/$', flatpageviews.flatpage, {'url': '/geschichte/'}, name='geschichte'),
     url(r'^bundesordnung/$', flatpageviews.flatpage, {'url': '/bundesordnung/'}, name='bundesordnung'),
     url(r'^was-sind-pfadfinder/$', flatpageviews.flatpage, {'url': '/was-sind-pfadfinder/'}, name='was-sind-pfadfinder'),
-    url(r'^(?P<url>.*/)$', flatpageviews.flatpage, name='flatpage'),
+
+    url(r'^test/$', pageviews.page, {'url': '/test/'}, name='test'),
+
+    #url(r'^(?P<url>.*/)$', flatpageviews.flatpage, name='flatpage'),
 ]
