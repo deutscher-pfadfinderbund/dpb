@@ -61,10 +61,10 @@ msgid "template name"
 msgstr "sablon neve"
 
 msgid ""
-"Example: 'flatpages/contact_page.html'. If this isn't provided, the system "
-"will use 'flatpages/default.html'."
+"Example: 'pages/contact_page.html'. If this isn't provided, the system "
+"will use 'pages/default.html'."
 msgstr ""
-"Példa: 'flatpages/contact_page'. Ha ez nem létezik, a rendszer a 'flatpages/"
+"Példa: 'pages/contact_page'. Ha ez nem létezik, a rendszer a 'pages/"
 "default.html' sablont fogja használni."
 
 msgid "registration required"

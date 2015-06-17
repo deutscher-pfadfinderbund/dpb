@@ -59,10 +59,10 @@ msgid "template name"
 msgstr "ಟೆಂಪ್ಲೇಟಿನ ಹೆಸರು"
 
 msgid ""
-"Example: 'flatpages/contact_page.html'. If this isn't provided, the system "
-"will use 'flatpages/default.html'."
+"Example: 'pages/contact_page.html'. If this isn't provided, the system "
+"will use 'pages/default.html'."
 msgstr ""
-"ಉದಾ:'flatpages/contact_page.html'. ಇದನ್ನು ಕೊಡದಿದ್ದರೆ ಗಣಕವ್ಯವಸ್ಥೆಯು  'flatpages/"
+"ಉದಾ:'pages/contact_page.html'. ಇದನ್ನು ಕೊಡದಿದ್ದರೆ ಗಣಕವ್ಯವಸ್ಥೆಯು  'pages/"
 "default.html' ಅನ್ನು ಬಳಸುವದು."
 
 msgid "registration required"

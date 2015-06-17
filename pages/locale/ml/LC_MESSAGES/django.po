@@ -62,10 +62,10 @@ msgid "template name"
 msgstr "ടെമ്പ്ലേറ്റിന്റെ പേര്"
 
 msgid ""
-"Example: 'flatpages/contact_page.html'. If this isn't provided, the system "
-"will use 'flatpages/default.html'."
+"Example: 'pages/contact_page.html'. If this isn't provided, the system "
+"will use 'pages/default.html'."
 msgstr ""
-"ഉദാ: 'flatpages/contact_page.html'. ഇതു നല്കിയില്ലെങ്കില്‍, 'flatpages/default."
+"ഉദാ: 'pages/contact_page.html'. ഇതു നല്കിയില്ലെങ്കില്‍, 'pages/default."
 "html' എന്ന വിലാസം ഉപയോഗിക്കപ്പെടും."
 
 msgid "registration required"

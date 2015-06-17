@@ -58,10 +58,10 @@ msgid "template name"
 msgstr "வார்ப்புரு பெயர்"
 
 msgid ""
-"Example: 'flatpages/contact_page.html'. If this isn't provided, the system "
-"will use 'flatpages/default.html'."
+"Example: 'pages/contact_page.html'. If this isn't provided, the system "
+"will use 'pages/default.html'."
 msgstr ""
-"உதாரணம்  'flatpages/contact_page'. இது இல்லையெனில் 'flatpages/default' என்பதே "
+"உதாரணம்  'pages/contact_page'. இது இல்லையெனில் 'pages/default' என்பதே "
 "பயன்படுத்தப்படும்.ப்படும்."
 
 msgid "registration required"

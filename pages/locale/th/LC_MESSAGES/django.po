@@ -59,10 +59,10 @@ msgid "template name"
 msgstr "ชื่อเทมเพลต"
 
 msgid ""
-"Example: 'flatpages/contact_page.html'. If this isn't provided, the system "
-"will use 'flatpages/default.html'."
+"Example: 'pages/contact_page.html'. If this isn't provided, the system "
+"will use 'pages/default.html'."
 msgstr ""
-"ตัวอย่าง: 'flatpages/contact_page.html' ถ้าไม่ได้ถูกใช้ ระบบจะใช้ 'flatpages/default."
+"ตัวอย่าง: 'pages/contact_page.html' ถ้าไม่ได้ถูกใช้ ระบบจะใช้ 'pages/default."
 "html' "
 
 msgid "registration required"

@@ -19,8 +19,8 @@ class Page(models.Model):
     enable_comments = models.BooleanField(_('enable comments'), default=False)
     template_name = models.CharField(_('template name'), max_length=70, blank=True,
         help_text=_(
-            "Example: 'flatpages/contact_page.html'. If this isn't provided, "
-            "the system will use 'flatpages/default.html'."
+            "Example: 'pages/contact_page.html'. If this isn't provided, "
+            "the system will use 'pages/default.html'."
         ),
     )
     registration_required = models.BooleanField(_('registration required'),

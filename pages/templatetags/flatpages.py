@@ -30,7 +30,7 @@ class FlatpageNode(template.Node):
                 url__startswith=self.starts_with.resolve(context))
 
         # If the provided user is not authenticated, or no user
-        # was provided, filter the list to only public flatpages.
+        # was provided, filter the list to only public pages.
         if self.user:
             user = self.user.resolve(context)
             if not user.is_authenticated():
@@ -51,10 +51,10 @@ def get_flatpages(parser, token):
     whose name is defined by the ``as`` clause.
 
     An optional ``for`` clause can be used to control the user whose
-    permissions are to be used in determining which flatpages are visible.
+    permissions are to be used in determining which pages are visible.
 
     An optional argument, ``starts_with``, can be applied to limit the
-    returned flatpages to those beginning with a particular base URL.
+    returned pages to those beginning with a particular base URL.
     This argument can be passed as a variable or a string, as it resolves
     from the template context.
 
@@ -64,8 +64,8 @@ def get_flatpages(parser, token):
 
     Example usage::
 
-        {% get_flatpages as flatpages %}
-        {% get_flatpages for someuser as flatpages %}
+        {% get_flatpages as pages %}
+        {% get_flatpages for someuser as pages %}
         {% get_flatpages '/about/' as about_pages %}
         {% get_flatpages prefix as about_pages %}
         {% get_flatpages '/about/' for someuser as about_pages %}

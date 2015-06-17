@@ -1,5 +1,5 @@
 # from django.conf import settings
-# from django.contrib.flatpages.views import flatpage
+# from django.contrib.pages.views import flatpage
 # from django.http import Http404
 #
 #
