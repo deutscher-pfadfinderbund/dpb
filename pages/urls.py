@@ -3,5 +3,5 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^(?P<url>.*)$', views.flatpage, name='dpbflatpages'),
+    url(r'^(?P<url>.*)$', views.flatpage, name='pages'),
 ]

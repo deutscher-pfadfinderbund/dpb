@@ -29,7 +29,7 @@ class DPBFlatPage(models.Model):
     sites = models.ManyToManyField(Site)
 
     class Meta:
-        db_table = 'dpbflatpages'
+        db_table = 'pages'
         verbose_name = _('flat page')
         verbose_name_plural = _('flat pages')
         ordering = ('url',)
