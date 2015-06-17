@@ -19,11 +19,11 @@ urlpatterns = [
 
 # Named Staticpages
 urlpatterns += [
-    url(r'^impressum/$', flatpageviews.flatpage, {'url': '/impressum/'}, name='impressum'),
-    url(r'^kontakt/$', flatpageviews.flatpage, {'url': '/kontakt/'}, name='kontakt'),
-    url(r'^geschichte/$', flatpageviews.flatpage, {'url': '/geschichte/'}, name='geschichte'),
-    url(r'^bundesordnung/$', flatpageviews.flatpage, {'url': '/bundesordnung/'}, name='bundesordnung'),
-    url(r'^was-sind-pfadfinder/$', flatpageviews.flatpage, {'url': '/was-sind-pfadfinder/'}, name='was-sind-pfadfinder'),
+    url(r'^impressum/$', pageviews.page, {'url': '/impressum/'}, name='impressum'),
+    url(r'^kontakt/$', pageviews.page, {'url': '/kontakt/'}, name='kontakt'),
+    url(r'^geschichte/$', pageviews.page, {'url': '/geschichte/'}, name='geschichte'),
+    url(r'^bundesordnung/$', pageviews.page, {'url': '/bundesordnung/'}, name='bundesordnung'),
+    url(r'^was-sind-pfadfinder/$', pageviews.page, {'url': '/was-sind-pfadfinder/'}, name='was-sind-pfadfinder'),
 
     url(r'^test/$', pageviews.page, {'url': '/test/'}, name='test'),
 
