@@ -38,14 +38,20 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     #'django.contrib.pages',
-    'polls',
-    'login',
-    'archive',
+
+    # 3rd party
     'pipeline',
     'filer',
     'mptt',
     'easy_thumbnails',
+    'tinymce',
+    'filebrowser',
+
+    # Own apps
+    'polls',
     'pages',
+    'login',
+    'archive',
 )   
 
 MIDDLEWARE_CLASSES = (
@@ -169,6 +175,16 @@ PIPELINE_JS = {
 
 # Configure TinyMCE
 # Find the TinyMCE configuration in /templates/admin/base_site.html
+
+TINYMCE_JS_URL = STATIC_URL + 'tiny_mce/tiny_mce_src.js'
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,spellchecker,paste,searchreplace",
+    'theme': "advanced",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+}
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = True
 
 
 # Configure Templates
