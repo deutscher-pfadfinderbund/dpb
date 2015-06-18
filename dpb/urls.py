@@ -2,7 +2,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.flatpages import views as flatpageviews
 from . import views
 
 from pages import views as pageviews
@@ -27,5 +26,5 @@ urlpatterns += [
 
     url(r'^test/$', pageviews.page, {'url': '/test/'}, name='test'),
 
-    #url(r'^(?P<url>.*/)$', flatpageviews.flatpage, name='flatpage'),
+    url(r'^(?P<url>.*/)$', pageviews.page, name='page'),
 ]
