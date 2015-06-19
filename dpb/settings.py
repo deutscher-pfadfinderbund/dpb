@@ -176,15 +176,15 @@ PIPELINE_JS = {
 # Configure TinyMCE
 # Find the TinyMCE configuration in /templates/admin/base_site.html
 
-TINYMCE_JS_URL = STATIC_URL + 'tiny_mce/tiny_mce_src.js'
+TINYMCE_JS_URL = '/static/assets/tinymce/tinymce.min.js'
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': "table,spellchecker,paste,searchreplace",
-    'theme': "advanced",
+    'theme': "modern",
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 10,
 }
-TINYMCE_SPELLCHECKER = True
-TINYMCE_COMPRESSOR = True
+TINYMCE_SPELLCHECKER = False
+TINYMCE_COMPRESSOR = False
 
 
 # Configure Templates
