@@ -45,7 +45,6 @@ INSTALLED_APPS = (
     'mptt',
     'easy_thumbnails',
     'tinymce',
-    'filebrowser',
 
     # Own apps
     'polls',
@@ -176,12 +175,22 @@ PIPELINE_JS = {
 # Configure TinyMCE
 # Find the TinyMCE configuration in /templates/admin/base_site.html
 
-TINYMCE_JS_URL = '/static/assets/tinymce/tinymce.min.js'
+TINYMCE_JS_URL = STATIC_URL + 'assets/tinymce/tinymce.min.js'
 TINYMCE_DEFAULT_CONFIG = {
-    'plugins': "table,spellchecker,paste,searchreplace",
+    'plugins': "code,directionality,paste,searchreplace,bootstrap",
     'theme': "modern",
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 10,
+    'language': "de",
+    'directionality': "de",
+    'spellchecker_languages': "de",
+    'spellchecker_rpc_url': STATIC_URL + 'assets/tinymce/langs/de.js',
+    'bootstrapConfig': {
+        'imagesPath': MEDIA_URL + 'img/filer_public',
+    },
+    'toolbar': "bootstrap",
+    'fullpage_default_encoding': "UTF-8",
+    'entity_encoding': "raw",
 }
 TINYMCE_SPELLCHECKER = False
 TINYMCE_COMPRESSOR = False
