@@ -1,12 +1,13 @@
 from django import template
 from django.conf import settings
-from django.contrib.flatpages.models import FlatPage
 from django.contrib.sites.shortcuts import get_current_site
+
+from .models import Pages
 
 register = template.Library()
 
 
-class FlatpageNode(template.Node):
+class PageNode(template.Node):
     def __init__(self, context_name, starts_with=None, user=None):
         self.context_name = context_name
         if starts_with:
@@ -23,10 +24,10 @@ class FlatpageNode(template.Node):
             site_pk = get_current_site(context['request']).pk
         else:
             site_pk = settings.SITE_ID
-        flatpages = FlatPage.objects.filter(sites__id=site_pk)
+        pages = Pages.objects.filter(sites__id=site_pk)
         # If a prefix was specified, add a filter
         if self.starts_with:
-            flatpages = flatpages.filter(
+            pages = pages.filter(
                 url__startswith=self.starts_with.resolve(context))
 
         # If the provided user is not authenticated, or no user
@@ -34,18 +35,18 @@ class FlatpageNode(template.Node):
         if self.user:
             user = self.user.resolve(context)
             if not user.is_authenticated():
-                flatpages = flatpages.filter(registration_required=False)
+                pages = pages.filter(registration_required=False)
         else:
-            flatpages = flatpages.filter(registration_required=False)
+            pages = pages.filter(registration_required=False)
 
-        context[self.context_name] = flatpages
+        context[self.context_name] = pages
         return ''
 
 
 @register.tag
-def get_flatpages(parser, token):
+def get_pages(parser, token):
     """
-    Retrieves all flatpage objects available for the current site and
+    Retrieves all page objects available for the current site and
     visible to the specific user (or visible to all users if no user is
     specified). Populates the template context with them in a variable
     whose name is defined by the ``as`` clause.
@@ -60,15 +61,15 @@ def get_flatpages(parser, token):
 
     Syntax::
 
-        {% get_flatpages ['url_starts_with'] [for user] as context_name %}
+        {% get_pages ['url_starts_with'] [for user] as context_name %}
 
     Example usage::
 
-        {% get_flatpages as pages %}
-        {% get_flatpages for someuser as pages %}
-        {% get_flatpages '/about/' as about_pages %}
-        {% get_flatpages prefix as about_pages %}
-        {% get_flatpages '/about/' for someuser as about_pages %}
+        {% get_pages as pages %}
+        {% get_pages for someuser as pages %}
+        {% get_pages '/about/' as about_pages %}
+        {% get_pages prefix as about_pages %}
+        {% get_pages '/about/' for someuser as about_pages %}
     """
     bits = token.split_contents()
     syntax_message = ("%(tag_name)s expects a syntax of %(tag_name)s "
@@ -96,6 +97,6 @@ def get_flatpages(parser, token):
         else:
             user = None
 
-        return FlatpageNode(context_name, starts_with=prefix, user=user)
+        return PageNode(context_name, starts_with=prefix, user=user)
     else:
         raise template.TemplateSyntaxError(syntax_message)
