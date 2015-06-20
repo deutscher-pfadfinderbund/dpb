@@ -99,8 +99,3 @@ def get_pages(parser, token):
         return PageNode(context_name, starts_with=prefix, user=user)
     else:
         raise template.TemplateSyntaxError(syntax_message)
-
-
-@register.tag
-def get_pages_preview(parser, token):
-    pass

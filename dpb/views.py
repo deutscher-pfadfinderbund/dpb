@@ -7,3 +7,11 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         return None
+
+class BundesordnungView(generic.ListView):
+    template_name = 'bundesordnung.html'
+    context_object_name = ''
+
+    def get_queryset(self):
+        return None
+

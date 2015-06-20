@@ -76,13 +76,6 @@
 
       <div class="container" role="main">
         {% block content %}{% endblock %}
-        {% load pages %}
-        {% get_pages '/bundesordnung/' as pages %}
-        <ul>
-            {% for page in pages %}
-                <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-            {% endfor %}
-        </ul>
       </div>
     </div>
 
