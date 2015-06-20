@@ -2,11 +2,11 @@ Django==1.8.2
 django-appconf==1.0.1
 django-filer==0.9.11
 django-mptt==0.7.4
-django-pipeline==1.5.0
+django-pipeline==1.5.1
 django-polymorphic==0.7.1
 django-tinymce==1.5.3
 easy-thumbnails==2.2
-futures==3.0.2
+futures==3.0.3
 Pillow==2.8.2
 six==1.9.0
 Unidecode==0.4.17
