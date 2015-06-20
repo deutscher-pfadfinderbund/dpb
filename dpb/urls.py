@@ -11,6 +11,7 @@ urlpatterns = [
     # Hard-coded pages
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^bundesordnung/$', views.BundesordnungView.as_view(), name='bundesordnung'),
+    url(r'^dpb/$', views.DPBView.as_view(), name='dpb'),
 
     # Apps
     url(r'^polls/', include('polls.urls', namespace='polls')),

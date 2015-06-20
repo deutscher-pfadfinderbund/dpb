@@ -15,3 +15,10 @@ class BundesordnungView(generic.ListView):
     def get_queryset(self):
         return None
 
+
+class DPBView(generic.ListView):
+    template_name = 'dpb.html'
+    context_object_name = ''
+
+    def get_queryset(self):
+        return None
