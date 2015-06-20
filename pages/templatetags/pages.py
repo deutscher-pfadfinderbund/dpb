@@ -1,8 +1,7 @@
 from django import template
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
-
-from .models import Pages
+from pages.models import Page
 
 register = template.Library()
 
@@ -24,7 +23,7 @@ class PageNode(template.Node):
             site_pk = get_current_site(context['request']).pk
         else:
             site_pk = settings.SITE_ID
-        pages = Pages.objects.filter(sites__id=site_pk)
+        pages = Page.objects.filter(sites__id=site_pk)
         # If a prefix was specified, add a filter
         if self.starts_with:
             pages = pages.filter(
@@ -100,3 +99,8 @@ def get_pages(parser, token):
         return PageNode(context_name, starts_with=prefix, user=user)
     else:
         raise template.TemplateSyntaxError(syntax_message)
+
+
+@register.tag
+def get_pages_preview(parser, token):
+    pass
