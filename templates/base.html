@@ -54,6 +54,9 @@
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
               <li><a href="#">Eingeloggt als {{ user }}</a></li>
+              {% if user.is_staff %}
+                <li><a href="{% url 'admin:index' %}">Adminbereich</a></li>
+              {% endif %}
             {% else %}
               <li><a href="">Login</a></li>
             {% endif %}
@@ -74,7 +77,6 @@
       <div class="container" role="main">
         {% block content %}{% endblock %}
       </div>
-
     </div>
 
     <div class="footer-wrapper">
