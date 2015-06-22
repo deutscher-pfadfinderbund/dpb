@@ -10,7 +10,7 @@
   <p>
     <div>
       {% if page.image %}
-        <a href="{% thumbnail page.image 1920x1080 %}">
+        <a href="{{ page.image.url }}">
           <img src="{% thumbnail page.image 300x200 crop %}" class="img-thumbnail img-responsive img-float-right" alt="{{ page.image }}"/>
         </a>
       {% endif %}
