@@ -16,6 +16,8 @@ urlpatterns = [
     # Apps
     url(r'^polls/', include('polls.urls', namespace='polls')),
     url(r'^bundesarchiv/', include('archive.urls', namespace='archive')),
+    url(r'^email/', include('contact.urls', namespace='email')),
+
     url(r'^admin/', include(admin.site.urls)),
     url(r'^account/', include('login.urls', namespace='login')),
     url(r'^accounts/', include('login.urls', namespace='login')),

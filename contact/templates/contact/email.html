@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Contact Us{% endblock title %}
+{% block content %}
+  <form method="post" action="/email/send/">{% csrf_token %}
+    <div class="name">
+      <label class="label">Name  <span class="required">*</span></label>
+            <span class="span">
+              <input name= "firstname" class="inputtext" maxlength="255" size="12" />
+              <label class="spanlabel">First</label>
+            </span>
+            <span class="span">
+              <input name= "lastname" class="inputtext" maxlength="255" size="18" />
+              <label class="spanlabel">Last</label>
+            </span>
+    </div>
+    <div class="email">
+      <label class="label">Email Address  <span class="required">*</span></label>
+      <input name="email" class="inputtext" type="text" maxlength="255" size="35" />
+    </div>
+    <div class="subject">
+      <label class="label">Subject  <span class="required">*</span></label>
+      <input name="subject" class="inputtext" type="text" maxlength="255" size="45" />
+    </div>
+    <div class="botcheck">
+      <label class="label">You must answer <u>YES</u> to the question below to<br /> approve sending this email.  <span class="required">*</span></label>
+      Do you want to send me an email? <input name="botcheck" class="inputtext" type="text" maxlength="5" size="5" />
+      <div class="message">
+        <label class="label">Message  <span class="required">*</span></label>
+        <textarea name="message" class="inputtextarea" rows="11" cols="45"></textarea>
+      </div>
+      <div class="button">
+        <input class="submitform" type="submit" name="submitform" value="Send Message" />
+      </div>
+  </form>
+{% endblock content %}

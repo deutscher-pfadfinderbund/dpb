@@ -217,3 +217,12 @@ TEMPLATES = [{
 # Needed for login
 import django.contrib.auth
 django.contrib.auth.LOGIN_URL = '/'
+
+
+### E-MAIL SETTINGS ###
+EMAIL_HOST = "noreply@deutscher-pfadfinderbund.de"
+EMAIL_HOST_PASSWORD = "6w25Y@Zf$Sj!"
+EMAIL_HOST_USER = "smtp.strato.de"
+EMAIL_PORT = "465"
+EMAIL_SUBJECT_PREFIX = "[Deutscher-Pfadfinderbund.de]"
+EMAIL_USE_TLS = True
