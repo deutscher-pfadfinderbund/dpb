@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^accounts/', include('login.urls', namespace='login')),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^', include('django.contrib.auth.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Named Staticpages
 urlpatterns += [
