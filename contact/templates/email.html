@@ -1,8 +1,51 @@
 {% extends "base.html" %}
 {% block title %}Contact Us{% endblock title %}
 {% block content %}
-  <form method="post" action="/email/send/">{% csrf_token %}
-    <div class="name">
+  <form class="form-horizontal" method="post" action="/email/send/">{% csrf_token %}
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Vorname *</label>
+      <div class="col-sm-9">
+        <input class="form-control" name="firstname" type="text" placeholder="Vorname" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Nachname *</label>
+      <div class="col-sm-9">
+        <input class="form-control" name="lastname" type="text" placeholder="Nachname" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">E-Mail *</label>
+      <div class="col-sm-9">
+        <input class="form-control" name="email" type="email" placeholder="E-Mail" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Betreff *</label>
+      <div class="col-sm-9">
+        <input class="form-control" name="subject" type="text" placeholder="Betreff" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Sind Sie ein Mensch? *</label>
+      <div class="col-sm-9">
+        <input class="form-control" name="botcheck" type="text" placeholder="ja" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Ihre Nachricht *</label>
+      <div class="col-sm-9">
+        <textarea rows="3" class="form-control" name="message" placeholder="Ihre Nachricht" required></textarea>
+      </div>
+    </div>
+
+    <!--<div class="name">
       <label class="label">Name  <span class="required">*</span></label>
             <span class="span">
               <input name= "firstname" class="inputtext" maxlength="255" size="12" />
@@ -30,6 +73,11 @@
       </div>
       <div class="button">
         <input class="submitform" type="submit" name="submitform" value="Send Message" />
+      </div>-->
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-9">
+          <button type="submit" class="btn btn-default">Abschicken</button>
+        </div>
       </div>
   </form>
 {% endblock content %}

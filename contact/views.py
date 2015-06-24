@@ -19,8 +19,8 @@ def sendmail(request):
             subject = form.cleaned_data['subject']
             botcheck = form.cleaned_data['botcheck'].lower()
             message = form.cleaned_data['message']
-            if botcheck == 'yes':
-                print("botcheck yes")
+            if botcheck == 'ja':
+                print("botcheck ja")
                 try:
                     print("send mail to " + RECIPIENT)
                     fullemail = firstname + " " + lastname + " " + "<" + email + ">"
