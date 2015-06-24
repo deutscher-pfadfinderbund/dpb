@@ -4,7 +4,7 @@ from django.core.mail import send_mail, BadHeaderError
 from .models import EmailForm
 
 
-RECIPIENT = "cmeter@gmail.com"
+RECIPIENTS = ["cmeter@gmail.com"]
 
 
 def sendmail(request):
@@ -22,10 +22,10 @@ def sendmail(request):
             if botcheck == 'ja':
                 print("botcheck ja")
                 try:
-                    print("send mail to " + RECIPIENT)
-                    fullemail = firstname + " " + lastname + " " + "<" + email + ">"
-                    send_mail(subject, message, fullemail, [RECIPIENT])
-                    return HttpResponseRedirect('/email/thankyou/')
+                    #print("send mail to " + RECIPIENTS[0])
+                    #fullemail = firstname + " " + lastname + " " + "<" + email + ">"
+                    send_mail(subject, message, email, RECIPIENTS)
+                    return HttpResponseRedirect('/email/verschickt/')
                 except:
                     print("catch")
                     return HttpResponseRedirect('/email/')
