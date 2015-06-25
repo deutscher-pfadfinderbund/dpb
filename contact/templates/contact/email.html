@@ -1,8 +1,14 @@
 {% extends "base.html" %}
+
+{% load staticfiles %}
+
 {% block heading %}
   <h1>Kontakt</h1>
 {% endblock heading %}
 {% block content %}
+
+  <script src="{% static 'js/contact.js' %}"></script>
+
   <form class="form-horizontal" method="post" action="/email/send/">{% csrf_token %}
 
     <div class="form-group">
