@@ -1,37 +1,24 @@
-from django.views.generic.base import TemplateView
 from django.http import HttpResponseRedirect
-from django.core.mail import send_mail, BadHeaderError
-from .models import EmailForm
+from django.core.mail import send_mail
+from django.shortcuts import render
+from .forms import EmailForm
 
 
-RECIPIENTS = ["cmeter@gmail.com"]
+RECIPIENT = "cmeter@gmail.com"
 
 
-def sendmail(request):
+def contact(request):
     if request.method == 'POST':
-        print("POST")
         form = EmailForm(request.POST)
         if form.is_valid():
-            print("IS VALID")
-            firstname = form.cleaned_data['firstname']
-            lastname = form.cleaned_data['lastname']
-            email = form.cleaned_data['email']
-            subject = form.cleaned_data['subject']
-            botcheck = form.cleaned_data['botcheck'].lower()
-            message = form.cleaned_data['message']
-            if botcheck == 'ja':
-                print("botcheck ja")
-                try:
-                    #print("send mail to " + RECIPIENTS[0])
-                    #fullemail = firstname + " " + lastname + " " + "<" + email + ">"
-                    send_mail(subject, message, email, RECIPIENTS)
-                    return HttpResponseRedirect('/email/verschickt/')
-                except:
-                    print("catch")
-                    return HttpResponseRedirect('/email/')
-        else:
-            print("invalid form")
-            return HttpResponseRedirect('/email/')
+            cd = form.cleaned_data
+            send_mail(
+                cd['subject'],
+                cd['message'],
+                cd.get('email', RECIPIENT),
+                [RECIPIENT],
+            )
+            return HttpResponseRedirect('/email/verschickt/')
     else:
-        print("pos 2")
-        return HttpResponseRedirect('/email/')  
+        form = EmailForm()
+    return render(request, 'contact/email.html', {'form': form})

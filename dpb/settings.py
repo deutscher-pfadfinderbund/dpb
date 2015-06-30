@@ -45,6 +45,8 @@ INSTALLED_APPS = (
     'mptt',
     'easy_thumbnails',
     'tinymce',
+    'captcha',
+    'django_forms_bootstrap',
 
     # Own apps
     'polls',
@@ -228,5 +230,13 @@ EMAIL_HOST_USER = "noreply@deutscher-pfadfinderbund.de"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 EMAIL_PORT = 465
 EMAIL_SUBJECT_PREFIX = "[Deutscher-Pfadfinderbund.de]"
-#EMAIL_USE_TLS = True
 EMAIL_USE_SSL = True
+### END E-MAIL ###
+
+### Google Recaptcha Support ###
+RECAPTCHA_PUBLIC_KEY = "6LdOm_cSAAAAAMAn4otF5sCysq0TGz0eJtjK38CO"
+RECAPTCHA_PRIVATE_KEY = "6LdOm_cSAAAAAI6FJ1vC5iR589Me1lLSUjilpzun"
+NOCAPTCHA = True
+RECAPTCHA_USE_SSL = True
+
+### END Recaptcha ###

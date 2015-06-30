@@ -1,17 +1,26 @@
 {% extends "base.html" %}
 
 {% load staticfiles %}
+{% load bootstrap_tags %}
 
 {% block heading %}
   <h1>Kontakt</h1>
 {% endblock heading %}
 {% block content %}
 
-  <script src="{% static 'js/contact.js' %}"></script>
+  <p>
+    Hier hast du die Möglichkeit uns eine E-Mail zu senden. Bitte fülle dafür alle Felder aus. Wir werden uns dann
+    bei dir melden!
+  </p>
 
-  <form id="contact-form" class="form-horizontal" method="post" action="/email/send/">{% csrf_token %}
+  <!--<form id="contact-form" class="form-horizontal" method="post" action="/email/send/">-->
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form|as_bootstrap }}
+    <input type="submit" value="Abschicken" class="btn btn-default">
+  </form>
 
-    <div id="firstname-div" class="form-group">
+    <!--<div id="firstname-div" class="form-group">
       <label class="col-sm-2 control-label">Vorname *</label>
       <div class="col-sm-9">
         <input id="firstname" class="form-control" name="firstname" type="text" placeholder="Vorname" required>
@@ -46,22 +55,25 @@
       </div>
     </div>
 
+    <div id="captcha-div" class="form-group">
+      <label class="col-sm-2 control-label">Bist du ein Mensch? *</label>
+      <div class="col-sm-9">
+        <input id="captcha" class="form-control" name="captcha" type="" required>
+      </div>
+    </div>
+
     <div id="message-div" class="form-group">
       <label class="col-sm-2 control-label">Deine Nachricht *</label>
       <div class="col-sm-9">
         <textarea id="message" rows="3" class="form-control" name="message" placeholder="Deine Nachricht" required></textarea>
       </div>
-    </div>
+    </div>-->
 
-    <div class="form-group">
+    <!--<div class="form-group">
       <div class="col-sm-offset-2 col-sm-9">
         <button id="submit" class="btn btn-default">Abschicken</button>
       </div>
-    </div>
-  </form>
-
-  <div id="proceeding" style="display:none;">
-    E-Mail wird verschickt. Bitte warten...
-  </div>
+    </div>-->
+ <!-- </form>-->
 
 {% endblock content %}
