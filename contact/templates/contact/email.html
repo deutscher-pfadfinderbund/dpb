@@ -9,54 +9,59 @@
 
   <script src="{% static 'js/contact.js' %}"></script>
 
-  <form class="form-horizontal" method="post" action="/email/send/">{% csrf_token %}
+  <form id="contact-form" class="form-horizontal" method="post" action="/email/send/">{% csrf_token %}
 
-    <div class="form-group">
+    <div id="firstname-div" class="form-group">
       <label class="col-sm-2 control-label">Vorname *</label>
       <div class="col-sm-9">
-        <input class="form-control" name="firstname" type="text" placeholder="Vorname" required>
+        <input id="firstname" class="form-control" name="firstname" type="text" placeholder="Vorname" required>
       </div>
     </div>
 
-    <div class="form-group">
+    <div id="lastname-div" class="form-group">
       <label class="col-sm-2 control-label">Nachname *</label>
       <div class="col-sm-9">
-        <input class="form-control" name="lastname" type="text" placeholder="Nachname" required>
+        <input id="lastname" class="form-control" name="lastname" type="text" placeholder="Nachname" required>
       </div>
     </div>
 
-    <div class="form-group">
+    <div id="email-div" class="form-group">
       <label class="col-sm-2 control-label">E-Mail *</label>
       <div class="col-sm-9">
-        <input class="form-control" name="email" type="email" placeholder="E-Mail" required>
+        <input id="email" class="form-control" name="email" type="email" placeholder="E-Mail" required>
       </div>
     </div>
 
-    <div class="form-group">
+    <div id="subject-div" class="form-group">
       <label class="col-sm-2 control-label">Betreff *</label>
       <div class="col-sm-9">
-        <input class="form-control" name="subject" type="text" placeholder="Betreff" required>
+        <input id="subject" class="form-control" name="subject" type="text" placeholder="Betreff" required>
       </div>
     </div>
 
-    <div class="form-group">
+    <div id="botcheck-div" class="form-group">
       <label class="col-sm-2 control-label">Bist du ein Mensch? *</label>
       <div class="col-sm-9">
-        <input class="form-control" name="botcheck" type="text" placeholder="ja" required>
+        <input id="botcheck" class="form-control" name="botcheck" type="text" placeholder="ja" required>
       </div>
     </div>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Ihre Nachricht *</label>
+    <div id="message-div" class="form-group">
+      <label class="col-sm-2 control-label">Deine Nachricht *</label>
       <div class="col-sm-9">
-        <textarea rows="3" class="form-control" name="message" placeholder="Ihre Nachricht" required></textarea>
+        <textarea id="message" rows="3" class="form-control" name="message" placeholder="Deine Nachricht" required></textarea>
       </div>
     </div>
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-9">
-        <button type="submit" class="btn btn-default">Abschicken</button>
+        <button id="submit" class="btn btn-default">Abschicken</button>
       </div>
     </div>
   </form>
+
+  <div id="proceeding" style="display:none;">
+    E-Mail wird verschickt. Bitte warten...
+  </div>
+
 {% endblock content %}
