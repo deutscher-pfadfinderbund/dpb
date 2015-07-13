@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     #'django.contrib.pages',
 
     # 3rd party
-    'pipeline',
     'filer',
     'mptt',
     'easy_thumbnails',
@@ -57,7 +56,6 @@ INSTALLED_APPS = (
 )   
 
 MIDDLEWARE_CLASSES = (
-    'pipeline.middleware.MinifyHTMLMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -105,13 +103,9 @@ STATIC_URL = '/static/'
 # STATIC_ROOT = "/var/www/dpbstatic/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# Define Paths for Pipeline
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'pipeline.finders.PipelineFinder',
 )
 
 STATICFILES_DIRS = (
@@ -123,58 +117,6 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-### Pipeline ###
-
-# Set Pipeline Compilers
-PIPELINE_COMPILERS = (
-  'pipeline.compilers.sass.SASSCompiler',
-)
-
-PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
-
-PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
-
-#PIPELINE_ENABLED = True
-
-PIPELINE_CSS = {
-  'master': {
-    'source_filenames': (
-      'css/*.sass',
-    ),
-    'output_filename': 'compressed/master.css',
-    'extra_context': {
-      'media': 'screen, projection',
-    },
-  },
-  'vendor': {
-    'source_filenames': (
-      'assets/bootstrap/css/bootstrap.min.css',
-      'assets/bootstrap/css/bootstrap-theme.min.css',
-      'assets/bootswatch/bootswatch.min.css',
-      #'assets/fontawesome/css/font-awesome.min.css',
-
-    ),
-    'output_filename': 'compressed/vendor.css'
-  }
-}
-
-PIPELINE_JS = {
-  'master': {
-    'source_filenames': (
-      'js/*.js',
-    ),
-    'output_filename': 'compressed/master.js'
-  },
-  'vendor': {
-    'source_filenames': (
-      'assets/jquery/jquery.min.js',
-      'assets/bootstrap/js/bootstrap.min.js',
-    ),
-    'output_filename': 'compressed/vendor.js'
-  }
-}
-
-### END Pipeline ###
 
 # Configure TinyMCE
 # Find the TinyMCE configuration in /templates/admin/base_site.html

@@ -9,11 +9,20 @@
     <meta name="author" content="">
 
     {% load staticfiles %}
-    {% load pipeline %}
-    {% stylesheet 'vendor' %}
-    {% stylesheet 'master' %}
-    {% javascript 'vendor' %}
-    {% javascript 'master' %}
+
+    <!-- Vendor Stylesheets -->
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'assets/bootswatch/bootswatch.min.css' %}"/>
+
+    <!-- Own Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+
+    <!-- Vendor Javascript -->
+    <script src="{% static 'assets/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <!-- Own Javascript -->
+    <!-- None -->
 
     <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
