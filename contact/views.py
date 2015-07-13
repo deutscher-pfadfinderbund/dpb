@@ -18,7 +18,7 @@ def contact(request):
                 cd.get('email', RECIPIENT),
                 [RECIPIENT],
             )
-            return HttpResponseRedirect('/email/verschickt/')
+            return HttpResponseRedirect('/kontakt/verschickt/')
     else:
         form = EmailForm()
     return render(request, 'contact/email.html', {'form': form})

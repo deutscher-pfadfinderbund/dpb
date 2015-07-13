@@ -1,0 +1,118 @@
+body {
+  color: #333;
+  background-color: #f6f6f6; }
+
+p {
+  padding-bottom: 1em; }
+
+.img-float-right {
+  float: right;
+  margin-left: 1em; }
+
+.img-float-left {
+  float: left; }
+
+@media (min-width: 1500px) {
+  .container {
+    width: 1470px; } }
+header h1 {
+  height: 100%;
+  padding-top: 0.4em; }
+
+#header-wrapper {
+  padding: 1em 0; }
+
+.navbar-nav > li > a, .navbar-brand, .navbar-toggle {
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 80px; }
+
+.navbar-toggle {
+  height: 80px;
+  line-height: 80px; }
+
+@media (max-width: 767px) {
+  .navbar-nav > li > a {
+    line-height: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px; } }
+.navbar-brand {
+  height: 80px; }
+
+.navbar-brand {
+  padding-left: 1em; }
+  .navbar-brand img {
+    padding: 0.1em 1em; }
+
+.container {
+  padding-bottom: 1em; }
+
+.row {
+  padding-bottom: 1em; }
+
+.navbar .container {
+  padding-bottom: 0; }
+
+.stripe {
+  background-color: white;
+  border-color: #eeeeee; }
+
+.stripe .container {
+  padding-top: 1em; }
+
+.footer-wrapper {
+  box-shadow: 0 1px 2px #aaa; }
+
+footer .row {
+  padding-bottom: 0; }
+
+#dpb-carousel .item img {
+  display: block;
+  width: 100%;
+  height: auto; }
+
+#owl-container {
+  padding-bottom: 0; }
+
+#toc-panel {
+  float: right;
+  width: 300px;
+  margin-left: 2em;
+  margin-bottom: 2em; }
+
+/* Make footer sticky */
+/* Sticky footer styles */
+html {
+  position: relative;
+  min-height: 100%; }
+
+#main {
+  /* Margin bottom by footer height */ }
+  @media only screen and (min-width: 1000px) {
+    #main {
+      margin-bottom: 176px; } }
+
+.footer-wrapper {
+  margin-top: 50px; }
+  @media only screen and (min-width: 1000px) {
+    .footer-wrapper {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      /* Set the fixed height of the footer here */
+      height: 176px; } }
+
+/* END Make footer sticky */
+/* Style images in text */
+.image-inline-right {
+  float: right;
+  padding-left: 1em;
+  padding-bottom: 1em;
+  max-width: 300px;
+  max-height: 300px; }
+
+/* General padding and margin */
+.margin-top-10px {
+  margin-top: 10px; }
+
+/*# sourceMappingURL=style.css.map */
