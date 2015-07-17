@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load bootstrap_tags %}
+
 {% block heading %}
   <h1>Registrierung</h1>
 {% endblock %}
@@ -7,12 +9,12 @@
 {% block content %}
   <form method="post" action=".">{% csrf_token %}
     <table border="0">
-        {{ form.as_table }}
+        {{ form|as_bootstrap }}
     </table>
-    <input type="submit" value="Register" class="btn btn-default"/>
+    <input type="submit" value="Registrieren" class="btn btn-default"/>
   </form>
   <p>
     <br>
-    <a href="/account">Login</a>
+    <a href="{% url 'login:login' %}">Login</a>
   </p>
 {% endblock %}

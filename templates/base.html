@@ -67,7 +67,7 @@
                 <li><a href="{% url 'admin:index' %}">Adminbereich</a></li>
               {% endif %}
             {% else %}
-              <li><a href="">Login</a></li>
+              <li><a href="{% url 'login:login' %}">Login</a></li>
             {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
