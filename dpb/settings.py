@@ -53,7 +53,7 @@ INSTALLED_APPS = (
     'login',
     'archive',
     'contact',
-)   
+)
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
