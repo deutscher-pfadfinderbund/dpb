@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^bundesordnung/$', views.BundesordnungView.as_view(), name='bundesordnung'),
     url(r'^dpb/$', views.DPBView.as_view(), name='dpb'),
+    url(r'^pfadfinder/$', views.PfadfinderView.as_view(), name='pfadfinder'),
 
     # Apps
     url(r'^polls/', include('polls.urls', namespace='polls')),
@@ -29,8 +30,6 @@ urlpatterns = [
 urlpatterns += [
     url(r'^impressum/$', pageviews.page, {'url': '/impressum/'}, name='impressum'),
     url(r'^kontakt/$', pageviews.page, {'url': '/kontakt/'}, name='kontakt'),
-    url(r'^geschichte/$', pageviews.page, {'url': '/geschichte/'}, name='geschichte'),
-    url(r'^was-sind-pfadfinder/$', pageviews.page, {'url': '/was-sind-pfadfinder/'}, name='was-sind-pfadfinder'),
 
     url(r'^test/$', pageviews.page, {'url': '/test/'}, name='test'),
 
