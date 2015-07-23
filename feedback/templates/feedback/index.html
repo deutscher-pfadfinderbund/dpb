@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block heading %}
+  <h1>Feedback</h1>
+{% endblock %}
+
+{% block content %}
+  {% if feedbacks %}
+    <table>
+    {% for feedback in feedbacks %}
+      <tr>
+        <td>
+          {{ feedback.name }}
+        </td>
+        <td>
+          {{ feedback.note }}
+        </td>
+        <td>
+          {{ feedback.created }}
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
+  {% else %}
+    <p>
+      Keine Einträge vorhanden.
+    </p>
+  {% endif %}
+{% endblock %}
