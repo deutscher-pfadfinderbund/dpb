@@ -1,29 +1,51 @@
 {% extends "base.html" %}
 
+{% load bootstrap_tags %}
+
 {% block heading %}
   <h1>Feedback</h1>
 {% endblock %}
 
 {% block content %}
+  <p>
+    Rückmeldung ist wichtig. Daher habt ihr hier die Möglichkeit eure Vorschläge zur Verbesserung der Homepage kurz
+    zu beschreiben. Ihr könnt anonym posten oder ihr gebt euren Namen und E-Mail Adresse an, falls ich weitere
+    Rückfragen zu eurem Vorschlag habe.<br>
+    Eure E-Mail Adresse wird nicht veröffentlicht, sondern nur intern für Rückfragen gespeichert, falls ihr sie angebt.
+  </p>
   {% if feedbacks %}
-    <table>
-    {% for feedback in feedbacks %}
-      <tr>
-        <td>
-          {{ feedback.name }}
-        </td>
-        <td>
-          {{ feedback.note }}
-        </td>
-        <td>
-          {{ feedback.created }}
-        </td>
-      </tr>
-    {% endfor %}
+    <table class="table table-striped table-hover table-responsive">
+      <thead>
+        <th>Von</th>
+        <th>Vorschlag</th>
+        <th>Erstellt am</th>
+      </thead>
+      <tbody>
+        {% for feedback in feedbacks %}
+          <tr>
+            <td>
+              {{ feedback.name }}
+            </td>
+            <td>
+              {{ feedback.note }}
+            </td>
+            <td>
+              {{ feedback.created }}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
     </table>
   {% else %}
     <p>
       Keine Einträge vorhanden.
     </p>
   {% endif %}
+
+  <h2>Vorschlag einreichen</h2>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form|as_bootstrap }}
+    <input type="submit" value="Vorschlag abschicken" class="btn btn-default">
+  </form>
 {% endblock %}

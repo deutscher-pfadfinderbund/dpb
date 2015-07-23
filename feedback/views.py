@@ -1,13 +1,16 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from django.views import generic
 from .models import Feedback
+from .forms import FeedbackForm
 
-class IndexView(generic.ListView):
-    template_name = 'feedback/index.html'
-    context_object_name = 'feedbacks'
-
-    def get_queryset(self):
-        """Return the last five published questions."""
-        return Feedback.objects.order_by('-created')
+def index(request):
+    feedbacks = Feedback.objects.order_by('-created')
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('/feedback/danke/')
+    else:
+        form = FeedbackForm()
+    return render(request, 'feedback/index.html', {'form': form, 'feedbacks': feedbacks})
