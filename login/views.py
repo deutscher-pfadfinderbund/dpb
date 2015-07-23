@@ -42,5 +42,5 @@ def logout_page(request):
 def home(request):
     return render_to_response(
         'index.html',
-        { 'user': request.user }
+        {'user': request.user }
     )
