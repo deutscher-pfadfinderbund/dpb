@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+  {# comment "Currently no registration possible" #}
   <form method="post" action=".">{% csrf_token %}
     <table border="0">
         {{ form|as_bootstrap }}
@@ -16,5 +17,10 @@
   <p>
     <br>
     <a href="{% url 'login:login' %}">Login</a>
+  </p>
+  {# endcomment #}
+  <p>
+    Zur Zeit ist es nicht möglich sich selbst für die Homepage zu registrieren. Schreibe uns diesbezüglich eine
+    <a href="{% url 'kontakt' %}">E-Mail</a>.
   </p>
 {% endblock %}
