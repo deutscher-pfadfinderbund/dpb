@@ -6,4 +6,9 @@
 
 {% block content %}
   <p>Vielen Dank für dein Feedback!</p>
+  <p>Du wirst nach 5 Sekunden wieder zu den Feedbacks geleitet. Oder klicke einfach <a href="{% url 'feedback:index' %}">hier.</a></p>
+
+  <script type="text/javascript">
+    window.setTimeout('location.href="{% url 'feedback:index' %}"', 5000);
+  </script>
 {% endblock %}
