@@ -7,12 +7,6 @@
 {% endblock %}
 
 {% block content %}
-  <p>
-    Rückmeldung ist wichtig. Daher habt ihr hier die Möglichkeit eure Vorschläge zur Verbesserung der Homepage kurz
-    zu beschreiben. Ihr könnt anonym posten oder ihr gebt euren Namen und E-Mail Adresse an, falls ich weitere
-    Rückfragen zu eurem Vorschlag habe.<br>
-    Eure E-Mail Adresse wird nicht veröffentlicht, sondern nur intern für Rückfragen gespeichert, falls ihr sie angebt.
-  </p>
   {% if feedbacks %}
     <table class="table table-striped table-hover table-responsive">
       <thead>
@@ -42,10 +36,27 @@
     </p>
   {% endif %}
 
-  <h2>Vorschlag einreichen</h2>
-  <form action="" method="post">
-    {% csrf_token %}
-    {{ form|as_bootstrap }}
-    <input type="submit" value="Vorschlag abschicken" class="btn btn-default">
-  </form>
+  <h2 style="padding-top: 2em;">Vorschlag einreichen</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <p>
+        Hier könnt ihr Feedback geben. Name und E-Mail sind freiwillig.
+      </p>
+      <form action="" method="post">
+        {% csrf_token %}
+        {{ form|as_bootstrap }}
+        <input type="submit" value="Vorschlag abschicken" class="btn btn-default">
+      </form>
+    </div>
+    <div class="col-md-offset-1 col-md-5">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            Rückmeldung ist wichtig. Daher habt ihr hier die Möglichkeit eure Vorschläge zur Verbesserung der Homepage kurz
+            zu beschreiben. Ihr könnt anonym posten oder ihr gebt euren Namen und E-Mail Adresse an, falls wir weitere
+            Rückfragen zu eurem Vorschlag haben.<br>
+            Eure E-Mail Adresse wird nicht veröffentlicht, sondern nur intern für Rückfragen gespeichert.
+          </div>
+        </div>
+    </div>
+  </div>
 {% endblock %}

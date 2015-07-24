@@ -10,7 +10,8 @@ def index(request):
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
         if form.is_valid():
-            return HttpResponseRedirect('/feedback/danke/')
+            form.save()
+            return render(request, 'feedback/danke.html')
     else:
         form = FeedbackForm()
     return render(request, 'feedback/index.html', {'form': form, 'feedbacks': feedbacks})
