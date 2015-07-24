@@ -1,12 +1,11 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.db.models import Q
 
-# Create your views here.
 from .models import Feedback
 from .forms import FeedbackForm
 
 def index(request):
-    feedbacks = Feedback.objects.order_by('-created')
+    feedbacks = Feedback.objects.order_by('-created').filter(Q(public=True))
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
         if form.is_valid():

@@ -5,8 +5,8 @@ from .models import Feedback
 
 
 class FeedbackAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'note')
+    list_display = ('name', 'email', 'note', 'public')
     list_filter = ['created']
-    search_fields = ['name', 'email', 'note']
+    search_fields = ['name', 'email', 'note', 'public']
 
 admin.site.register(Feedback, FeedbackAdmin)
