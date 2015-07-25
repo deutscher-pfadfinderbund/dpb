@@ -3,3 +3,4 @@
 *.iml
 .sass-cache/
 static/
+db.sqlite3
