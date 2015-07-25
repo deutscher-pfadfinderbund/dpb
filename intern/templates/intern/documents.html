@@ -10,10 +10,11 @@
 {% endblock %}
 
 {% block content %}
-
-  <p>
-    <a href="/admin/filer/folder/">Weitere Dokumente hochladen</a>
-  </p>
+  {% if user.is_staff %}
+    <p>
+      <a href="/admin/filer/folder/">Weitere Dokumente hochladen</a>
+    </p>
+  {% endif %}
 
   {% for folder in folders %}
 
@@ -44,6 +45,9 @@
                 <td>
                   {% if file.description %}
                     <a class="btn btn-default btn-xs" tabindex="0" data-toggle="popover" title="{{ file }}" data-content="{{ file.description }}">Info</a>
+                  {% endif %}
+                  {% if user.is_staff %}
+                    <a href="{{ file.get_admin_url_path }}"><i class="fa fa-pencil-square-o fa-lg"></i></a>
                   {% endif %}
                 </td>
                 <td>{{ file.size|sizify }}</td>

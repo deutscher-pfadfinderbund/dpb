@@ -116,6 +116,9 @@ html {
   margin-top: 10px; }
 
 /* Table stylings */
+table {
+  font-size: 13px; }
+
 td {
   vertical-align: middle !important; }
 
