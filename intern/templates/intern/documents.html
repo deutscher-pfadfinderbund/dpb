@@ -23,17 +23,26 @@
       <h3>{{ folder }}</h3>
       <table class="table table-hover table-striped table-condensed table-responsive">
         <thead>
+          <th style="text-align:center;">Typ</th>
           <th>Name</th>
           <th></th>
-          <th></th>
           <th>Größe</th>
-          <th>Hochgeladen am</th>
           <th>Zuletzt geändert</th>
+          <th></th>
         </thead>
         <tbody>
           {% for file in files %}
             {% ifequal file.folder folder %}
               <tr>
+                <td align="center">
+                  {% if file.extension == "pdf" %}
+                    <i class="fa fa-file-pdf-o fa-lg"></i>
+                  {% elif file.extension == "jpg" or file.extension == "png" %}
+                    <i class="fa fa-picture-o fa-lg"></i>
+                  {% else %}
+                    {{ file.extension }}
+                  {% endif %}
+                </td>
                 <td>
                   <a href="{{ file.url }}">
                     {% if file.name %}
@@ -48,14 +57,14 @@
                     <a tabindex="0" data-toggle="popover" title="{{ file }}" data-content="{{ file.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
                   {% endif %}
                 </td>
+                <td>{{ file.size|sizify }}</td>
+                <td>{{ file.modified_at }}</td>
                 <td>
                   {% if user.is_staff %}
                     <a href="{{ file.get_admin_url_path }}"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+                    <a href="{{ file.get_admin_url_path }}delete"><i class="fa fa-remove fa-lg"></i></a>
                   {% endif %}
                 </td>
-                <td>{{ file.size|sizify }}</td>
-                <td>{{ file.uploaded_at }}</td>
-                <td>{{ file.modified_at }}</td>
               </tr>
             {% endifequal %}
           {% endfor %}
