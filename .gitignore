@@ -4,3 +4,4 @@
 .sass-cache/
 static/
 db.sqlite3
+media/
