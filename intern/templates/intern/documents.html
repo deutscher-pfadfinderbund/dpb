@@ -25,6 +25,7 @@
         <thead>
           <th>Name</th>
           <th></th>
+          <th></th>
           <th>Größe</th>
           <th>Hochgeladen am</th>
           <th>Zuletzt geändert</th>
@@ -44,8 +45,10 @@
                 </td>
                 <td>
                   {% if file.description %}
-                    <a class="btn btn-default btn-xs" tabindex="0" data-toggle="popover" title="{{ file }}" data-content="{{ file.description }}">Info</a>
+                    <a tabindex="0" data-toggle="popover" title="{{ file }}" data-content="{{ file.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
                   {% endif %}
+                </td>
+                <td>
                   {% if user.is_staff %}
                     <a href="{{ file.get_admin_url_path }}"><i class="fa fa-pencil-square-o fa-lg"></i></a>
                   {% endif %}
