@@ -99,8 +99,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_ROOT = "/var/www/dpb/static/"
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = "/var/www/dpb/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
 
@@ -110,12 +110,12 @@ STATICFILES_FINDERS = (
 )
 
 STATICFILES_DIRS = (
-#    os.path.join(BASE_DIR, 'media'),
     os.path.join(BASE_DIR, 'templates/dpb'),
     os.path.join(BASE_DIR, 'contact/templates/contact'),
 )
 
-MEDIA_ROOT = '/var/www/dpb/media/'
+#MEDIA_ROOT = '/var/www/dpb/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
