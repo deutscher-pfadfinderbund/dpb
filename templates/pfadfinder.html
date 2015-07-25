@@ -17,22 +17,26 @@
     {% for page in pages %}
 
       <div class="row">
-        <div class="col-md-2 col-sm-3 col-xs-4">
-          <a href="{{ page.url }}">
-            <img src="{% thumbnail page.image 200x133 crop %}" class="img-thumbnail img-responsive margin-top-10px" alt="{{ page.image }}"/>
-          </a>
-        </div>
-        <div class="col-md-10">
-          <h4>{{ page.title }}</h4>
-          <p>
-            {{ page.content|striptags|truncatewords:50 }}
-          </p>
-          <p>
+        {% if page.image %}
+          <div class="col-md-2 col-sm-3 col-xs-4">
             <a href="{{ page.url }}">
-              <button type="button" class="btn btn-default btn-sm">Weiterlesen</button>
+              <img src="{% thumbnail page.image 200x300 crop %}" class="img-thumbnail img-responsive margin-top-10px" alt="{{ page.image }}"/>
             </a>
-          </p>
-        </div>
+          </div>
+          <div class="col-md-10">
+        {% else %}
+          <div class="col-md-12">
+        {% endif %}
+            <h4>{{ page.title }}</h4>
+            <p>
+              {{ page.content|striptags|truncatewords:50 }}
+            </p>
+            <p>
+              <a href="{{ page.url }}">
+                <button type="button" class="btn btn-default btn-sm">Weiterlesen</button>
+              </a>
+            </p>
+          </div>
       </div>
 
     {% endfor %}
