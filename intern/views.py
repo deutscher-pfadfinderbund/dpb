@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
+from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render
-from django.db.models import Q
-
 from filer.models import File
 from filer.models import Folder
-from filer.models import FileManager
 
+
+@login_required
 def documents(request):
     files = File.objects.all()
     folders = Folder.objects.all()
