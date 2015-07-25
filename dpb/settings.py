@@ -101,8 +101,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATIC_ROOT = "/var/www/dpbstatic/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = "/var/www/dpb/static/"
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -115,8 +115,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'contact/templates/contact'),
 )
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = '/media/'
+MEDIA_URL = '/var/www/dpb/media/'
 
 
 # Configure TinyMCE
