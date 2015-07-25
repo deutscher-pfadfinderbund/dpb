@@ -8,7 +8,7 @@
 
 {% block content %}
   {% if feedbacks %}
-    <table class="table table-striped table-hover table-responsive">
+    <table class="table table-striped table-responsive">
       <thead>
         <th width="10%">Von</th>
         <th width="80%">Vorschlag</th>
@@ -27,6 +27,15 @@
               {{ feedback.created }}
             </td>
           </tr>
+          {% if feedback.answer %}
+            <tr>
+              <td></td>
+              <td class="info">
+                <strong>Antwort von {{ feedback.author }}:</strong> {{ feedback.answer }}
+              </td>
+              <td></td>
+            </tr>
+          {% endif %}
         {% endfor %}
       </tbody>
     </table>
