@@ -47,7 +47,6 @@ INSTALLED_APPS = (
     'django_forms_bootstrap',
 
     # Own apps
-    'polls',
     'pages',
     'login',
     'archive',
