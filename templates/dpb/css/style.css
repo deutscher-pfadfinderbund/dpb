@@ -115,4 +115,8 @@ html {
 .margin-top-10px {
   margin-top: 10px; }
 
+/* Table stylings */
+td {
+  vertical-align: middle !important; }
+
 /*# sourceMappingURL=style.css.map */

@@ -23,15 +23,29 @@
       <table class="table table-hover table-striped table-condensed table-responsive">
         <thead>
           <th>Name</th>
+          <th></th>
           <th>Größe</th>
-          <th>Erstellt am</th>
+          <th>Hochgeladen am</th>
           <th>Zuletzt geändert</th>
         </thead>
         <tbody>
           {% for file in files %}
             {% ifequal file.folder folder %}
               <tr>
-                <td><a href="{{ file.url }}">{{ file }}</a></td>
+                <td>
+                  <a href="{{ file.url }}">
+                    {% if file.name %}
+                      {{ file.name }}
+                    {% else %}
+                      {{ file }}
+                    {% endif %}
+                  </a>
+                </td>
+                <td>
+                  {% if file.description %}
+                    <a class="btn btn-default btn-xs" tabindex="0" data-toggle="popover" title="{{ file }}" data-content="{{ file.description }}">Info</a>
+                  {% endif %}
+                </td>
                 <td>{{ file.size|sizify }}</td>
                 <td>{{ file.uploaded_at }}</td>
                 <td>{{ file.modified_at }}</td>
@@ -45,4 +59,10 @@
     {% endifequal %}
 
   {% endfor %}
+
+  <script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+    });
+  </script>
 {% endblock %}
