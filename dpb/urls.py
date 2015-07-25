@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^feedback/', include('feedback.urls', namespace='feedback')),
     url(r'^bundesarchiv/', include('archive.urls', namespace='archive')),
     url(r'^kontakt/', include('contact.urls', namespace='email')),
+    url(r'^intern/', include('intern.urls', namespace='intern')),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^account/', include('login.urls', namespace='login')),

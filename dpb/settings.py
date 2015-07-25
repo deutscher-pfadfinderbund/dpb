@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'archive',
     'contact',
     'feedback',
+    'intern',
 )
 
 MIDDLEWARE_CLASSES = (
