@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 from django.shortcuts import render
@@ -12,9 +13,22 @@ def contact(request):
         form = EmailForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            author = str(cd['firstname'] + " " + cd['lastname'])
+            subject = str("[DPB Homepage] " + cd['subject'])
+            message ="""\
+Kontaktanfrage über www.deutscher-pfadfinderbund.de
+
+Von: {}
+Betreff: {}
+Zeit: {}
+
+Nachricht:
+{}
+            """.format(author, cd['subject'], datetime.now(), cd['message'])
+
             send_mail(
-                cd['subject'],
-                cd['message'],
+                subject,
+                message,
                 cd.get('email', RECIPIENT),
                 [RECIPIENT],
             )

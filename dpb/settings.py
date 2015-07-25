@@ -23,7 +23,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['christian-meter.de', 'localhost', 'deutscher-pfadfinderbund.de']
+ALLOWED_HOSTS = ['christian-meter.de', 'localhost', 'deutscher-pfadfinderbund.de', 'jungenbund.de']
 
 SITE_ID = 1
 
