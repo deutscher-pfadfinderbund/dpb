@@ -22,7 +22,7 @@ header h1 {
 #header-wrapper {
   padding: 1em 0; }
 
-.navbar-nav > li > a, .navbar-brand, .navbar-toggle {
+.navbar-nav > li > a, .navbar-brand, .navbar-toggle, .navbar-header {
   padding-top: 0;
   padding-bottom: 0;
   line-height: 80px; }
