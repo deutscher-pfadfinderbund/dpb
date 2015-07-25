@@ -1,4 +1,4 @@
-Django==1.8.2
+Django==1.8.3
 django-appconf==1.0.1
 django-contact-form==1.0
 django-filer==0.9.11
