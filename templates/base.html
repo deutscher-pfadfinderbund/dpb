@@ -26,7 +26,7 @@
     <script src="{% static 'assets/datatables/js/jquery.dataTables.js' %}"></script>
     <script src="{% static 'assets/datatables/js/dataTables.bootstrap.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'assets/datatables/css/dataTables.bootstrap.min.css' %}"/>
-    <script>
+    <script type="text/javascript">
       $(document).ready(function() {
         $('.datatable').dataTable( {
           "language": {
@@ -37,6 +37,13 @@
     </script>
 
     <!-- Own Javascript -->
+    <script type="text/javascript">
+      $(document).ready(function(){
+        // Enable Popovers and tooltips
+        $('[data-toggle="popover"]').popover();
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
     <!-- None -->
 
     <link rel="icon" href="{% static 'img/favicon.ico' %}">

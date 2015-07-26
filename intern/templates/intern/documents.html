@@ -33,10 +33,12 @@
         <thead>
           <th width="5%" style="text-align:center;">Typ</th>
           <th width="60%">Name</th>
-          <th width="5%"></th>
+          <th width="5%">Info</th>
+          {% if user.is_staff %}
+            <th width="5%"></th>
+          {% endif %}
           <th width="10%">Größe</th>
           <th width="15%">Zuletzt geändert</th>
-          <th width="5%"></th>
         </thead>
         <tbody>
           {% for file in files %}
@@ -69,14 +71,16 @@
                     <a tabindex="0" data-toggle="popover" data-trigger="hover" title="{{ file }}" data-content="{{ file.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
                   {% endif %}
                 </td>
-                <td>{{ file.size|sizify }}</td>
-                <td>{{ file.modified_at }}</td>
-                <td>
-                  {% if user.is_staff %}
+
+                {% if user.is_staff %}
+                  <td>
                     <a href="{{ file.get_admin_url_path }}" data-toggle="tooltip" data-placement="top" title="Datei bearbeiten"><i class="fa fa-pencil-square-o fa-lg"></i></a>
                     <a href="{{ file.get_admin_url_path }}delete" data-toggle="tooltip" data-placement="top" title="Datei löschen"><i class="fa fa-remove fa-lg"></i></a>
-                  {% endif %}
-                </td>
+                  </td>
+                {% endif %}
+
+                <td>{{ file.size|sizify }}</td>
+                <td>{{ file.modified_at }}</td>
               </tr>
             {% endifequal %}
           {% endfor %}
@@ -87,12 +91,4 @@
     {% endif %}
 
   {% endfor %}
-
-  <script>
-    $(document).ready(function(){
-      $('[data-toggle="popover"]').popover();
-      $('[data-toggle="tooltip"]').tooltip();
-      $('.datatable').DataTable();
-    });
-  </script>
 {% endblock %}
