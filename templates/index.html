@@ -23,16 +23,16 @@
   <div class="row" style="padding-bottom:0;">
     {# Der Deutsche Pfadfinderbund #}
     <div class="col-md-6">
-      <h3>Der Deutsche Pfadfinderbund</h3>
+      <h3>Unsere Bundesordnung</h3>
       <div class="row">
         <div class="col-md-4 col-sm-5 col-xs-6">
-          <a href="{% url 'dpb' %}">
-            <img src="{% static 'img/bundeslager2013_200px.jpg' %}" class="img-thumbnail img-responsive margin-top-10px" alt="Bundeslager 2013"/>
+          <a href="{% url 'bundesordnung' %}">
+            <img src="{% static 'img/bundesordnung_200px.png' %}" class="img-thumbnail img-responsive margin-top-10px" alt="Bundesordnung"/>
           </a>
         </div>
 
         <div class="col-md-8">
-          {% get_pages '/dpb/' as pages %}
+          {% get_pages '/bundesordnung/' as pages %}
           {% for page in pages %}
             <h4>{{ page.title }}</h4>
             <p>
@@ -47,7 +47,7 @@
     {# Was sind bündische Pfadfinder? #}
     <div class="col-md-6">
       <h3>Was sind (bündische) Pfadfinder?</h3>
-      <div class="row">
+      <div class="row" style="padding-bottom: 0;">
         <div class="col-md-4 col-sm-5 col-xs-6">
           <a href="{% url 'pfadfinder' %}">
             <img src="{% static 'img/schweden2011_200px.jpg' %}" class="img-thumbnail img-responsive margin-top-10px" alt="Schweden 2011"/>
@@ -71,16 +71,16 @@
   {# Preview Row 2 #}
   <div class="row">
     <div class="col-md-6">
-      <h3>Unsere Bundesordnung</h3>
+      <h3>Der Deutsche Pfadfinderbund</h3>
       <div class="row">
         <div class="col-md-4 col-sm-5 col-xs-6">
-          <a href="{% url 'bundesordnung' %}">
-            <img src="{% static 'img/bundesordnung_200px.png' %}" class="img-thumbnail img-responsive margin-top-10px" alt="Bundesordnung"/>
+          <a href="{% url 'dpb' %}">
+            <img src="{% static 'img/bundeslager2013_200px.jpg' %}" class="img-thumbnail img-responsive margin-top-10px" alt="Bundeslager 2013"/>
           </a>
         </div>
 
         <div class="col-md-8">
-          {% get_pages '/bundesordnung/' as pages %}
+          {% get_pages '/dpb/' as pages %}
           {% for page in pages %}
             <h4>{{ page.title }}</h4>
             <p>
@@ -90,6 +90,5 @@
           {% endfor %}
         </div>
       </div>
-    </div>
   </div>
 {% endblock %}
