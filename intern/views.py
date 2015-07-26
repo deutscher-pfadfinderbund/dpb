@@ -8,7 +8,7 @@ from filer.models import Folder
 
 @login_required
 def documents(request):
-    files = File.objects.all()
+    files = File.objects.all().order_by("-modified_at")
     folders = Folder.objects.all()
     #print(files[0])
     return render(request, 'intern/documents.html', {'files': files, 'folders': folders})
