@@ -2,6 +2,9 @@
 from django.db import models
 from datetime import datetime
 
+from filer.fields.file import FilerFileField
+from filer.fields.image import FilerImageField
+
 class Item(models.Model):
     # Define Choices
     doctype_choices = (
@@ -56,6 +59,10 @@ class Item(models.Model):
     medartdig = models.CharField('Medienart digital', max_length=256, choices=medartdig_choices, blank=True)
     medartanalog = models.CharField('Medienart analog', max_length=256, choices=medartanalog_choices, blank=True)
     doctype = models.CharField('Dokumenttyp', max_length=256, choices=doctype_choices, blank=True)
+
+    file = FilerFileField(null=True, blank=True, related_name="item_file", verbose_name='Datei')
+    image = FilerImageField(null=True, blank=True, related_name="item_image", verbose_name='Bild')
+
     keywords = models.TextField('Schlagworte *', default="", max_length=1024)
     location = models.CharField('Standort (analoges Archiv)', max_length=256, blank=True)
     source = models.CharField('Quelle', max_length=256, blank=True)
