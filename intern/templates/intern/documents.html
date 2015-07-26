@@ -29,7 +29,7 @@
         </small>
       </h3>
 
-      <table class="table table-hover table-striped table-condensed table-responsive">
+      <table class="table table-hover table-striped table-condensed table-responsive datatable">
         <thead>
           <th width="5%" style="text-align:center;">Typ</th>
           <th width="60%">Name</th>
@@ -92,6 +92,7 @@
     $(document).ready(function(){
       $('[data-toggle="popover"]').popover();
       $('[data-toggle="tooltip"]').tooltip();
+      $('.datatable').DataTable();
     });
   </script>
 {% endblock %}
