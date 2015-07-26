@@ -1,8 +1,8 @@
 div.dataTables_length label {
+	display: none;				/* Hide number of entries because it is ugly */
 	font-weight: normal;
 	text-align: left;
 	white-space: nowrap;
-	float: left;
 }
 
 div.dataTables_length select {
@@ -12,7 +12,6 @@ div.dataTables_length select {
 
 div.dataTables_filter {
 	text-align: right;
-	float: right;
 }
 
 div.dataTables_filter label {
