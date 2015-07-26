@@ -364,16 +364,16 @@ a.breakpoint-tooltip {
 /* Icomoon */
 
 @font-face {
-    font-family: 'icomoon';
+    font-family: 'icomoon-tbp';
     font-style: normal;
     font-weight: normal;
-    src: url('../fonts/icomoon.eot?-tu63u2');
-    src: url('../fonts/icomoon.eot?#iefix-tu63u2') format('embedded-opentype'), url('../fonts/icomoon.woff?-tu63u2') format('woff'), url('../fonts/icomoon.ttf?-tu63u2') format('truetype'), url('../fonts/icomoon.svg?-tu63u2#icomoon') format('svg');
+    src: url('../fonts/icomoon-tbp.eot?-tu63u2');
+    src: url('../fonts/icomoon-tbp.eot?#iefix-tu63u2') format('embedded-opentype'), url('../fonts/icomoon-tbp.woff?-tu63u2') format('woff'), url('../fonts/icomoon-tbp.ttf?-tu63u2') format('truetype'), url('../fonts/icomoon-tbp.svg?-tu63u2#icomoon') format('svg');
 }
 
 [class^='bootstrap-'], [class*=' bootstrap-'], .selector:before {
     text-transform: none;
-    font-family: 'icomoon';
+    font-family: 'icomoon-tbp';
     font-style: normal;
     font-variant: normal;
     font-weight: normal;

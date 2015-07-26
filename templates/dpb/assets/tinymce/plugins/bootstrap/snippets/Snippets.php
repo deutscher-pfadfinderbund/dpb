@@ -30,7 +30,7 @@ class Snippets
         $html = '';
         if (empty($this->total_snippets)) {
             $html .= '<div class="col-xs-12">' . " \n";
-                $html .= '<p>No Snippet to Display</p>' . " \n";
+            $html .= '<p>&nbsp;</p><p>' . NO_SNIPPET_TO_DISPLAY . '</p>' . " \n";
             $html .= '</div>' . " \n";
         } else {
             for ($i=0; $i < $this->total_snippets; $i++) {

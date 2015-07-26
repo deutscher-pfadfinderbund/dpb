@@ -10,5 +10,6 @@ tinymce.addI18n('fr_FR', {
     "Insert/Edit Bootstrap Label": "Insérer/Editer un Label",
     "Insert/Edit Bootstrap Badge": "Insérer/Editer un Badge",
     "Insert/Edit Bootstrap Alert": "Insérer/Editer une Alerte",
-    "Insert/Edit Bootstrap Panel": "Insérer/Editer un Panel"
+    "Insert/Edit Bootstrap Panel": "Insérer/Editer un Panel",
+    "Insert/Edit Snippet": "Insérer/Editer un Snippet"
 });

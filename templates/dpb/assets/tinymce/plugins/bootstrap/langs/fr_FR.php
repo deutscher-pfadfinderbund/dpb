@@ -64,6 +64,7 @@
     define('NO_FOOTER', 'SANS FOOTER');
     define('NO_HEADING', 'SANS ENTETE');
     define('NO_IMAGE_SELECTED', 'Aucune image sélectionnée');
+    define('NO_SNIPPET_TO_DISPLAY', 'Aucun Snippet enregistré');
     define('OK', 'OK');
     define('OTHERS', 'Autres');
     define('PANEL_CONTENT', 'Contenu');

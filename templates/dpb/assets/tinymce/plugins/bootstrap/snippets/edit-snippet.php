@@ -21,7 +21,7 @@ if (!isset($_GET['index']) || !is_numeric($_GET['index']) || !isset($_GET['title
     require_once 'Snippets.php';
     $snippets = new Snippets('snippets.xml', true);
     $snippets->getSnippets();
-    $out = $snippets->editSnippet($_GET['index'], $_GET['title'], $_GET['code']);
+    $out = $snippets->editSnippet($_GET['index'], utf8_decode(urldecode($_GET['title'])), utf8_decode(urldecode($_GET['code'])));
     $return_msg = '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . SNIPPET_UPDATED . '</div>';
     $return_danger_msg = '';
     if ($out === 'script_forbidden') {

@@ -17,7 +17,7 @@ function getBootstrapStyles()
     var choiceTitleBorderTop;
     var choiceTitleBorderTopAfter;
 
-    bodyBackground = previewBackground = $('body').css('background-color');
+    bodyBackground = previewBackground = $(window.parent.document.body).find('iframe').contents().find('.mce-content-body').css('background-color');
     if(bodyBackground.match(/rgb(255, 255, 255)/)) {
         $('body').css('background-color', '#fafafa');
     } else {

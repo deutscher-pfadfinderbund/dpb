@@ -64,6 +64,7 @@
     define('NO_FOOTER', 'NO FOOTER');
     define('NO_HEADING', 'NO HEADING');
     define('NO_IMAGE_SELECTED', 'No image selected');
+    define('NO_SNIPPET_TO_DISPLAY', 'No Snippet to Display');
     define('OK', 'OK');
     define('OTHERS', 'Others');
     define('PANEL_CONTENT', 'Panel content');

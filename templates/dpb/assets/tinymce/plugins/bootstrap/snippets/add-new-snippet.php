@@ -21,7 +21,7 @@ if (!isset($_GET['title']) || !isset($_GET['code']) || !preg_match('`[a-zA-Z0-9_
     require_once 'Snippets.php';
     $snippets = new Snippets('snippets.xml', true);
     $snippets->getSnippets();
-    $out = $snippets->addNewSnippet($_GET['title'], $_GET['code']);
+    $out = $snippets->addNewSnippet(utf8_decode(urldecode($_GET['title'])), utf8_decode(urldecode($_GET['code'])));
     $return_msg = '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . SNIPPET_ADDED . '</div>';
     $return_danger_msg = '';
     if ($out === 'script_forbidden') {

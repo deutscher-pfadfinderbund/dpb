@@ -1,7 +1,7 @@
 /**
  * TinyMce Bootstrap plugin
  *
- * @version 1.1.0
+ * @version 2.0
  * @author Gilles Migliori - gilles.migliori@gmail.com
  *
  */
@@ -81,7 +81,7 @@ tinymce.PluginManager.add('bootstrap', function(editor, url) {
     if(typeof(content_css) == 'undefined') {
         content_css = bootstrapCssPath + ',' + url + '/css/editor-content.min.css';
     } else {
-        content_css = content_css + ',' + bootstrapCssPath + ',' + url + '/css/editor-content.min.css';
+        content_css = bootstrapCssPath + ',' + content_css + ',' + url + '/css/editor-content.min.css';
     }
     editor.settings.content_css = content_css;
 
@@ -237,7 +237,7 @@ tinymce.PluginManager.add('bootstrap', function(editor, url) {
      */
     function renderContent(element, type)
     {
-        var markup = htmlDecode(document.getElementById('bs-code').value) + '<p></p>';
+        var markup = htmlDecode(document.getElementById('bs-code').value);
         var selectedNode = getSelectedNode();
         if($(selectedNode).hasClass('active')) {
 
@@ -439,8 +439,28 @@ tinymce.PluginManager.add('bootstrap', function(editor, url) {
             document.getElementsByTagName('head')[0].
                       appendChild(cssLink);
         }
+
+        /* get custom background color */
+
+        var tinymceBackgroundColor = editor.settings.bootstrapConfig.tinymceBackgroundColor;
+        if(tinymceBackgroundColor !== '') {
+            editor.dom.addStyle('.mce-content-body {background-color: ' + tinymceBackgroundColor + ' !important}');
+        }
         initCallbackEvents();
     });
+
+    /**
+     * toggle visual aid for templates
+     * @return void
+     */
+    function toggleVisualAid()
+    {
+        if(tinymce.activeEditor.hasVisual) {
+            tinymce.activeEditor.dom.addClass(tinymce.activeEditor.dom.select('.mce-content-body '), 'hasVisual');
+        } else {
+            tinymce.activeEditor.dom.removeClass(tinymce.activeEditor.dom.select('.mce-content-body '), 'hasVisual');
+        }
+    }
 
     /* callback events to select bootstrap elements on click and allow updates */
 
@@ -450,6 +470,13 @@ tinymce.PluginManager.add('bootstrap', function(editor, url) {
      */
     function initCallbackEvents()
     {
+        toggleVisualAid();
+        tinymce.activeEditor.on('ExecCommand', function(e) {
+            if(e.command == 'mceToggleVisualAid'); {
+                toggleVisualAid();
+            }
+        });
+        toggleVisualAid();
         tinymce.activeEditor.on('click keyup', function(e) {
             var elementSelector = '';
             var editorBtnName = '';
@@ -512,7 +539,7 @@ tinymce.PluginManager.add('bootstrap', function(editor, url) {
     {
         if(elementSelector == '.glyphicon') {
             editor.selection.setCursorLocation(element);
-        } else if(elementSelector == '.btn') {
+        } else if(elementSelector == '.btn' && $(element).is('input') !== true) {
             editor.selection.setCursorLocation(element, true);
         }
         if(elementSelector == '.table') {
@@ -545,7 +572,6 @@ tinymce.PluginManager.add('bootstrap', function(editor, url) {
         for (var i = 0; i < elements.length; i++) {
             $(editor.dom.select(elements[i])).removeClass('active');
         }
-        toggleEditorButton('allBtns', 'off');
     }
 
     function toggleEditorButton(editorBtnName, onOff)
@@ -554,9 +580,7 @@ tinymce.PluginManager.add('bootstrap', function(editor, url) {
         for (var i = editorBtns.length - 1; i >= 0; i--) {
             if(editorBtnName == 'allBtns' || editorBtns[i]._name == editorBtnName) {
                 if(onOff == 'on') {
-                    editorBtns[i].addClass('active');
-                } else {
-                    editorBtns[i].removeClass('active');
+                    $(editorBtns[i]).focus();
                 }
             }
         }
@@ -758,7 +782,7 @@ tinymce.PluginManager.add('bootstrap', function(editor, url) {
      */
     function getValidElements()
     {
-        var valid_elements = '@[accesskey|draggable|style|class|hidden|tabindex|contenteditable|id|title|contextmenu|lang|dir<ltr?rtl|spellcheck|onabort|onerror|onmousewheel|onblur|onfocus|onpause|oncanplay|onformchange|onplay|oncanplaythrough|onforminput|onplaying|onchange|oninput|onprogress|onclick|oninvalid|onratechange|oncontextmenu|onkeydown|onreadystatechange|ondblclick|onkeypress|onscroll|ondrag|onkeyup|onseeked|ondragend|onload|onseeking|ondragenter|onloadeddata|onselect|ondragleave|onloadedmetadata|onshow|ondragover|onloadstart|onstalled|ondragstart|onmousedown|onsubmit|ondrop|onmousemove|onsuspend|ondurationmouseout|ontimeupdate|onemptied|onmouseover|onvolumechange|onended|onmouseup|onwaiting],a[target<_blank?_self?_top?_parent|ping|media|href|hreflang|type|rel<alternate?archives?author?bookmark?external?feed?first?help?index?last?license?next?nofollow?noreferrer?prev?search?sidebar?tag?up],abbr,address,area[alt|coords|shape|href|target<_blank?_self?_top?_parent|ping|media|hreflang|type|shape<circle?default?poly?rect|rel<alternate?archives?author?bookmark?external?feed?first?help?index?last?license?next?nofollow?noreferrer?prev?search?sidebar?tag?up],article,aside,audio[src|preload<none?metadata?auto|autoplay<autoplay|loop<loop|controls<controls|mediagroup],blockquote[cite],body,br,button[autofocus<autofocus|disabled<disabled|form|formaction|formenctype|formmethod<get?put?post?delete|formnovalidate?novalidate|formtarget<_blank?_self?_top?_parent|name|type<reset?submit?button|value],canvas[width,height],caption,cite,code,col[span],colgroup[span],command[type<command?checkbox?radio|label|icon|disabled<disabled|checked<checked|radiogroup|default<default],datalist[data],dd,del[cite|datetime],details[open<open],dfn,div,dl,dt,-em/i,embed[src|type|width|height],eventsource[src],fieldset[disabled<disabled|form|name],figcaption,figure,footer,form[accept-charset|action|enctype|method<get?post?put?delete|name|novalidate<novalidate|target<_blank?_self?_top?_parent],-h1,-h2,-h3,-h4,-h5,-h6,header,hgroup,hr,iframe[name|src|srcdoc|seamless<seamless|width|height|sandbox],img[alt=|src|ismap|usemap|width|height],input[accept|alt|autocomplete<on?off|autofocus<autofocus|checked<checked|disabled<disabled|form|formaction|formenctype|formmethod<get?put?post?delete|formnovalidate?novalidate|formtarget<_blank?_self?_top?_parent|height|list|max|maxlength|min|multiple<multiple|name|pattern|placeholder|readonly<readonly|required<required|size|src|step|type<hidden?text?search?tel?url?email?password?datetime?date?month?week?time?datetime-local?number?range?color?checkbox?radio?file?submit?image?reset?button?value|width],ins[cite|datetime],kbd,keygen[autofocus<autofocus|challenge|disabled<disabled|form|name],label[for|form],legend,li[value],mark,map[name],menu[type<context?toolbar?list|label],meter[value|min|low|high|max|optimum],nav,noscript,object[data|type|name|usemap|form|width|height],ol[reversed|start],optgroup[disabled<disabled|label],option[disabled<disabled|label|selected<selected|value],output[for|form|name],-p,param[name,value],-pre,progress[value,max],q[cite],ruby,rp,rt,samp,script[src|async<async|defer<defer|type|charset],section,select[autofocus<autofocus|disabled<disabled|form|multiple<multiple|name|size],small,source[src|type|media],span,-strong/b,-sub,summary,-sup,table,tbody,td[colspan|rowspan|headers],textarea[autofocus<autofocus|disabled<disabled|form|maxlength|name|placeholder|readonly<readonly|required<required|rows|cols|wrap<soft|hard],tfoot,th[colspan|rowspan|headers|scope],thead,time[datetime],tr,ul,var,video[preload<none?metadata?auto|src|crossorigin|poster|autoplay<autoplay|mediagroup|loop<loop|muted<muted|controls<controls|width|height],wbr';
+        var valid_elements = '@[accesskey|draggable|style|class|hidden|tabindex|contenteditable|id|title|contextmenu|lang|dir<ltr?rtl|spellcheck|onabort|onerror|onmousewheel|onblur|onfocus|onpause|oncanplay|onformchange|onplay|oncanplaythrough|onforminput|onplaying|onchange|oninput|onprogress|onclick|oninvalid|onratechange|oncontextmenu|onkeydown|onreadystatechange|ondblclick|onkeypress|onscroll|ondrag|onkeyup|onseeked|ondragend|onload|onseeking|ondragenter|onloadeddata|onselect|ondragleave|onloadedmetadata|onshow|ondragover|onloadstart|onstalled|ondragstart|onmousedown|onsubmit|ondrop|onmousemove|onsuspend|ondurationmouseout|ontimeupdate|onemptied|onmouseover|onvolumechange|onended|onmouseup|onwaiting],a[target<_blank?_self?_top?_parent|ping|media|href|hreflang|type|rel<alternate?archives?author?bookmark?external?feed?first?help?index?last?license?next?nofollow?noreferrer?prev?search?sidebar?tag?up],abbr,address,area[alt|coords|shape|href|target<_blank?_self?_top?_parent|ping|media|hreflang|type|shape<circle?default?poly?rect|rel<alternate?archives?author?bookmark?external?feed?first?help?index?last?license?next?nofollow?noreferrer?prev?search?sidebar?tag?up],article,aside,audio[src|preload<none?metadata?auto|autoplay<autoplay|loop<loop|controls<controls|mediagroup],blockquote[cite],body,br,button[autofocus<autofocus|disabled<disabled|form|formaction|formenctype|formmethod<get?put?post?delete|formnovalidate?novalidate|formtarget<_blank?_self?_top?_parent|name|type<reset?submit?button|value],canvas[width,height],caption,cite,code,col[span],colgroup[span],command[type<command?checkbox?radio|label|icon|disabled<disabled|checked<checked|radiogroup|default<default],datalist[data],dd,del[cite|datetime],details[open<open],dfn,div,dl,dt,-em/i,embed[src|type|width|height],eventsource[src],fieldset[disabled<disabled|form|name],figcaption,figure,footer,form[accept-charset|action|enctype|method<get?post?put?delete|name|novalidate<novalidate|target<_blank?_self?_top?_parent],-h1,-h2,-h3,-h4,-h5,-h6,header,hgroup,hr,iframe[name|src|srcdoc|seamless<seamless|width|height|sandbox],img[alt=|src|ismap|usemap|width|height],input[accept|alt|autocomplete<on?off|autofocus<autofocus|checked<checked|disabled<disabled|form|formaction|formenctype|formmethod<get?put?post?delete|formnovalidate?novalidate|formtarget<_blank?_self?_top?_parent|height|list|max|maxlength|min|multiple<multiple|name|pattern|placeholder|readonly<readonly|required<required|size|src|step|type<hidden?text?search?tel?url?email?password?datetime?date?month?week?time?datetime-local?number?range?color?checkbox?radio?file?submit?image?reset?button|value|width],ins[cite|datetime],kbd,keygen[autofocus<autofocus|challenge|disabled<disabled|form|name],label[for|form],legend,li[value],mark,map[name],menu[type<context?toolbar?list|label],meter[value|min|low|high|max|optimum],nav,noscript,object[data|type|name|usemap|form|width|height],ol[reversed|start],optgroup[disabled<disabled|label],option[disabled<disabled|label|selected<selected|value],output[for|form|name],-p,param[name,value],-pre,progress[value,max],q[cite],ruby,rp,rt,samp,script[src|async<async|defer<defer|type|charset],section,select[autofocus<autofocus|disabled<disabled|form|multiple<multiple|name|size],small,source[src|type|media],span,-strong/b,-sub,summary,-sup,table,tbody,td[colspan|rowspan|headers],textarea[autofocus<autofocus|disabled<disabled|form|maxlength|name|placeholder|readonly<readonly|required<required|rows|cols|wrap<soft|hard],tfoot,th[colspan|rowspan|headers|scope],thead,time[datetime],tr,ul,var,video[preload<none?metadata?auto|src|crossorigin|poster|autoplay<autoplay|mediagroup|loop<loop|muted<muted|controls<controls|width|height],wbr';
 
         return valid_elements;
     }
