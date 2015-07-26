@@ -1,7 +1,5 @@
 # DPB
 
-Temporarily available at https://jungenbund.de
-
 ## Development
 This is a Python3 Django project. The requirements are defined in `requirements.txt`. Use a virtualenv for it since this is the best practice.
 
