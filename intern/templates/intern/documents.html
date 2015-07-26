@@ -20,7 +20,15 @@
 
     {# Compare to folder.parent.name to get the string #}
     {% if folder.parent.name == "Dokumente" and folder.file_count > 0%}
-      <h3>{{ folder }}</h3>
+      <h3>{{ folder }}
+        <small>
+          <a href="{{ folder.get_admin_directory_listing_url_path }}"
+             data-toggle="tooltip" data-placement="top" title="Datei zum Ordner hinzufügen">
+            <i class="text-right fa fa-paperclip"></i>
+          </a>
+        </small>
+      </h3>
+
       <table class="table table-hover table-striped table-condensed table-responsive">
         <thead>
           <th style="text-align:center;">Typ</th>
@@ -39,6 +47,10 @@
                     <i class="fa fa-file-pdf-o fa-lg"></i>
                   {% elif file.extension == "jpg" or file.extension == "png" %}
                     <i class="fa fa-picture-o fa-lg"></i>
+                  {% elif file.extension == "doc" or file.extension == "docx" %}
+                    <i class="fa fa-file-word-o fa-lg"></i>
+                  {% elif file.extension == "xls" or file.extension == "xlsx" %}
+                    <i class="fa fa-file-excel-o fa-lg"></i>
                   {% else %}
                     {{ file.extension }}
                   {% endif %}
@@ -54,15 +66,15 @@
                 </td>
                 <td>
                   {% if file.description %}
-                    <a tabindex="0" data-toggle="popover" title="{{ file }}" data-content="{{ file.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
+                    <a tabindex="0" data-toggle="popover" data-trigger="hover" title="{{ file }}" data-content="{{ file.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
                   {% endif %}
                 </td>
                 <td>{{ file.size|sizify }}</td>
                 <td>{{ file.modified_at }}</td>
                 <td>
                   {% if user.is_staff %}
-                    <a href="{{ file.get_admin_url_path }}"><i class="fa fa-pencil-square-o fa-lg"></i></a>
-                    <a href="{{ file.get_admin_url_path }}delete"><i class="fa fa-remove fa-lg"></i></a>
+                    <a href="{{ file.get_admin_url_path }}" data-toggle="tooltip" data-placement="top" title="Datei bearbeiten"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+                    <a href="{{ file.get_admin_url_path }}delete" data-toggle="tooltip" data-placement="top" title="Datei löschen"><i class="fa fa-remove fa-lg"></i></a>
                   {% endif %}
                 </td>
               </tr>
@@ -78,7 +90,8 @@
 
   <script>
     $(document).ready(function(){
-        $('[data-toggle="popover"]').popover();
+      $('[data-toggle="popover"]').popover();
+      $('[data-toggle="tooltip"]').tooltip();
     });
   </script>
 {% endblock %}
