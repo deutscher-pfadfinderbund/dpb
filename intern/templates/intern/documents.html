@@ -19,7 +19,7 @@
   {% for folder in folders %}
 
     {# Compare to folder.parent.name to get the string #}
-    {% ifequal folder.parent.name "Dokumente" %}
+    {% if folder.parent.name == "Dokumente" and folder.file_count > 0%}
       <h3>{{ folder }}</h3>
       <table class="table table-hover table-striped table-condensed table-responsive">
         <thead>
@@ -72,7 +72,7 @@
         </tbody>
 
       </table>
-    {% endifequal %}
+    {% endif %}
 
   {% endfor %}
 
