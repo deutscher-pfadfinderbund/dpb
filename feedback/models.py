@@ -11,5 +11,6 @@ class Feedback(models.Model):
     note = models.TextField('Anmerkung', max_length=1024, blank=False)
     answer = models.TextField('Antwort', max_length=1024, blank=True)
     author = models.CharField('Antwort von', max_length=50, default="Admin", blank=True)
+    archive = models.BooleanField('Bearbeitet?', default=False)
     public = models.BooleanField('Öffentlich?', default=True)
     created = models.DateTimeField('Erstellt am', default=datetime.now)
