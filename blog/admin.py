@@ -1,8 +1,10 @@
 from django.contrib import admin
-from .models import Post, Category
 
+from .models import Post, Category
+from .forms import PostForm
 
 class PostAdmin(admin.ModelAdmin):
+    form = PostForm
     list_display = ('title', 'archive', 'public', 'created')
     list_filter = ['title']
     search_fields = ['title']
