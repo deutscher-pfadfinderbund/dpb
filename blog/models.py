@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.db import models
+from autoslug import AutoSlugField
 
 
 class Category(models.Model):
@@ -16,13 +17,18 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField('Titel', max_length=50, blank=False)
     content = models.TextField('Inhalt', blank=False)
+    slug = AutoSlugField(null=True, populate_from='title')
     archive = models.BooleanField('Archiviert?', default=False)
     public = models.BooleanField('Öffentlich?', default=True)
     created = models.DateTimeField('Erstellt am', default=datetime.now)
-    categories = models.ManyToManyField(Category, verbose_name="Kategorien")
+    category = models.ForeignKey('Category', null=True, verbose_name="Kategorie")
 
     def __str__(self):
         return self.title
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'blog:post', (self.slug,)
 
     class Meta:
         verbose_name = 'Beitrag'

@@ -5,7 +5,7 @@ from .forms import PostForm
 
 class PostAdmin(admin.ModelAdmin):
     form = PostForm
-    list_display = ('title', 'archive', 'public', 'created')
+    list_display = ('title', 'category', 'archive', 'public', 'created')
     list_filter = ['title']
     search_fields = ['title']
 

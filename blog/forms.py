@@ -1,5 +1,8 @@
+import itertools
+
 from django import forms
 from tinymce.widgets import TinyMCE
+from django.utils.text import slugify
 
 from .models import Post
 
