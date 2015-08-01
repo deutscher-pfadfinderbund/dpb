@@ -36,3 +36,10 @@ If PIL was already installed, reinstall it with:
 ```bash
 $ pip install -I pillow
 ```
+
+### Bower
+
+Some apps, like `django-scheduler` require Bower. Just install it with:
+```bash
+$ sudo npm install -g bower
+```
