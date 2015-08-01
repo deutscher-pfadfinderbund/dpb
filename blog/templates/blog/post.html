@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block heading %}
+  <h1>{{ post.title }}</h1>
+{% endblock %}
+
+{% block content %}
+  {{ post.content|safe }}
+{% endblock %}

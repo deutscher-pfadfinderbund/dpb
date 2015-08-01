@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 
 from . import views
 
+from blog import views as blogviews
 from pages import views as pageviews
 
 urlpatterns = [
@@ -19,7 +20,11 @@ urlpatterns = [
     url(r'^feedback/', include('feedback.urls', namespace='feedback')),
     url(r'^bundesarchiv/', include('archive.urls', namespace='archive')),
     url(r'^kontakt/', include('contact.urls', namespace='email')),
+
+    # Members Area
     url(r'^intern/', include('intern.urls', namespace='intern')),
+    url(r'^intern/aktuelles/(?P<slug>[\w-]+)/$', blogviews.current),
+    url(r'^intern/themen/(?P<slug>[\w-]+)/$', blogviews.topics),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^account/', include('login.urls', namespace='login')),
