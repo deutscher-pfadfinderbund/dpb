@@ -7,5 +7,4 @@ urlpatterns = [
     # Form URLs
     url(r'^$', contact),
     url(r'^verschickt/$', TemplateView.as_view(template_name='contact/verschickt.html'), name='verschickt'),
-    #url(r'^$', TemplateView.as_view(template_name='contact/email.html'), name='email'),
 ]

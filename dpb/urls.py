@@ -31,9 +31,10 @@ urlpatterns = [
 # Named Staticpages
 urlpatterns += [
     url(r'^impressum/$', pageviews.page, {'url': '/impressum/'}, name='impressum'),
+    url(r'^arbeitskreis/$', pageviews.page, {'url': '/arbeitskreis/'}, name='arbeitskreis'),
+
     url(r'^kontakt/$', pageviews.page, {'url': '/kontakt/'}, name='kontakt'),
 
-    url(r'^test/$', pageviews.page, {'url': '/test/'}, name='test'),
 
     url(r'^(?P<url>.*/)$', pageviews.page, name='page'),
 ]
