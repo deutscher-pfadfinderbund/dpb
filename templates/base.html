@@ -9,6 +9,7 @@
     <meta name="author" content="">
 
     {% load staticfiles %}
+    {% load pages %}
 
     <!-- Vendor Stylesheets -->
     <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}"/>
@@ -92,6 +93,18 @@
                   <li class="disabled"><a href="#">Links zu den Gruppenheimen</a></li>
                 </ul>
               </li>
+              
+              {# Links for Arbeitskreis #}
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Arbeitskreis <span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="themes">
+                  {% get_pages '/intern/arbeitskreis/' as pages %}
+                  {% for page in pages %}
+                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              </li>
+              {# Endlinks #}
 
               {% comment %}
               <li class="dropdown">
