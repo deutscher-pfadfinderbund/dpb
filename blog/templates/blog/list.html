@@ -13,31 +13,35 @@
     </p>
   {% endif %}
 
-  {% for p1, p2 in posts %}
-    <div class="row">
-      <div class="col-md-6">
-        <h4>
-          {{ p1.title }}<br>
-          <small>{{ p1.created|date:"j. N Y" }}{% if p1.author %} von {{ p1.author }}{% endif %}</small>
-        </h4>
-        <p>
-          {{ p1.content|striptags|truncatewords:20 }}<br>
-          <a href="{{ p1.slug }}">Mehr</a>
-        </p>
-      </div>
-
-      {% if p2 %}
+  {% if p1 %}
+    {% for p1, p2 in posts %}
+      <div class="row">
         <div class="col-md-6">
           <h4>
-            {{ p2.title }}<br>
-            <small>{{ p2.created|date:"j. N Y" }}{% if p2.author %} von {{ p2.author }}{% endif %}</small>
+            {{ p1.title }}<br>
+            <small>{{ p1.created|date:"j. N Y" }}{% if p1.author %} von {{ p1.author }}{% endif %}</small>
           </h4>
           <p>
-            {{ p2.content|striptags|truncatewords:20 }}<br>
-            <a href="{{ p2.slug }}">Mehr</a>
+            {{ p1.content|striptags|truncatewords:20 }}<br>
+            <a href="{{ p1.slug }}">Mehr</a>
           </p>
         </div>
-      {% endif %}
-    </div>
-  {% endfor %}
+
+        {% if p2 %}
+          <div class="col-md-6">
+            <h4>
+              {{ p2.title }}<br>
+              <small>{{ p2.created|date:"j. N Y" }}{% if p2.author %} von {{ p2.author }}{% endif %}</small>
+            </h4>
+            <p>
+              {{ p2.content|striptags|truncatewords:20 }}<br>
+              <a href="{{ p2.slug }}">Mehr</a>
+            </p>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>In dieser Rubrik sind noch keine Einträge vorhanden.</p>
+  {% endif %}
 {% endblock %}
