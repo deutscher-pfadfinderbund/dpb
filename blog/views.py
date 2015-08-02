@@ -23,19 +23,35 @@ def current_overview(request):
             Q(category=category[0].id),
             Q(public=True),
             Q(archive=False),
-        ))
+        ).order_by("-created"))
     except Post.DoesNotExist:
         raise Http404("Diese Beiträge konnten leider nicht gefunden werden.")
     return render(request, 'blog/list.html',
-                  {'posts': posts,
+                  {'posts':   posts,
                    'heading': "Aktuelles",
-                   'intro': "Hier gibt es eine Übersicht aktueller Beiträge rund um den DPB."})
+                   'intro':   "Hier gibt es eine Übersicht aktueller Beiträge rund um den DPB."})
 
 
 @login_required
-def topics(request, slug):
-    pass
+def topics_overview(request):
+    try:
+        category = Category.objects.filter(name="Themen")
+        posts = pack(Post.objects.filter(
+            Q(category=category[0].id),
+            Q(public=True),
+            Q(archive=False),
+        ).order_by("-created"))
+    except Post.DoesNotExist:
+        raise Http404("Diese Beiträge konnten leider nicht gefunden werden.")
+    return render(request, 'blog/list.html',
+                  {'posts':   posts,
+                   'heading': "Themen",
+                   'intro':   "Ausführliche Informationen zu bestimmten Themen."})
 
+
+@login_required
+def topic(request):
+    pass
 
 ################################ Aux functions
 

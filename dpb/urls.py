@@ -25,7 +25,8 @@ urlpatterns = [
     url(r'^intern/', include('intern.urls', namespace='intern')),
     url(r'^intern/aktuelles/$', blogviews.current_overview, name='blog_aktuelles'),
     url(r'^intern/aktuelles/(?P<slug>[\w-]+)/$', blogviews.post),
-    url(r'^intern/themen/(?P<slug>[\w-]+)/$', blogviews.topics),
+    url(r'^intern/themen/$', blogviews.topics_overview, name='blog_themen'),
+    url(r'^intern/themen/(?P<slug>[\w-]+)/$', blogviews.topic),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^account/', include('login.urls', namespace='login')),
