@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block heading %}
+  <h1>{{ heading }}</h1>
+{% endblock %}
+
+{% block content %}
+  <p>
+    {{ intro }}
+  </p>
+
+  {% for p1, p2 in posts %}
+    <div class="row">
+      <div class="col-md-6">
+        <h4>
+          {{ p1.title }}<br>
+          <small>{{ p1.created|date:"j. N Y" }}</small>
+        </h4>
+
+        <p>
+          {{ p1.content|striptags|truncatewords:20 }}
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <h4>
+          {{ p2.title }}<br>
+          <small>{{ p1.created|date:"j. N Y" }}</small>
+        </h4>
+        <p>
+          {{ p2.content|striptags|truncatewords:20 }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+
+  {{ post.content|safe }}
+{% endblock %}

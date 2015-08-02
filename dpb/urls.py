@@ -23,7 +23,8 @@ urlpatterns = [
 
     # Members Area
     url(r'^intern/', include('intern.urls', namespace='intern')),
-    url(r'^intern/aktuelles/(?P<slug>[\w-]+)/$', blogviews.current),
+    url(r'^intern/aktuelles/$', blogviews.current_overview),
+    url(r'^intern/aktuelles/(?P<slug>[\w-]+)/$', blogviews.post),
     url(r'^intern/themen/(?P<slug>[\w-]+)/$', blogviews.topics),
 
     url(r'^admin/', include(admin.site.urls)),
