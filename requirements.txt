@@ -1,5 +1,6 @@
 Django==1.8.3
 django-appconf==1.0.1
+django-autoslug==1.8.0
 django-contact-form==1.0
 django-filer==0.9.11
 django-forms-bootstrap==3.0.1
@@ -10,6 +11,6 @@ django-recaptcha==1.0.4
 django-tinymce==1.5.3
 easy-thumbnails==2.2
 futures==3.0.3
-Pillow==2.8.2
+Pillow>=2.9.0
 six==1.9.0
 Unidecode==0.4.17
