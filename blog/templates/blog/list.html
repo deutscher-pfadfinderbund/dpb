@@ -18,19 +18,20 @@
           {{ p1.title }}<br>
           <small>{{ p1.created|date:"j. N Y" }}</small>
         </h4>
-
         <p>
-          {{ p1.content|striptags|truncatewords:20 }}
+          {{ p1.content|striptags|truncatewords:20 }}<br>
+          <a href="{{ p1.slug }}">Mehr</a>
         </p>
       </div>
 
       <div class="col-md-6">
         <h4>
           {{ p2.title }}<br>
-          <small>{{ p1.created|date:"j. N Y" }}</small>
+          <small>{{ p2.created|date:"j. N Y" }}</small>
         </h4>
         <p>
-          {{ p2.content|striptags|truncatewords:20 }}
+          {{ p2.content|striptags|truncatewords:20 }}<br>
+          <a href="{{ p2.slug }}">Mehr</a>
         </p>
       </div>
     </div>

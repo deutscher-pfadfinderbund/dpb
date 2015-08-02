@@ -9,6 +9,16 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ['created']
     search_fields = ['title']
 
+    fieldsets = [
+        (None,        {'fields': ['title', 'category', ('archive', 'public'), 'content']}),
+        ('Erweitert', {'fields': ['created', 'author'], 'classes': ['collapse']}),
+    ]
+
+    def save_model(self, request, obj, form, change):
+        if getattr(obj, 'author', None) is None:
+            obj.author = request.user
+        obj.save()
+
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category)

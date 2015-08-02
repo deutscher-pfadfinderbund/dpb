@@ -1,5 +1,8 @@
 from django.http import Http404
 from django.shortcuts import render
+from django.db.models import Q
+
+
 from .models import Post, Category
 
 
@@ -14,7 +17,11 @@ def post(request, slug):
 def current_overview(request):
     try:
         category = Category.objects.filter(name="Aktuelles")
-        posts = pack(Post.objects.filter(category=category[0].id))
+        posts = pack(Post.objects.filter(
+            Q(category=category[0].id),
+            Q(public=True),
+            Q(archive=False),
+        ))
     except Post.DoesNotExist:
         raise Http404("Diese Beiträge konnten leider nicht gefunden werden.")
     return render(request, 'blog/list.html',
@@ -30,7 +37,7 @@ def topics(request, slug):
 ################################ Aux functions
 
 def pack(_list):
-    new_list = zip(_list[::2], _list[1::2])
-    if len(_list) % 2:
-        new_list.append((_list[-1], None))
-    return new_list
+    nlist = list(_list)
+    if len(nlist) % 2:      # Append none if len is odd
+        nlist.append(None)
+    return zip(nlist[::2], nlist[1::2])

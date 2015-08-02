@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.contrib.auth.models import User
 from django.db import models
 from autoslug import AutoSlugField
 
@@ -16,6 +17,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField('Titel', max_length=50, blank=False)
+    author = models.ForeignKey(User, null=True, blank=True, verbose_name="Autor")
     content = models.TextField('Inhalt', blank=False)
     slug = AutoSlugField(null=True, populate_from='title')
     archive = models.BooleanField('Archiviert?', default=False)
