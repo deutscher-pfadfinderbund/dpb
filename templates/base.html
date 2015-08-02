@@ -81,6 +81,7 @@
               </ul>
             </li>
             <li><a href="{% url 'kontakt' %}">Kontakt</a></li>
+
             {% if user.is_authenticated %}
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Intern <span class="caret"></span></a>
@@ -93,7 +94,7 @@
                   <li class="disabled"><a href="#">Links zu den Gruppenheimen</a></li>
                 </ul>
               </li>
-              
+
               {# Links for Arbeitskreis #}
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Arbeitskreis <span class="caret"></span></a>
