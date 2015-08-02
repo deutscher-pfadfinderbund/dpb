@@ -4,6 +4,11 @@
 
 {% block heading %}
   <h1>{{ post.title }}</h1>
+  <h4>
+    <small>
+      {{ post.created|date:"j. N Y" }}{% if post.author %} von {{ post.author }}{% endif %}
+    </small>
+  </h4>
 {% endblock %}
 
 {% block content %}

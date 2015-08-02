@@ -1,11 +1,12 @@
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render
 from django.db.models import Q
 
-
 from .models import Post, Category
 
 
+@login_required
 def post(request, slug):
     try:
         post = Post.objects.get(slug=slug)
@@ -14,6 +15,7 @@ def post(request, slug):
     return render(request, 'blog/post.html', {'post': post})
 
 
+@login_required
 def current_overview(request):
     try:
         category = Category.objects.filter(name="Aktuelles")
@@ -30,6 +32,7 @@ def current_overview(request):
                    'intro': "Hier gibt es eine Übersicht aktueller Beiträge rund um den DPB."})
 
 
+@login_required
 def topics(request, slug):
     pass
 

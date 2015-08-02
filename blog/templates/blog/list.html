@@ -16,7 +16,7 @@
       <div class="col-md-6">
         <h4>
           {{ p1.title }}<br>
-          <small>{{ p1.created|date:"j. N Y" }}</small>
+          <small>{{ p1.created|date:"j. N Y" }}{% if p1.author %} von {{ p1.author }}{% endif %}</small>
         </h4>
         <p>
           {{ p1.content|striptags|truncatewords:20 }}<br>
@@ -27,7 +27,7 @@
       <div class="col-md-6">
         <h4>
           {{ p2.title }}<br>
-          <small>{{ p2.created|date:"j. N Y" }}</small>
+          <small>{{ p2.created|date:"j. N Y" }}{% if p2.author %} von {{ p2.author }}{% endif %}</small>
         </h4>
         <p>
           {{ p2.content|striptags|truncatewords:20 }}<br>
