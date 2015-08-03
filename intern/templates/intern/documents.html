@@ -10,6 +10,20 @@
 {% endblock %}
 
 {% block content %}
+  <!-- Setup datatables -->
+  <script src="{% static 'assets/datatables/js/jquery.dataTables.js' %}"></script>
+  <script src="{% static 'assets/datatables/js/dataTables.bootstrap.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'assets/datatables/css/dataTables.bootstrap.min.css' %}"/>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.datatable').dataTable( {
+        "language": {
+          "url": "{% static 'assets/datatables/german.json' %}"
+        }
+      });
+    });
+  </script>
+
   {% if user.is_staff %}
     <p>
       <a href="/admin/filer/folder/"><i class="fa fa-paperclip fa-lg"></i> Weitere Dokumente hochladen</a>
@@ -91,8 +105,9 @@
     {% endif %}
 
     <script type="text/javascript">
+      // Settings for datatables
       $.extend( $.fn.dataTable.defaults, {
-
+        searching: false,
       });
     </script>
 

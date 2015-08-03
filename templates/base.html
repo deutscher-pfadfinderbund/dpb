@@ -23,20 +23,6 @@
     <script src="{% static 'assets/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
 
-    <!-- Setup datatables -->
-    <script src="{% static 'assets/datatables/js/jquery.dataTables.js' %}"></script>
-    <script src="{% static 'assets/datatables/js/dataTables.bootstrap.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'assets/datatables/css/dataTables.bootstrap.min.css' %}"/>
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $('.datatable').dataTable( {
-          "language": {
-            "url": "{% static 'assets/datatables/german.json' %}"
-          }
-        });
-      });
-    </script>
-
     <!-- Own Javascript -->
     <script type="text/javascript">
       $(document).ready(function(){
