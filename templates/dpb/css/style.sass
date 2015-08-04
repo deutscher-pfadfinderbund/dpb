@@ -45,6 +45,8 @@ header
   line-height: $navbar-height
 
 @media (max-width: 767px)
+  .navbar-brand
+    margin-top: 0.1em
   .navbar-nav > li > a
     line-height: 20px
     padding-top: 10px
@@ -56,7 +58,12 @@ header
 .navbar-brand
   padding-left: 1em
   img
-    padding: 0.1em 1em
+    padding: 0.1em 1em 0.1em 0.6em
+
+@media (max-width: 767px)
+  .navbar-brand
+    img
+      padding: 0.1em 1em 0.1em 0.1em
 
 
 // Container

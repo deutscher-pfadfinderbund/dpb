@@ -32,6 +32,9 @@ header h1 {
   line-height: 80px; }
 
 @media (max-width: 767px) {
+  .navbar-brand {
+    margin-top: 0.1em; }
+
   .navbar-nav > li > a {
     line-height: 20px;
     padding-top: 10px;
@@ -42,8 +45,11 @@ header h1 {
 .navbar-brand {
   padding-left: 1em; }
   .navbar-brand img {
-    padding: 0.1em 1em; }
+    padding: 0.1em 1em 0.1em 0.6em; }
 
+@media (max-width: 767px) {
+  .navbar-brand img {
+    padding: 0.1em 1em 0.1em 0.1em; } }
 .container {
   padding-bottom: 1em; }
 
