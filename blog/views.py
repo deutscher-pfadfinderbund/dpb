@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Post, Category
 
@@ -24,6 +25,26 @@ def current_overview(request):
             Q(public=True),
             Q(archive=False),
         ).order_by("-created"))
+    except Post.DoesNotExist:
+        raise Http404("Diese Beiträge konnten leider nicht gefunden werden.")
+    return render(request, 'blog/list.html',
+                  {'posts':   posts,
+                   'heading': "Aktuelles",
+                   'intro':   "Hier gibt es eine Übersicht aktueller Beiträge rund um den DPB."})
+
+
+@login_required
+def current_page(request, page):
+    try:
+        category = Category.objects.filter(name="Aktuelles")
+        posts = pack(Post.objects.filter(
+            Q(category=category[0].id),
+            Q(public=True),
+            Q(archive=False),
+        ).order_by("-created"))
+
+        paginator = Paginator(posts, 6)
+
     except Post.DoesNotExist:
         raise Http404("Diese Beiträge konnten leider nicht gefunden werden.")
     return render(request, 'blog/list.html',
