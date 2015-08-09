@@ -23,9 +23,11 @@ urlpatterns = [
 
     # Members Area
     url(r'^intern/', include('intern.urls', namespace='intern')),
-    url(r'^intern/aktuelles/$', blogviews.current_overview, name='blog_aktuelles'),
-    url(r'^intern/aktuelles/(?P<page>[0-9]+)/$', blogviews.current_page, name='blog_page'),
-    url(r'^intern/aktuelles/(?P<slug>[\w-]+)/$', blogviews.post),
+
+    url(r'^intern/aktuelles/$', blogviews.current_overview_paginator, name='blog_page'),
+    url(r'^intern/aktuelles/(?P<page>[0-9]+)/$', blogviews.current_overview_paginator, name='blog_page'),
+    url(r'^intern/aktuelles/(?P<slug>[\w-]+)/$', blogviews.post, name='blog_detail'),
+
     url(r'^intern/themen/$', blogviews.topics_overview, name='blog_themen'),
     url(r'^intern/themen/(?P<slug>[\w-]+)/$', blogviews.topic),
 
