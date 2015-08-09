@@ -25,7 +25,7 @@
             </h4>
             <p>
               {{ p1.content|striptags|truncatewords:20 }}<br>
-              <a href="{{ p1.slug }}">Mehr</a>
+              <a href="{% url 'blog_detail' slug=p1.slug %}">Mehr</a>
             </p>
           </div>
         {% endif %}
@@ -38,7 +38,7 @@
             </h4>
             <p>
               {{ p2.content|striptags|truncatewords:20 }}<br>
-              <a href="{{ p2.slug }}">Mehr</a>
+              <a href="{% url 'blog_detail' slug=p2.slug %}">Mehr</a>
             </p>
           </div>
         {% endif %}

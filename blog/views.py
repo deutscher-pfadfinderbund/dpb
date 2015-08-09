@@ -34,7 +34,7 @@ def current_overview(request):
 
 
 @login_required
-def current_overview_paginator(request, page):
+def current_overview_paginator(request, page=1):
     try:
         category = Category.objects.filter(name="Aktuelles")
         all_posts = Post.objects.filter(
