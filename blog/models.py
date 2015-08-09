@@ -6,6 +6,7 @@ from autoslug import AutoSlugField
 
 class Category(models.Model):
     name = models.CharField('Name', max_length=50, blank=False)
+    intro = models.TextField('Kurzbeschreibung', blank=True, null=True)
 
     def __str__(self):
         return self.name
