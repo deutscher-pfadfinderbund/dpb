@@ -47,29 +47,31 @@
 
     {# Pagination #}
 
-    <nav>
-      <ul class="pagination">
-        {% if paginator.has_previous %}
-          <li>
-            <a href="{% url 'blog_page' page=paginator.previous_page_number %}" aria-label="Zurück">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-        {% endif %}
+    {% if paginator.paginator.num_pages > 1 %}
+      <nav>
+        <ul class="pagination">
+          {% if paginator.has_previous %}
+            <li>
+              <a href="{% url 'blog_page' page=paginator.previous_page_number %}" aria-label="Zurück">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+          {% endif %}
 
-        {% for i in paginator.paginator.page_range %}
-          <li {% if paginator.number == i %} class="active" {% endif %}><a href="{% url 'blog_page' page=i %}">{{ i }}</a></li>
-        {% endfor %}
+          {% for i in paginator.paginator.page_range %}
+            <li {% if paginator.number == i %} class="active" {% endif %}><a href="{% url 'blog_page' page=i %}">{{ i }}</a></li>
+          {% endfor %}
 
-        {% if paginator.has_next%}
-          <li>
-            <a href="{% url 'blog_page' page=paginator.next_page_number %}" aria-label="Weiter">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        {% endif %}
-      </ul>
-    </nav>
+          {% if paginator.has_next %}
+            <li>
+              <a href="{% url 'blog_page' page=paginator.next_page_number %}" aria-label="Weiter">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
   {% else %}
     <p>In dieser Rubrik sind noch keine Einträge vorhanden.</p>
   {% endif %}
