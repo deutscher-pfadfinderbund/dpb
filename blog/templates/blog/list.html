@@ -4,13 +4,13 @@
 {% load blog_tags %}
 
 {% block heading %}
-  <h1>{{ heading }}</h1>
+  <h1>{{ category.name }}</h1>
 {% endblock %}
 
 {% block content %}
-  {% if intro %}
+  {% if category.intro %}
     <p>
-      {{ intro }}
+      {{ category.intro }}
     </p>
   {% endif %}
 
