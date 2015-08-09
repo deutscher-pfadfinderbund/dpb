@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load bootstrap_tags %}
+{% load blog_tags %}
 
 {% block heading %}
   <h1>{{ heading }}</h1>
@@ -13,19 +14,21 @@
     </p>
   {% endif %}
 
-  {% if not p1 %}
+  {% if posts %}
     {% for p1, p2 in posts %}
       <div class="row">
-        <div class="col-md-6">
-          <h4>
-            {{ p1.title }}<br>
-            <small>{{ p1.created|date:"j. N Y" }}{% if p1.author %} von {{ p1.author }}{% endif %}</small>
-          </h4>
-          <p>
-            {{ p1.content|striptags|truncatewords:20 }}<br>
-            <a href="{{ p1.slug }}">Mehr</a>
-          </p>
-        </div>
+        {% if p1 %}
+          <div class="col-md-6">
+            <h4>
+              {{ p1.title }}<br>
+              <small>{{ p1.created|date:"j. N Y" }}{% if p1.author %} von {{ p1.author }}{% endif %}</small>
+            </h4>
+            <p>
+              {{ p1.content|striptags|truncatewords:20 }}<br>
+              <a href="{{ p1.slug }}">Mehr</a>
+            </p>
+          </div>
+        {% endif %}
 
         {% if p2 %}
           <div class="col-md-6">
@@ -41,6 +44,32 @@
         {% endif %}
       </div>
     {% endfor %}
+
+    {# Pagination #}
+
+    <nav>
+      <ul class="pagination">
+        {% if paginator.has_previous %}
+          <li>
+            <a href="{% url 'blog_page' page=paginator.previous_page_number %}" aria-label="Zurück">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+        {% endif %}
+
+        {% for i in paginator.paginator.page_range %}
+          <li {% if paginator.number == i %} class="active" {% endif %}><a href="{% url 'blog_page' page=i %}">{{ i }}</a></li>
+        {% endfor %}
+
+        {% if paginator.has_next%}
+          <li>
+            <a href="{% url 'blog_page' page=paginator.next_page_number %}" aria-label="Weiter">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
   {% else %}
     <p>In dieser Rubrik sind noch keine Einträge vorhanden.</p>
   {% endif %}

@@ -34,23 +34,33 @@ def current_overview(request):
 
 
 @login_required
-def current_page(request, page):
+def current_overview_paginator(request, page):
     try:
         category = Category.objects.filter(name="Aktuelles")
-        posts = pack(Post.objects.filter(
+        all_posts = Post.objects.filter(
             Q(category=category[0].id),
             Q(public=True),
             Q(archive=False),
-        ).order_by("-created"))
+        ).order_by("-created")
 
-        paginator = Paginator(posts, 6)
+        paginator = Paginator(all_posts, 6)
 
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            posts = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            posts = paginator.page(paginator.num_pages)
     except Post.DoesNotExist:
         raise Http404("Diese Beiträge konnten leider nicht gefunden werden.")
     return render(request, 'blog/list.html',
-                  {'posts':   posts,
-                   'heading': "Aktuelles",
-                   'intro':   "Hier gibt es eine Übersicht aktueller Beiträge rund um den DPB."})
+                  {'posts':     pack(posts),
+                   'paginator': posts,
+                   'length':    range(len(posts)),
+                   'heading':   "Aktuelles",
+                   'intro':     "Hier gibt es eine Übersicht aktueller Beiträge rund um den DPB."})
 
 
 @login_required
