@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load pages %}
+{% load thumbnail %}
+{% load intern_tags %}
+
+{% block heading %}
+  <h1>Termine</h1>
+{% endblock %}
+
+{% block content %}
+  <!-- Setup datatables -->
+  <script src="{% static 'assets/datatables/js/jquery.dataTables.js' %}"></script>
+  <script src="{% static 'assets/datatables/js/dataTables.bootstrap.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'assets/datatables/css/dataTables.bootstrap.min.css' %}"/>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.datatable').dataTable( {
+        "language": {
+          "url": "{% static 'assets/datatables/german.json' %}"
+        }
+      });
+    });
+  </script>
+
+  {% if user.is_staff %}
+    <p>
+      <a href="/admin/intern/date/"><i class="fa fa-paperclip fa-lg"></i> Weitere Termine erstellen</a>
+    </p>
+  {% endif %}
+  <table class="table table-hover table-striped table-condensed table-responsive datatable">
+    <thead>
+      <th>Titel</th>
+      <th></th>
+      <th>Ort</th>
+      <th>Ausrichter</th>
+      <th>Datum</th>
+    </thead>
+    <tbody>
+      {% for date in dates %}
+        <tr>
+          <td>{{ date.title }}</td>
+          <td>
+            {% if date.description %}
+              <a tabindex="0" data-toggle="popover" data-trigger="hover" title="{{ date.title }}" data-content="{{ date.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
+            {% endif %}
+          </td>
+          <td>{{ date.location }}</td>
+          <td>{{ date.host }}</td>
+          <td>{{ date.date }}</td>
+        </tr>
+      {% endfor %}
+
+    </tbody>
+
+  </table>
+    <script type="text/javascript">
+      // Settings for datatables
+      $.extend( $.fn.dataTable.defaults, {
+        searching: false,
+      });
+    </script>
+
+{% endblock %}
