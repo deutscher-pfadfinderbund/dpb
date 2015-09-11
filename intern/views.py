@@ -14,5 +14,5 @@ def documents(request):
 
 @login_required
 def dates(request):
-    dates = Date.objects.all().order_by("-date")
+    dates = Date.objects.all().order_by("-start")
     return render(request, 'intern/dates.html', {'dates': dates})

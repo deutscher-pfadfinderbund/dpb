@@ -29,37 +29,43 @@
       <a href="/admin/intern/date/"><i class="fa fa-paperclip fa-lg"></i> Weitere Termine erstellen</a>
     </p>
   {% endif %}
-  <table class="table table-hover table-striped table-condensed table-responsive datatable">
-    <thead>
-      <th>Titel</th>
-      <th></th>
-      <th>Ort</th>
-      <th>Ausrichter</th>
-      <th>Datum</th>
-    </thead>
-    <tbody>
-      {% for date in dates %}
-        <tr>
-          <td>{{ date.title }}</td>
-          <td>
-            {% if date.description %}
-              <a tabindex="0" data-toggle="popover" data-trigger="hover" title="{{ date.title }}" data-content="{{ date.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
-            {% endif %}
-          </td>
-          <td>{{ date.location }}</td>
-          <td>{{ date.host }}</td>
-          <td>{{ date.date }}</td>
-        </tr>
-      {% endfor %}
+  {% if dates %}
+    <table class="table table-hover table-striped table-condensed table-responsive datatable">
+      <thead>
+        <th width="35%">Titel</th>
+        <th width="5%"></th>
+        <th width="15%">Ort</th>
+        <th width="15%">Ausrichter</th>
+        <th width="15%">Beginn</th>
+        <th width="15%">Ende</th>
+      </thead>
+      <tbody>
+        {% for date in dates %}
+          <tr>
+            <td>{{ date.title }}</td>
+            <td>
+              {% if date.description %}
+                <a data-toggle="tooltip" data-placement="top" title="{{ date.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
+              {% endif %}
+            </td>
+            <td>{{ date.location }}</td>
+            <td>{{ date.host }}</td>
+            <td>{{ date.start|date:"D, d. F Y" }}</td>
+            <td>{{ date.end|date:"D, d. F Y" }}</td>
+          </tr>
+        {% endfor %}
 
-    </tbody>
+      </tbody>
 
-  </table>
-    <script type="text/javascript">
-      // Settings for datatables
-      $.extend( $.fn.dataTable.defaults, {
-        searching: false,
-      });
-    </script>
+    </table>
+  {% else %}
+    <p>Im Moment gibt es keine Termine und Veranstaltungen.</p>
+  {% endif %}
+  <script type="text/javascript">
+    // Settings for datatables
+    $.extend( $.fn.dataTable.defaults, {
+      searching: false,
+    });
+  </script>
 
 {% endblock %}
