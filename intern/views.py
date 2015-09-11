@@ -28,7 +28,11 @@ def date_detail(request, id):
 
     # Get latitude and longitude from destination
     #if date.location:
-    url = "http://nominatim.openstreetmap.org/search?q=" + date.location + "&format=json&polygon=1&addressdetails=1"
-    data = requests.get(url).json()[0]
+    #url = "http://nominatim.openstreetmap.org/search?q=" + date.location + "&format=json&polygon=1&addressdetails=1"
+    #data = requests.get(url).json()[0]
 
-    return render(request, 'intern/date_detail.html', {'date': date, 'lat': data['lat'], 'lon': data['lon'], 'name': data['display_name']})
+    return render(request, 'intern/date_detail.html', {'date': date,
+                                                       #'lat': data['lat'],
+                                                       #'lon': data['lon'],
+                                                       #'name': data['display_name']
+                                                       })
