@@ -29,6 +29,9 @@
       <a href="/admin/intern/date/"><i class="fa fa-paperclip fa-lg"></i> Weitere Termine erstellen</a>
     </p>
   {% endif %}
+
+  <p>Für weitere Details und eventuell vorhandene Anhänge müsst ihr einfach auf den Titel des Termins klicken.</p>
+
   {% if dates %}
     <table class="table table-hover table-striped table-condensed table-responsive datatable">
       <thead>
@@ -50,8 +53,8 @@
             </td>
             <td>{{ date.location }}</td>
             <td>{{ date.host }}</td>
-            <td>{{ date.start|date:"D, d. F Y" }}</td>
-            <td>{{ date.end|date:"D, d. F Y" }}</td>
+            <td>{{ date.start }}</td>
+            <td>{{ date.end }}</td>
           </tr>
         {% endfor %}
 

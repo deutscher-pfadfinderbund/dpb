@@ -4,11 +4,11 @@ from .models import Date
 
 
 class DateAdmin(admin.ModelAdmin):
-    list_display = ('title', 'start', 'end', 'location', 'created')
+    list_display = ('title', 'location', 'start', 'end')
     list_filter = ['start']
     search_fields = ['title']
     fieldsets = [
-        (None,        {'fields': ['title', 'start', 'end', 'location', 'location_gmaps', 'description', 'host']}),
+        (None,        {'fields': ['title', 'start', 'end', 'attachment', 'location', 'location_gmaps', 'description', 'host']}),
         ('Erweitert', {'fields': ['created'], 'classes': ['collapse']}),
     ]
 
