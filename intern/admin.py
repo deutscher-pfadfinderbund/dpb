@@ -8,7 +8,7 @@ class DateAdmin(admin.ModelAdmin):
     list_filter = ['start']
     search_fields = ['title']
     fieldsets = [
-        (None,        {'fields': ['title', 'start', 'end', 'attachment', 'location', 'location_gmaps', 'description', 'host']}),
+        (None,        {'fields': ['title', 'start', 'end', 'attachment', 'location', 'host', 'description']}),
         ('Erweitert', {'fields': ['created'], 'classes': ['collapse']}),
     ]
 

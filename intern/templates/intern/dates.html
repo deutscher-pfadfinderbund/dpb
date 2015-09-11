@@ -44,22 +44,20 @@
       </thead>
       <tbody>
         {% for date in dates %}
-          <tr>
-            <td>{{ date.title }}</td>
-            <td>
-              {% if date.description %}
-                <a data-toggle="tooltip" data-placement="top" title="{{ date.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
-              {% endif %}
-            </td>
-            <td>{{ date.location }}</td>
-            <td>{{ date.host }}</td>
-            <td>{{ date.start }}</td>
-            <td>{{ date.end }}</td>
-          </tr>
+        <tr>
+          <td>{{ date.title }}</td>
+          <td>
+            {% if date.description %}
+              <a data-toggle="tooltip" data-placement="top" title="{{ date.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
+            {% endif %}
+          </td>
+          <td>{{ date.location }}</td>
+          <td>{{ date.host }}</td>
+          <td>{{ date.start }}</td>
+          <td>{{ date.end }}</td>
+        </tr>
         {% endfor %}
-
       </tbody>
-
     </table>
   {% else %}
     <p>Im Moment gibt es keine Termine und Veranstaltungen.</p>
