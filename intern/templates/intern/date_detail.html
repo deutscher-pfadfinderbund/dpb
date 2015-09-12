@@ -39,7 +39,7 @@
     </div>
 
     <h3>Karte</h3>
-    {% include "show_map.html" with location=date.location %}
+    {% include "show_map.html" with latitude=date.latitude longitude=date.longitude display_name=date.display_name %}
 
   {% else %}
     <p>Es konnte kein passender Termin gefunden werden.</p>

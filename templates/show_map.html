@@ -22,7 +22,7 @@
 </style>
 
 <script>
-  function mapbox(lat, lon) {
+  function mapbox(lat, lon, display_name) {
     L.mapbox.accessToken = 'pk.eyJ1IjoibjJvIiwiYSI6ImNpZWd6c2NrMDAwMHBzd204NW41bmFsNHUifQ.XstEiEGH9bP2wasGOOVp4g';
     L.mapbox.config.FORCE_HTTPS = true;
 
@@ -48,22 +48,13 @@
 
     // Enable fullscreen toggle
     L.control.fullscreen().addTo(map);
+
+    $("#map_location").html("Berechneter Standort: " + display_name);
   }
 
-  // Load map via AJAX
-  $.ajax({
-    url: "http://nominatim.openstreetmap.org/search?q={{ location }}&format=json&polygon=1&addressdetails=1",  // Translate location into latitude and longitude
-    dataType: 'json',
-    success: function (data) {
-      data = data[0];
-      $("#map_location").html("Berechneter Standort: " + data["display_name"]);
-      mapbox(data["lat"], data["lon"]);
-    },
-    error: function (err) {
-      console.log(err);
-      $("#map_location").html("<i class='fa fa-times'></i> Es ist ein Fehler aufgetreten.");
-    }
-  });
+  $(document).ready(function(){
+    mapbox({{ latitude|stringformat:"f" }}, {{ longitude|stringformat:"f" }}, "{{ display_name }}");
+  })
 </script>
 
 <p>
