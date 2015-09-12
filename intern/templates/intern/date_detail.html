@@ -10,16 +10,6 @@
 {% endblock %}
 
 {% block content %}
-  {# Load files for OSM #}
-  <link rel="stylesheet" href="{% static 'assets/leaflet/leaflet.css' %}"/>
-  <script src="{% static 'assets/leaflet/leaflet.js' %}"></script>
-
-  <style>
-    #map {
-      height: 450px;
-    }
-  </style>
-
   {% if date %}
     <h3>{{ date.title }}</h3>
     <p>
@@ -49,44 +39,7 @@
     </div>
 
     <h3>Karte</h3>
-
-    <p>
-      Karte für: <span id="map_location"></span>
-    </p>
-
-    <div id="map"></div>
-
-    <script>
-      var map;
-      var ajaxRequest;
-      var plotlist;
-      var plotlayers = [];
-
-      function initmap(lat, lon) {
-        // set up the map
-        map = new L.Map('map');
-
-        // create the tile layer with correct attribution
-        var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-        var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-        var osm = new L.TileLayer(osmUrl, {minZoom: 3, maxZoom: 20, attribution: osmAttrib});
-
-        // start the map in South-East England
-        map.setView(new L.LatLng(lat, lon), 16);
-        map.addLayer(osm);
-        L.marker(lat, lon).addTo(map);
-      }
-
-      $.ajax({
-        url: "http://nominatim.openstreetmap.org/search?q={{ date.location  }}&format=json&polygon=1&addressdetails=1",
-        dataType: 'json',
-        complete: function (data) {
-          data = data.responseJSON[0];
-          $("#map_location").html(data["display_name"]);
-          initmap(data["lat"], data["lon"]);
-        }
-      });
-    </script>
+    {% include "show_map.html" with location=date.location %}
 
   {% else %}
     <p>Es konnte kein passender Termin gefunden werden.</p>

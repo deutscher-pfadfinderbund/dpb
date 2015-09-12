@@ -5,11 +5,7 @@
 {% load thumbnail %}
 {% load intern_tags %}
 
-{% block heading %}
-  <h1>Termine</h1>
-{% endblock %}
-
-{% block content %}
+{% block sources %}
   <!-- Setup datatables -->
   <script src="{% static 'assets/datatables/js/jquery.dataTables.js' %}"></script>
   <script src="{% static 'assets/datatables/js/dataTables.bootstrap.min.js' %}"></script>
@@ -23,7 +19,13 @@
       });
     });
   </script>
+{% endblock %}
 
+{% block heading %}
+  <h1>Termine</h1>
+{% endblock %}
+
+{% block content %}
   {% if user.is_staff %}
     <p>
       <a href="/admin/intern/date/"><i class="fa fa-paperclip fa-lg"></i> Weitere Termine erstellen</a>
@@ -45,7 +47,7 @@
       <tbody>
         {% for date in dates %}
         <tr>
-          <td>{{ date.title }}</td>
+          <td><a href="{% url 'intern:date_detail' id=date.id %}">{{ date.title }}</a></td>
           <td>
             {% if date.description %}
               <a data-toggle="tooltip" data-placement="top" title="{{ date.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
