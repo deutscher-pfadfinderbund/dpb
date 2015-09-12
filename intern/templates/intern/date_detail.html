@@ -10,6 +10,12 @@
 {% endblock %}
 
 {% block content %}
+  <div style="float:right;">
+    {% if user.is_staff %}
+      <a href="/admin/intern/date/{{ date.id }}" data-toggle="tooltip" data-placement="top" title="Termin bearbeiten"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+      <a href="/admin/intern/date/{{ date.id }}/delete" data-toggle="tooltip" data-placement="top" title="Termin löschen"><i class="fa fa-remove fa-lg"></i></a>
+    {% endif %}
+  </div>
   {% if date %}
     <h3>{{ date.title }}</h3>
     <p>
