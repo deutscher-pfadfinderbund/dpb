@@ -55,7 +55,7 @@
     url: "http://nominatim.openstreetmap.org/search?q={{ location }}&format=json&polygon=1&addressdetails=1",  // Translate location into latitude and longitude
     dataType: 'json',
     complete: function (data) {
-      data = data.responseJSON[0];
+      data = JSON.parse(data.responseText)[0];
       $("#map_location").html("Berechneter Standort: " + data["display_name"]);
       mapbox(data["lat"], data["lon"]);
     }
