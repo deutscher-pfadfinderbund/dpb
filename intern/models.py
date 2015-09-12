@@ -60,6 +60,8 @@ class House(models.Model):
     capacity_outdoor = models.CharField('Schlafplätze außerhalb', max_length=128, blank=True, null=True)
     price_intern = models.CharField('Preise für Pfadfinder', max_length=128, blank=True, null=True)
     price_extern = models.CharField('Preise für Externe', max_length=128, blank=True, null=True)
+    created = models.DateTimeField('Erstellt am', default=datetime.now)
+
 
     def __str__(self):
         return self.name

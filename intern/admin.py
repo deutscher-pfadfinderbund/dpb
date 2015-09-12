@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Date
+from .models import Date, House
 
 
 class DateAdmin(admin.ModelAdmin):
@@ -19,16 +19,21 @@ class HouseAdmin(admin.ModelAdmin):
     search_fields = ['name', 'city']
     readonly_fields = ['latitude', 'longitude', 'display_name']
     fieldsets = [
-        (None,        {'fields': ['name',
-                                  ('street', 'plz', 'city'),
-                                  ('gmaps_location', 'osm_location'),
-                                  'website', 'image', 'owner',
-                                  ('contact_name', 'contact_tel', 'contact_email'),
-                                  'description',
-                                  ('capacity_house', 'capacity_outdoor'),
-                                  ('price_intern', 'price_extern')]}),
+        ('Allgemein', {'fields': [
+            'name',
+            ('street', 'plz', 'city'),
+            'website', 'image',
+            'description',
+            ('gmaps_location', 'osm_location')]}),
+        ('Kontakt', {'fields': [
+            'owner',
+            ('contact_name', 'contact_tel', 'contact_email')]}),
+        ('Preise', {'fields': [
+            ('capacity_house', 'capacity_outdoor'),
+            ('price_intern', 'price_extern')]}),
         ('Erweitert', {'fields': ['created', 'latitude', 'longitude', 'display_name'], 'classes': ['collapse']}),
     ]
 
 
 admin.site.register(Date, DateAdmin)
+admin.site.register(House, HouseAdmin)
