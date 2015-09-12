@@ -59,17 +59,7 @@
             {% ifequal file.folder folder %}
               <tr>
                 <td align="center">
-                  {% if file.extension == "pdf" %}
-                    <i class="fa fa-file-pdf-o fa-lg"></i>
-                  {% elif file.extension == "jpg" or file.extension == "png" %}
-                    <i class="fa fa-picture-o fa-lg"></i>
-                  {% elif file.extension == "doc" or file.extension == "docx" %}
-                    <i class="fa fa-file-word-o fa-lg"></i>
-                  {% elif file.extension == "xls" or file.extension == "xlsx" %}
-                    <i class="fa fa-file-excel-o fa-lg"></i>
-                  {% else %}
-                    {{ file.extension }}
-                  {% endif %}
+                  {{ file.extension|faAttachment|safe }}
                 </td>
                 <td>
                   <a href="{{ file.url }}">
@@ -82,7 +72,7 @@
                 </td>
                 <td>
                   {% if file.description %}
-                    <a tabindex="0" data-toggle="popover" data-trigger="hover" title="{{ file }}" data-content="{{ file.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
+                    <a data-toggle="tooltip" data-placement="top" title="{{ file.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
                   {% endif %}
                 </td>
 

@@ -33,6 +33,10 @@
     </script>
     <!-- None -->
 
+    {# Reserved for scripts and stylesheets #}
+    {% block sources %}
+    {% endblock %}
+
     <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
     <title>Deutscher Pfadfinderbund</title>
@@ -73,7 +77,7 @@
                 <ul class="dropdown-menu" aria-labelledby="themes">
                   <li><a href="{% url 'blog_page' %}">Aktuelles</a></li>
                   <li><a href="{% url 'blog_themen' %}">Themen</a></li>
-                  <li class="disabled"><a href="#">Termine</a></li>
+                  <li><a href="{% url 'intern:dates' %}">Termine</a></li>
                   <li><a href="{% url 'intern:documents' %}">Dokumente</a></li>
                   <li><a href="{% url 'archive:index' %}">Bundesarchiv</a></li>
                   <li class="disabled"><a href="#">Links zu den Gruppenheimen</a></li>

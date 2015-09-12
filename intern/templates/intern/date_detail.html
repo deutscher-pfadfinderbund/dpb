@@ -1,0 +1,47 @@
+<!-- Include GMaps iframe: http://www.mikedoesweb.com/2012/convert-tag-to-google-maps-embed-automatically-with-jquery/ -->
+
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load intern_tags %}
+
+{% block heading %}
+  <h1>Termin: Details</h1>
+{% endblock %}
+
+{% block content %}
+  {% if date %}
+    <h3>{{ date.title }}</h3>
+    <p>
+      {{ date.description }}
+    </p>
+    <div class="row">
+      <div class="col-md-2">Beginn</div>
+      <div class="col-md-10">{{ date.start }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Ende</div>
+      <div class="col-md-10">{{ date.end }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Ausrichter</div>
+      <div class="col-md-10">{{ date.host }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Ort</div>
+      <div class="col-md-10">{{ date.location }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Anhang</div>
+      <div class="col-md-10">
+        {{ date.attachment.extension|faAttachment|safe }}
+        <a href="{{ date.attachment.url }}">{{ date.attachment }}</a></div>
+    </div>
+
+    <h3>Karte</h3>
+    {% include "show_map.html" with location=date.location %}
+
+  {% else %}
+    <p>Es konnte kein passender Termin gefunden werden.</p>
+  {% endif %}
+{% endblock %}

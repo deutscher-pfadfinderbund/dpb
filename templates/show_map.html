@@ -1,0 +1,72 @@
+{% load staticfiles %}
+
+{# Load files for OSM #}
+<link rel="stylesheet" href="{% static 'assets/leaflet/leaflet.css' %}"/>
+<script src="{% static 'assets/leaflet/leaflet.js' %}"></script>
+
+<script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css' rel='stylesheet' />
+
+<style>
+  {% if height %}
+    #map {
+      height: {{ height }};
+    }
+  {% else %}
+    #map {
+      height: 450px;
+    }
+  {% endif %}
+</style>
+
+<script>
+  function mapbox(lat, lon) {
+    L.mapbox.accessToken = 'pk.eyJ1IjoibjJvIiwiYSI6ImNpZWd6c2NrMDAwMHBzd204NW41bmFsNHUifQ.XstEiEGH9bP2wasGOOVp4g';
+    L.mapbox.config.FORCE_HTTPS = true;
+
+    var map = L.map('map', {
+      center: [lat, lon],
+      zoom: 16,
+      layers: [L.mapbox.tileLayer('mapbox.streets')]  // Set default map
+    });
+
+    // Add marker
+    L.marker([lat, lon]).addTo(map);
+
+    // Group layers
+    var baseMaps = {
+      "Mapbox":                         L.mapbox.tileLayer('mapbox.streets'),
+      "OSM":                            L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"),
+      "Satellit mit Straßen":           L.mapbox.tileLayer('mapbox.streets-satellite'),
+      "Zum Wandern und Fahrrad fahren": L.mapbox.tileLayer('mapbox.run-bike-hike')
+    };
+
+    // Add group layers to map
+    L.control.layers(baseMaps).addTo(map);
+
+    // Enable fullscreen toggle
+    L.control.fullscreen().addTo(map);
+  }
+
+  // Load map via AJAX
+  $.ajax({
+    url: "http://nominatim.openstreetmap.org/search?q={{ location }}&format=json&polygon=1&addressdetails=1",  // Translate location into latitude and longitude
+    dataType: 'json',
+    complete: function (data) {
+      data = data.responseJSON[0];
+      $("#map_location").html("Berechneter Standort: " + data["display_name"]);
+      mapbox(data["lat"], data["lon"]);
+    }
+  });
+</script>
+
+<p>
+  Der genaue Standort des Lagerplatzes kann abweichen, da die Position aus den gegebenen Informationen der Datenbank berechnet wird.
+</p>
+<p>
+  <span id="map_location"><i class="fa fa-refresh fa-spin"></i> Karte wird geladen...</span>
+</p>
+
+<div id="map"></div>
