@@ -54,10 +54,14 @@
   $.ajax({
     url: "http://nominatim.openstreetmap.org/search?q={{ location }}&format=json&polygon=1&addressdetails=1",  // Translate location into latitude and longitude
     dataType: 'json',
-    complete: function (data) {
-      data = JSON.parse(data.responseText)[0];
+    success: function (data) {
+      data = data[0];
       $("#map_location").html("Berechneter Standort: " + data["display_name"]);
       mapbox(data["lat"], data["lon"]);
+    },
+    error: function (err) {
+      console.log(err);
+      $("#map_location").html("<i class='fa fa-times'></i> Es ist ein Fehler aufgetreten.");
     }
   });
 </script>
