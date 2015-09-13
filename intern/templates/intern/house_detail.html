@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load intern_tags %}
+
+{% block sources %}
+{% endblock %}
+
+{% block heading %}
+  <h1>{{ house.name }}</h1>
+{% endblock %}
+
+{% block content %}
+  {% if house.description %}
+    <p>
+      {{ house.description }}
+    </p>
+  {% endif %}
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Allgemein</h3>
+      {{ house.street|houseDetails:"Straße:"|safe }}
+      <div class="row">
+        <div class="col-md-4">
+          PLZ, Ort:
+        </div>
+        <div class="col-md-8">
+          {{ house.plz }} {{ house.city }}, {{ house.state }}
+        </div>
+      </div>
+      {{ house.owner|houseDetails:"Name der Gruppe:"|safe }}
+      {{ house.accessibility|houseDetails:"Erreichbarkeit:"|safe }}
+    </div>
+    <div class="col-md-4">
+      <h3>Fakten zum Haus</h3>
+      <h4>Schlafplätze</h4>
+      {{ house.capacity_house|houseDetails:"im Haus:"|safe }}
+      {{ house.capacity_outdoor|houseDetails:"außerhalb:"|safe }}
+      <h4>Preise</h4>
+      {{ house.price_intern|houseDetails:"Pfadfinder:"|safe }}
+      {{ house.price_extern|houseDetails:"Externe:"|safe }}
+    </div>
+    <div class="col-md-4">
+      <h3>Kontakt</h3>
+      {{ house.contact_name|houseDetails:"Ansprechpartner:"|safe }}
+      {{ house.contact_tel|houseDetails:"Telefon:"|safe }}
+      {{ house.contact_email|houseDetails:"E-Mail:"|safe }}
+
+      {{ house.gmaps_location|houseDetailsLink:"Google Maps"|safe }}
+      {{ house.osm_location|houseDetailsLink:"Open Street Map"|safe }}
+      {{ house.website|houseDetailsLink:"Website"|safe }}
+    </div>
+  </div>
+
+  <h3>Karte</h3>
+  {% include "show_map.html" with latitude=house.latitude longitude=house.longitude display_name=house.display_name %}
+
+{% endblock %}

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render
 from filer.models import File, Folder
-from .models import Date
+from .models import Date, House
 
 import json
 import requests
@@ -25,6 +25,16 @@ def dates(request):
 @login_required
 def date_detail(request, id):
     date = Date.objects.get(id=id)
-    print(date.latitude)
-    print(type(date.latitude))
     return render(request, 'intern/date_detail.html', {'date': date})
+
+
+@login_required
+def houses(request):
+    houses = House.objects.all().order_by("-name")
+    return render(request, 'intern/houses.html', {'houses': houses})
+
+
+@login_required
+def house_detail(request, id):
+    house = House.objects.get(id=id)
+    return render(request, 'intern/house_detail.html', {'house': house})
