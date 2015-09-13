@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load intern_tags %}
+
+{% block sources %}
+{% endblock %}
+
+{% block heading %}
+  <h1>Häuser und Zeltplätze</h1>
+{% endblock %}
+
+{% block content %}
+  {% if user.is_staff %}
+    <p>
+      <a href="/admin/intern/house/"><i class="fa fa-paperclip fa-lg"></i> Weiteres Haus erstellen</a>
+    </p>
+  {% endif %}
+
+  {% if houses %}
+    {% for house in houses %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><a href="{% url 'intern:house_detail' id=house.id %}">{{ house.name }}</a></h3>
+        </div>
+        <div class="panel-body">
+          <p>
+            {{ house.street }}, {{ house.plz }} {{ house.city }}, {{ house.state }}.
+            {% if house.capacity_house %}
+              Schlafplätze im Haus: {{ house.capacity_house }},
+            {% endif %}
+            {% if house.capacity_outdoor %}
+              Schlafplätze außerhalb: {{ house.capacity_outdoor }}.
+            {% endif %}
+            <a href="{% url 'intern:house_detail' id=house.id %}">Details</a>
+          </p>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Im Moment sind keine Häuser oder Zeltplätze in der Datenbank vorhanden.</p>
+  {% endif %}
+{% endblock %}

@@ -3,6 +3,7 @@ from django import template
 register = template.Library()
 
 
+@register.filter(is_safe=True)
 def sizify(value):
     """
     Simple kb/mb/gb size snippet for templates:
@@ -22,6 +23,7 @@ def sizify(value):
     return '%s %s' % (str(round(value, 2)), ext)
 
 
+@register.filter(is_safe=True)
 def faAttachment(extension):
     """
     Add fontawesome icon if found. Else return normal extension as string.
@@ -40,5 +42,29 @@ def faAttachment(extension):
         return extension
 
 
-register.filter('sizify', sizify)
-register.filter('faAttachment', faAttachment)
+@register.filter(is_safe=True)
+def houseDetails(value, text):
+    if value:
+        return """<div class="row">
+            <div class="col-md-4">
+              {0}
+            </div>
+            <div class="col-md-8">
+              {1}
+            </div>
+          </div>
+        """.format(text, value)
+    else:
+        return ""
+
+@register.filter(is_safe=True)
+def houseDetailsLink(value, text):
+    if value:
+        return """<span style='margin-right: 1em;'>
+                  <a href='{1}'>
+                    {0}
+                  </a>
+              </span>
+        """.format(text, value)
+    else:
+        return ""

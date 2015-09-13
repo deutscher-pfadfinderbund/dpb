@@ -44,6 +44,8 @@ class House(models.Model):
     street = models.CharField('Straße', max_length=128, blank=False)
     plz = models.CharField('PLZ', max_length=128, blank=False)
     city = models.CharField('Stadt', max_length=128, blank=False)
+    state = models.CharField('Bundesland', max_length=128, blank=True, null=True)
+    accessibility = models.CharField('Erreichbarkeit', max_length=128, blank=True, null=True)
     gmaps_location = models.URLField('Google Maps Link', blank=True, null=True)
     osm_location = models.URLField('OSM Link', blank=True, null=True)
     latitude = models.FloatField('Breitengrad', max_length=128, blank=True, null=True)
@@ -78,7 +80,6 @@ class House(models.Model):
                 self.latitude = None
                 self.longitude = None
                 self.display_name = None
-
 
     def __str__(self):
         return self.name

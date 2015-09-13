@@ -22,6 +22,7 @@ class HouseAdmin(admin.ModelAdmin):
         ('Allgemein', {'fields': [
             'name',
             ('street', 'plz', 'city'),
+            'state', 'accessibility',
             'website', 'image',
             'description',
             ('gmaps_location', 'osm_location')]}),
