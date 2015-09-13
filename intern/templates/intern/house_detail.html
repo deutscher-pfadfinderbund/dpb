@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load intern_tags %}
+{% load thumbnail %}
 
 {% block sources %}
 {% endblock %}
@@ -51,6 +52,30 @@
       {{ house.website|houseDetailsLink:"Website"|safe }}
     </div>
   </div>
+
+  {% if house.image1 %}
+    <div class="row">
+      <div class="col-md-4">
+        <a href="{{ house.image1.url }}">
+          <img src="{% thumbnail house.image1 300x200 crop %}" class="img-thumbnail img-responsive" alt="{{ house.image1 }}"/>
+        </a>
+      </div>
+      {% if house.image2 %}
+        <div class="col-md-4">
+          <a href="{{ house.image2.url }}">
+            <img src="{% thumbnail house.image2 300x200 crop %}" class="img-thumbnail img-responsive" alt="{{ house.image2 }}"/>
+          </a>
+        </div>
+      {% endif %}
+      {% if house.image3 %}
+        <div class="col-md-4">
+          <a href="{{ house.image3.url }}">
+            <img src="{% thumbnail house.image3 300x200 crop %}" class="img-thumbnail img-responsive" alt="{{ house.image3 }}"/>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
 
   <h3>Karte</h3>
   {% include "show_map.html" with latitude=house.latitude longitude=house.longitude display_name=house.display_name %}
