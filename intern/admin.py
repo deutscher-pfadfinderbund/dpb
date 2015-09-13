@@ -23,13 +23,14 @@ class HouseAdmin(admin.ModelAdmin):
             'name',
             ('street', 'plz', 'city'),
             'state', 'accessibility',
-            'website', 'image',
+            'website',
+            ('image1', 'image2', 'image3'),
             'description',
             ('gmaps_location', 'osm_location')]}),
-        ('Kontakt', {'fields': [
+            ('Kontakt', {'fields': [
             'owner',
             ('contact_name', 'contact_tel', 'contact_email')]}),
-        ('Preise', {'fields': [
+            ('Preise', {'fields': [
             ('capacity_house', 'capacity_outdoor'),
             ('price_intern', 'price_extern')]}),
         ('Erweitert', {'fields': ['created', 'latitude', 'longitude', 'display_name'], 'classes': ['collapse']}),
