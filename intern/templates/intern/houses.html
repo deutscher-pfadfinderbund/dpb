@@ -25,7 +25,16 @@
         </div>
         <div class="panel-body">
           <p>
-            {{ house.street }}, {{ house.plz }} {{ house.city }}, {{ house.state }}.
+            {% if house.owner %}
+              {{ house.owner }},
+            {% endif %}
+
+            {{ house.city }},
+
+            {% if house.state %}
+              {{ house.state }},
+            {% endif %}
+
             {% if house.capacity_house %}
               Schlafplätze im Haus: {{ house.capacity_house }},
             {% endif %}
