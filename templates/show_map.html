@@ -29,7 +29,9 @@
     var map = L.map('map', {
       center: [lat, lon],
       zoom: 16,
-      layers: [L.mapbox.tileLayer('mapbox.streets')]  // Set default map
+      layers: [L.mapbox.tileLayer('mapbox.streets')],  // Set default map
+      maxZoom: 19,
+      minZoom: 0
     });
 
     // Add marker
