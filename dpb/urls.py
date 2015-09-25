@@ -20,14 +20,13 @@ urlpatterns = [
     url(r'^feedback/', include('feedback.urls', namespace='feedback')),
     url(r'^bundesarchiv/', include('archive.urls', namespace='archive')),
     url(r'^kontakt/', include('contact.urls', namespace='email')),
+    url(r'^links/', include('links.urls', namespace='links')),
 
     # Members Area
     url(r'^intern/', include('intern.urls', namespace='intern')),
-
     url(r'^intern/aktuelles/$', blogviews.blog_overview, {'category': 'Aktuelles'}, name='blog_page'),
     url(r'^intern/aktuelles/(?P<page>[0-9]+)/$', blogviews.blog_overview, {'category': 'Aktuelles'}, name='blog_page'),
     url(r'^intern/post/(?P<slug>[\w-]+)/$', blogviews.post, name='blog_detail'),
-
     url(r'^intern/themen/$', blogviews.blog_overview, {'category': 'Themen'}, name='blog_themen'),
 
     url(r'^admin/', include(admin.site.urls)),

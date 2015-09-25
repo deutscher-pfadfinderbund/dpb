@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block sources %}
+{% endblock %}
+
+{% block heading %}
+  <h1>Links</h1>
+{% endblock %}
+
+{% block content %}
+  {% if user.is_staff %}
+    <p>
+      <a href="/admin/links/link/add/"><i class="fa fa-paperclip fa-lg"></i> Weiteren Link erstellen</a>
+    </p>
+  {% endif %}
+
+  <p>
+    Unseren Haftungsausschluss für Links auf externe Webseiten findet ihr
+    <a href="{% url 'impressum' %}">in unserem Impressum</a>.
+  </p>
+
+  {% if cats %}
+    {% for cat in cats %}
+      <h4>{{ cat.name }}</h4>
+      <ul style="padding-bottom:2em;">
+      {% for link in links %}
+        {% if link.category == cat %}
+          <li><a href="{{ link.website }}" target="_blank">{{ link }}&nbsp;&nbsp;<i class="fa fa-external-link"></i></a></li>
+        {% endif %}
+      {% endfor %}
+      </ul>
+    {% endfor %}
+
+  {% else %}
+    <p>Im Moment gibt es keine Links.</p>
+  {% endif %}
+{% endblock %}
