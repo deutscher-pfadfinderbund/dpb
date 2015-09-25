@@ -5,9 +5,6 @@ from django.shortcuts import render
 from filer.models import File, Folder
 from .models import Date, House
 
-import json
-import requests
-
 
 @login_required
 def documents(request):
