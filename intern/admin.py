@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Date, House
+from .models import Date, House, Link
 
 
 class DateAdmin(admin.ModelAdmin):
@@ -12,6 +12,7 @@ class DateAdmin(admin.ModelAdmin):
         (None,        {'fields': ['title', 'start', 'end', 'attachment', 'location', 'host', 'description']}),
         ('Erweitert', {'fields': ['created', 'latitude', 'longitude', 'display_name'], 'classes': ['collapse']}),
     ]
+
 
 class HouseAdmin(admin.ModelAdmin):
     list_display = ('name', 'city', 'price_intern')
@@ -37,5 +38,11 @@ class HouseAdmin(admin.ModelAdmin):
     ]
 
 
+class LinkAdmin(admin.ModelAdmin):
+    list_display = ('title', 'website')
+    search_fields = ['title, website']
+
+
 admin.site.register(Date, DateAdmin)
 admin.site.register(House, HouseAdmin)
+admin.site.register(Link, LinkAdmin)
