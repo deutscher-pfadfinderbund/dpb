@@ -91,18 +91,3 @@ class House(models.Model):
     class Meta:
         verbose_name = 'Haus'
         verbose_name_plural = 'Häuser'
-
-
-class Link(models.Model):
-    """ Links to the different groups in the DPB """
-    title = models.CharField('Titel', max_length=128, blank=False)
-    website = models.URLField('Homepage', blank=True, null=True)
-    description = models.TextField('Beschreibung', blank=True)
-    created = models.DateTimeField('Erstellt am', default=datetime.now)
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'Link'
-        verbose_name_plural = 'Links'
