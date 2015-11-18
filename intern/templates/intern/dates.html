@@ -35,7 +35,7 @@
   <p>Für weitere Details und eventuell vorhandene Anhänge müsst ihr einfach auf den Titel des Termins klicken.</p>
 
   {% if dates %}
-    <table class="table table-hover table-striped table-condensed table-responsive datatable">
+    <table class="table table-hover table-striped table-condensed table-responsive">
       <thead>
         <th width="36%">Titel</th>
         <th width="5%">Info</th>
@@ -73,11 +73,4 @@
   {% else %}
     <p>Im Moment gibt es keine Termine und Veranstaltungen.</p>
   {% endif %}
-  <script type="text/javascript">
-    // Settings for datatables
-    $.extend( $.fn.dataTable.defaults, {
-      searching: false,
-    });
-  </script>
-
 {% endblock %}
