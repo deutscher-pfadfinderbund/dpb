@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+  {% comment %}
   {% if feedbacks %}
     <table class="table table-striped table-responsive">
       <thead>
@@ -46,6 +47,7 @@
       Keine Einträge vorhanden.
     </p>
   {% endif %}
+  {% endcomment %}
 
   <h2 style="padding-top: 2em;">Feedback einreichen</h2>
   <div class="row">
