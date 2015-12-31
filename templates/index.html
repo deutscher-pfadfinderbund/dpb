@@ -8,55 +8,6 @@
 {% endblock %}
 
 {% block content %}
-  <div id="div-construction" class="panel panel-default">
-    <div class="panel-heading">
-      <div class="row" style="padding-bottom: 0">
-        <div class="col-md-10">
-          <h3 class="panel-title">Seite noch im Aufbau</h3>
-        </div>
-        <div class="col-md-2">
-          <div class="text-right">
-            <i id="close-construction" class="fa fa-times fa-lg" style="cursor:pointer;"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-md-10">
-          <p>
-            Hier wird gerade am neuen Internetauftritt des Deutschen Pfadfinderbundes gearbeitet. Diese Seite ist nur für
-            Testzwecke online, die offizielle Seite findet ihr weiterhin unter
-            <a href="http://deutscher-pfadfinderbund.de">www.deutscher-pfadfinderbund.de</a>.
-          </p>
-          <p>
-            Falls ihr uns bei der Entwicklung der Seite unterstützen möchtet, so seid ihr dazu herzlichst eingeladen.
-            Wir freuen uns über jede Art von <a href="{% url 'feedback:index' %}">Feedback</a> oder jeden Entwickler,
-            der mit Django umgehen kann.
-          </p>
-          <p style="padding-bottom: 0; margin-bottom: 0;">
-            Um den internen Bereich zu testen, benötigt ihr einen Benutzeraccount. Ihr könnt uns dazu eine
-            <a href="{% url 'kontakt' %}">E-Mail</a> schicken und wir entscheiden dann darüber, ob ihr einen
-            Testaccount erhaltet.
-          </p>
-        </div>
-        <div class="col-md-2">
-          <p>&nbsp;<br>&nbsp;</p>
-          <p class="text-center"><i class="fa fa-coffee fa-3x"></i></p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script type="text/javascript">
-    // Hide panel on click
-    $(document).ready(function(){
-      $("#close-construction").on('click', function() {
-        $("#div-construction").hide();
-      });
-    });
-  </script>
-
-
   <p>
     Der Deutsche Pfadfinderbund (DPB) ist ein unabhängiger, interkonfessioneller und bündisch geprägter Pfadfinderbund. Er dient gemeinnützigen Zwecken und wird ehrenamtlich getragen. Der Bund ist Mitglied des Ringes junger Bünde (RjB).
   </p>
