@@ -5,49 +5,54 @@
 {% endblock %}
 
 {% block content %}
-  <p>
-    <form method="get" action="" class="form-inline">
-      <div class="form-group">
-        <input type="text" name="q" id="id_q" value="{{ query|default_if_none:'' }}" class="form-control" placeholder="Kompassnadel, ..."/>
-      </div>
-      <input type="submit" value="Suchen" class="btn btn-default"/>
-    </form>
-  </p>
-  <p>
-    {% if results %}
-      <table class="table table-condensed table-striped table-hover">
-        <thead>
-          <th>
-            Titel
-          </th>
-          <th>
-            Autor
-          </th>
-          <th data-sortable="true">
-            Jahr
-          </th>
-        </thead>
-        <tbody>
-        {% for item in results %}
-          <tr>
-            <td>
-              {{ item.title }}
-            </td>
-            <td>
-              {{ item.author }}
-            </td>
-            <td>
-              {% if not item.year == 0 %}
-                {{ item.year }}
-              {% endif %}
-            </td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    {% elif query != "" %}
-      Keine Einträge gefunden.
-    {% endif %}
-  </p>
-
+  {% if user.is_staff %}
+    <p>
+      <form method="get" action="" class="form-inline">
+        <div class="form-group">
+          <input type="text" name="q" id="id_q" value="{{ query|default_if_none:'' }}" class="form-control" placeholder="Kompassnadel, ..."/>
+        </div>
+        <input type="submit" value="Suchen" class="btn btn-default"/>
+      </form>
+    </p>
+    <p>
+      {% if results %}
+        <table class="table table-condensed table-striped table-hover">
+          <thead>
+            <th>
+              Titel
+            </th>
+            <th>
+              Autor
+            </th>
+            <th data-sortable="true">
+              Jahr
+            </th>
+          </thead>
+          <tbody>
+          {% for item in results %}
+            <tr>
+              <td>
+                {{ item.title }}
+              </td>
+              <td>
+                {{ item.author }}
+              </td>
+              <td>
+                {% if not item.year == 0 %}
+                  {{ item.year }}
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      {% elif query != "" %}
+        Keine Einträge gefunden.
+      {% endif %}
+    </p>
+  {% else %}
+    <p>
+      Das Bundesarchiv ist noch nicht öffentlich für alle Mitglieder des DPBs einsehbar, aber wir arbeiten dran!
+    </p>
+  {% endif %}
 {% endblock %}
