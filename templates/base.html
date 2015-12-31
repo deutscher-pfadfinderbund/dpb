@@ -108,8 +108,8 @@
                 <ul class="dropdown-menu">
                   {% if user.is_staff %}
                     <li><a href="{% url 'admin:index' %}">Adminbereich</a></li>
+                    <li role="separator" class="divider"></li>
                   {% endif %}
-                  <li role="separator" class="divider"></li>
                   <li><a href="#">Eingeloggt als {{ user }}</a></li>
                   <li><a href="{% url 'login:logout' %}">Ausloggen</a></li>
                 </ul>
