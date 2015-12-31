@@ -10,7 +10,7 @@ from pages import views as pageviews
 
 urlpatterns = [
     # Hard-coded pages
-    url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^$', views.index, name='index'),
     url(r'^bundesordnung/$', views.BundesordnungView.as_view(), name='bundesordnung'),
     url(r'^dpb/$', views.DPBView.as_view(), name='dpb'),
     url(r'^pfadfinder/$', views.PfadfinderView.as_view(), name='pfadfinder'),
