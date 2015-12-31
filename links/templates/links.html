@@ -20,17 +20,20 @@
   </p>
 
   {% if cats %}
-    {% for cat in cats %}
-      <h4>{{ cat.name }}</h4>
-      <ul style="padding-bottom:2em;">
-      {% for link in links %}
-        {% if link.category == cat %}
-          <li><a href="{{ link.website }}" target="_blank">{{ link }}</a></li>
-        {% endif %}
+    <div class="row">
+      {% for cat in cats %}
+        <div class="col-md-4">
+          <h4>{{ cat.name }}</h4>
+          <ul style="padding-bottom:2em;">
+          {% for link in links %}
+            {% if link.category == cat %}
+              <li><a href="{{ link.website }}" target="_blank">{{ link }}</a></li>
+            {% endif %}
+          {% endfor %}
+          </ul>
+        </div>
       {% endfor %}
-      </ul>
-    {% endfor %}
-
+    </div>
   {% else %}
     <p>Im Moment gibt es keine Links.</p>
   {% endif %}
