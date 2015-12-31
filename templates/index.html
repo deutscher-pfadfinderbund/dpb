@@ -8,6 +8,10 @@
 {% endblock %}
 
 {% block content %}
+  {% if user.is_authenticated and news %}
+    <div class="row">
+      <div class="col-md-8">
+  {% endif %}
   <p>
     Der Deutsche Pfadfinderbund (DPB) ist ein unabhängiger, interkonfessioneller und bündisch geprägter Pfadfinderbund. Er dient gemeinnützigen Zwecken und wird ehrenamtlich getragen. Der Bund ist Mitglied des Ringes junger Bünde (RjB).
   </p>
@@ -17,6 +21,26 @@
   <p>
     In der Erkenntnis, dass das Wesentliche im Zusammenleben der Menschen nicht die Betonung des Trennenden, sondern die des Gemeinsamen und die Achtung vor der freien, menschlichen Persönlichkeit ist, sieht der Deutsche Pfadfinderbund eine seiner gesellschaftlichen Aufgaben darin, eine demokratische Gesinnung zu fördern und totalitären Bestrebungen entgegenzuwirken.
   </p>
+  {% if user.is_authenticated and news %}
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Aktuelles</h3>
+        </div>
+        <div class="panel-body">
+          {% for post in news %}
+            <h4>{{ post.title }}<br><small>{{ post.created|date:"d. M  Y" }} von {{ post.author }}</small></h4>
+            <p>
+              {{ post.content|striptags|truncatewords:15 }}<br>
+              <a href="{% url 'blog_detail' slug=post.slug %}">Zum Beitrag</a>
+            </p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 
   {# Preview Row 1 #}
   <div class="row" style="padding-bottom:0;">
