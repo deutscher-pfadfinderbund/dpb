@@ -3,6 +3,7 @@
 {% load staticfiles %}
 {% load intern_tags %}
 {% load thumbnail %}
+{% load markdown_deux_tags %}
 
 {% block sources %}
 {% endblock %}
@@ -14,7 +15,7 @@
 {% block content %}
   {% if house.description %}
     <p>
-      {{ house.description }}
+      {{ house.description|markdown }}
     </p>
   {% endif %}
   <div class="row">
