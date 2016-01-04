@@ -43,9 +43,10 @@ class Date(models.Model):
 class House(models.Model):
     """ Model for Houses and campsites """
     name = models.CharField('Name', max_length=128, blank=False)
-    street = models.CharField('Straße', max_length=128, blank=False)
-    plz = models.CharField('PLZ', max_length=128, blank=False)
-    city = models.CharField('Stadt', max_length=128, blank=False)
+    situation = models.CharField('Lage', max_length=128, blank=True)
+    street = models.CharField('Straße', max_length=128, blank=True)
+    plz = models.CharField('PLZ', max_length=128, blank=True)
+    city = models.CharField('Stadt', max_length=128, blank=True)
     state = models.CharField('Bundesland', max_length=128, blank=True, null=True)
     accessibility = models.CharField('Erreichbarkeit', max_length=128, blank=True, null=True)
     gmaps_location = models.URLField('Google Maps Link', blank=True, null=True)
@@ -58,7 +59,7 @@ class House(models.Model):
     image2 = FilerImageField(verbose_name='2. Bild', related_name="house_image2", blank=True, null=True)
     image3 = FilerImageField(verbose_name='3. Bild', related_name="house_image3", blank=True, null=True)
     owner = models.CharField('Name der Gruppe', max_length=128, blank=True, null=True)
-    contact_name = models.CharField('Ansprechpartner', max_length=128, blank=False)
+    contact_name = models.CharField('Ansprechpartner', max_length=128, blank=True)
     contact_tel = models.CharField('Telefon', max_length=128, blank=True, null=True)
     contact_email = models.EmailField('E-Mail', max_length=128, blank=True, null=True)
     description = models.TextField('Beschreibung', blank=True, null=True)
