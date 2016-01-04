@@ -46,7 +46,7 @@
       <h3>Kontakt</h3>
       {{ house.contact_name|houseDetails:"Ansprechpartner:"|safe }}
       {{ house.contact_tel|houseDetails:"Telefon:"|safe }}
-      <a href="mailto:{{ house.contact_email|houseDetails:"E-Mail:"|safe }}">
+      <a href="mailto:{{ house.contact_email }}">
         {{ house.contact_email|houseDetails:"E-Mail:"|safe }}
       </a>
 
