@@ -64,6 +64,10 @@
 </p>
 <div id="map"></div>
 <p>
-  <span id="map_location"><i class="fa fa-refresh fa-spin"></i> Karte wird geladen...</span>
+  {% if not latitude %}
+    Es konnte leider kein Standort berechnet werden.
+  {% else %}
+    <span id="map_location"><i class="fa fa-refresh fa-spin"></i> Karte wird geladen...</span>
+  {% endif %}
 </p>
 
