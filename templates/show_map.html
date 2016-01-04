@@ -1,73 +1,76 @@
 {% load staticfiles %}
 
-{# Load files for OSM #}
-<link rel="stylesheet" href="{% static 'assets/leaflet/leaflet.css' %}"/>
-<script src="{% static 'assets/leaflet/leaflet.js' %}"></script>
+{% if not latitude %}
+  <p>
+    Es konnte leider keine Karte generiert werden, da die Standortangaben dafür nicht ausreichen
+    oder der Ort nicht gefunden werden konnte.
+  </p>
+{% else %}
+  {# Load files for OSM #}
+  <link rel="stylesheet" href="{% static 'assets/leaflet/leaflet.css' %}"/>
+  <script src="{% static 'assets/leaflet/leaflet.js' %}"></script>
 
-<script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
-<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css' rel='stylesheet' />
+  <script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
+  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css' rel='stylesheet' />
 
-<style>
-  {% if height %}
-    #map {
-      height: {{ height }};
+  <style>
+    {% if height %}
+      #map {
+        height: {{ height }};
+      }
+    {% else %}
+      #map {
+        height: 450px;
+      }
+    {% endif %}
+  </style>
+
+  <script>
+    function mapbox(lat, lon, display_name) {
+      L.mapbox.accessToken = 'pk.eyJ1IjoibjJvIiwiYSI6ImNpZWd6c2NrMDAwMHBzd204NW41bmFsNHUifQ.XstEiEGH9bP2wasGOOVp4g';
+      L.mapbox.config.FORCE_HTTPS = true;
+
+      var map = L.map('map', {
+        center: [lat, lon],
+        zoom: 16,
+        layers: [L.mapbox.tileLayer('mapbox.streets')],  // Set default map
+        maxZoom: 19,
+        minZoom: 0
+      });
+
+      // Add marker
+      L.marker([lat, lon]).addTo(map);
+
+      // Group layers
+      var baseMaps = {
+        "Mapbox":                         L.mapbox.tileLayer('mapbox.streets'),
+        "OSM":                            L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"),
+        "Satellit mit Straßen":           L.mapbox.tileLayer('mapbox.streets-satellite'),
+        "Zum Wandern und Fahrrad fahren": L.mapbox.tileLayer('mapbox.run-bike-hike')
+      };
+
+      // Add group layers to map
+      L.control.layers(baseMaps).addTo(map);
+
+      // Enable fullscreen toggle
+      L.control.fullscreen().addTo(map);
+
+      $("#map_location").html("Berechneter Standort: " + display_name);
     }
-  {% else %}
-    #map {
-      height: 450px;
-    }
-  {% endif %}
-</style>
 
-<script>
-  function mapbox(lat, lon, display_name) {
-    L.mapbox.accessToken = 'pk.eyJ1IjoibjJvIiwiYSI6ImNpZWd6c2NrMDAwMHBzd204NW41bmFsNHUifQ.XstEiEGH9bP2wasGOOVp4g';
-    L.mapbox.config.FORCE_HTTPS = true;
+    $(document).ready(function(){
+      mapbox({{ latitude|stringformat:"f" }}, {{ longitude|stringformat:"f" }}, "{{ display_name }}");
+    })
+  </script>
 
-    var map = L.map('map', {
-      center: [lat, lon],
-      zoom: 16,
-      layers: [L.mapbox.tileLayer('mapbox.streets')],  // Set default map
-      maxZoom: 19,
-      minZoom: 0
-    });
-
-    // Add marker
-    L.marker([lat, lon]).addTo(map);
-
-    // Group layers
-    var baseMaps = {
-      "Mapbox":                         L.mapbox.tileLayer('mapbox.streets'),
-      "OSM":                            L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"),
-      "Satellit mit Straßen":           L.mapbox.tileLayer('mapbox.streets-satellite'),
-      "Zum Wandern und Fahrrad fahren": L.mapbox.tileLayer('mapbox.run-bike-hike')
-    };
-
-    // Add group layers to map
-    L.control.layers(baseMaps).addTo(map);
-
-    // Enable fullscreen toggle
-    L.control.fullscreen().addTo(map);
-
-    $("#map_location").html("Berechneter Standort: " + display_name);
-  }
-
-  $(document).ready(function(){
-    mapbox({{ latitude|stringformat:"f" }}, {{ longitude|stringformat:"f" }}, "{{ display_name }}");
-  })
-</script>
-
-<p>
-  Der genaue Standort des Lagerplatzes kann abweichen, da die Position aus den gegebenen Informationen der Datenbank berechnet wird.
-</p>
-<div id="map"></div>
-<p>
-  {% if not latitude %}
-    Es konnte leider kein Standort berechnet werden.
-  {% else %}
+  <p>
+    Der genaue Standort des Lagerplatzes kann abweichen, da die Position aus den gegebenen Informationen der Datenbank berechnet wird.
+  </p>
+  <div id="map"></div>
+  <p>
     <span id="map_location"><i class="fa fa-refresh fa-spin"></i> Karte wird geladen...</span>
-  {% endif %}
-</p>
+  </p>
+{% endif %}
 
