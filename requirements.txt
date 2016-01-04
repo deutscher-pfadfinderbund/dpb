@@ -4,13 +4,16 @@ django-autoslug==1.8.0
 django-contact-form==1.0
 django-filer==0.9.11
 django-forms-bootstrap==3.0.1
+django-markdown-deux==1.0.5
 django-mptt==0.7.4
+django-pagedown==0.1.1
 django-pipeline==1.5.1
 django-polymorphic==0.7.1
 django-recaptcha==1.0.4
 django-tinymce==1.5.3
 easy-thumbnails==2.2
 futures==3.0.3
+markdown2==2.3.0
 Pillow==2.9.0
 requests==2.7.0
 six==1.9.0
