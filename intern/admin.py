@@ -32,7 +32,8 @@ class HouseAdmin(PageDownAdmin):
         ('Allgemein', {'fields': [
             'name',
             ('street', 'plz', 'city'),
-            'state', 'accessibility',
+            ('situation', 'state'),
+            'accessibility',
             'website',
             ('image1', 'image2', 'image3'),
             'description',
