@@ -5,29 +5,6 @@
 {% block branding %}
   {% load static %}
   <h1 id="site-name"><a href="{% url 'admin:index' %}">DPB Administration</a></h1>
-  <script src="{% static 'assets/jquery/jquery.min.js' %}"></script>
-  {% comment %}
-  <script src="{% static 'assets/tinymce/tinymce.min.js' %}"></script>
-  <script src="{% static 'assets/tinymce/themes/modern/theme.min.js' %}"></script>
-  <script>
-    tinyMCE.init({
-      mode: "exact",
-      elements: "id_content",
-      height: "500",
-      theme: "modern",
-      plugins: "code,directionality,paste,searchreplace,bootstrap",
-      language: "de",
-      directionality: "de",
-      spellchecker_languages : "de",
-      spellchecker_rpc_url : "{% static 'assets/tinymce/langs/de.js' %}",
-      bootstrapConfig: {
-      'imagesPath': "{{ MEDIA_URL }}img/",
-      },
-      toolbar: "bootstrap",
-      fullpage_default_encoding: "UTF-8",
-      entity_encoding : "raw",
-    });
-  </script>{% endcomment %}
 {% endblock %}
 
 {% block nav-global %}{% endblock %}

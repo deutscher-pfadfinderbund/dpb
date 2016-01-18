@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from filer.fields.image import FilerImageField
 from filer.fields.file import FilerFileField
 
+
 @python_2_unicode_compatible
 class Page(models.Model):
     url = models.CharField(_('URL'), max_length=100, db_index=True)

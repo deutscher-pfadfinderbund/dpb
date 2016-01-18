@@ -1,8 +1,10 @@
 from django.contrib import admin
 from .models import Link, LinkCategory
 
+from dpb.admin import PageDownAdmin
 
-class LinkAdmin(admin.ModelAdmin):
+
+class LinkAdmin(PageDownAdmin):
     list_display = ('title', 'category', 'website')
     search_fields = ['title']
 

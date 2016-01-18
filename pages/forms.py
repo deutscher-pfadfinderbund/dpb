@@ -1,13 +1,11 @@
 from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext, ugettext_lazy as _
-from tinymce.widgets import TinyMCE
 
 from .models import Page
 
 
 class PageForm(forms.ModelForm):
-    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
     url = forms.RegexField(label=_("URL"), max_length=100, regex=r'^[-\w/\.~]+$',
         help_text=_("Example: '/about/contact/'. Make sure to have leading"
                     " and trailing slashes."),
