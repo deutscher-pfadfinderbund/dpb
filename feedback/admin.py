@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
 from .models import Feedback
+from dpb.admin import PageDownAdmin
 
 
-class FeedbackAdmin(admin.ModelAdmin):
+class FeedbackAdmin(PageDownAdmin):
     list_display = ('name', 'email', 'note', 'archive', 'public')
     list_filter = ['created']
     search_fields = ['name', 'email', 'note', 'archive', 'public']
