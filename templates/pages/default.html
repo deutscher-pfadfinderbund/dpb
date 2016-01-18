@@ -15,7 +15,7 @@
           <img src="{% thumbnail page.image 300x200 crop %}" class="img-thumbnail img-responsive img-float-right" alt="{{ page.image }}"/>
         </a>
       {% endif %}
-      {{ page.content|markdown }}
+      {{ page.content|markdown|safe }}
     </div>
   </p>
 
