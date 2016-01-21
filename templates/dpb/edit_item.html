@@ -1,0 +1,17 @@
+{% if user.is_staff %}
+  {% with "admin:"|add:model|add:"_add" as admin_add %}
+  {% with "admin:"|add:model|add:"_change" as admin_change %}
+  <p class="text-right">
+    {% if not noadd %}
+      <a href="{% url admin_add %}"><i class="fa fa-plus-square-o fa-lg"></i></a>
+    {% endif %}
+    {% if id %}
+      <a href="{% url admin_change id %}"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+      {% comment %}
+      <a href="{% url 'admin:index' %}{{ model }}{{ id }}/delete"><i class="fa fa-minus-square-o"></i></a>
+      {% endcomment %}
+    {% endif %}
+  </p>
+  {% endwith %}
+  {% endwith %}
+{% endif %}
