@@ -6,4 +6,4 @@
 static/
 db.sqlite3
 media/
-settings_secure.py
+dpb/settings_secret.py
