@@ -9,22 +9,19 @@
 
 {% block content %}
   <p>
-    <div>
-      {% if page.image %}
-        <a href="{{ page.image.url }}">
-          <img src="{% thumbnail page.image 300x200 crop %}" class="img-thumbnail img-responsive img-float-right" alt="{{ page.image }}"/>
-        </a>
-      {% endif %}
-      {{ page.content|markdown|safe }}
-    </div>
+    {% if page.image %}
+      <a href="{{ page.image.url }}">
+        <img src="{% thumbnail page.image 300x200 crop %}" class="img-thumbnail img-responsive img-float-right" alt="{{ page.image }}"/>
+      </a>
+    {% endif %}
+    {{ page.content|markdown|safe }}
   </p>
 
   {% if page.attachment %}
-    <p>
-      <h4>Dateien:</h4>
-      <ul>
-        <li><a href="">{{ page.attachment }}</a></li>
-      </ul>
-    </p>
+    <h4>Dateien:</h4>
+    <ul>
+      <li><a href="">{{ page.attachment }}</a></li>
+    </ul>
   {% endif %}
+  {% include 'dpb/edit_item.html' with model="pages_page" id=page.id %}
 {% endblock %}
