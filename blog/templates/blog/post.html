@@ -13,4 +13,5 @@
 
 {% block content %}
   {{ post.content|safe }}
+  {% include 'dpb/edit_item.html' with model="blog_post" id=post.id %}
 {% endblock %}
