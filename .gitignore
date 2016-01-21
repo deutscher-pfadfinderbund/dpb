@@ -1,8 +1,9 @@
 *.pyc
 .idea
 *.iml
+*.bak
 .sass-cache/
 static/
 db.sqlite3
 media/
-dpb/settings.py
+settings_secure.py
