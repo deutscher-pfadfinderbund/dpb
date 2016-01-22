@@ -21,13 +21,13 @@ TEMPLATE_DEBUG = True
 
 # Import SECRET_KEY and check it
 try:
-    from dpb.settings_secret import *
+    from dpb.settings_local import *
 except ImportError:
-    print("[ERROR] dpb/settings_secret.py not found. Please create it according to the template settings_secret.py.template")
+    print("[ERROR] dpb/settings_local.py not found. Please create it according to the template settings_local.py.template")
     sys.exit()
 
 if SECRET_KEY == "CHANGE_ME":
-    print("[ERROR] Please change your secret key, stored in dpb/settings_secret.py")
+    print("[ERROR] Please change your secret key, stored in dpb/settings_local.py")
     print("More information: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-SECRET_KEY")
     sys.exit()
 elif len(SECRET_KEY) < 50:
@@ -173,7 +173,7 @@ MARKDOWN_DEUX_STYLES = {
 django.contrib.auth.LOGIN_URL = '/'
 
 
-# Store this in settings_secret.py
+# Store this in settings_local.py
 # ### E-MAIL SETTINGS ###
 # EMAIL_HOST =
 # EMAIL_HOST_PASSWORD =
