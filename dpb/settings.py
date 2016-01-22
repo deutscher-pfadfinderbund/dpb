@@ -173,22 +173,23 @@ MARKDOWN_DEUX_STYLES = {
 django.contrib.auth.LOGIN_URL = '/'
 
 
-### E-MAIL SETTINGS ###
-EMAIL_HOST = "smtp.strato.de"
-EMAIL_HOST_PASSWORD = "5kFYS4Svh5WF"
-EMAIL_HOST_USER = "noreply@deutscher-pfadfinderbund.de"
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-EMAIL_PORT = 465
-EMAIL_SUBJECT_PREFIX = "[Deutscher-Pfadfinderbund.de]"
-EMAIL_USE_SSL = True
-### END E-MAIL ###
-
-### Google Recaptcha Support ###
-RECAPTCHA_PUBLIC_KEY = "6Ld9OBQTAAAAAFY3w4kc029PUVvFupckwo5PfR25"
-RECAPTCHA_PRIVATE_KEY = "6Ld9OBQTAAAAAP7HT6Lu6IppZEOFD3LXjg2nrWSA"
-NOCAPTCHA = True
-RECAPTCHA_USE_SSL = True
-### END Recaptcha ###
+# Store this in settings_secret.py
+# ### E-MAIL SETTINGS ###
+# EMAIL_HOST =
+# EMAIL_HOST_PASSWORD =
+# EMAIL_HOST_USER =
+# DEFAULT_FROM_EMAIL =
+# EMAIL_PORT =
+# EMAIL_SUBJECT_PREFIX =
+# EMAIL_USE_SSL =
+# ### END E-MAIL ###
+#
+# ### Google Recaptcha Support ###
+# RECAPTCHA_PUBLIC_KEY =
+# RECAPTCHA_PRIVATE_KEY =
+# NOCAPTCHA =
+# RECAPTCHA_USE_SSL =
+# ### END Recaptcha ###
 
 ### Haystack+Solr Search Engine ###
 HAYSTACK_CONNECTIONS = {
