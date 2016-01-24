@@ -34,7 +34,7 @@ elif len(SECRET_KEY) < 50:
     print("[WARNING] Your SECRET_KEY is too short. Please consider changing it.")
 
 
-ALLOWED_HOSTS = ['christian-meter.de', 'localhost', 'deutscher-pfadfinderbund.de', 'jungenbund.de']
+ALLOWED_HOSTS = ['christian-meter.de', 'localhost', 'deutscher-pfadfinderbund.de', 'www.deutscher-pfadfinderbund.de', 'jungenbund.de']
 
 SITE_ID = 1
 
