@@ -5,7 +5,7 @@ from django.shortcuts import render
 from .forms import EmailForm
 
 
-RECIPIENT = "cmeter@gmail.com"
+RECIPIENT = "bundesamt@deutscher-pfadfinderbund.de"
 
 
 def contact(request):
