@@ -1,7 +1,7 @@
 {% if user.is_staff %}
   {% with "admin:"|add:model|add:"_add" as admin_add %}
   {% with "admin:"|add:model|add:"_change" as admin_change %}
-  <p class="text-right">
+  <span class="pull-right">
     {% if not noadd %}
       <a href="{% url admin_add %}"><i class="fa fa-plus-square-o"></i></a>
     {% endif %}
@@ -11,7 +11,7 @@
       <a href="{% url 'admin:index' %}{{ model }}{{ id }}/delete"><i class="fa fa-minus-square-o"></i></a>
       {% endcomment %}
     {% endif %}
-  </p>
+  </span>
   {% endwith %}
   {% endwith %}
 {% endif %}

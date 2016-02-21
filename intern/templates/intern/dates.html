@@ -26,44 +26,26 @@
 {% endblock %}
 
 {% block content %}
-  {% if user.is_staff %}
-    <p>
-      <a href="/admin/intern/date/"><i class="fa fa-paperclip fa-lg"></i> Weitere Termine erstellen</a>
-    </p>
-  {% endif %}
+  {% include 'dpb/edit_item.html' with model="intern_date" %}
 
   <p>Für weitere Details und eventuell vorhandene Anhänge müsst ihr einfach auf den Titel des Termins klicken.</p>
 
   {% if dates %}
     <table class="table table-hover table-striped table-condensed table-responsive">
       <thead>
-        <th width="36%">Titel</th>
-        <th width="5%">Info</th>
-        {% if user.is_staff %}
-          <th width="5%"></th>
-        {% endif %}
-        <th width="15%">Ort</th>
-        <th width="12%">Beginn</th>
-        <th width="12%">Ende</th>
+        <th>Titel</th>
+        <th>Ort</th>
+        <th>Beginn</th>
+        <th>Ende</th>
       </thead>
       <tbody>
         {% for date in dates %}
         <tr>
           <td><a href="{% url 'intern:date_detail' id=date.id %}">{{ date.title }}</a></td>
-          <td>
-            {% if date.description %}
-              <a data-toggle="tooltip" data-placement="top" title="{{ date.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
-            {% endif %}
-          </td>
-          {% if user.is_staff %}
-            <td>
-              <a href="/admin/intern/date/{{ date.id }}" data-toggle="tooltip" data-placement="top" title="Termin bearbeiten"><i class="fa fa-pencil-square-o fa-lg"></i></a>
-              <a href="/admin/intern/date/{{ date.id }}/delete" data-toggle="tooltip" data-placement="top" title="Termin löschen"><i class="fa fa-remove fa-lg"></i></a>
-            </td>
-          {% endif %}
           <td>{{ date.location }}</td>
           <td>{{ date.start|date:"j. F Y" }}</td>
           <td>{{ date.end|date:"j. F Y" }}</td>
+          <td>{% include 'dpb/edit_item.html' with model="intern_date" id=date.id %}</td>
         </tr>
         {% endfor %}
       </tbody>
