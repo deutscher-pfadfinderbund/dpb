@@ -22,7 +22,7 @@
 {% endblock %}
 
 {% block heading %}
-  <h1>Termine</h1>
+  <h1>Zusammenkünfte</h1>
 {% endblock %}
 
 {% block content %}
@@ -62,8 +62,8 @@
             </td>
           {% endif %}
           <td>{{ date.location }}</td>
-          <td>{{ date.start }}</td>
-          <td>{{ date.end }}</td>
+          <td>{{ date.start|date:"j. F Y" }}</td>
+          <td>{{ date.end|date:"j. F Y" }}</td>
         </tr>
         {% endfor %}
       </tbody>

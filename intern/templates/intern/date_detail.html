@@ -6,15 +6,12 @@
 {% load intern_tags %}
 
 {% block heading %}
-  <h1>Termin: Details</h1>
+  <h1>Zusammenkünfte: Details</h1>
 {% endblock %}
 
 {% block content %}
-  <div style="float:right;">
-    {% if user.is_staff %}
-      <a href="/admin/intern/date/{{ date.id }}" data-toggle="tooltip" data-placement="top" title="Termin bearbeiten"><i class="fa fa-pencil-square-o fa-lg"></i></a>
-      <a href="/admin/intern/date/{{ date.id }}/delete" data-toggle="tooltip" data-placement="top" title="Termin löschen"><i class="fa fa-remove fa-lg"></i></a>
-    {% endif %}
+  <div class="pull-right">
+    {% include 'dpb/edit_item.html' with model="intern_date" id=date.id %}
   </div>
   {% if date %}
     <h2>{{ date.title }}</h2>
