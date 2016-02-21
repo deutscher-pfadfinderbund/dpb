@@ -1,35 +1,35 @@
 {% extends "base.html" %}
 
+{% load bootstrap_tags %}
+
 {% block heading %}
   <h1>Login</h1>
 {% endblock %}
 
 {% block content %}
   {% if form.errors %}
-    <p>Username and password do not match.</p>
+    <p>Der Benutzername und das Passwort passen nicht zusammen.</p>
   {% endif %}
-  <form method="post" action=".">{% csrf_token %}
-    <div class="row">
-      <div class="col-md-2">
-        <label for="id_username">Username:</label>
-      </div>
-      <div class="col-md-2">
-        {{ form.username }}
-      </div>
+
+  <div class="alert alert-info" role="alert">
+    <strong>
+      Die alten Zugänge wurden aus Sicherheitsgründen nicht für die neue Homepage
+      übernommen. Wir werden euch bald darüber informieren, wie ihr an die neuen Zugänge kommt.
+    </strong>
+  </div>
+
+  <form method="post" action=".">
+    {% csrf_token %}
+    {{ form|as_bootstrap }}
+    <div class="form-actions">
+      <input type="submit" value="Login" class="btn btn-default"/>
+      <input class="btn btn-primary" type="hidden" name="next" value="/" />
     </div>
-    <div class="row">
-      <div class="col-md-2">
-        <label for="id_password">Password:</label>
-      </div>
-      <div class="col-md-2">
-        {{ form.password }}
-      </div>
-    </div>
-    <input type="submit" value="Login" class="btn btn-default"/>
-    <input type="hidden" name="next" value="/" />
   </form>
+  {% comment %}
   <p>
     <br>
-    <a href="{% url 'account:register' %}">Register</a>
+    <a href="{% url 'login:register' %}">Registrieren</a>
   </p>
+  {% endcomment %}
 {% endblock %}

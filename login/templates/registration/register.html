@@ -1,18 +1,26 @@
 {% extends "base.html" %}
 
+{% load bootstrap_tags %}
+
 {% block heading %}
-  <h1>Register</h1>
+  <h1>Registrierung</h1>
 {% endblock %}
 
 {% block content %}
+  {%  comment "Currently no registration possible" %}
   <form method="post" action=".">{% csrf_token %}
     <table border="0">
-        {{ form.as_table }}
+        {{ form|as_bootstrap }}
     </table>
-    <input type="submit" value="Register" class="btn btn-default"/>
+    <input type="submit" value="Registrieren" class="btn btn-default"/>
   </form>
   <p>
     <br>
-    <a href="{% url 'account:login' %}">Login</a>
+    <a href="{% url 'login:login' %}">Login</a>
+  </p>
+  {% endcomment %}
+  <p>
+    Zur Zeit ist es nicht möglich sich selbst für die Homepage zu registrieren. Schreibe uns diesbezüglich eine
+    <a href="{% url 'kontakt' %}">E-Mail</a>.
   </p>
 {% endblock %}
