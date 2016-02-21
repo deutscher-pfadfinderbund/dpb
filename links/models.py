@@ -1,6 +1,8 @@
 from django.db import models
 from datetime import datetime
 
+from intern.models import State
+
 
 class LinkCategory(models.Model):
     name = models.CharField('Name', max_length=128, blank=False)
@@ -21,7 +23,7 @@ class Link(models.Model):
     category = models.ForeignKey(LinkCategory)
     description = models.TextField('Beschreibung', blank=True)
     city = models.CharField('Stadt', max_length=1024, default="", blank=True)
-    state = models.CharField('Bundesland', max_length=1024, default="", blank=True)
+    state = models.ForeignKey(State, null=True, blank=True)
     public = models.BooleanField('Öffentlich?', default=True)
     created = models.DateTimeField('Erstellt am', default=datetime.now)
 

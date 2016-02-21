@@ -1,7 +1,7 @@
 from django.contrib import admin
 from pagedown.widgets import AdminPagedownWidget
 from django.db import models
-from .models import Date, House
+from .models import Date, House, State
 
 
 class PageDownAdmin(admin.ModelAdmin):
@@ -46,3 +46,5 @@ class HouseAdmin(PageDownAdmin):
             ('price_intern', 'price_extern')]}),
         ('Erweitert', {'fields': ['created', 'latitude', 'longitude', 'display_name'], 'classes': ['collapse']}),
     ]
+
+admin.site.register(State)

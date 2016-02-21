@@ -7,6 +7,19 @@ from filer.fields.image import FilerImageField
 import requests
 
 
+class State(models.Model):
+    """ List of the states of Germany """
+    name = models.CharField("Name", max_length=1024, blank=False)
+    created = models.DateTimeField('Erstellt am', default=datetime.now)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Bundesland'
+        verbose_name_plural = 'Bundesländer'
+
+
 class Date(models.Model):
     """ Important dates """
     title = models.CharField('Titel', max_length=128, blank=False)
