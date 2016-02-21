@@ -17,7 +17,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-TEMPLATE_DEBUG = True
 
 # Import SECRET_KEY and check it
 try:
@@ -34,7 +33,7 @@ elif len(SECRET_KEY) < 50:
     print("[WARNING] Your SECRET_KEY is too short. Please consider changing it.")
 
 
-ALLOWED_HOSTS = ['christian-meter.de', 'localhost', 'deutscher-pfadfinderbund.de', 'www.deutscher-pfadfinderbund.de', 'jungenbund.de']
+ALLOWED_HOSTS = ['.deutscher-pfadfinderbund.de', 'deutscher-pfadfinderbund.de', '.jungenbund.de', '.maedchenbund.de']
 
 SITE_ID = 1
 
@@ -140,7 +139,8 @@ TEMPLATES = [{
                 'django.core.context_processors.media',
                 'django.core.context_processors.static',
                 'django.core.context_processors.request',
-            ]
+            ],
+            'debug': DEBUG,
         },
     },
 ]
