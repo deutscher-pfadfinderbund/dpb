@@ -8,11 +8,7 @@
 {% endblock %}
 
 {% block content %}
-  {% if user.is_staff %}
-    <p>
-      <a href="/admin/links/link/add/"><i class="fa fa-paperclip fa-lg"></i> Weiteren Link erstellen</a>
-    </p>
-  {% endif %}
+  {% include 'dpb/edit_item.html' with model='links_link' %}
 
   <p>
     Unseren Haftungsausschluss für Links auf externe Webseiten findet ihr
@@ -26,7 +22,7 @@
           <h4>{{ cat.name }}</h4>
           <ul style="padding-bottom:2em;">
           {% for link in links %}
-            {% if link.category == cat %}
+            {% if link.public and link.category == cat %}
               <li><a href="{{ link.website }}" target="_blank">{{ link }}</a></li>
             {% endif %}
           {% endfor %}

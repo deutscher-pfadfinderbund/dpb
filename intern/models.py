@@ -77,7 +77,7 @@ class House(models.Model):
             self.display_name = data["display_name"]
         except IndexError:
             try:
-                data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(self.street) + " " + str(self.plz) + " " + str(self.city) + " " + "&format=json&polygon=1&addressdetails=1").json()[0]
+                data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(self.street) + " " + str(self.city) + " " + "&format=json&polygon=1&addressdetails=1").json()[0]
                 self.latitude = data["lat"]
                 self.longitude = data["lon"]
                 self.display_name = data["display_name"]
