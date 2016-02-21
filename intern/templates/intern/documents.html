@@ -5,11 +5,7 @@
 {% load thumbnail %}
 {% load intern_tags %}
 
-{% block heading %}
-  <h1>Dokumente</h1>
-{% endblock %}
-
-{% block content %}
+{% block sources %}
   <!-- Setup datatables -->
   <script src="{% static 'assets/datatables/js/jquery.dataTables.js' %}"></script>
   <script src="{% static 'assets/datatables/js/dataTables.bootstrap.min.js' %}"></script>
@@ -23,7 +19,13 @@
       });
     });
   </script>
+{% endblock %}
 
+{% block heading %}
+  <h1>Dokumente</h1>
+{% endblock %}
+
+{% block content %}
   {% if user.is_staff %}
     <p>
       <a href="/admin/filer/folder/"><i class="fa fa-paperclip fa-lg"></i> Weitere Dokumente hochladen</a>
@@ -31,7 +33,6 @@
   {% endif %}
 
   {% for folder in folders %}
-
     {# Compare to folder.parent.name to get the string #}
     {% if folder.parent.name == "Dokumente" and folder.file_count > 0%}
       <h3>{{ folder }}
@@ -45,7 +46,7 @@
 
       <table class="table table-hover table-striped table-condensed table-responsive datatable">
         <thead>
-          <th width="5%" style="text-align:center;">Typ</th>
+          <th width="5%" class="text-center">Typ</th>
           <th width="63%">Name</th>
           <th width="5%">Info</th>
           {% if user.is_staff %}
@@ -84,7 +85,7 @@
                 {% endif %}
 
                 <td>{{ file.size|sizify }}</td>
-                <td>{{ file.modified_at }}</td>
+                <td>{{ file.modified_at|date:"j. F Y" }}</td>
               </tr>
             {% endifequal %}
           {% endfor %}
