@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
 
+from datetime import datetime
 from django.shortcuts import render
 from filer.models import File, Folder
 from .models import Date, House
@@ -15,7 +16,7 @@ def documents(request):
 
 @login_required
 def dates(request):
-    dates = Date.objects.all().order_by("start")
+    dates = Date.objects.filter(end__gte=datetime.now()).order_by("start")
     return render(request, 'intern/dates.html', {'dates': dates})
 
 
