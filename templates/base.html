@@ -84,7 +84,13 @@
                 </ul>
               </li>
 
-              <li><a href="{% url 'intern:arbeitskreis' %}">Arbeitskreis</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Arbeitskreis <span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="themes">
+                  <li><a href="{% url 'intern:arbeitskreis' %}">Überblick</a></li>
+                  <li><a href="{% url 'arbeitskreis_mitglieder' %}">Mitglieder</a></li>
+                </ul>
+              </li>
 
             {% endif %}
 
