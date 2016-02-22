@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load pages %}
+{% load thumbnail %}
+
+{% block heading %}
+  <h1>Arbeitskreis Macht und Sexualität</h1>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+      <div class="text-center padding-bottom-2">
+        <img class="img-responsive" src="{% static 'img/arbeitskreis/arbeitskreis_header.png' %}" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Wir sind...</a></li>
+      <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Wir wollen...</a></li>
+      <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Sprich uns an!</a></li>
+      <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Als nächstes...</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content padding-bottom">
+      <div role="tabpanel" class="tab-pane active" id="home">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h3>Wir sind...</h3>
+            <p>
+              Der Arbeitskreis arbeitet seit 2003 am Thema „strukturelle Prävention von Machtmissbrauch und sexualisierter Gewalt“.
+            </p>
+            <p>
+              Der Kreis besteht sowohl aus dauerhaft Engagierten als auch aus vorübergehend Interessierten.
+            </p>
+            <p>
+              Einmal im Jahr finden wir zusammen, um Bestehendes weiterzuentwickeln und im Austausch Neues zu entdecken.
+            </p>
+            <p>
+              Unsere Legitimation ziehen wir aus der Akzeptanz im Bund und verzichten dabei bewusst auf eine Institutionalisierung.
+            </p>
+            <p>
+              Die Professionalisierung der dauerhaft Engagierten im Thema ist unser Anspruch und befähigt uns zur Beratung in Fragen der Intervention und der Prävention.
+            </p>
+            <p>
+              Ergebnisse unserer Arbeit sind z.B. Infomappe, Leitfäden, Krisenpläne, "Achtung! Anvertraut oder Ausgeliefert." Austausch- und Infotreffen zur Sensibilisierung.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="profile">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h3>Wir wollen...</h3>
+            <p>
+              Unser Pfadfindergesetz und unsere Versprechen verpflichten uns zur <strong>Achtung gegenüber den uns Anvertrauten</strong>. Das schließt grenzverletzendes Verhalten klar aus!
+            </p>
+            <p>
+              Der Arbeitskreis „Macht und Sexualität“ hat drei Ziele:
+              <ul>
+                <li>Aufklärung und Sensibilisierung für die Themen Machtmissbrauch und sexuelle Gewalt.</li>
+                <li>Hilfestellung für Bundesmitglieder im Umgang mit Vermutungen und konkreten Missbrauchsfällen.</li>
+                <li>Ein Klima in unserem Bund, das Betroffenen Mut macht, sich anzuvertrauen, und Täter und Täterinnen klar macht, dass sie nicht auf falsches Schweigen zählen können.</li>
+              </ul>
+            </p>
+            <p>
+              In Aufklärungssituationen gilt bei uns im Gegensatz zur staatlichen Rechtsprechung der Grundsatz:<br>
+              <strong>Im Zweifel für die Kinder und Jugendlichen. Im Zweifel für die Betroffenen.</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="messages">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h3>Sprich uns an!</h3>
+            <p>
+              Möchtest du dich jemanden anvertrauen? Du findest <a href="{% url 'arbeitskreis_mitglieder' %}">hinter diesem Link</a> eine kurze Vorstellung der Mitglieder
+              des Arbeitskreises. Du kannst jeden jederzeit anrufen oder eine E-Mail schreiben.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="settings">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h3>Als nächstes...</h3>
+            <p>
+              <strong>"Achtung! Anvertraut oder ausgeliefert."</strong><br>
+              31.03. - 02. April 2017<br>
+              Austausch- und Infotreffen des Arbeitskreises Macht und Sexualität</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  {% comment %}<div class="row">
+    <div class="col-md-3 text-center">
+      <a href="#" class="btn btn-primary btn-lg active" role="button">
+        Wir sind...
+      </a>
+    </div>
+    <div class="col-md-3 text-center">
+      <a href="#" class="btn btn-primary btn-lg active" role="button">
+        Wir wollen...
+      </a>
+    </div>
+    <div class="col-md-3 text-center">
+      <a href="#" class="btn btn-primary btn-lg active" role="button">
+        Sprich uns an!
+      </a>
+    </div>
+    <div class="col-md-3 text-center">
+      <a href="#" class="btn btn-primary btn-lg active" role="button">
+        Als nächstes...
+      </a>
+    </div>
+  </div>{% endcomment %}
+
+{% endblock %}
