@@ -8,6 +8,11 @@ from .models import Date, House
 
 
 @login_required
+def work_group(request):
+    return render(request, 'intern/arbeitskreis.html')
+
+
+@login_required
 def documents(request):
     files = File.objects.all().order_by("-modified_at")
     folders = Folder.objects.all()
