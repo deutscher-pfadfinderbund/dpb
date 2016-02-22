@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^intern/aktuelles/(?P<page>[0-9]+)/$', blogviews.blog_overview, {'category': 'Aktuelles'}, name='blog_page'),
     url(r'^intern/post/(?P<slug>[\w-]+)/$', blogviews.post, name='blog_detail'),
     url(r'^intern/themen/$', blogviews.blog_overview, {'category': 'Themen'}, name='blog_themen'),
+    url(r'^intern/arbeitskreis/mitglieder/$', pageviews.page, {'url': '/intern/arbeitskreis/mitglieder/'}, name='arbeitskreis_mitglieder'),
+
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^account/', include('login.urls', namespace='login')),
@@ -41,7 +43,6 @@ urlpatterns += [
     url(r'^arbeitskreis/$', pageviews.page, {'url': '/arbeitskreis/'}, name='arbeitskreis'),
 
     url(r'^kontakt/$', pageviews.page, {'url': '/kontakt/'}, name='kontakt'),
-
 
     url(r'^(?P<url>.*/)$', pageviews.page, name='page'),
 ]

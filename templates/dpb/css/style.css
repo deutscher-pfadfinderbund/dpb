@@ -3,7 +3,7 @@ body {
   background-color: #f6f6f6; }
 
 p {
-  padding-bottom: 1em; }
+  padding-bottom: 0.5em; }
 
 .img-float-right {
   float: right;
@@ -11,6 +11,12 @@ p {
 
 .img-float-left {
   float: left; }
+
+.padding-bottom {
+  padding-bottom: 1em; }
+
+.padding-bottom-2 {
+  padding-bottom: 2em; }
 
 @media (min-width: 1500px) {
   .container {
