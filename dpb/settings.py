@@ -169,6 +169,13 @@ MARKDOWN_DEUX_STYLES = {
 }
 # END MARKDOWN DEUX
 
+# Configure Easy Thumbnails
+THUMBNAIL_ALIASES = {
+    '': {
+        'pages': {'size': (350, 350), 'crop': "scale", 'quality': 100},
+    },
+}
+
 # Needed for login
 django.contrib.auth.LOGIN_URL = '/'
 
