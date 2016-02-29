@@ -1,10 +1,9 @@
 from django.contrib import admin
-
-# Register your models here.
 from .models import Item
+from dpb.admin import PageDownAdmin
 
 
-class ItemAdmin(admin.ModelAdmin):
+class ItemAdmin(PageDownAdmin):
     list_display = ('signature', 'title', 'active', 'reviewed', 'pub_date')
     list_filter = ['pub_date']
     search_fields = ['signature', 'title']
