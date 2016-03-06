@@ -62,12 +62,12 @@ class House(models.Model):
     city = models.CharField("Stadt", max_length=4096, blank=True)
     state = models.ForeignKey(State, verbose_name="Bundesland", null=True, blank=True)
 
+    # Web
     gmaps_location = models.URLField("Google Maps Link", blank=True, null=True)
     osm_location = models.URLField("OSM Link", blank=True, null=True)
     latitude = models.FloatField("Breitengrad", max_length=4096, blank=True, null=True)
     longitude = models.FloatField("Längengrad", max_length=4096, blank=True, null=True)
     display_name = models.CharField("Berechneter Standort", max_length=4096, blank=True, null=True)
-
     website = models.URLField("Link zum Heim/Haus", blank=True, null=True)
     image1 = FilerImageField(verbose_name="1. Bild", related_name="house_image1", blank=True, null=True)
     image2 = FilerImageField(verbose_name="2. Bild", related_name="house_image2", blank=True, null=True)
@@ -80,8 +80,9 @@ class House(models.Model):
 
     # Schlafmöglichkeiten
     sleep_beds = models.IntegerField("Anzahl der Betten", null=True, blank=True)
-    sleep_mattresses = models.IntegerField("Anzahl der Matrazen", null=True, blank=True)
+    sleep_mattresses = models.IntegerField("Anzahl der Matratzen", null=True, blank=True)
     sleep_floor = models.IntegerField("Fußboden", null=True, blank=True)
+    sleep_outdoor = models.TextField("Schlafplätze auf dem Gelände", max_length=4096, blank=True)
 
     # Ausstattung Küche
     kitchen_stove = models.BooleanField("Herd", default=False, blank=True)
