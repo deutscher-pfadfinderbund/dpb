@@ -121,7 +121,7 @@ class House(models.Model):
 
     # Lage
     location_urban = models.BooleanField("städtisch", default=False, blank=True)
-    location_countryy = models.BooleanField("ländlich", default=False, blank=True)
+    location_country = models.BooleanField("ländlich", default=False, blank=True)
     location_special = models.TextField("Besonderheiten", max_length=4096, blank=True)
 
     # Kosten

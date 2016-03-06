@@ -61,7 +61,7 @@ class HouseAdmin(PageDownAdmin):
             "accessibility_other",
         ]}),
         ("Lage", {"fields": [
-            ("location_urban", "location_countryy"),
+            ("location_urban", "location_country"),
             "location_special",
         ]}),
         ("Web", {"fields": [
