@@ -17,9 +17,49 @@
   {% endif %}
 
   <!--<form id="contact-form" class="form-horizontal" method="post" action="/email/send/">-->
+  <style>
+  form .col-md-2, form .col-md-3, form .col-md-4, form .col-md-6 {
+    padding-left: 0;
+  }
+  </style>
+  {{ form.non_field_errors }}
   <form action="" method="post">
     {% csrf_token %}
-    {{ form|as_bootstrap }}
+
+    <h2>Allgemein</h2>
+    {{ form.name|form_item|safe }}
+    {{ form.situation|form_item|safe }}
+    {{ form.street|form_item|safe }}
+    <div class="col-md-2">
+      {{ form.plz|form_item|safe }}
+      </div>
+    <div class="col-md-4">
+      {{ form.city|form_item|safe }}
+    </div>
+    <div class="col-md-6">
+      {{ form.state|form_item|safe }}
+    </div>
+
+    <h2>Schlafmöglichkeiten</h2>
+    <div class="col-md-4">
+      {{ form.sleep_beds|form_item|safe }}
+    </div>
+    <div class="col-md-4">
+      {{ form.sleep_mattresses|form_item|safe }}
+    </div>
+    <div class="col-md-4">
+      {{ form.sleep_floor|form_item|safe }}
+    </div>
+    {{ form.sleep_outdoor|form_item|safe }}
+
     <input type="submit" value="Abschicken" class="btn btn-default">
   </form>
+
+  <script type="application/javascript">
+    $(document).ready(function() {
+      $(".form-group input").addClass("form-control");
+      $(".form-group select").addClass("form-control");
+      $(".form-group textarea").addClass("form-control");
+    });
+  </script>
 {% endblock content %}

@@ -42,9 +42,10 @@ def houses(request):
 def house_add(request):
     if request.method == 'POST':
         form = HouseForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request, 'intern/house_add.html')
+        print(type(form))
+        #if form.is_valid():
+        #    form.save()
+        return render(request, 'intern/house_add.html', {"form": form})
     else:
         form = HouseForm()
     return render(request, 'intern/house_add.html', {'form': form})

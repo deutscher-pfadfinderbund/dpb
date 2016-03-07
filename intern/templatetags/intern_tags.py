@@ -57,6 +57,7 @@ def houseDetails(value, text):
     else:
         return ""
 
+
 @register.filter(is_safe=True)
 def houseDetailsLink(value, text):
     if value:
@@ -68,3 +69,13 @@ def houseDetailsLink(value, text):
         """.format(text, value)
     else:
         return ""
+
+
+@register.filter(is_safe=True)
+def form_item(val):
+    return """
+        <div class="form-group">
+            {1}
+            {0}
+            {2}
+        </div>""".format(val.errors, val.label_tag(), val)
