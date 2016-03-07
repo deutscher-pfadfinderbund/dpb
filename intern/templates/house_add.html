@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load intern_tags %}
+
+{% block heading %}
+  <h1>Häuser und Zeltplätze hinzufügen</h1>
+{% endblock %}
+
+
+{% block content %}
+  {% include 'dpb/edit_item.html' with model="intern_house" %}
+
+  {% if success %}
+    <div class="alert alert-info">
+    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    	<strong>Erfolg!</strong> Das Item wurde erfolgreich hinzugefügt.
+    </div>
+  {% endif %}
+
+  <!--<form id="contact-form" class="form-horizontal" method="post" action="/email/send/">-->
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form|as_bootstrap }}
+    <input type="submit" value="Abschicken" class="btn btn-default">
+  </form>
+{% endblock content %}

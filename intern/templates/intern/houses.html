@@ -3,19 +3,12 @@
 {% load staticfiles %}
 {% load intern_tags %}
 
-{% block sources %}
-{% endblock %}
-
 {% block heading %}
   <h1>Häuser und Zeltplätze</h1>
 {% endblock %}
 
 {% block content %}
-  {% if user.is_staff %}
-    <p>
-      <a href="/admin/intern/house/"><i class="fa fa-paperclip fa-lg"></i> Weiteres Haus erstellen</a>
-    </p>
-  {% endif %}
+  {% include 'dpb/edit_item.html' with model="intern_house" %}
 
   {% if houses %}
     {% for house in houses %}
@@ -30,10 +23,6 @@
             {% endif %}
 
             {{ house.city }},
-
-            {% if house.state %}
-              {{ house.state }},
-            {% endif %}
 
             {% if house.capacity_house %}
               Schlafplätze im Haus: {{ house.capacity_house }},
