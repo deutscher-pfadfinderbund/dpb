@@ -2,19 +2,17 @@
 
 {% load staticfiles %}
 {% load intern_tags %}
+{% load bootstrap_tags %}
 
 {% block heading %}
   <h1>Häuser und Zeltplätze hinzufügen</h1>
 {% endblock %}
 
-
 {% block content %}
-  {% include 'dpb/edit_item.html' with model="intern_house" %}
-
   {% if success %}
     <div class="alert alert-info">
     	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    	<strong>Erfolg!</strong> Das Item wurde erfolgreich hinzugefügt.
+    	<strong>Erfolg!</strong> Das Haus wurde erfolgreich hinzugefügt.
     </div>
   {% endif %}
 

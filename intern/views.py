@@ -5,6 +5,7 @@ from datetime import datetime
 from django.shortcuts import render
 from filer.models import File, Folder
 from .models import Date, House
+from .forms import HouseForm
 
 
 @login_required
@@ -38,6 +39,18 @@ def houses(request):
 
 
 @login_required
-def house_detail(request, id):
-    house = House.objects.get(id=id)
+def house_add(request):
+    if request.method == 'POST':
+        form = HouseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'intern/house_add.html')
+    else:
+        form = HouseForm()
+    return render(request, 'intern/house_add.html', {'form': form})
+
+
+@login_required
+def house_detail(request, house_id):
+    house = House.objects.get(id=house_id)
     return render(request, 'intern/house_detail.html', {'house': house})
