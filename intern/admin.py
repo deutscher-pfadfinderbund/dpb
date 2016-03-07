@@ -6,34 +6,34 @@ from .models import Date, House, State
 
 class PageDownAdmin(admin.ModelAdmin):
     formfield_overrides = {
-        models.TextField: {'widget': AdminPagedownWidget}
+        models.TextField: {"widget": AdminPagedownWidget}
     }
 
 
 @admin.register(Date)
 class DateAdmin(admin.ModelAdmin):
-    list_display = ('title', 'location', 'start', 'end')
-    list_filter = ['start']
-    search_fields = ['title']
-    readonly_fields = ['latitude', 'longitude', 'display_name']
+    list_display = ("title", "location", "start", "end")
+    list_filter = ["start"]
+    search_fields = ["title"]
+    readonly_fields = ["latitude", "longitude", "display_name"]
     fieldsets = [
-        (None,        {'fields': ['title', 'start', 'end', 'attachment', 'location', 'host', 'description']}),
-        ('Erweitert', {'fields': ['created', 'latitude', 'longitude', 'display_name'], 'classes': ['collapse']}),
+        (None,        {"fields": ["title", "start", "end", "attachment", "location", "host", "description"]}),
+        ("Erweitert", {"fields": ["created", "latitude", "longitude", "display_name"], "classes": ["collapse"]}),
     ]
 
 
 @admin.register(House)
 class HouseAdmin(PageDownAdmin):
-    list_display = ('name', 'city', 'price_intern')
-    list_filter = ['name', 'price_intern']
-    search_fields = ['name', 'city']
-    readonly_fields = ['latitude', 'longitude', 'display_name']
+    list_display = ("name", "city", "price_intern")
+    list_filter = ["name", "price_intern"]
+    search_fields = ["name", "city"]
+    readonly_fields = ["latitude", "longitude", "display_name", "modified"]
     fieldsets = [
-        ('Allgemein', {'fields': [
-            'name',
-            'situation',
-            ('street', 'plz', 'city'),
-            'state'
+        ("Allgemein", {"fields": [
+            "name",
+            "situation",
+            ("street", "plz", "city"),
+            "state"
         ]}),
         ("Schlafmöglichkeiten", {"fields": [
             ("sleep_beds", "sleep_mattresses", "sleep_floor"),
@@ -66,21 +66,25 @@ class HouseAdmin(PageDownAdmin):
         ]}),
         ("Web", {"fields": [
             "website",
-            ('image1', 'image2', 'image3'),
-            ('gmaps_location', 'osm_location')
+            ("image1", "image2", "image3"),
+            ("gmaps_location", "osm_location")
         ]}),
-        ('Kontakt', {'fields': [
-            'owner',
-            ('contact_name', 'contact_tel', 'contact_email')
+        ("Kontakt", {"fields": [
+            "owner",
+            ("contact_name", "contact_tel", "contact_email")
         ]}),
-        ('Kosten', {'fields': [
-            ('price_intern', 'price_extern')
+        ("Kosten", {"fields": [
+            ("price_intern", "price_extern")
         ]}),
         ("Sonstiges", {"fields": [
             "description",
         ]}),
-
-        ('Erweitert', {'fields': ['created', 'latitude', 'longitude', 'display_name'], 'classes': ['collapse']}),
+        ("Erweitert", {"fields": [
+            ("latitude", "longitude"),
+            "display_name",
+            "created",
+            "modified",
+        ], "classes": ["collapse"]}),
     ]
 
 admin.site.register(State)

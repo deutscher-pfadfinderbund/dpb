@@ -132,6 +132,7 @@ class House(models.Model):
     description = models.TextField("Sonstige Beschreibung", blank=True, null=True)
 
     created = models.DateTimeField("Erstellt am", default=datetime.now)
+    modified = models.DateTimeField("Zuletzt geändert", auto_now=True)
 
     def clean(self):
         try:
