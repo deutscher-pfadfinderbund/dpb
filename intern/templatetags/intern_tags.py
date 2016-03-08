@@ -79,3 +79,14 @@ def form_item(val):
             {0}
             {2}
         </div>""".format(val.errors, val.label_tag(), val)
+
+
+@register.filter(is_safe=True)
+def form_checkbox(val):
+    return """
+        <div class="checkbox">
+            {0}
+            <label>
+            {2} {3}
+            </label>
+        </div>""".format(val.errors, val.label_tag(), val, val.label)

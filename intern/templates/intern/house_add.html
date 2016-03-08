@@ -27,30 +27,93 @@
     {% csrf_token %}
 
     <h2>Allgemein</h2>
-    {{ form.name|form_item|safe }}
-    {{ form.situation|form_item|safe }}
-    {{ form.street|form_item|safe }}
-    <div class="col-md-2">
-      {{ form.plz|form_item|safe }}
-      </div>
-    <div class="col-md-4">
-      {{ form.city|form_item|safe }}
-    </div>
-    <div class="col-md-6">
-      {{ form.state|form_item|safe }}
-    </div>
+    <fieldset>
+      {{ form.name|form_item|safe }}
+      {{ form.situation|form_item|safe }}
+      {{ form.street|form_item|safe }}
+    </fieldset>
+    <fieldset>
+      <div class="col-md-2">{{ form.plz|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.city|form_item|safe }}</div>
+      <div class="col-md-6">{{ form.state|form_item|safe }}</div>
+    </fieldset>
 
     <h2>Schlafmöglichkeiten</h2>
-    <div class="col-md-4">
-      {{ form.sleep_beds|form_item|safe }}
-    </div>
-    <div class="col-md-4">
-      {{ form.sleep_mattresses|form_item|safe }}
-    </div>
-    <div class="col-md-4">
-      {{ form.sleep_floor|form_item|safe }}
-    </div>
-    {{ form.sleep_outdoor|form_item|safe }}
+    <fieldset>
+      <div class="col-md-4">{{ form.sleep_beds|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.sleep_mattresses|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.sleep_floor|form_item|safe }}</div>
+    </fieldset>
+    <fieldset>
+      {{ form.sleep_outdoor|form_item|safe }}
+    </fieldset>
+
+    <h2>Ausstattung der Küche</h2>
+    <fieldset>
+      <div class="col-md-3">{{ form.kitchen_stove|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_oven|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_fridge|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_sink|form_checkbox|safe }}</div>
+    </fieldset>
+    <fieldset>
+      <div class="col-md-3">{{ form.kitchen_dishwasher|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_dishes|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_pots|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_hot_water|form_checkbox|safe }}</div>
+    </fieldset>
+    <fieldset>
+      {{ form.kitchen_other|form_item|safe }}
+    </fieldset>
+
+    <h2>Bad</h2>
+    <fieldset>
+      <div class="col-md-3">{{ form.toilets_separate|form_checkbox|safe }}</div>
+    </fieldset>
+    <fieldset>
+      <div class="col-md-4">{{ form.toilets_total|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.toilets_washbasin|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.toilets_shower|form_item|safe }}</div>
+    </fieldset>
+
+    <h2>Gruppenraum</h2>
+    <fieldset>
+      <div class="col-md-4">{{ form.room_size|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.room_tables|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.room_chairs|form_item|safe }}</div>
+    </fieldset>
+
+    <h2>Weitere Räume</h2>
+    <fieldset>
+      <div class="col-md-4">{{ form.rooms_total|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.rooms_tables|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.rooms_chairs|form_item|safe }}</div>
+    </fieldset>
+
+    <h2>Anbindung</h2>
+    <fieldset>
+      <div class="col-md-4">{{ form.accessibility_parking|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.accessibility_train|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.accessibility_bus|form_item|safe }}</div>
+    </fieldset>
+    <fieldset>
+      <div class="col-md-4">{{ form.accessibility_shop|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.accessibility_baker|form_item|safe }}</div>
+    </fieldset>
+    <fieldset>
+      {{ form.accessibility_other|form_item|safe }}
+    </fieldset>
+
+    <h2>Lage</h2>
+    <fieldset>
+      <div class="col-md-4">{{ form.location_urban|form_checkbox|safe }}</div>
+      <div class="col-md-4">{{ form.location_country|form_checkbox|safe }}</div>
+    </fieldset>
+    <fieldset>
+      {{ form.location_special|form_item|safe }}
+    </fieldset>
+
+
+
 
     <input type="submit" value="Abschicken" class="btn btn-default">
   </form>
