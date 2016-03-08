@@ -69,9 +69,9 @@ class House(models.Model):
     longitude = models.FloatField("Längengrad", max_length=4096, blank=True, null=True)
     display_name = models.CharField("Berechneter Standort", max_length=4096, blank=True, null=True)
     website = models.URLField("Link zum Heim/Haus", blank=True, null=True)
-    image1 = FilerImageField(verbose_name="1. Bild", related_name="house_image1", blank=True, null=True)
-    image2 = FilerImageField(verbose_name="2. Bild", related_name="house_image2", blank=True, null=True)
-    image3 = FilerImageField(verbose_name="3. Bild", related_name="house_image3", blank=True, null=True)
+    image1 = models.ImageField(upload_to="haeuser", verbose_name="1. Bild", blank=True, null=True)
+    image2 = models.ImageField(upload_to="haeuser", verbose_name="2. Bild", blank=True, null=True)
+    image3 = models.ImageField(upload_to="haeuser", verbose_name="3. Bild", blank=True, null=True)
 
     owner = models.CharField("Bundesgruppe des Heimes", max_length=4096, blank=True, null=True)
     contact_name = models.CharField("Kontaktdaten der Vermietung", max_length=4096, blank=True)

@@ -112,8 +112,25 @@
       {{ form.location_special|form_item|safe }}
     </fieldset>
 
+    <h2>Kosten</h2>
+    <fieldset>
+      <div class="col-md-6">{{ form.price_intern|form_item|safe }}</div>
+      <div class="col-md-6">{{ form.price_extern|form_item|safe }}</div>
+    </fieldset>
 
-
+    <h2>Links und Bilder</h2>
+    <fieldset>
+      <div class="col-md-6">{{ form.website|form_item|safe }}</div>
+    </fieldset>
+    <fieldset>
+      <div class="col-md-4">{{ form.image1|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.image2|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.image3|form_item|safe }}</div>
+    </fieldset>
+    <fieldset>
+      <div class="col-md-6">{{ form.gmaps_location|form_item|safe }}</div>
+      <div class="col-md-6">{{ form.osm_location|form_item|safe }}</div>
+    </fieldset>
 
     <input type="submit" value="Abschicken" class="btn btn-default">
   </form>
@@ -123,6 +140,7 @@
       $(".form-group input").addClass("form-control");
       $(".form-group select").addClass("form-control");
       $(".form-group textarea").addClass("form-control");
+      // $(".footer-wrapper").hide();
     });
   </script>
 {% endblock content %}
