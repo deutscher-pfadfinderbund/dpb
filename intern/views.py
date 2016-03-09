@@ -52,6 +52,6 @@ def house_add(request):
 
 
 @login_required
-def house_detail(request, house_id):
-    house = House.objects.get(id=house_id)
+def house_detail(request, slug):
+    house = House.objects.get(slug=slug)
     return render(request, 'intern/house_detail.html', {'house': house})

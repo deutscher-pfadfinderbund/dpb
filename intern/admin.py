@@ -24,7 +24,7 @@ class DateAdmin(admin.ModelAdmin):
 
 @admin.register(House)
 class HouseAdmin(PageDownAdmin):
-    list_display = ("name", "city", "price_intern")
+    list_display = ("name", "state", "city", "price_intern")
     list_filter = ["name", "price_intern"]
     search_fields = ["name", "city"]
     readonly_fields = ["latitude", "longitude", "display_name", "modified"]

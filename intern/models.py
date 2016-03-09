@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from autoslug import AutoSlugField
 from django.db import models
 
 from datetime import datetime
@@ -131,6 +132,7 @@ class House(models.Model):
     # Sonstiges
     description = models.TextField("Sonstige Beschreibung", blank=True, null=True)
 
+    slug = AutoSlugField(populate_from='name', null=True)
     created = models.DateTimeField("Erstellt am", default=datetime.now)
     modified = models.DateTimeField("Zuletzt geändert", auto_now=True)
 

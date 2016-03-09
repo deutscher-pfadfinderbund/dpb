@@ -14,7 +14,7 @@
     {% for house in houses %}
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title"><a href="{% url 'intern:house_detail' id=house.id %}">{{ house.name }}</a></h3>
+          <h3 class="panel-title"><a href="{% url 'intern:house_detail' slug=house.slug %}">{{ house.name }}</a></h3>
         </div>
         <div class="panel-body">
           <p style="margin-bottom: 0; padding-bottom: 0;">
@@ -31,7 +31,7 @@
               Schlafplätze außerhalb: {{ house.capacity_outdoor }}.
             {% endif %}
             <br>
-            <a href="{% url 'intern:house_detail' id=house.id %}">Details</a>
+            <a href="{% url 'intern:house_detail' slug=house.slug %}">Details</a>
           </p>
         </div>
       </div>
