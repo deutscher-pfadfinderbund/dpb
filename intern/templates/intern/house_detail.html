@@ -62,39 +62,81 @@
 
   <div class="row">
     <div class="col-md-4">
-      <h3>Allgemein</h3>
-      {{ house.street|houseDetails:"Straße:"|safe }}
-      <div class="row">
-        <div class="col-md-4">
-          PLZ, Ort:
-        </div>
-        <div class="col-md-8">
-          {{ house.plz }} {{ house.city }}, {{ house.state }}
-        </div>
-      </div>
-      {{ house.owner|houseDetails:"Name der Gruppe:"|safe }}
-      {{ house.accessibility|houseDetails:"Erreichbarkeit:"|safe }}
+      <h3>Preise</h3>
+      <table class="table table-hover">
+      	<tbody>
+        {{ house.price_intern|table_row:"Preise für Pfadfinder"|safe }}
+        {{ house.price_extern|table_row:"Preise für Externe"|safe }}
+        {{ house.price_other|table_row:"Sonstige Kosten"|safe }}
+      	</tbody>
+      </table>
     </div>
     <div class="col-md-4">
-      <h3>Fakten zum Haus</h3>
-      <h4>Schlafplätze</h4>
-      {{ house.capacity_house|houseDetails:"im Haus:"|safe }}
-      {{ house.capacity_outdoor|houseDetails:"außerhalb:"|safe }}
-      <h4>Preise</h4>
-      {{ house.price_intern|houseDetails:"Pfadfinder:"|safe }}
-      {{ house.price_extern|houseDetails:"Externe:"|safe }}
+      <h3>Schlafmöglichkeiten</h3>
+      <table class="table table-hover">
+        <tbody>
+        {{ house.sleep_beds|table_row:"Anzahl Betten"|safe }}
+        {{ house.sleep_mattresses|table_row:"Anzahl Matrazen"|safe }}
+        {{ house.sleep_floor|table_row:"Fußboden"|safe }}
+        {{ house.sleep_outdoor|table_row:"Schlafplätze auf dem Gelände"|safe }}
+        </tbody>
+      </table>
     </div>
     <div class="col-md-4">
-      <h3>Kontakt</h3>
-      {{ house.contact_name|houseDetails:"Ansprechpartner:"|safe }}
-      {{ house.contact_tel|houseDetails:"Telefon:"|safe }}
-      <a href="mailto:{{ house.contact_email }}">
-        {{ house.contact_email|houseDetails:"E-Mail:"|safe }}
-      </a>
+      <h3>Küche</h3>
+      <table class="table table-hover">
+      	<tbody>
+        <tr>
+          <td>
+            <ul class="no-dot">
+              <li>{{ house.kitchen_stove|bool_icon:"Herd"|safe }}</li>
+              <li>{{ house.kitchen_oven|bool_icon:"Backofen"|safe }}</li>
+              <li>{{ house.kitchen_fridge|bool_icon:"Kühlschrank"|safe }}</li>
+              <li>{{ house.kitchen_sink|bool_icon:"Spüle"|safe }}</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="no-dot">
+              <li>{{ house.kitchen_dishwasher|bool_icon:"Geschirrspüler"|safe }}</li>
+              <li>{{ house.kitchen_dishes|bool_icon:"Geschirr und Besteck"|safe }}</li>
+              <li>{{ house.kitchen_pots|bool_icon:"Große Töpfe"|safe }}</li>
+              <li>{{ house.kitchen_hot_water|bool_icon:"Heißes Wasser"|safe }}</li>
+            </ul>
+          </td>
+        </tr>
+        {{ house.kitchen_other|table_row:"Sonstige Küchengeräte"|safe }}
+      	</tbody>
+      </table>
+    </div>
+  </div>
 
-      {{ house.gmaps_location|houseDetailsLink:"Google Maps"|safe }}
-      {{ house.osm_location|houseDetailsLink:"Open Street Map"|safe }}
-      {{ house.website|houseDetailsLink:"Website"|safe }}
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Bad</h3>
+      <table class="table table-hover">
+      	<tbody>
+        <tr>
+          <td>{{ house.toilets_separate|bool_icon:"Geschlechtergetrennt?"|safe }}</td>
+        </tr>
+        {{ house.toilets_total|table_row:"Anzahl der Toiletten"|safe }}
+        {{ house.toilets_washbasin|table_row:"Anzahl der Waschbecken"|safe }}
+        {{ house.toilets_shower|table_row:"Anzahl der Duschen"|safe }}
+      	</tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <h3>Gruppenraum</h3>
+      <table class="table table-hover">
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <h3>Weitere Räume</h3>
+      <table class="table table-hover">
+      	<tbody>
+      	</tbody>
+      </table>
     </div>
   </div>
 

@@ -111,6 +111,7 @@ class House(models.Model):
     rooms_total = models.CharField("Anzahl weiterer Räume", max_length=4096, blank=True)
     rooms_tables = models.CharField("Anzahl der Tische in weiteren Räumen", max_length=4096, blank=True)
     rooms_chairs = models.CharField("Anzahl der Stühle in weiteren Räumen", max_length=4096, blank=True)
+    rooms_other = models.TextField("Sonstiges zu den Räumen", max_length=4096, blank=True)
 
     # Anbindung
     accessibility_parking = models.CharField("Anzahl der Parkplätze", max_length=4096, blank=True)
@@ -128,6 +129,7 @@ class House(models.Model):
     # Kosten
     price_intern = models.CharField("Preise für Pfadfinder", max_length=4096, blank=True, null=True)
     price_extern = models.CharField("Preise für Externe", max_length=4096, blank=True, null=True)
+    price_other = models.TextField("Sonstige Kosten", max_length=4096, blank=True)
 
     # Sonstiges
     description = models.TextField("Sonstige Beschreibung", blank=True, null=True)

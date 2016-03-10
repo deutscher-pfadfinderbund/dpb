@@ -54,6 +54,7 @@ class HouseAdmin(PageDownAdmin):
         ]}),
         ("Weitere Räume", {"fields": [
             ("rooms_total", "rooms_tables", "rooms_chairs"),
+            "rooms_other"
         ]}),
         ("Anbindung", {"fields": [
             ("accessibility_parking", "accessibility_train", "accessibility_bus"),
@@ -74,7 +75,8 @@ class HouseAdmin(PageDownAdmin):
             ("contact_name", "contact_tel", "contact_email")
         ]}),
         ("Kosten", {"fields": [
-            ("price_intern", "price_extern")
+            ("price_intern", "price_extern"),
+            "price_other",
         ]}),
         ("Sonstiges", {"fields": [
             "description",

@@ -54,6 +54,7 @@ def houseDetails(value, text):
             </div>
           </div>
         """.format(text, value)
+
     else:
         return ""
 
@@ -90,6 +91,15 @@ def table_row(value, args):
             </tr>
         """.format(text, tdurl)
     return ""
+
+
+@register.filter(is_safe=True)
+def bool_icon(value, text):
+    if value:
+        icon = "<i class='fa fa-check'></i>"
+    else:
+        icon = "<i class='fa fa-times'></i>"
+    return "{0} {1}".format(icon, text)
 
 
 @register.filter(is_safe=True)
