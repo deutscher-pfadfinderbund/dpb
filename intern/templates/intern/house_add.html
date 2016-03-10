@@ -38,6 +38,16 @@
       <div class="col-md-6">{{ form.state|form_item|safe }}</div>
     </fieldset>
 
+    <h2>Kontakt</h2>
+    <fieldset>
+      <div class="col-md-4">{{ form.owner|form_item|safe }}</div>
+    </fieldset>
+    <fieldset>
+      <div class="col-md-4">{{ form.contact_name|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.contact_tel|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.contact_email|form_item|safe }}</div>
+    </fieldset>
+
     <h2>Schlafmöglichkeiten</h2>
     <fieldset>
       <div class="col-md-4">{{ form.sleep_beds|form_item|safe }}</div>

@@ -75,7 +75,7 @@ class House(models.Model):
     image3 = models.ImageField(upload_to="haeuser", verbose_name="3. Bild", blank=True, null=True)
 
     owner = models.CharField("Bundesgruppe des Heimes", max_length=4096, blank=True, null=True)
-    contact_name = models.CharField("Kontaktdaten der Vermietung", max_length=4096, blank=True)
+    contact_name = models.CharField("Ansprechpartner für die Vermietung", max_length=4096, blank=True)
     contact_tel = models.CharField("Telefon", max_length=4096, blank=True, null=True)
     contact_email = models.EmailField("E-Mail", max_length=4096, blank=True, null=True)
 

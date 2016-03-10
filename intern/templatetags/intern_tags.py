@@ -72,6 +72,27 @@ def houseDetailsLink(value, text):
 
 
 @register.filter(is_safe=True)
+def table_row(value, args):
+    if value:
+        args = args.split(",")
+        text = args[0]
+        tdurl = "<td>{0}</td>".format(value)
+        if len(args) > 1:
+            if len(value) > 40:
+                url = value[:40] + "..."
+            else:
+                url = value
+            tdurl = "<td><a href='{0}' target='_blank'>{1}</a></td>".format(value, url)
+        return """
+            <tr>
+                <td>{0}</td>
+                {1}
+            </tr>
+        """.format(text, tdurl)
+    return ""
+
+
+@register.filter(is_safe=True)
 def form_item(val):
     return """
         <div class="form-group">

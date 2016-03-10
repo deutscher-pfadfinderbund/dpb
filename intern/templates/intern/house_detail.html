@@ -14,10 +14,52 @@
 
 {% block content %}
   {% if house.description %}
-    <p>
-      {{ house.description|markdown }}
-    </p>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Beschreibung</h3>
+      </div>
+    	<div class="panel-body">
+    	   {{ house.description|markdown }}
+    	</div>
+    </div>
   {% endif %}
+
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Allgemein</h3>
+      <table class="table table-hover">
+        <tbody>
+        {{ house.street|table_row:"Straße"|safe }}
+        {% with house.plz|add:" "|add:house.city as plzcity %}
+          {{ plzcity|table_row:"PLZ / Ort"|safe }}
+        {% endwith %}
+        {{ house.state|table_row:"Bundesland"|safe }}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <h3>Kontakt</h3>
+      <table class="table table-hover">
+      	<tbody>
+        {{ house.owner|table_row:"Bundesgruppe des Heimes"|safe }}
+        {{ house.contact_name|table_row:"Ansprechpartner für die Vermietung"|safe }}
+        {{ house.contact_tel|table_row:"Telefon"|safe }}
+        {{ house.contact_email|table_row:"E-Mail"|safe }}
+      	</tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <h3>Web</h3>
+      <table class="table table-hover">
+      	<tbody>
+        {{ house.website|table_row:"Webseite,url"|safe }}
+        {{ house.gmaps_location|table_row:"Google Maps Link,url"|safe }}
+        {{ house.osm_location|table_row:"OSM Link,url"|safe }}
+      	</tbody>
+      </table>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-4">
       <h3>Allgemein</h3>
