@@ -139,22 +139,22 @@ class House(models.Model):
     created = models.DateTimeField("Erstellt am", default=datetime.now)
     modified = models.DateTimeField("Zuletzt geändert", auto_now=True)
 
-    # def clean(self):
-    #     try:
-    #         data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(self.name) + " " + str(self.street) + " " + str(self.plz) + " " + str(self.city) + " " + "&format=json&polygon=1&addressdetails=1").json()[0]
-    #         self.latitude = data["lat"]
-    #         self.longitude = data["lon"]
-    #         self.display_name = data["display_name"]
-    #     except IndexError:
-    #         try:
-    #             data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(self.street) + " " + str(self.city) + " " + "&format=json&polygon=1&addressdetails=1").json()[0]
-    #             self.latitude = data["lat"]
-    #             self.longitude = data["lon"]
-    #             self.display_name = data["display_name"]
-    #         except IndexError:
-    #             self.latitude = None
-    #             self.longitude = None
-    #             self.display_name = None
+    def clean(self):
+        try:
+            data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(self.name) + " " + str(self.street) + " " + str(self.plz) + " " + str(self.city) + " " + "&format=json&polygon=1&addressdetails=1").json()[0]
+            self.latitude = data["lat"]
+            self.longitude = data["lon"]
+            self.display_name = data["display_name"]
+        except IndexError:
+            try:
+                data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(self.street) + " " + str(self.city) + " " + "&format=json&polygon=1&addressdetails=1").json()[0]
+                self.latitude = data["lat"]
+                self.longitude = data["lon"]
+                self.display_name = data["display_name"]
+            except IndexError:
+                self.latitude = None
+                self.longitude = None
+                self.display_name = None
 
     def __str__(self):
         return self.name

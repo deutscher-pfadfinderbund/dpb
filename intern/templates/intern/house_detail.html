@@ -59,7 +59,9 @@
   {% endif %}
   </div>
 <!-- TODO hier wieter IFs einbauen -->
+
   <div class="row">
+  {% if house.price_intern or house.price_extern or house.price_other %}
     <div class="col-md-4">
       <h3>Preise</h3>
       <table class="table table-hover">
@@ -70,6 +72,9 @@
       	</tbody>
       </table>
     </div>
+  {% endif %}
+  
+  {% if house.kitchen_stove or house.kitchen_oven or house.kitchen_fridge or house.kitchen_sink or house.kitchen_dishwasher or house.kitchen_dishes or house.kitchen_pots or house.kitchen_hot_water or house.kitchen_other %}
     <div class="col-md-4">
       <h3>Küche</h3>
       <table class="table table-hover">
@@ -96,6 +101,8 @@
       	</tbody>
       </table>
     </div>
+  {% endif %}
+  {% if house.toilets_total or house.toilets_washbasin or house.toilets_shower %}
     <div class="col-md-4">
       <h3>Bad</h3>
       <table class="table table-hover">
@@ -110,9 +117,11 @@
       	</tbody>
       </table>
     </div>
+  {% endif %}
   </div>
 
   <div class="row">
+  {% if house.sleep_beds or house.sleep_mattresses or house.sleep_floor or house.sleep_outdoor %}
     <div class="col-md-4">
       <h3>Schlafmöglichkeiten</h3>
       <table class="table table-hover">
@@ -124,16 +133,22 @@
         </tbody>
       </table>
     </div>
+  {% endif %}
+
+  {% if house.room_size or house.room_tables or house.room_chairs %}
     <div class="col-md-4">
       <h3>Gruppenraum</h3>
       <table class="table table-hover">
         <tbody>
-        {{  house.room_size|table_row:"Größe"|safe }}
-        {{  house.room_tables|table_row:"Anzahl der Tische"|safe }}
-        {{  house.room_chairs|table_row:"Anzahl der Stühle"|safe }}
+        {{ house.room_size|table_row:"Größe"|safe }}
+        {{ house.room_tables|table_row:"Anzahl der Tische"|safe }}
+        {{ house.room_chairs|table_row:"Anzahl der Stühle"|safe }}
         </tbody>
       </table>
     </div>
+  {% endif %}
+
+  {% if house.rooms_total or house.rooms_tables or house.rooms_chairs or house.rooms_other %}
     <div class="col-md-4">
       <h3>Weitere Räume</h3>
       <table class="table table-hover">
@@ -145,9 +160,11 @@
       	</tbody>
       </table>
     </div>
+  {% endif %}
   </div>
 
   <div class="row">
+  {% if house.accessibility_parking or house.accessibility_train or house.accessibility_bus or house.accessibility_shop or house.accessibility_baker or house.accessibility_other %}
     <div class="col-md-4">
       <h3>Anbindung</h3>
       <table class="table table-hover">
@@ -161,6 +178,9 @@
       	</tbody>
       </table>
     </div>
+  {% endif %}
+
+  {% if house.location_urban or house.location_country or house.location_special %}
     <div class="col-md-4">
       <h3>Lage</h3>
       <table class="table table-hover">
@@ -177,6 +197,7 @@
         </tbody>
       </table>
     </div>
+  {% endif %}
   </div>
 
   {% if house.image1 %}
