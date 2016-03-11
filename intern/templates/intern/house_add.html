@@ -148,6 +148,13 @@
       <div class="col-md-6">{{ form.osm_location|form_item|safe }}</div>
     </fieldset>
 
+    <h2>Sonstiges</h2>
+    <fieldset>
+      {{ form.public|form_checkbox|safe }}
+    </fieldset>
+
+    <div class="padding-bottom"></div>
+
     <input type="submit" value="Abschicken" class="btn btn-default">
   </form>
 

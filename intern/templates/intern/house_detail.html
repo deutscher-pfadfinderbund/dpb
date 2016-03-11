@@ -11,17 +11,13 @@
 
 {% block content %}
   {% if house.description %}
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Beschreibung</h3>
-      </div>
-    	<div class="panel-body">
-    	   {{ house.description|markdown }}
-    	</div>
+    <div class="well">
+     {{ house.description|markdown }}
     </div>
   {% endif %}
 
   <div class="row">
+  {% if house.street or house.plz or house.city or house.state %}
     <div class="col-md-4">
       <h3>Adresse</h3>
       <table class="table table-hover">
@@ -34,6 +30,8 @@
         </tbody>
       </table>
     </div>
+  {% endif %}
+  {% if house.owner or house.contact_name or house.contact_tel or house.contact_email %}
     <div class="col-md-4">
       <h3>Kontakt</h3>
       <table class="table table-hover">
@@ -45,6 +43,9 @@
       	</tbody>
       </table>
     </div>
+  {% endif %}
+
+  {% if house.website or house.gmaps_location or house.osm_location %}
     <div class="col-md-4">
       <h3>Web</h3>
       <table class="table table-hover">
@@ -55,8 +56,9 @@
       	</tbody>
       </table>
     </div>
+  {% endif %}
   </div>
-
+<!-- TODO hier wieter IFs einbauen -->
   <div class="row">
     <div class="col-md-4">
       <h3>Preise</h3>
@@ -66,17 +68,6 @@
         {{ house.price_extern|table_row:"Preise für Externe"|safe }}
         {{ house.price_other|table_row:"Sonstige Kosten"|safe }}
       	</tbody>
-      </table>
-    </div>
-    <div class="col-md-4">
-      <h3>Schlafmöglichkeiten</h3>
-      <table class="table table-hover">
-        <tbody>
-        {{ house.sleep_beds|table_row:"Anzahl Betten"|safe }}
-        {{ house.sleep_mattresses|table_row:"Anzahl Matrazen"|safe }}
-        {{ house.sleep_floor|table_row:"Fußboden"|safe }}
-        {{ house.sleep_outdoor|table_row:"Schlafplätze auf dem Gelände"|safe }}
-        </tbody>
       </table>
     </div>
     <div class="col-md-4">
@@ -105,9 +96,6 @@
       	</tbody>
       </table>
     </div>
-  </div>
-
-  <div class="row">
     <div class="col-md-4">
       <h3>Bad</h3>
       <table class="table table-hover">
@@ -120,6 +108,20 @@
         {{ house.toilets_washbasin|table_row:"Anzahl der Waschbecken"|safe }}
         {{ house.toilets_shower|table_row:"Anzahl der Duschen"|safe }}
       	</tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Schlafmöglichkeiten</h3>
+      <table class="table table-hover">
+        <tbody>
+        {{ house.sleep_beds|table_row:"Anzahl Betten"|safe }}
+        {{ house.sleep_mattresses|table_row:"Anzahl Matrazen"|safe }}
+        {{ house.sleep_floor|table_row:"Fußboden"|safe }}
+        {{ house.sleep_outdoor|table_row:"Schlafplätze auf dem Gelände"|safe }}
+        </tbody>
       </table>
     </div>
     <div class="col-md-4">
@@ -144,6 +146,7 @@
       </table>
     </div>
   </div>
+
   <div class="row">
     <div class="col-md-4">
       <h3>Anbindung</h3>
@@ -172,16 +175,6 @@
         </tr>
         {{ house.location_special|table_row:"Besonderheiten"|safe }}
         </tbody>
-      </table>
-    </div>
-    <div class="col-md-4">
-      <h3>Sonstiges</h3>
-      <table class="table table-hover">
-      	<tbody>
-        <tr>
-          <td colspan="2">{{ house.description|safe }}</td>
-        </tr>
-      	</tbody>
       </table>
     </div>
   </div>
