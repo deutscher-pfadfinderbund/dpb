@@ -1,9 +1,11 @@
 from django.contrib import admin
 
+from dpb.admin import PageDownAdmin
 from .models import Post, Category
 
 
-class PostAdmin(admin.ModelAdmin):
+@admin.register(Post)
+class PostAdmin(PageDownAdmin):
     list_display = ('title', 'category', 'archive', 'public', 'created')
     list_filter = ['created']
     search_fields = ['title']
@@ -19,5 +21,4 @@ class PostAdmin(admin.ModelAdmin):
         obj.save()
 
 
-admin.site.register(Post, PostAdmin)
 admin.site.register(Category)

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load bootstrap_tags %}
+{% load markdown_deux_tags %}
 
 {% block heading %}
   <h1>{{ post.title }}</h1>
@@ -12,6 +13,6 @@
 {% endblock %}
 
 {% block content %}
-  {{ post.content|safe }}
+  {{ post.content|markdown }}
   {% include 'dpb/edit_item.html' with model="blog_post" id=post.id %}
 {% endblock %}

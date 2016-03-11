@@ -8,6 +8,8 @@
 {% endblock %}
 
 {% block content %}
+  {% include 'dpb/edit_item.html' with model="blog_post" %}
+
   {% if category.intro %}
     <p>
       {{ category.intro }}
