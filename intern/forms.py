@@ -1,12 +1,11 @@
+from captcha.fields import ReCaptchaField
 from django.forms import ModelForm
-#from pagedown.forms import PagedownField
 from .models import House
 
 
 class HouseForm(ModelForm):
+    captcha = ReCaptchaField()
+
     class Meta:
         model = House
         exclude = []
-        #widgets = {
-        #    'name': PagedownField()
-        #}
