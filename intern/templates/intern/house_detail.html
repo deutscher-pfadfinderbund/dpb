@@ -116,7 +116,8 @@
       <table class="table table-hover">
       	<tbody>
         <tr>
-          <td>{{ house.toilets_separate|bool_icon:"Geschlechtergetrennt?"|safe }}</td>
+          <td>Geschlechtergetrennt?</td>
+          <td>{{ house.toilets_separate|bool_icon|safe }}</td>
         </tr>
         {{ house.toilets_total|table_row:"Anzahl der Toiletten"|safe }}
         {{ house.toilets_washbasin|table_row:"Anzahl der Waschbecken"|safe }}
@@ -128,11 +129,47 @@
       <h3>Gruppenraum</h3>
       <table class="table table-hover">
         <tbody>
+        {{  house.room_size|table_row:"Größe"|safe }}
+        {{  house.room_tables|table_row:"Anzahl der Tische"|safe }}
+        {{  house.room_chairs|table_row:"Anzahl der Stühle"|safe }}
         </tbody>
       </table>
     </div>
     <div class="col-md-4">
       <h3>Weitere Räume</h3>
+      <table class="table table-hover">
+      	<tbody>
+        {{ house.rooms_total|table_row:"Anzahl weiterer Räume"|safe }}
+        {{ house.rooms_tables|table_row:"Anzahl der Tische in weiteren Räumen"|safe }}
+        {{ house.rooms_chairs|table_row:"Anzahl der Stühle in weiteren Räumen"|safe }}
+        {{ house.rooms_other|table_row:"Sonstiges zu den Räumen"|safe }}
+      	</tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Anbindung</h3>
+      <table class="table table-hover">
+      	<tbody>
+        {{ house.accessibility_parking|table_row:"Anzahl der Parkplätze"|safe }}
+        {{ house.accessibility_train|table_row:"Entfernung zum nächsten Bahnhof"|safe }}
+        {{ house.accessibility_bus|table_row:"Entfernung zum nächsten Bus"|safe }}
+        {{ house.accessibility_shop|table_row:"Entfernung zur Einkaufsmöglichkeit"|safe }}
+        {{ house.accessibility_baker|table_row:"Entfernung zum nächsten Bäcker"|safe }}
+        {{ house.accessibility_other|table_row:"Sonstiges in der Nähe"|safe }}
+      	</tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <h3></h3>
+      <table class="table table-hover">
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <h3></h3>
       <table class="table table-hover">
       	<tbody>
       	</tbody>

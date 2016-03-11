@@ -104,8 +104,8 @@ class House(models.Model):
 
     # Gruppenraum
     room_size = models.CharField("Größe", max_length=4096, blank=True)
-    room_tables = models.IntegerField("Anzahl der Tische", null=True, blank=True)
-    room_chairs = models.IntegerField("Anzahl der Stühle", null=True, blank=True)
+    room_tables = models.CharField("Anzahl der Tische", max_length=4096, null=True, blank=True)
+    room_chairs = models.CharField("Anzahl der Stühle", max_length=4096, null=True, blank=True)
 
     # Weitere Räume
     rooms_total = models.CharField("Anzahl weiterer Räume", max_length=4096, blank=True)

@@ -74,7 +74,7 @@ def houseDetailsLink(value, text):
 
 @register.filter(is_safe=True)
 def table_row(value, args):
-    if value:
+    if value or value == 0:
         args = args.split(",")
         text = args[0]
         tdurl = "<td>{0}</td>".format(value)
@@ -94,7 +94,7 @@ def table_row(value, args):
 
 
 @register.filter(is_safe=True)
-def bool_icon(value, text):
+def bool_icon(value, text=""):
     if value:
         icon = "<i class='fa fa-check'></i>"
     else:
