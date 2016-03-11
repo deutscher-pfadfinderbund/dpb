@@ -5,9 +5,6 @@
 {% load thumbnail %}
 {% load markdown_deux_tags %}
 
-{% block sources %}
-{% endblock %}
-
 {% block heading %}
   <h1>{{ house.name }}</h1>
 {% endblock %}
@@ -26,7 +23,7 @@
 
   <div class="row">
     <div class="col-md-4">
-      <h3>Allgemein</h3>
+      <h3>Adresse</h3>
       <table class="table table-hover">
         <tbody>
         {{ house.street|table_row:"Straße"|safe }}
@@ -162,16 +159,28 @@
       </table>
     </div>
     <div class="col-md-4">
-      <h3></h3>
+      <h3>Lage</h3>
       <table class="table table-hover">
         <tbody>
+        <tr>
+          <td>Städtisch?</td>
+          <td>{{ house.location_urban|bool_icon|safe }}</td>
+        </tr>
+        <tr>
+          <td>Ländlich?</td>
+          <td>{{ house.location_country|bool_icon|safe }}</td>
+        </tr>
+        {{ house.location_special|table_row:"Besonderheiten"|safe }}
         </tbody>
       </table>
     </div>
     <div class="col-md-4">
-      <h3></h3>
+      <h3>Sonstiges</h3>
       <table class="table table-hover">
       	<tbody>
+        <tr>
+          <td colspan="2">{{ house.description|safe }}</td>
+        </tr>
       	</tbody>
       </table>
     </div>

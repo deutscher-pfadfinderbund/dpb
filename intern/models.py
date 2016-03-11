@@ -134,6 +134,7 @@ class House(models.Model):
     # Sonstiges
     description = models.TextField("Sonstige Beschreibung", blank=True, null=True)
 
+    public = models.BooleanField("Öffentlich?", default=False)
     slug = AutoSlugField(populate_from='name', null=True)
     created = models.DateTimeField("Erstellt am", default=datetime.now)
     modified = models.DateTimeField("Zuletzt geändert", auto_now=True)
