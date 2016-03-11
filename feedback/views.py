@@ -4,6 +4,7 @@ from django.db.models import Q
 from .models import Feedback
 from .forms import FeedbackForm
 
+
 def index(request):
     feedbacks = Feedback.objects.order_by('-created').filter(Q(public=True))
     if request.method == 'POST':

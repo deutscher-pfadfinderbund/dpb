@@ -54,8 +54,10 @@ def houseDetails(value, text):
             </div>
           </div>
         """.format(text, value)
+
     else:
         return ""
+
 
 @register.filter(is_safe=True)
 def houseDetailsLink(value, text):
@@ -68,3 +70,54 @@ def houseDetailsLink(value, text):
         """.format(text, value)
     else:
         return ""
+
+
+@register.filter(is_safe=True)
+def table_row(value, args):
+    if value or value == 0:
+        args = args.split(",")
+        text = args[0]
+        tdurl = "<td>{0}</td>".format(value)
+        if len(args) > 1:
+            if len(value) > 40:
+                url = value[:40] + "..."
+            else:
+                url = value
+            tdurl = "<td><a href='{0}' target='_blank'>{1}</a></td>".format(value, url)
+        return """
+            <tr>
+                <td>{0}</td>
+                {1}
+            </tr>
+        """.format(text, tdurl)
+    return ""
+
+
+@register.filter(is_safe=True)
+def bool_icon(value, text=""):
+    if value:
+        icon = "<i class='fa fa-check'></i>"
+    else:
+        icon = "<i class='fa fa-times'></i>"
+    return "{0} {1}".format(icon, text)
+
+
+@register.filter(is_safe=True)
+def form_item(val):
+    return """
+        <div class="form-group">
+            {1}
+            {0}
+            {2}
+        </div>""".format(val.errors, val.label_tag(), val)
+
+
+@register.filter(is_safe=True)
+def form_checkbox(val):
+    return """
+        <div class="checkbox">
+            {0}
+            <label>
+            {2} {3}
+            </label>
+        </div>""".format(val.errors, val.label_tag(), val, val.label)

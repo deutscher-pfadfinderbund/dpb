@@ -11,7 +11,7 @@
   <p>
     {% if page.image %}
       <a href="{{ page.image.url }}">
-        <img src="{% thumbnail page.image 300x200 crop %}" class="img-thumbnail img-responsive img-float-right" alt="{{ page.image }}"/>
+        <img src="{{ page.image|thumbnail_url:'pages' }}" class="img-responsive img-float-right" alt="{{ page.image }}"/>
       </a>
     {% endif %}
     {{ page.content|markdown|safe }}

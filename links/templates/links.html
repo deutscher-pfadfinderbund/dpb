@@ -8,30 +8,52 @@
 {% endblock %}
 
 {% block content %}
-  {% if user.is_staff %}
-    <p>
-      <a href="/admin/links/link/add/"><i class="fa fa-paperclip fa-lg"></i> Weiteren Link erstellen</a>
-    </p>
-  {% endif %}
+  {% include 'dpb/edit_item.html' with model='links_link' %}
 
   <p>
     Unseren Haftungsausschluss für Links auf externe Webseiten findet ihr
     <a href="{% url 'impressum' %}">in unserem Impressum</a>.
   </p>
 
+  <h2>Gruppen im DPB</h2>
+
+  <div class="row">
+  {% for state in states %}
+    <div class="col-md-6">
+      <h4>{{ state }}</h4>
+      <ul>
+        {% for link in links %}
+          {% if link.public and link.state == state %}
+            <li>
+              <a href="{{ link.website }}" target="_blank">
+                {{ link }}
+                {% if link.city %}
+                  ({{ link.city }})
+                {% endif %}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
+  </div>
+
   {% if cats %}
     <div class="row">
       {% for cat in cats %}
-        <div class="col-md-4">
-          <h4>{{ cat.name }}</h4>
-          <ul style="padding-bottom:2em;">
-          {% for link in links %}
-            {% if link.category == cat %}
-              <li><a href="{{ link.website }}" target="_blank">{{ link }}</a></li>
-            {% endif %}
-          {% endfor %}
-          </ul>
-        </div>
+        {% if cat.name != "Gruppen im DPB" %}
+          <div class="col-md-4">
+            <h2>{{ cat.name }}</h2>
+            <ul style="padding-bottom:2em;">
+            {% for link in links %}
+              {% if link.public and link.category == cat %}
+                <li><a href="{{ link.website }}" target="_blank">{{ link }}</a></li>
+              {% endif %}
+            {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
       {% endfor %}
     </div>
   {% else %}

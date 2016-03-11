@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load intern_tags %}
+{% load bootstrap_tags %}
+
+{% block heading %}
+  <h1>Häuser und Zeltplätze hinzufügen</h1>
+{% endblock %}
+
+{% block sources %}
+  <style>
+    form .col-md-2, form .col-md-3, form .col-md-4, form .col-md-6 {
+      padding-left: 0;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  {% if success %}
+    <div class="alert alert-info">
+    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    	<strong>Vielen Dank für deine Hilfe!</strong> Das Haus wurde erfolgreich hinzugefügt.
+    </div>
+  {% endif %}
+
+  {{ form.non_field_errors }}
+
+  <p>
+    Ja, das ist ein sehr langes Formular. Aber je mehr Informationen du angibst, desto genauer wird unsere Datenbank.
+    Und wenn jemand auf der Suche nach einem Haus / Lagerplatz ist, dann wird er sehr dankbar um möglichst viele
+    Details sein.
+  </p>
+  <p>
+    Vielen Dank für deine Hilfe!
+  </p>
+
+  <form action="" method="post">
+    {% csrf_token %}
+
+    <h2>Allgemein</h2>
+    <fieldset>
+      {{ form.name|form_item|safe }}
+      {{ form.situation|form_item|safe }}
+      {{ form.street|form_item|safe }}
+    </fieldset>
+    <fieldset>
+      <div class="col-md-2">{{ form.plz|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.city|form_item|safe }}</div>
+      <div class="col-md-6">{{ form.state|form_item|safe }}</div>
+    </fieldset>
+
+    <h2>Kontakt</h2>
+    <fieldset>
+      <div class="col-md-4">{{ form.owner|form_item|safe }}</div>
+    </fieldset>
+    <fieldset>
+      <div class="col-md-4">{{ form.contact_name|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.contact_tel|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.contact_email|form_item|safe }}</div>
+    </fieldset>
+
+    <h2>Schlafmöglichkeiten</h2>
+    <fieldset>
+      <div class="col-md-4">{{ form.sleep_beds|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.sleep_mattresses|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.sleep_floor|form_item|safe }}</div>
+    </fieldset>
+    <fieldset>
+      {{ form.sleep_outdoor|form_item|safe }}
+    </fieldset>
+
+    <h2>Ausstattung der Küche</h2>
+    <fieldset>
+      <div class="col-md-3">{{ form.kitchen_stove|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_oven|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_fridge|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_sink|form_checkbox|safe }}</div>
+    </fieldset>
+    <fieldset>
+      <div class="col-md-3">{{ form.kitchen_dishwasher|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_dishes|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_pots|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_hot_water|form_checkbox|safe }}</div>
+    </fieldset>
+    <fieldset>
+      {{ form.kitchen_other|form_item|safe }}
+    </fieldset>
+
+    <h2>Bad</h2>
+    <fieldset>
+      <div class="col-md-3">{{ form.toilets_separate|form_checkbox|safe }}</div>
+    </fieldset>
+    <fieldset>
+      <div class="col-md-4">{{ form.toilets_total|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.toilets_washbasin|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.toilets_shower|form_item|safe }}</div>
+    </fieldset>
+
+    <h2>Gruppenraum</h2>
+    <fieldset>
+      <div class="col-md-4">{{ form.room_size|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.room_tables|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.room_chairs|form_item|safe }}</div>
+    </fieldset>
+
+    <h2>Weitere Räume</h2>
+    <fieldset>
+      <div class="col-md-4">{{ form.rooms_total|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.rooms_tables|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.rooms_chairs|form_item|safe }}</div>
+    </fieldset>
+    <fieldset>
+      <div class="col-md-4">{{ form.rooms_other|form_item|safe }}</div>
+    </fieldset>
+
+    <h2>Anbindung</h2>
+    <fieldset>
+      <div class="col-md-4">{{ form.accessibility_parking|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.accessibility_train|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.accessibility_bus|form_item|safe }}</div>
+    </fieldset>
+    <fieldset>
+      <div class="col-md-4">{{ form.accessibility_shop|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.accessibility_baker|form_item|safe }}</div>
+    </fieldset>
+    <fieldset>
+      {{ form.accessibility_other|form_item|safe }}
+    </fieldset>
+
+    <h2>Lage</h2>
+    <fieldset>
+      <div class="col-md-4">{{ form.location_urban|form_checkbox|safe }}</div>
+      <div class="col-md-4">{{ form.location_country|form_checkbox|safe }}</div>
+    </fieldset>
+    <fieldset>
+      {{ form.location_special|form_item|safe }}
+    </fieldset>
+
+    <h2>Kosten</h2>
+    <fieldset>
+      <div class="col-md-6">{{ form.price_intern|form_item|safe }}</div>
+      <div class="col-md-6">{{ form.price_extern|form_item|safe }}</div>
+    </fieldset>
+    <fieldset>
+      <div class="col-md-6">{{ form.price_other|form_item|safe }}</div>
+    </fieldset>
+
+    <h2>Links und Bilder</h2>
+    <fieldset>
+      <div class="col-md-6">{{ form.website|form_item|safe }}</div>
+    </fieldset>
+    <fieldset>
+      <div class="col-md-4">{{ form.image1|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.image2|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.image3|form_item|safe }}</div>
+    </fieldset>
+    <fieldset>
+      <div class="col-md-6">{{ form.gmaps_location|form_item|safe }}</div>
+      <div class="col-md-6">{{ form.osm_location|form_item|safe }}</div>
+    </fieldset>
+
+    {{ form.captcha }}
+
+    <div class="padding-bottom"></div>
+
+    <input type="submit" value="Abschicken" class="btn btn-default">
+  </form>
+
+  <script type="application/javascript">
+    $(document).ready(function() {
+      $(".form-group input").addClass("form-control");
+      $(".form-group select").addClass("form-control");
+      $(".form-group textarea").addClass("form-control");
+      // $(".footer-wrapper").hide();
+    });
+  </script>
+{% endblock content %}

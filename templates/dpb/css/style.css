@@ -78,6 +78,9 @@ header h1 {
 footer .row {
   padding-bottom: 0; }
 
+ul.no-dot > li {
+  list-style-type: none; }
+
 #dpb-carousel .item img {
   display: block;
   width: 100%;

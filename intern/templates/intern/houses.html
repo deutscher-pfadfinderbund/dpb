@@ -3,47 +3,51 @@
 {% load staticfiles %}
 {% load intern_tags %}
 
-{% block sources %}
-{% endblock %}
-
 {% block heading %}
   <h1>Häuser und Zeltplätze</h1>
 {% endblock %}
 
+{% block sources %}
+  <style>
+    .col-md-6 {
+      padding-left: 0;
+    }
+  </style>
+{% endblock %}
+
 {% block content %}
-  {% if user.is_staff %}
-    <p>
-      <a href="/admin/intern/house/"><i class="fa fa-paperclip fa-lg"></i> Weiteres Haus erstellen</a>
-    </p>
-  {% endif %}
+  <p>
+    Hier findest du eine Liste von Häusern und Zeltplätzen, die vielleicht auch für euch interessant sein könnten.
+  </p>
+  <p>
+    Wenn du ein Haus oder Lagerplatz einschicken möchtest, dann klicke auf den folgenden Button und fülle möglichst
+    viele Felder aus. Nach kurzer Durchsicht wird dein Beitrag auch hier auf der Seite erscheinen.
+  </p>
+  <p class="padding-bottom">
+    <a href="{% url 'intern:house_add' %}" class="btn btn-primary">Neues Haus / Zeltplatz hinzufügen</a>
+  </p>
 
   {% if houses %}
     {% for house in houses %}
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title"><a href="{% url 'intern:house_detail' id=house.id %}">{{ house.name }}</a></h3>
-        </div>
-        <div class="panel-body">
-          <p style="margin-bottom: 0; padding-bottom: 0;">
-            {% if house.owner %}
-              {{ house.owner }},
-            {% endif %}
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><a href="{% url 'intern:house_detail' slug=house.slug %}">{{ house.name }}</a></h3>
+          </div>
+          <div class="panel-body">
+            <p style="margin-bottom: 0; padding-bottom: 0;">
+              {% if house.owner %}
+                {{ house.owner }},
+              {% endif %}
 
-            {{ house.city }},
+              {{ house.city }},
+              {{ house.state }}
 
-            {% if house.state %}
-              {{ house.state }},
-            {% endif %}
-
-            {% if house.capacity_house %}
-              Schlafplätze im Haus: {{ house.capacity_house }},
-            {% endif %}
-            {% if house.capacity_outdoor %}
-              Schlafplätze außerhalb: {{ house.capacity_outdoor }}.
-            {% endif %}
-            <br>
-            <a href="{% url 'intern:house_detail' id=house.id %}">Details</a>
-          </p>
+              <br>
+              <a href="{% url 'intern:house_detail' slug=house.slug %}">Details</a>
+              {% include 'dpb/edit_item.html' with model="intern_house" id=house.id %}
+            </p>
+          </div>
         </div>
       </div>
     {% endfor %}
