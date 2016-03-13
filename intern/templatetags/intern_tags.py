@@ -74,12 +74,15 @@ def houseDetailsLink(value, text):
 
 @register.filter(is_safe=True)
 def has_errors(value):
-    if value.errors:
-        return """
-            <div class="alert alert-warning" role="alert">
-                <strong>{0}</strong>
-            </div>
-        """.format(value.errors)
+    try:
+        if value.errors:
+            return """
+                <div class="alert alert-warning" role="alert">
+                    <strong>{0}</strong>
+                </div>
+            """.format(value.errors)
+    except AttributeError:
+        pass
     return ""
 
 
@@ -125,7 +128,6 @@ def form_item(val):
             {0}
             {2}
         </div>""".format(errors, val.label_tag(), val)
-    return ""
 
 
 @register.filter(is_safe=True)
