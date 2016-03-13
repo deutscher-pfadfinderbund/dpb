@@ -153,6 +153,13 @@
 
     {{ form.captcha|form_item|safe }}
 
+    <h2>Über dich</h2>
+    <p>Freiwillige Angaben zu deiner Person (für Rückfragen)</p>
+    <fieldset>
+      <div class="col-md-6">{{ form.user|form_item|safe }}</div>
+      <div class="col-md-6">{{ form.user_email|form_item|safe }}</div>
+    </fieldset>
+
     <div class="padding-bottom"></div>
 
     <input type="submit" value="Abschicken" class="btn btn-default">

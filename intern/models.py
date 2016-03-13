@@ -133,6 +133,9 @@ class House(models.Model):
     # Sonstiges
     description = models.TextField("Sonstige Beschreibung", blank=True, null=True)
 
+    user = models.CharField("Dein Name", max_length=1024, blank=True)
+    user_mail = models.EmailField("Deine E-Mail Adresse", max_length=1024, blank=True)
+
     public = models.BooleanField("Öffentlich?", default=False)
     slug = AutoSlugField(populate_from='name', null=True)
     created = models.DateTimeField("Erstellt am", auto_now_add=True)

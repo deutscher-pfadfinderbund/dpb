@@ -121,12 +121,16 @@ def bool_icon(value, text=""):
 @register.filter(is_safe=True)
 def form_item(val):
     errors = has_errors(val)
+    try:
+        label = val.label_tag()
+    except AttributeError:
+        label = ""
     return """
         <div class="form-group">
             {1}
             {0}
             {2}
-        </div>""".format(errors, val.label_tag(), val)
+        </div>""".format(errors, label, val)
 
 
 @register.filter(is_safe=True)

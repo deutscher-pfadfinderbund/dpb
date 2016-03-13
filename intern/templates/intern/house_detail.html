@@ -12,6 +12,12 @@
 {% block content %}
   {% include 'dpb/edit_item.html' with model="intern_house" id=house.id %}
 
+  {% if house.user %}
+    <div class="text-muted text-right">
+      Hinzufügt von <a href="mailto:{{ house.user_mail }}">{{ house.user }}</a>
+    </div>
+  {% endif %}
+
   {% if house.description %}
     <div class="well">
      {{ house.description|markdown }}

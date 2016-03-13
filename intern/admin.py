@@ -75,10 +75,13 @@ class HouseAdmin(PageDownAdmin):
         ("Sonstiges", {"fields": [
             "description",
         ]}),
+        ("Über dich", {"fields": [
+            "user",
+            "user_mail"
+        ]}),
         ("Erweitert", {"fields": [
             ("latitude", "longitude"),
             "display_name",
-            "created",
             "modified",
         ], "classes": ["collapse"]}),
     ]
