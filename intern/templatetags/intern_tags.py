@@ -111,7 +111,6 @@ def table_row(value, args):
 
 @register.filter(is_safe=True)
 def bool_icon(value, text=""):
-    print(value.errors)
     if value:
         icon = "<i class='fa fa-check'></i>"
     else:
