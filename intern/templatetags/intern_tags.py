@@ -73,11 +73,23 @@ def houseDetailsLink(value, text):
 
 
 @register.filter(is_safe=True)
+def has_errors(value):
+    if value.errors:
+        return """
+            <div class="alert alert-warning" role="alert">
+                <strong>{0}</strong>
+            </div>
+        """.format(value.errors)
+    return ""
+
+
+@register.filter(is_safe=True)
 def table_row(value, args):
     if value or value == 0:
         args = args.split(",")
         text = args[0]
         tdurl = "<td>{0}</td>".format(value)
+        errors = has_errors(value)
         if len(args) > 1:
             if len(value) > 40:
                 url = value[:40] + "..."
@@ -85,16 +97,18 @@ def table_row(value, args):
                 url = value
             tdurl = "<td><a href='{0}' target='_blank'>{1}</a></td>".format(value, url)
         return """
+            {2}
             <tr>
                 <td>{0}</td>
                 {1}
             </tr>
-        """.format(text, tdurl)
+        """.format(text, tdurl, errors)
     return ""
 
 
 @register.filter(is_safe=True)
 def bool_icon(value, text=""):
+    print(value.errors)
     if value:
         icon = "<i class='fa fa-check'></i>"
     else:
@@ -104,12 +118,14 @@ def bool_icon(value, text=""):
 
 @register.filter(is_safe=True)
 def form_item(val):
+    errors = has_errors(val)
     return """
         <div class="form-group">
             {1}
             {0}
             {2}
-        </div>""".format(val.errors, val.label_tag(), val)
+        </div>""".format(errors, val.label_tag(), val)
+    return ""
 
 
 @register.filter(is_safe=True)

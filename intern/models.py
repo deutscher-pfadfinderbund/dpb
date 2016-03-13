@@ -4,7 +4,6 @@ from django.db import models
 
 from datetime import datetime
 from filer.fields.file import FilerFileField
-from filer.fields.image import FilerImageField
 import requests
 
 
@@ -136,7 +135,7 @@ class House(models.Model):
 
     public = models.BooleanField("Öffentlich?", default=False)
     slug = AutoSlugField(populate_from='name', null=True)
-    created = models.DateTimeField("Erstellt am", default=datetime.now)
+    created = models.DateTimeField("Erstellt am", auto_now_add=True)
     modified = models.DateTimeField("Zuletzt geändert", auto_now=True)
 
     def clean(self):
