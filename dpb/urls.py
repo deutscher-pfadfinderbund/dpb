@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^intern/post/(?P<slug>[\w-]+)/$', blogviews.post, name='blog_detail'),
     url(r'^intern/themen/$', blogviews.blog_overview, {'category': 'Themen'}, name='blog_themen'),
     url(r'^intern/arbeitskreis/mitglieder/$', pageviews.page, {'url': '/intern/arbeitskreis/mitglieder/'}, name='arbeitskreis_mitglieder'),
+    url(r'^intern/bundesgilde/$', pageviews.page, {'url': '/intern/bundesgilde/'}, name='bundesgilde'),
 
 
     url(r'^admin/', include(admin.site.urls)),
