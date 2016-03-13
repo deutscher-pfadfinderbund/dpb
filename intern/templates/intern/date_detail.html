@@ -4,14 +4,13 @@
 {% load intern_tags %}
 
 {% block heading %}
-  <h1>Zusammenkünfte: Details</h1>
+  <h1>{{ date.title }}</h1>
 {% endblock %}
 
 {% block content %}
   {% include 'dpb/edit_item.html' with model="intern_date" id=date.id %}
 
   {% if date %}
-    <h2>{{ date.title }}</h2>
     <p>
       {{ date.description }}
     </p>
