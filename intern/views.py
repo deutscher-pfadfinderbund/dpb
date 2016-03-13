@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from datetime import datetime
 from django.shortcuts import render
+from django.views.generic import CreateView
 from filer.models import File, Folder
 from .models import Date, House
 from .forms import HouseForm
@@ -30,6 +31,11 @@ def dates(request):
 def date_detail(request, id):
     date = Date.objects.get(id=id)
     return render(request, 'intern/date_detail.html', {'date': date})
+
+
+class DateCreate(CreateView):
+    model = Date
+    fields = ["title", "start", "end", "location", "host", "attachment", "description"]
 
 
 @login_required

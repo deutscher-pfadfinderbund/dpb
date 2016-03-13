@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block heading %}
+  <h1>Zusammenkunft hinzufügen</h1>
+{% endblock %}
+
+{% block content %}
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form|as_bootstrap_inline }}
+    <input type="submit" value="Zusammenkunft hinzufügen" class="btn btn-default">
+  </form>
+
+  <script>
+  $(document).ready(function() {
+    $("#id_start").attr("type", "date");
+    $("#id_end").attr("type", "date");
+  });
+  </script>
+{% endblock %}

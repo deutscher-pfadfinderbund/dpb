@@ -26,17 +26,19 @@
 {% endblock %}
 
 {% block content %}
-  {% include 'dpb/edit_item.html' with model="intern_date" %}
+  {% include 'dpb/edit_item_no_admin.html' with model="intern:date_add" %}
 
   <p>Für weitere Details und eventuell vorhandene Anhänge müsst ihr einfach auf den Titel des Termins klicken.</p>
 
   {% if dates %}
     <table class="table table-hover table-striped table-condensed table-responsive">
       <thead>
-        <th>Titel</th>
-        <th>Ort</th>
-        <th>Beginn</th>
-        <th>Ende</th>
+        <tr>
+          <th>Titel</th>
+          <th>Ort</th>
+          <th>Beginn</th>
+          <th>Ende</th>
+        </tr>
       </thead>
       <tbody>
         {% for date in dates %}
