@@ -3,7 +3,6 @@ from autoslug import AutoSlugField
 from django.db import models
 
 from datetime import datetime
-from filer.fields.file import FilerFileField
 import requests
 
 
