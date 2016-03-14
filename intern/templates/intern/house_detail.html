@@ -13,7 +13,7 @@
   {% include 'dpb/edit_item.html' with model="intern_house" id=house.id %}
 
   {% if house.user %}
-    <div class="text-muted text-right">
+    <div class="text-muted">
       Hinzugefügt von <a href="mailto:{{ house.user_mail }}">{{ house.user }}</a>
     </div>
   {% endif %}
