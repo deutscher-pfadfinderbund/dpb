@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DeleteView
+from django.views.generic import CreateView, DeleteView, UpdateView
 from filer.models import File, Folder
 from .models import Date, House
 from .forms import HouseForm
@@ -45,6 +45,12 @@ class DateCreate(LoginRequiredMixin, CreateView):
 class DateDelete(LoginRequiredMixin, DeleteView):
     model = Date
     success_url = reverse_lazy('intern:dates')
+
+
+class DateUpdate(LoginRequiredMixin, UpdateView):
+    model = Date
+    fields = ["title", "start", "end", "location", "host", "attachment", "description"]
+    template_name_suffix = "_form"
 
 
 @login_required
