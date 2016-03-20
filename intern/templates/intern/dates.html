@@ -26,8 +26,6 @@
 {% endblock %}
 
 {% block content %}
-  {% include 'dpb/edit_item_no_admin.html' with model="intern:date_add" %}
-
   <p>Für weitere Details und eventuell vorhandene Anhänge müsst ihr einfach auf den Titel des Termins klicken.</p>
 
   {% if dates %}
@@ -47,7 +45,7 @@
           <td>{{ date.location }}</td>
           <td>{{ date.start|date:"j. F Y" }}</td>
           <td>{{ date.end|date:"j. F Y" }}</td>
-          <td>{% include 'dpb/edit_item.html' with model="intern_date" id=date.id %}</td>
+          <td>{% include 'dpb/edit_item_generic.html' with model="intern:date" id=date.id %}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -55,4 +53,6 @@
   {% else %}
     <p>Im Moment gibt es keine Termine und Veranstaltungen.</p>
   {% endif %}
+
+  <a href="{% url 'intern:date_add' %}" class="btn btn-default">Zusammenkunft hinzufügen</a>
 {% endblock %}

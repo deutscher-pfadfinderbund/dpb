@@ -3,7 +3,7 @@
 {% load bootstrap_tags %}
 
 {% block heading %}
-  <h1>Zusammenkunft hinzufügen</h1>
+  <h1>Zusammenkunft bearbeiten</h1>
 {% endblock %}
 
 {% block content %}
@@ -13,6 +13,13 @@
     <input type="submit" value="Zusammenkunft hinzufügen" class="btn btn-default">
   </form>
 
+  <!-- polyfiller file to detect and load polyfills -->
+  <script src="//cdn.jsdelivr.net/webshim/1.15.10/polyfiller.js"></script>
+  <script>
+    webshims.setOptions('waitReady', false);
+    webshims.setOptions('forms-ext', {types: 'date'});
+    webshims.polyfill('forms forms-ext');
+  </script>
   <script>
   $(document).ready(function() {
     $("#id_start").attr("type", "date");

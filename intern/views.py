@@ -2,8 +2,12 @@
 from django.contrib.auth.decorators import login_required
 
 from datetime import datetime
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
-from django.views.generic import CreateView
+from django.utils.decorators import method_decorator
+from django.views.generic import CreateView, DeleteView
 from filer.models import File, Folder
 from .models import Date, House
 from .forms import HouseForm
@@ -33,9 +37,14 @@ def date_detail(request, id):
     return render(request, 'intern/date_detail.html', {'date': date})
 
 
-class DateCreate(CreateView):
+class DateCreate(LoginRequiredMixin, CreateView):
     model = Date
     fields = ["title", "start", "end", "location", "host", "attachment", "description"]
+
+
+class DateDelete(LoginRequiredMixin, DeleteView):
+    model = Date
+    success_url = reverse_lazy('intern:dates')
 
 
 @login_required
