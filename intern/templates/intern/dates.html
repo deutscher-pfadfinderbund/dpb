@@ -54,5 +54,7 @@
     <p>Im Moment gibt es keine Termine und Veranstaltungen.</p>
   {% endif %}
 
-  <a href="{% url 'intern:date_add' %}" class="btn btn-default">Zusammenkunft hinzufügen</a>
+  {% if user.is_staff %}
+    <a href="{% url 'intern:date_add' %}" class="btn btn-default">Zusammenkunft hinzufügen</a>
+  {% endif %}
 {% endblock %}
