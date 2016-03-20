@@ -22,8 +22,8 @@ class State(models.Model):
 class Date(models.Model):
     """ Important dates """
     title = models.CharField("Titel", max_length=128, blank=False)
-    start = models.DateTimeField("Beginn", null=True, blank=True)
-    end = models.DateTimeField("Ende", null=True, blank=True)
+    start = models.DateField("Beginn", null=True, blank=True)
+    end = models.DateField("Ende", null=True, blank=True)
     location = models.CharField("Ort", max_length=128, blank=True)
     latitude = models.FloatField("Breitengrad", max_length=128, blank=True, null=True)
     longitude = models.FloatField("Längengrad", max_length=128, blank=True, null=True)
