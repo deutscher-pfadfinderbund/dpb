@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^bundesarchiv/', include('archive.urls', namespace='archive')),
     url(r'^kontakt/', include('contact.urls', namespace='email')),
     url(r'^links/', include('links.urls', namespace='links')),
+    url(r'^filer/', include('filer.urls')),
 
     # Members Area
     url(r'^intern/', include('intern.urls', namespace='intern')),
