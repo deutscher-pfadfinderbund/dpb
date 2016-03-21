@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-  {% include 'dpb/edit_item.html' with model="intern_date" id=date.id %}
+  {% include 'dpb/edit_item_generic.html' with model="intern:date" id=date.id %}
 
   {% if date %}
     <p>

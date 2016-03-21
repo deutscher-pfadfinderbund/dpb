@@ -28,6 +28,11 @@ header h1 {
 #header-wrapper {
   padding: 1em 0; }
 
+.ak-images {
+  float: right;
+  max-width: 250px;
+  margin: 0 0 1em 5em; }
+
 .navbar-nav > li > a, .navbar-brand, .navbar-toggle, .navbar-header {
   padding-top: 0;
   padding-bottom: 0;
