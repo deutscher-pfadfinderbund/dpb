@@ -6,7 +6,6 @@ from datetime import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
-from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DeleteView, UpdateView
 from filer.models import File, Folder
 from .models import Date, House
