@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from datetime import datetime
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, UpdateView
@@ -36,20 +36,23 @@ def date_detail(request, id):
     return render(request, 'intern/date_detail.html', {'date': date})
 
 
-class DateCreate(LoginRequiredMixin, CreateView):
+class DateCreate(PermissionRequiredMixin, CreateView):
     model = Date
     fields = ["title", "start", "end", "location", "host", "attachment", "description"]
+    permission_required = "intern.can_edit"
 
 
-class DateDelete(LoginRequiredMixin, DeleteView):
+class DateDelete(PermissionRequiredMixin, DeleteView):
     model = Date
     success_url = reverse_lazy('intern:dates')
+    permission_required = "intern.can_edit"
 
 
-class DateUpdate(LoginRequiredMixin, UpdateView):
+class DateUpdate(PermissionRequiredMixin, UpdateView):
     model = Date
     fields = ["title", "start", "end", "location", "host", "attachment", "description"]
     template_name_suffix = "_form"
+    permission_required = "intern.can_edit"
 
 
 @login_required

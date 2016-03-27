@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
 from django.http import Http404
@@ -19,21 +19,24 @@ def post(request, slug):
     return render(request, 'blog/post.html', {'post': post})
 
 
-class PostCreate(LoginRequiredMixin, CreateView):
+class PostCreate(PermissionRequiredMixin, CreateView):
     model = Post
     fields = ["title", "content", "category"]
     success_url = reverse_lazy("blog_page")
+    permission_required = "blog.can_edit"
 
 
-class PostUpdate(LoginRequiredMixin, UpdateView):
+class PostUpdate(PermissionRequiredMixin, UpdateView):
     model = Post
     fields = ["title", "content", "category"]
     success_url = reverse_lazy("blog_page")
+    permission_required = "blog.can_edit"
 
 
-class PostDelete(LoginRequiredMixin, DeleteView):
+class PostDelete(PermissionRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy("blog_page")
+    permission_required = "blog.can_edit"
 
 
 @login_required
