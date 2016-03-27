@@ -25,6 +25,7 @@ urlpatterns = [
     # Members Area
     url(r'^intern/', include('intern.urls', namespace='intern')),
     url(r'^intern/aktuelles/$', blogviews.blog_overview, {'category': 'Aktuelles'}, name='blog_page'),
+    url(r'^intern/aktuelles/neu/$', blogviews.PostCreate.as_view(), {'category': 'Aktuelles'}, name='blog_post_add'),
     url(r'^intern/aktuelles/(?P<page>[0-9]+)/$', blogviews.blog_overview, {'category': 'Aktuelles'}, name='blog_page'),
     url(r'^intern/post/(?P<slug>[\w-]+)/$', blogviews.post, name='blog_detail'),
     url(r'^intern/themen/$', blogviews.blog_overview, {'category': 'Themen'}, name='blog_themen'),

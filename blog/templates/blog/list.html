@@ -77,4 +77,8 @@
   {% else %}
     <p>In dieser Rubrik sind noch keine Einträge vorhanden.</p>
   {% endif %}
+
+  {% if user.is_staff %}
+    <a href="{% url 'blog_post_add' %}" class="btn btn-default">Eintrag hinzufügen</a>
+  {% endif %}
 {% endblock %}

@@ -1,8 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse_lazy
 from django.http import Http404
 from django.shortcuts import render
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import CreateView
 
 from .models import Post, Category
 
@@ -14,6 +17,12 @@ def post(request, slug):
     except Post.DoesNotExist:
         raise Http404("Dieser Beitrag konnte leider nicht gefunden werden.")
     return render(request, 'blog/post.html', {'post': post})
+
+
+class PostCreate(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ["title", "content", "category"]
+    success_url = reverse_lazy("blog_page")
 
 
 @login_required
@@ -43,6 +52,8 @@ def blog_overview(request, page=1, category="Aktuelles"):
                    'paginator': posts,
                    'length':    range(len(posts)),
                    'category':  category[0]})
+
+
 
 
 ################################ Aux functions
