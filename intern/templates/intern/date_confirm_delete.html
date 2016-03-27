@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block heading %}
+  <h1>Zusammenkunft löschen</h1>
+{% endblock %}
+
+{% block content %}
+  <form action="" method="post">{% csrf_token %}
+    <p>Möchtest du die Zusammenkunft "{{ object }}" wirklich löschen?</p>
+    <p><input type="submit" value="Zusammenkunft löschen" class="btn btn-primary"></p>
+  </form>
+{% endblock %}

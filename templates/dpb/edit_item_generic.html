@@ -1,0 +1,16 @@
+{% if user.is_staff %}
+  {% with model|add:"_add" as admin_add %}
+  {% with model|add:"_change" as admin_change %}
+  {% with model|add:"_delete" as admin_delete %}
+  <span class="pull-right">
+    {% if id %}
+      <a href="{% url admin_change id %}"><i class="fa fa-pencil-square-o"></i></a>
+    {% endif %}
+    {% if id %}
+      <a href="{% url admin_delete id %}"><i class="fa fa-times"></i></a>
+    {% endif %}
+  </span>
+  {% endwith %}
+  {% endwith %}
+  {% endwith %}
+{% endif %}

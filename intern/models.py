@@ -3,8 +3,6 @@ from autoslug import AutoSlugField
 from django.db import models
 
 from datetime import datetime
-from filer.fields.file import FilerFileField
-from filer.fields.image import FilerImageField
 import requests
 
 
@@ -24,15 +22,15 @@ class State(models.Model):
 class Date(models.Model):
     """ Important dates """
     title = models.CharField("Titel", max_length=128, blank=False)
-    start = models.DateTimeField("Beginn", blank=True)
-    end = models.DateTimeField("Ende", blank=True)
+    start = models.DateField("Beginn", null=True, blank=True)
+    end = models.DateField("Ende", null=True, blank=True)
     location = models.CharField("Ort", max_length=128, blank=True)
     latitude = models.FloatField("Breitengrad", max_length=128, blank=True, null=True)
     longitude = models.FloatField("Längengrad", max_length=128, blank=True, null=True)
     display_name = models.CharField("Berechneter Standort", max_length=128, blank=True, null=True)
     description = models.TextField("Beschreibung", blank=True)
     host = models.CharField("Ausrichter", max_length=128, blank=True)
-    attachment = FilerFileField(verbose_name="Anhang", null=True, blank=True, related_name="date_attachment")
+    attachment = models.FileField(upload_to="termine/", verbose_name="Anhang", null=True, blank=True)
     created = models.DateTimeField("Erstellt am", default=datetime.now)
 
     def clean(self):
@@ -48,6 +46,10 @@ class Date(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('intern:dates')
 
     class Meta:
         verbose_name = "Termin"
@@ -134,9 +136,12 @@ class House(models.Model):
     # Sonstiges
     description = models.TextField("Sonstige Beschreibung", blank=True, null=True)
 
+    user = models.CharField("Dein Name", max_length=1024, blank=True)
+    user_mail = models.EmailField("Deine E-Mail Adresse", max_length=1024, blank=True)
+
     public = models.BooleanField("Öffentlich?", default=False)
     slug = AutoSlugField(populate_from='name', null=True)
-    created = models.DateTimeField("Erstellt am", default=datetime.now)
+    created = models.DateTimeField("Erstellt am", auto_now_add=True)
     modified = models.DateTimeField("Zuletzt geändert", auto_now=True)
 
     def clean(self):

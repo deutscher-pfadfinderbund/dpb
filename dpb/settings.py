@@ -146,7 +146,7 @@ TEMPLATES = [{
 ]
 
 # Filer Settings
-FILER_CANONICAL_URL = 's/'
+FILER_CANONICAL_URL = 'filer/'
 
 # Markdown Deux Settings
 MARKDOWN_DEUX_STYLES = {

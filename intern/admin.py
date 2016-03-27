@@ -1,13 +1,6 @@
 from django.contrib import admin
-from pagedown.widgets import AdminPagedownWidget
-from django.db import models
 from .models import Date, House, State
-
-
-class PageDownAdmin(admin.ModelAdmin):
-    formfield_overrides = {
-        models.TextField: {"widget": AdminPagedownWidget}
-    }
+from dpb.admin import PageDownAdmin
 
 
 @admin.register(Date)
@@ -82,10 +75,13 @@ class HouseAdmin(PageDownAdmin):
         ("Sonstiges", {"fields": [
             "description",
         ]}),
+        ("Über dich", {"fields": [
+            "user",
+            "user_mail"
+        ]}),
         ("Erweitert", {"fields": [
             ("latitude", "longitude"),
             "display_name",
-            "created",
             "modified",
         ], "classes": ["collapse"]}),
     ]

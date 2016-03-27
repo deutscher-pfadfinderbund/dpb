@@ -17,15 +17,6 @@
 {% endblock %}
 
 {% block content %}
-  {% if success %}
-    <div class="alert alert-info">
-    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    	<strong>Vielen Dank für deine Hilfe!</strong> Das Haus wurde erfolgreich hinzugefügt.
-    </div>
-  {% endif %}
-
-  {{ form.non_field_errors }}
-
   <p>
     Ja, das ist ein sehr langes Formular. Aber je mehr Informationen du angibst, desto genauer wird unsere Datenbank.
     Und wenn jemand auf der Suche nach einem Haus / Lagerplatz ist, dann wird er sehr dankbar um möglichst viele
@@ -160,7 +151,14 @@
       <div class="col-md-6">{{ form.osm_location|form_item|safe }}</div>
     </fieldset>
 
-    {{ form.captcha }}
+    {{ form.captcha|form_item|safe }}
+
+    <h2>Über dich</h2>
+    <p>Freiwillige Angaben zu deiner Person (für Rückfragen)</p>
+    <fieldset>
+      <div class="col-md-6">{{ form.user|form_item|safe }}</div>
+      <div class="col-md-6">{{ form.user_mail|form_item|safe }}</div>
+    </fieldset>
 
     <div class="padding-bottom"></div>
 

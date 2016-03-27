@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block heading %}
+  <h1>Zusammenkunft bearbeiten</h1>
+{% endblock %}
+
+{% block content %}
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form|as_bootstrap_inline }}
+    <input type="submit" value="Abschicken" class="btn btn-default">
+  </form>
+
+  <!-- polyfiller file to detect and load polyfills -->
+  <script src="//cdn.jsdelivr.net/webshim/1.15.10/polyfiller.js"></script>
+  <script>
+    webshims.setOptions('waitReady', false);
+    webshims.setOptions('forms-ext', {types: 'date'});
+    webshims.polyfill('forms forms-ext');
+  </script>
+  <script>
+  $(document).ready(function() {
+    $("#id_start").attr("type", "date");
+    $("#id_end").attr("type", "date");
+  });
+  </script>
+{% endblock %}

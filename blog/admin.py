@@ -4,6 +4,7 @@ from .models import Post, Category
 from dpb.admin import PageDownAdmin
 
 
+@admin.register(Post)
 class PostAdmin(PageDownAdmin):
     list_display = ('title', 'category', 'archive', 'public', 'created')
     list_filter = ['created']
@@ -20,5 +21,4 @@ class PostAdmin(PageDownAdmin):
         obj.save()
 
 
-admin.site.register(Post, PostAdmin)
 admin.site.register(Category)

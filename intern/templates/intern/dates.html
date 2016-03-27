@@ -26,17 +26,17 @@
 {% endblock %}
 
 {% block content %}
-  {% include 'dpb/edit_item.html' with model="intern_date" %}
-
   <p>Für weitere Details und eventuell vorhandene Anhänge müsst ihr einfach auf den Titel des Termins klicken.</p>
 
   {% if dates %}
     <table class="table table-hover table-striped table-condensed table-responsive">
       <thead>
-        <th>Titel</th>
-        <th>Ort</th>
-        <th>Beginn</th>
-        <th>Ende</th>
+        <tr>
+          <th>Titel</th>
+          <th>Ort</th>
+          <th>Beginn</th>
+          <th>Ende</th>
+        </tr>
       </thead>
       <tbody>
         {% for date in dates %}
@@ -45,12 +45,16 @@
           <td>{{ date.location }}</td>
           <td>{{ date.start|date:"j. F Y" }}</td>
           <td>{{ date.end|date:"j. F Y" }}</td>
-          <td>{% include 'dpb/edit_item.html' with model="intern_date" id=date.id %}</td>
+          <td>{% include 'dpb/edit_item_generic.html' with model="intern:date" id=date.id %}</td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
   {% else %}
     <p>Im Moment gibt es keine Termine und Veranstaltungen.</p>
+  {% endif %}
+
+  {% if user.is_staff %}
+    <a href="{% url 'intern:date_add' %}" class="btn btn-default">Zusammenkunft hinzufügen</a>
   {% endif %}
 {% endblock %}
