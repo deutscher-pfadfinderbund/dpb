@@ -5,7 +5,7 @@ from django.http import Http404
 from django.shortcuts import render
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 from .models import Post, Category
 
@@ -22,6 +22,17 @@ def post(request, slug):
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
     fields = ["title", "content", "category"]
+    success_url = reverse_lazy("blog_page")
+
+
+class PostUpdate(LoginRequiredMixin, UpdateView):
+    model = Post
+    fields = ["title", "content", "category"]
+    success_url = reverse_lazy("blog_page")
+
+
+class PostDelete(LoginRequiredMixin, DeleteView):
+    model = Post
     success_url = reverse_lazy("blog_page")
 
 

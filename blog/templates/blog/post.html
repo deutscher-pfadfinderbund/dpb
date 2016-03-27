@@ -14,5 +14,5 @@
 
 {% block content %}
   {{ post.content|markdown|safe }}
-  {% include 'dpb/edit_item.html' with model="blog_post" id=post.id %}
+  {% include 'dpb/edit_item_generic.html' with model="blog_post" id=post.id %}
 {% endblock %}
