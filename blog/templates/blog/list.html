@@ -22,7 +22,7 @@
         {% if p1 %}
           <div class="col-md-6">
             <h4>
-              {{ p1.title }}<br>
+              <a href="{% url 'blog_detail' slug=p1.slug %}">{{ p1.title }}</a><br>
               <small>{{ p1.created|date:"j. N Y" }}{% if p1.author %} von {{ p1.author }}{% endif %}</small>
             </h4>
             <p>
@@ -35,7 +35,7 @@
         {% if p2 %}
           <div class="col-md-6">
             <h4>
-              {{ p2.title }}<br>
+              <a href="{% url 'blog_detail' slug=p1.slug %}">{{ p2.title }}</a><br>
               <small>{{ p2.created|date:"j. N Y" }}{% if p2.author %} von {{ p2.author }}{% endif %}</small>
             </h4>
             <p>
