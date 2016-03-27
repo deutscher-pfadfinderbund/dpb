@@ -27,7 +27,7 @@
         {% else %}
           <div class="col-md-12">
         {% endif %}
-            <h4>{{ page.title }}</h4>
+            <h4><a href="{{ page.url }}">{{ page.title }}</a></h4>
             <p>
               {{ page.content|striptags|truncatewords:50 }}
             </p>
