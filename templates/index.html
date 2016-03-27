@@ -26,11 +26,13 @@
     <div class="col-md-4">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Aktuelles</h3>
+          <h3 class="panel-title">
+            Aktuelles
+          </h3>
         </div>
         <div class="panel-body">
           {% for post in news %}
-            <h4>{{ post.title }}<br><small>{{ post.created|date:"d. M  Y" }} von {{ post.author }}</small></h4>
+            <h4><a href="{% url 'blog_detail' slug=post.slug %}">{{ post.title }}</a><br><small>{{ post.created|date:"d. M  Y" }} von {{ post.author }}</small></h4>
             <p>
               {{ post.content|striptags|truncatewords:15 }}<br>
               <a href="{% url 'blog_detail' slug=post.slug %}">Zum Beitrag</a>

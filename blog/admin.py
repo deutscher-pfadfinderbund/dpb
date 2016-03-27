@@ -1,9 +1,10 @@
 from django.contrib import admin
 
 from .models import Post, Category
+from dpb.admin import PageDownAdmin
 
 
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(PageDownAdmin):
     list_display = ('title', 'category', 'archive', 'public', 'created')
     list_filter = ['created']
     search_fields = ['title']

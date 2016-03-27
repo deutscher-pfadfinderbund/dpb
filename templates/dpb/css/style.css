@@ -5,6 +5,9 @@ body {
 p {
   padding-bottom: 0.5em; }
 
+h4 a {
+  color: #333; }
+
 .img-float-right {
   float: right;
   margin-left: 1em; }
