@@ -5,45 +5,102 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Item
 
-@login_required
-def index(request):
-    req = request.GET.get('q')
-    query = None
-    results = None
+
+def parse_form_field(request, param):
+    """
+    Parse parameter from request and return empty string if not provided or not parsable.
+
+    :param request:
+    :param param: to be parsed
+    :return: str
+    """
+    req = request.GET.get(param)
+    query = ""
     if req:
         query = req
-    else:
-        query = ""
     try:
         query = str(query)
     except ValueError:
         query = ""
-    if query:
-        try:
-            # Specify which fields are searchable
-            results = Item.objects.filter(      # '|' = OR; ',' = AND
-                Q(signature__iexact=query) |
-                Q(author__iexact=query) |
-                Q(title__iexact=query) |
-                Q(date__iexact=query) |
-                Q(year__iexact=query) |
-                Q(place__iexact=query) |
-                Q(doctype__iexact=query) |
-                Q(medartdig__iexact=query) |
-                Q(medartanalog__iexact=query) |
-                Q(keywords__iexact=query) |
-                Q(location__iexact=query) |
-                Q(source__iexact=query) |
-                Q(notes__iexact=query) |
-                Q(collection__iexact=query) |
-                Q(amount__iexact=query) |
-                Q(crossreference__iexact=query) |
-                Q(active__iexact=query) |
-                Q(reviewed__iexact=query) |
-                Q(owner__iexact=query) |
-                Q(pub_date__iexact=query)
-            ).exclude(active=False).exclude(reviewed=False)
-        except Item.DoesNotExist:
-            results = None
+    return query
+
+
+def search_fulltext(query):
+    """
+    Given a query, search complete database
+
+    :param query:
+    :return:
+    """
+    try:
+        # Specify which fields are searchable
+        return Item.objects.filter(  # '|' = OR; ',' = AND
+            Q(signature__icontains=query) |
+            Q(author__icontains=query) |
+            Q(title__icontains=query) |
+            Q(date__icontains=query) |
+            Q(year__icontains=query) |
+            Q(place__icontains=query) |
+            Q(doctype__icontains=query) |
+            Q(medartanalog__icontains=query) |
+            Q(keywords__icontains=query) |
+            Q(location__icontains=query) |
+            Q(source__icontains=query) |
+            Q(notes__icontains=query) |
+            Q(collection__icontains=query) |
+            Q(amount__icontains=query) |
+            Q(crossreference__icontains=query) |
+            Q(active__icontains=query) |
+            Q(reviewed__icontains=query) |
+            Q(owner__icontains=query) |
+            Q(pub_date__icontains=query)
+        ).exclude(active=False)
+    except Item.DoesNotExist:
+        return None
+
+
+def search_extended(title, author, keyword, doctype):
+    queried = False
+    try:
+        items = Item.objects.exclude(active=False)
+        if title and len(title) != 0:
+            queried = True
+            items = items.filter(Q(title__icontains=title))
+        if author and len(author) != 0:
+            queried = True
+            items = Item.objects.filter(Q(author__icontains=author))
+        if keyword and len(keyword) != 0:
+            queried = True
+            items = items.filter(keyword__icontains=keyword)
+        if queried:
+            return items
+    except Item.DoesNotExist:
+        return None
+
+
+@login_required
+def index(request):
+    min_length = 4
+    title = author = keyword = doctype = results = None
+    searched = False
+
+    query = parse_form_field(request, "q")
+    title = parse_form_field(request, "title")
+    author = parse_form_field(request, "author")
+    keyword = parse_form_field(request, "keyword")
+    doctype = parse_form_field(request, "doctype")
+
+    if len(query) > 0:
+        searched = True
+        results = search_fulltext(query)
+    if not searched:
+        results = search_extended(title, author, keyword, doctype)
+
     context = RequestContext(request)
-    return render_to_response('archive/index.html', {"results": results, "query": query}, context_instance=context)
+
+    return render_to_response('archive/index.html', {"results": results,
+                                                     "query": query,
+                                                     "title": title,
+                                                     "author": author,
+                                                     "keyword": keyword,
+                                                     "doctype": doctype}, context_instance=context)
