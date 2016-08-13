@@ -7,13 +7,14 @@ class ItemAdmin(PageDownAdmin):
     list_display = ('title', 'author', 'doctype', 'active', 'reviewed', 'signature')
     list_filter = ['doctype']
     search_fields = ['signature', 'title', 'author']
+    filter_horizontal = ('years',)
 
     fieldsets = [
         ('Allgemein', {'fields': ['signature', 'title', 'author',
                                   ('date', 'year'),
                                   'years',
                                   'place',
-                                  ('medartdig', 'medartanalog', 'doctype'),
+                                  ('doctype', 'medartdig', 'medartanalog'),
                                   ('file', 'image'), 'keywords', 'location',
                                   'source', 'notes', 'collection', 'amount',
                                   'crossreference', 'owner']}),
@@ -21,5 +22,14 @@ class ItemAdmin(PageDownAdmin):
     ]
     readonly_fields = ['pub_date']
 
+
+class YearAdmin(PageDownAdmin):
+    list_display = ('year',)
+    fieldsets = [
+        ('Allgemein', {'fields': ['year']}),
+    ]
+    readonly_fields = ('created',)
+
+
 admin.site.register(Item, ItemAdmin)
-admin.site.register(Year)
+admin.site.register(Year, YearAdmin)

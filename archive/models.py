@@ -12,11 +12,12 @@ class Year(models.Model):
     created = models.DateTimeField("Erstellt am", default=datetime.now)
 
     def __str__(self):
-        return self.name
+        return str(self.year)
 
     class Meta:
         verbose_name = "Jahr"
         verbose_name_plural = "Jahre"
+        ordering = ['year', ]
 
 
 class Item(models.Model):
@@ -85,8 +86,8 @@ class Item(models.Model):
     collection = models.CharField('Sammlungsteil', max_length=256, blank=True)
     amount = models.IntegerField('Anzahl / Exemplare', null=True, blank=True)
     crossreference = models.CharField('Querverweis', max_length=256, blank=True)
-    active = models.BooleanField('Aktivitätsstatus', default=False)
-    reviewed = models.BooleanField('Bearbeitungsstatus', default=True)
+    active = models.BooleanField('Öffentlich? (intern)', default=False)
+    reviewed = models.BooleanField('Bearbeitet?', default=True)
     owner = models.CharField('Besitzer', max_length=256, blank=True)
     pub_date = models.DateTimeField('Hinzugefügt am', default=datetime.now)
 
