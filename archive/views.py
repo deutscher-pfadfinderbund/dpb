@@ -60,6 +60,15 @@ def search_fulltext(query):
 
 
 def search_extended(title, author, keyword, doctype):
+    """
+    If there are any additional search keywords provided, concatenate them with AND and return the result.
+
+    :param title:
+    :param author:
+    :param keyword:
+    :param doctype:
+    :return:
+    """
     queried = False
     try:
         items = Item.objects.exclude(active=False)
