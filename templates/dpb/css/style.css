@@ -1,3 +1,8 @@
+.archive-items {
+  cursor: pointer; }
+  .archive-items:hover {
+    text-decoration: underline; }
+
 body {
   color: #333;
   background-color: #f6f6f6; }
