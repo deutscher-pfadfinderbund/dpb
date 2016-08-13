@@ -8,7 +8,7 @@ from filer.fields.image import FilerImageField
 
 class Year(models.Model):
     """ List of the states of Germany """
-    year = models.CharField("Name", max_length=1024, blank=False)
+    year = models.IntegerField("Jahr", max_length=1024, blank=False)
     created = models.DateTimeField("Erstellt am", default=datetime.now)
 
     def __str__(self):
@@ -69,7 +69,7 @@ class Item(models.Model):
     title = models.CharField('Titel *', max_length=256)
     date = models.CharField('Datum (Vorlage)', max_length=256, blank=True)
     year = models.IntegerField('Jahr', null=True, blank=True)
-    years = models.ManyToManyField(Year)
+    years = models.ManyToManyField(Year, verbose_name=("Jahre"), blank=True)
     place = models.CharField('Ort / Veröffentlichung', max_length=256, blank=True)
     medartdig = models.CharField('Medienart digital', max_length=256, choices=medartdig_choices, blank=True)
     medartanalog = models.CharField('Medienart analog', max_length=256, choices=medartanalog_choices, blank=True)
