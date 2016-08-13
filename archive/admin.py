@@ -10,7 +10,9 @@ class ItemAdmin(PageDownAdmin):
 
     fieldsets = [
         ('Allgemein', {'fields': ['signature', 'title', 'author',
-                                  ('date', 'year'), 'place',
+                                  ('date', 'year'),
+                                  'years',
+                                  'place',
                                   ('medartdig', 'medartanalog', 'doctype'),
                                   ('file', 'image'), 'keywords', 'location',
                                   'source', 'notes', 'collection', 'amount',
