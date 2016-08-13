@@ -14,7 +14,7 @@ def parse_form_field(request, param):
     :param param: to be parsed
     :return: str
     """
-    req = request.GET.get(param)
+    req = request.POST.get(param)
     query = ""
     if req:
         query = req
@@ -84,8 +84,9 @@ def search_extended(items, title, author, keyword, doctype):
 
 @login_required
 def index(request):
-    title = author = keyword = doctype = results = errors = None
+    title = author = keyword = doctype = results = None
     items = Item.objects.exclude(active=False)
+    errors = False
     min_length = 4
 
     query = parse_form_field(request, "q")
