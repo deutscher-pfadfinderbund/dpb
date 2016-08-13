@@ -6,6 +6,10 @@
 
 {% block content %}
   {% if user.is_staff %}
+    {% if errors %}
+      <div class="alert alert-warning" role="alert">Deine Eingabe ist leider zu kurz. Du musst mindestens 4 Zeichen angeben.</div>
+    {% endif %}
+
     <p>
       <form method="get" action="" class="form-horizontal">
         <div class="form-group">

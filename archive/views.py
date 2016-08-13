@@ -72,24 +72,21 @@ def search_extended(items, title, author, keyword, doctype):
     queried = False
     try:
         if title and len(title) != 0:
-            queried = True
             items = items.filter(Q(title__icontains=title))
         if author and len(author) != 0:
-            queried = True
             items = items.filter(Q(author__icontains=author))
         if keyword and len(keyword) != 0:
-            queried = True
             items = items.filter(keyword__icontains=keyword)
-        if queried:
-            return items
+        return items
     except Item.DoesNotExist:
         return None
 
 
 @login_required
 def index(request):
-    title = author = keyword = doctype = results = None
+    title = author = keyword = doctype = results = errors = None
     items = Item.objects.exclude(active=False)
+    min_length = 4
 
     query = parse_form_field(request, "q")
     title = parse_form_field(request, "title")
@@ -97,8 +94,14 @@ def index(request):
     keyword = parse_form_field(request, "keyword")
     doctype = parse_form_field(request, "doctype")
 
-    items = search_fulltext(items, query)
-    results = search_extended(items, title, author, keyword, doctype)
+    lengths = len(query) + len(title) + len(author) + len(keyword) + len(doctype)
+
+    if lengths >= min_length:
+        items = search_fulltext(items, query)
+        results = search_extended(items, title, author, keyword, doctype)
+    else:
+        errors = True
+        results = None
 
     context = RequestContext(request)
 
@@ -107,4 +110,5 @@ def index(request):
                                                      "title": title,
                                                      "author": author,
                                                      "keyword": keyword,
-                                                     "doctype": doctype}, context_instance=context)
+                                                     "doctype": doctype,
+                                                     "errors": errors}, context_instance=context)
