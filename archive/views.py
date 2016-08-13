@@ -25,7 +25,7 @@ def parse_form_field(request, param):
     return query
 
 
-def search_fulltext(query):
+def search_fulltext(items, query):
     """
     Given a query, search complete database
 
@@ -34,7 +34,7 @@ def search_fulltext(query):
     """
     try:
         # Specify which fields are searchable
-        return Item.objects.filter(  # '|' = OR; ',' = AND
+        return items.filter(  # '|' = OR; ',' = AND
             Q(signature__icontains=query) |
             Q(author__icontains=query) |
             Q(title__icontains=query) |
@@ -54,12 +54,12 @@ def search_fulltext(query):
             Q(reviewed__icontains=query) |
             Q(owner__icontains=query) |
             Q(pub_date__icontains=query)
-        ).exclude(active=False)
+        )
     except Item.DoesNotExist:
-        return None
+        return items
 
 
-def search_extended(title, author, keyword, doctype):
+def search_extended(items, title, author, keyword, doctype):
     """
     If there are any additional search keywords provided, concatenate them with AND and return the result.
 
@@ -71,13 +71,12 @@ def search_extended(title, author, keyword, doctype):
     """
     queried = False
     try:
-        items = Item.objects.exclude(active=False)
         if title and len(title) != 0:
             queried = True
             items = items.filter(Q(title__icontains=title))
         if author and len(author) != 0:
             queried = True
-            items = Item.objects.filter(Q(author__icontains=author))
+            items = items.filter(Q(author__icontains=author))
         if keyword and len(keyword) != 0:
             queried = True
             items = items.filter(keyword__icontains=keyword)
@@ -89,9 +88,8 @@ def search_extended(title, author, keyword, doctype):
 
 @login_required
 def index(request):
-    min_length = 4
     title = author = keyword = doctype = results = None
-    searched = False
+    items = Item.objects.exclude(active=False)
 
     query = parse_form_field(request, "q")
     title = parse_form_field(request, "title")
@@ -99,11 +97,8 @@ def index(request):
     keyword = parse_form_field(request, "keyword")
     doctype = parse_form_field(request, "doctype")
 
-    if len(query) > 0:
-        searched = True
-        results = search_fulltext(query)
-    if not searched:
-        results = search_extended(title, author, keyword, doctype)
+    items = search_fulltext(items, query)
+    results = search_extended(items, title, author, keyword, doctype)
 
     context = RequestContext(request)
 
