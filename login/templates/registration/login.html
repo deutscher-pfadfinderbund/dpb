@@ -11,13 +11,6 @@
     <p>Der Benutzername und das Passwort passen nicht zusammen.</p>
   {% endif %}
 
-  <div class="alert alert-info" role="alert">
-    <strong>
-      Die alten Zugänge wurden aus Sicherheitsgründen nicht für die neue Homepage
-      übernommen. Wir werden euch bald darüber informieren, wie ihr an die neuen Zugänge kommt.
-    </strong>
-  </div>
-
   <form method="post" action=".">
     {% csrf_token %}
     {{ form|as_bootstrap }}
