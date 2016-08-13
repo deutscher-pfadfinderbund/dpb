@@ -8,7 +8,7 @@ from filer.fields.image import FilerImageField
 
 class Year(models.Model):
     """ List of the states of Germany """
-    year = models.IntegerField("Jahr", max_length=1024, blank=False)
+    year = models.IntegerField("Jahr", blank=False)
     created = models.DateTimeField("Erstellt am", default=datetime.now)
 
     def __str__(self):

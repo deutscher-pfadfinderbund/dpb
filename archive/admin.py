@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Item
+from .models import Item, Year
 from dpb.admin import PageDownAdmin
 
 
@@ -22,3 +22,4 @@ class ItemAdmin(PageDownAdmin):
     readonly_fields = ['pub_date']
 
 admin.site.register(Item, ItemAdmin)
+admin.site.register(Year)
