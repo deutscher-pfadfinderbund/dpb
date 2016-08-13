@@ -14,12 +14,14 @@ class ItemAdmin(PageDownAdmin):
                                   ('date', 'year'),
                                   'years',
                                   'place',
-                                  ('doctype', 'medartdig', 'medartanalog'),
-                                  ('file', 'image'), 'keywords', 'location',
+                                  ('medartanalog', 'doctype'),
+                                  'file', 'image',
+                                  'keywords', 'location',
                                   'source', 'notes', 'collection', 'amount',
                                   'crossreference', 'owner']}),
         ('Markierungen', {'fields': ['active', 'reviewed', 'pub_date']}),
     ]
+    save_as = True
     readonly_fields = ['pub_date']
 
 

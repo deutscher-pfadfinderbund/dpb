@@ -39,15 +39,8 @@ class Item(models.Model):
         ("Zeitschrift", "Zeitschrift"),
         ("Zeitungsartikel", "Zeitungsartikel"),
     )
-    medartdig_choices = (
-        ("Audiodatei", "Audiodatei"),
-        ("Buch", "Buch"),
-        ("Foto(s)", "Foto(s)"),
-        ("Schrifttum", "Schrifttum"),
-        ("Sonstiges", "Sonstiges"),
-        ("Videodatei", "Videodatei"),
-    )
     medartanalog_choices = (
+        ("Audiodatei", "Audiodatei"),
         ("Buch", "Buch"),
         ("CD / DVD", "CD / DVD"),
         ("Dia(s)", "Dia(s)"),
@@ -62,6 +55,7 @@ class Item(models.Model):
         ("Stempel", "Stempel"),
         ("Tonband", "Tonband"),
         ("VHS", "VHS"),
+        ("Videodatei", "Videodatei"),
         ("Wappen und Zeichen", "Wappen und Zeichen"),
     )
 
@@ -72,8 +66,7 @@ class Item(models.Model):
     year = models.IntegerField('Jahr', null=True, blank=True)
     years = models.ManyToManyField(Year, verbose_name=("Jahre"), blank=True)
     place = models.CharField('Ort / Veröffentlichung', max_length=256, blank=True)
-    medartdig = models.CharField('Medienart digital', max_length=256, choices=medartdig_choices, blank=True)
-    medartanalog = models.CharField('Medienart analog', max_length=256, choices=medartanalog_choices, blank=True)
+    medartanalog = models.CharField('Medienart', max_length=256, choices=medartanalog_choices, blank=True)
     doctype = models.CharField('Dokumenttyp', max_length=256, choices=doctype_choices, blank=True)
 
     file = FilerFileField(null=True, blank=True, related_name="item_file", verbose_name='Datei')
