@@ -84,10 +84,11 @@
           <input type="submit" value="Suchen" class="btn btn-primary"/>
         </div>
       </form>
-    <div>
-      <button class="btn btn-xs btn-default" data-toggle="collapse" data-target="#extended-search" aria-expanded="false" aria-controls="extended-search">Erweiterte Suche</button>
-      <button class="btn btn-xs btn-default" id="reset-button">Formular leeren</button>
-    </div>
+      <div>
+        <button class="btn btn-xs btn-default" data-toggle="collapse" data-target="#extended-search" aria-expanded="false" aria-controls="extended-search">Erweiterte Suche</button>
+        <button class="btn btn-xs btn-default" id="reset-button">Formular leeren</button>
+      </div>
+    </p>
 
 
 {#      <form method="get" action="" class="form-inline">#}
@@ -116,8 +117,6 @@
 {#          </div>#}
 {#        </div>#}
 {#      </form>#}
-    </p>
-
     <hr>
 
     <p>
@@ -127,21 +126,19 @@
             <th>Titel</th>
             <th>Autor</th>
             <th data-sortable="true">Jahr</th>
+            <th>Signatur</th>
           </thead>
           <tbody>
           {% for item in results %}
             <tr>
+              <td>{{ item.title }}</td>
+              <td>{{ item.author }}</td>
               <td>
-                {{ item.title }}
+              {% if not item.year == 0 %}
+                {{ item.year }}
+              {% endif %}
               </td>
-              <td>
-                {{ item.author }}
-              </td>
-              <td>
-                {% if not item.year == 0 %}
-                  {{ item.year }}
-                {% endif %}
-              </td>
+              <td>{{ item.signature }}</td>
             </tr>
           {% endfor %}
           </tbody>
