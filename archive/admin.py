@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Item, Year
+from .models import Feedback, Item, Year
 from dpb.admin import PageDownAdmin
 
 
@@ -34,5 +34,18 @@ class YearAdmin(PageDownAdmin):
     readonly_fields = ('created',)
 
 
+class FeedbackAdmin(PageDownAdmin):
+    list_display = ('name', 'email', 'note', 'archive')
+    list_filter = ['created']
+    search_fields = ['name', 'email', 'note', 'archive']
+    actions = ['to_archive']
+    readonly_fields = ('created', 'modified')
+
+    def to_archive(self, request, queryset):
+        queryset.update(archive=True)
+    to_archive.short_description = "Markierte Einträge als bearbeitet markieren"
+
+
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Year, YearAdmin)
+admin.site.register(Feedback, FeedbackAdmin)
