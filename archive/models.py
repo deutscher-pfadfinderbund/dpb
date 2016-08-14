@@ -58,6 +58,16 @@ class Item(models.Model):
         ("Videodatei", "Videodatei"),
         ("Wappen und Zeichen", "Wappen und Zeichen"),
     )
+    collection_choices = (
+        ("Bund", "Bund"),
+        ("DPB vor 1945", "DPB vor 1945"),
+        ("Jungenbund", "Jungenbund"),
+        ("Mädchenbund", "Mädchenbund"),
+        ("Orden St.Georg", "Orden St.Georg"),
+        ("Orden St.Christophorus", "Orden St.Christophorus"),
+        ("Gruppen des DPB", "Gruppen des DPB"),
+        ("Überbündisches", "Überbündisches"),
+    )
 
     signature = models.CharField('Signatur', max_length=50, blank=True)
     author = models.CharField('Autor', max_length=256, blank=True)
@@ -66,7 +76,7 @@ class Item(models.Model):
     year = models.IntegerField('Jahr', null=True, blank=True)
     years = models.ManyToManyField(Year, verbose_name=("Jahre"), blank=True)
     place = models.CharField('Ort / Veröffentlichung', max_length=256, blank=True)
-    medartanalog = models.CharField('Medienart', max_length=256, choices=medartanalog_choices, blank=False)
+    medartanalog = models.CharField('Medienart *', max_length=256, choices=medartanalog_choices, blank=False)
     doctype = models.CharField('Dokumenttyp', max_length=256, choices=doctype_choices, blank=True)
 
     file = FilerFileField(null=True, blank=True, related_name="item_file", verbose_name='Datei')
@@ -75,7 +85,7 @@ class Item(models.Model):
     location = models.CharField('Standort (analoges Archiv)', max_length=256, blank=True)
     source = models.CharField('Quelle', max_length=256, blank=True)
     notes = models.TextField('Anmerkungen', max_length=1024, blank=True)
-    collection = models.CharField('Sammlungsteil', max_length=256, blank=False)
+    collection = models.CharField('Sammlungsteil *', max_length=256, choices=collection_choices, blank=False)
     amount = models.IntegerField('Anzahl / Exemplare', default=1, null=True, blank=True)
     crossreference = models.CharField('Querverweis', max_length=256, blank=True)
     active = models.BooleanField('Öffentlich? (intern)', default=False)
