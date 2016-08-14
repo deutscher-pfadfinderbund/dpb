@@ -82,6 +82,9 @@ header h1 {
   background-color: white;
   border-color: #eeeeee; }
 
+.alert {
+  font-weight: bold; }
+
 .stripe .container {
   padding-top: 1em; }
 
