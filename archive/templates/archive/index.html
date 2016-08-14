@@ -18,22 +18,22 @@
         <div class="form-group">
           <label for="id_q" class="col-sm-2 control-label">Volltextsuche</label>
           <div class="col-sm-10">
-            <input type="text" name="q" id="id_q" value="{{ query|default_if_none:'' }}" class="form-control" placeholder="Kompassnadel, ..."/>
+            <input type="text" name="q" id="id_q" value="{{ query|default_if_none:'' }}" class="form-control" placeholder="z.B. Kompassnadel, ..."/>
           </div>
         </div>
 
-        <div class="collapse" id="extended-search">
+        <div class="collapse {% if title != "" or author != "" or keyword != "" or doctype != "" %}in{% endif %}" id="extended-search">
           <div class="form-group">
             <label for="id_title" class="col-sm-2 control-label">Titel</label>
             <div class="col-sm-10">
-              <input type="text" name="title" id="id_title" value="{{ title|default_if_none:'' }}" class="form-control" placeholder="Titel"/>
+              <input type="text" name="title" id="id_title" value="{{ title|default_if_none:'' }}" class="form-control" placeholder="z.B. Kompassnadel"/>
             </div>
           </div>
 
           <div class="form-group">
             <label for="id_author" class="col-sm-2 control-label">Autor</label>
             <div class="col-sm-10">
-              <input type="text" name="author" id="id_author" value="{{ author|default_if_none:'' }}" class="form-control" placeholder="Deutscher Pfadfinderbund"/>
+              <input type="text" name="author" id="id_author" value="{{ author|default_if_none:'' }}" class="form-control" placeholder="z.B. Deutscher Pfadfinderbund"/>
             </div>
           </div>
 
@@ -49,10 +49,6 @@
             <div class="col-sm-10">
               <input type="text" name="doctype" id="id_doctype" value="{{ doctype|default_if_none:'' }}" class="form-control" placeholder="Dokumentyp" disabled/>
             </div>
-          </div>
-
-          <div class="checkbox" style="display: none">
-            <input id="extended-checkbox" type="checkbox" name="extended">
           </div>
         </div>
 
