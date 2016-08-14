@@ -84,6 +84,17 @@ def search_extended(items, title, author, keyword, doctype):
 
 @login_required
 def index(request):
+    context = RequestContext(request)
+    return render_to_response('archive/index.html', context_instance=context)
+
+
+@login_required
+def send_in(request):
+    pass
+
+
+@login_required
+def search(request):
     query = title = author = keyword = doctype = results = None
     items = Item.objects.exclude(active=False)
     errors = False
@@ -110,7 +121,7 @@ def index(request):
 
     context = RequestContext(request)
 
-    return render_to_response('archive/index.html', {"results": results,
+    return render_to_response('archive/search.html', {"results": results,
                                                      "query": query,
                                                      "title": title,
                                                      "author": author,

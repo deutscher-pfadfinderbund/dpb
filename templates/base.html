@@ -80,13 +80,16 @@
                   <li><a href="{% url 'blog_page' %}">Aktuelles</a></li>
                   <li><a href="{% url 'blog_themen' %}">Themen</a></li>
                   <li><a href="{% url 'intern:documents' %}">Dokumente</a></li>
+                  <li><a href="{% url 'bundesgilde' %}">Die Bundesgilde</a></li>
                   <li><a href="{% url 'archive:index' %}">Bundesarchiv</a></li>
                 </ul>
               </li>
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Interne Seiten <span class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Bundesarchiv <span class="caret"></span></a>
                 <ul class="dropdown-menu" aria-labelledby="themes">
-                  <li><a href="{% url 'bundesgilde' %}">Die Bundesgilde</a></li>
+                  <li><a href="{% url 'archive:index' %}">Übersicht</a></li>
+                  <li><a href="{# {% url 'archive:search' %} #}">Suche</a></li>
+                  <li><a href="{# {% url 'archive:send_in' %} #}">Einschicken</a></li>
                 </ul>
               </li>
 

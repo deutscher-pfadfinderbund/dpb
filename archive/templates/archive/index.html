@@ -1,158 +1,27 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+{% load bootstrap_tags %}
+
 {% block heading %}
   <h1>Bundesarchiv</h1>
-{% endblock %}
+{% endblock heading %}
 
 {% block content %}
-  <script>
-  $(document).ready(function(){
-     $('#reset-button').click(function(){
-       $(':input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
-     });
-  })
-  </script>
-
-  {% if user.is_staff %}
-    <p>
-      Der Online-Katalog informiert über die bereits erfassten Bestände des Bundesarchivs. Diese können entweder nur vor Ort im Archiv auf Schloss Martinfeld genutzt werden, oder sind bereits digital verfügbar und im entsprechenden Eintrag verlinkt.
-    </p>
-    <p>
-      Gesucht werden kann in den beschreibenden Daten der einzelnen Dokumente. Über eine erweiterte Suche kann auch in einzelnen Unterkategorien gesucht werden. Eine Suche nach Titel=Kompassnadel findet beispielsweise alle im Archiv vorhandenen Kompassnadeln.
-    </p>
-    <p>
-      Das Suchergebnis listet alle gefundenen Dokumente. Durch Anklicken eines Titels kann die ausführliche Beschreibung des Dokuments aufgerufen werden. Aus dieser ist dann auch ersichtlich, wo genau das Dokument im Archiv zu finden ist.
-    </p>
-    <p>
-      Bei jedem Eintrag befindet sich ein Feedback-Button. Über diesen können zu diesem Eintrag gefundene Fehler oder auch Ergänzungen an das Bundesarchiv gesendet werden.
-    </p>
-    <p>
-      <strong>Alle Dokumente sind nur für den internen Gebrauch gedacht.</strong>
-    </p>
-
-    <hr>
-
-    <h2>Suche</h2>
-
-    {% if errors %}
-      <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        Deine Eingabe ist leider zu kurz. Du musst mindestens 4 Zeichen angeben.
-      </div>
-    {% endif %}
-
-    <p>
-      <form method="post" action="" class="form-horizontal" id="search-form">{% csrf_token %}
-        <div class="form-group">
-          <label for="id_q" class="col-sm-2 control-label">Volltextsuche</label>
-          <div class="col-sm-10">
-            <input type="text" name="q" id="id_q" value="{{ query|default_if_none:'' }}" class="form-control" placeholder="z.B. Kompassnadel, ..."/>
-          </div>
-        </div>
-
-        <div class="collapse {% if title and title != "" or author and author != "" or keyword and keyword != "" or doctype and doctype != "" %}in{% endif %}" id="extended-search">
-          <div class="form-group">
-            <label for="id_title" class="col-sm-2 control-label">Titel</label>
-            <div class="col-sm-10">
-              <input type="text" name="title" id="id_title" value="{{ title|default_if_none:'' }}" class="form-control" placeholder="z.B. Kompassnadel"/>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="id_author" class="col-sm-2 control-label">Autor</label>
-            <div class="col-sm-10">
-              <input type="text" name="author" id="id_author" value="{{ author|default_if_none:'' }}" class="form-control" placeholder="z.B. Deutscher Pfadfinderbund"/>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="id_keyword" class="col-sm-2 control-label">Schlagwort</label>
-            <div class="col-sm-10">
-              <input type="text" name="keyword" id="id_keyword" value="{{ keyword|default_if_none:'' }}" class="form-control" placeholder="Schlagwort"/>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="id_doctype" class="col-sm-2 control-label">Dokumententyp</label>
-            <div class="col-sm-10">
-              <input type="text" name="doctype" id="id_doctype" value="{{ doctype|default_if_none:'' }}" class="form-control" placeholder="Dokumentyp" disabled/>
-            </div>
-          </div>
-        </div>
-
-        <div class="pull-right">
-          <input type="submit" value="Suchen" class="btn btn-primary"/>
-        </div>
-      </form>
-    <div>
-      <button class="btn btn-xs btn-default" data-toggle="collapse" data-target="#extended-search" aria-expanded="false" aria-controls="extended-search">Erweiterte Suche</button>
-      <button class="btn btn-xs btn-default" id="reset-button">Formular leeren</button>
-    </div>
-
-
-{#      <form method="get" action="" class="form-inline">#}
-{#        <div class="form-group">#}
-{#          <input type="text" name="q" id="id_q" value="{{ query|default_if_none:'' }}" class="form-control" placeholder="Kompassnadel, ..."/>#}
-{#        </div>#}
-{#        <input type="submit" value="Suchen" class="btn btn-default"/>#}
-{#        <a href="javascript:void(0);" class="button" onclick="$('#target').toggle();">Erweiterte Suche</a>#}
-{#        <div id="target" style="">#}
-{#          <div class="form-group">#}
-{#            <label for="inputPassword" class="col-sm-2 control-label">Password</label>#}
-{#            <div class="col-sm-10">#}
-{#              <input type="password" class="form-control" id="inputPassword" placeholder="Password">#}
-{#            </div>#}
-{#          </div>#}
-{##}
-{#          <div class="input-group">#}
-{#            <label class="" for="author_include">Input with help text</label>#}
-{#            <div class="input-group-btn">#}
-{#              <select class="form-control" id="author_include">#}
-{#                <option>enthält</option>#}
-{#                <option>enthält nicht</option>#}
-{#              </select>#}
-{#            </div>#}
-{#            <input type="text" class="form-control" aria-label="...">#}
-{#          </div>#}
-{#        </div>#}
-{#      </form>#}
-    </p>
-
-    <hr>
-
-    <p>
-      {% if results %}
-        <table class="table table-condensed table-striped table-hover">
-          <thead>
-            <th>Titel</th>
-            <th>Autor</th>
-            <th data-sortable="true">Jahr</th>
-          </thead>
-          <tbody>
-          {% for item in results %}
-            <tr>
-              <td>
-                {{ item.title }}
-              </td>
-              <td>
-                {{ item.author }}
-              </td>
-              <td>
-                {% if not item.year == 0 %}
-                  {{ item.year }}
-                {% endif %}
-              </td>
-            </tr>
-          {% endfor %}
-          </tbody>
-        </table>
-      {% elif query != "" %}
-        Keine Einträge gefunden.
-      {% endif %}
-    </p>
-  {% else %}
-    <p>
-      Das Bundesarchiv ist noch nicht öffentlich für alle Mitglieder des DPBs einsehbar, aber wir arbeiten dran!
-    </p>
-  {% endif %}
-{% endblock %}
+  <p>
+    Das Bundesarchiv befindet sich im Dachgeschoss auf Schloss Martinfeld. Gesammelt werden Dokumente (Zeitschriften, Briefe, Protokolle etc.), Bücher und Liederbücher, Ton- und Bildaufnahmen, die aus dem DPB nach 1945 stammen oder diesen betreffen.
+  </p>
+  <p>
+    Die Bestände des Bundesarchivs können vor Ort in Martinfeld genutzt werden (nach Anmeldung bei brutus).<br>
+    Zur Orientierung durch die Bestände steht ein Online-Katalog zur Verfügung. In diesem kann auf die digital vorliegende Dokumente direkt zugegriffen werden.
+  </p>
+  <p>
+    Es gibt die Möglichkeit, dem Bundesarchiv Dokumente zur Verfügung zu stellen. Diese können entweder vor Ort abgegeben oder nach Martinfeld geschickt werden, oder, im Falle von digital vorliegenden Dokumenten, im Uploadbereich hochgeladen werden.
+  </p>
+  <p>
+    Interessierte treffen sich ein- bis zweimal im Jahr zur Pflege und Weiterentwicklung des Archivs, sowie zur Aufarbeitung der Geschichte des DPB. Neben der persönlichen Mitgestaltung am Archiv freuen wir uns auch jederzeit über finanzielle Unterstützung zur Aufrechterhaltung des Archivs.
+  </p>
+  <p>
+    Bei allen Fragen und Anregungen zum Bundesarchiv wende Dich bitte an henkel oder baron (<a href="mailto:bundesarchiv@deutscher-pfadfinderbund.de">bundesarchiv@deutscher-pfadfinderbund.de</a>).
+  </p>
+{% endblock content %}
