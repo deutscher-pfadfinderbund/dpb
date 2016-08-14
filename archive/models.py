@@ -70,7 +70,6 @@ class Item(models.Model):
     doctype = models.CharField('Dokumenttyp', max_length=256, choices=doctype_choices, blank=True)
 
     file = FilerFileField(null=True, blank=True, related_name="item_file", verbose_name='Datei')
-    image = FilerImageField(null=True, blank=True, related_name="item_image", verbose_name='Bild')
 
     keywords = models.TextField('Schlagworte *', default="", max_length=1024)
     location = models.CharField('Standort (analoges Archiv)', max_length=256, blank=True)
@@ -83,6 +82,7 @@ class Item(models.Model):
     reviewed = models.BooleanField('Bearbeitet?', default=True)
     owner = models.CharField('Besitzer', max_length=256, blank=True)
     pub_date = models.DateTimeField('Hinzugefügt am', default=datetime.now)
+    modified = models.DateTimeField('Zuletzt geändert', auto_now=True)
 
     def __str__(self):
         return self.title

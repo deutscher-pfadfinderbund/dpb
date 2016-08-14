@@ -4,7 +4,7 @@ from dpb.admin import PageDownAdmin
 
 
 class ItemAdmin(PageDownAdmin):
-    list_display = ('title', 'author', 'medartanalog', 'active', 'reviewed', 'signature')
+    list_display = ('title', 'author', 'medartanalog', 'active', 'reviewed', 'signature', 'modified')
     list_filter = ['medartanalog']
     search_fields = ['signature', 'title', 'author']
     filter_horizontal = ('years',)
@@ -15,7 +15,7 @@ class ItemAdmin(PageDownAdmin):
                                   'years',
                                   'place',
                                   ('medartanalog', 'doctype'),
-                                  'file', 'image',
+                                  'file',
                                   'keywords', 'location',
                                   'source', 'notes', 'collection', 'amount',
                                   'crossreference', 'owner']}),
@@ -23,6 +23,7 @@ class ItemAdmin(PageDownAdmin):
     ]
     save_as = True
     readonly_fields = ['pub_date']
+    ordering = ('-modified',)
 
 
 class YearAdmin(PageDownAdmin):
