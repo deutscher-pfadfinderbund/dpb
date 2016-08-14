@@ -1,6 +1,6 @@
 # DPB
 
-[![CircleCI](https://img.shields.io/circleci/project/n2o/dpb.svg?maxAge=2592000)](https://github.com/n2o/dpb)
+[![CircleCI](https://img.shields.io/circleci/project/n2o/dpb.svg?maxAge=2592000)](https://circleci.com/gh/n2o/dpb)
 
 ## Development
 This is a Python3 Django project. The requirements are defined in `requirements.txt`. Use a virtualenv for it since this is the best practice.
