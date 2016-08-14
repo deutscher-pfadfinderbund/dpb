@@ -27,6 +27,7 @@ def sizify(value):
 def faAttachment(extension):
     """
     Add fontawesome icon if found. Else return normal extension as string.
+
     :param extension: file extension
     :return: matching fontawesome icon as string
     """
