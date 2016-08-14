@@ -11,7 +11,6 @@
        $(':input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
      });
   })
-
   </script>
 
   {% if user.is_staff %}
@@ -82,12 +81,12 @@
         </div>
 
         <div class="pull-right">
-          <input type="submit" value="Suchen" class="btn btn-default"/>
+          <input type="submit" value="Suchen" class="btn btn-primary"/>
         </div>
       </form>
     <div>
-      <button class="btn btn-default" data-toggle="collapse" data-target="#extended-search" aria-expanded="false" aria-controls="extended-search">Erweiterte Suche</button>
-      <button class="btn btn-default" id="reset-button">Formular leeren</button>
+      <button class="btn btn-xs btn-default" data-toggle="collapse" data-target="#extended-search" aria-expanded="false" aria-controls="extended-search">Erweiterte Suche</button>
+      <button class="btn btn-xs btn-default" id="reset-button">Formular leeren</button>
     </div>
 
 
