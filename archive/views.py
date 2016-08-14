@@ -76,7 +76,7 @@ def search_extended(items, title, author, keyword, doctype):
         if author and len(author) != 0:
             items = items.filter(Q(author__icontains=author))
         if keyword and len(keyword) != 0:
-            items = items.filter(keyword__icontains=keyword)
+            items = items.filter(keywords__icontains=keyword)
         return items
     except Item.DoesNotExist:
         return None
@@ -84,25 +84,29 @@ def search_extended(items, title, author, keyword, doctype):
 
 @login_required
 def index(request):
-    title = author = keyword = doctype = results = None
+    query = title = author = keyword = doctype = results = None
     items = Item.objects.exclude(active=False)
     errors = False
     min_length = 4
 
-    query = parse_form_field(request, "q")
-    title = parse_form_field(request, "title")
-    author = parse_form_field(request, "author")
-    keyword = parse_form_field(request, "keyword")
-    doctype = parse_form_field(request, "doctype")
+    if request.method == 'POST':
+        query = parse_form_field(request, "q")
+        title = parse_form_field(request, "title")
+        author = parse_form_field(request, "author")
+        keyword = parse_form_field(request, "keyword")
+        doctype = parse_form_field(request, "doctype")
 
-    lengths = len(query) + len(title) + len(author) + len(keyword) + len(doctype)
+        lengths = len(query) + len(title) + len(author) + len(keyword) + len(doctype)
 
-    if lengths >= min_length:
-        items = search_fulltext(items, query)
-        results = search_extended(items, title, author, keyword, doctype)
-    else:
-        errors = True
-        results = None
+        if lengths >= min_length:
+            items = search_fulltext(items, query)
+            items = search_extended(items, title, author, keyword, doctype)
+            results = items.order_by('title')
+        else:
+            errors = True
+            results = None
+
+    results = results if results and results is not [] else None
 
     context = RequestContext(request)
 
