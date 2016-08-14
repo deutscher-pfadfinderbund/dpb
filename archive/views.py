@@ -122,9 +122,9 @@ def search(request):
     context = RequestContext(request)
 
     return render_to_response('archive/search.html', {"results": results,
-                                                     "query": query,
-                                                     "title": title,
-                                                     "author": author,
-                                                     "keyword": keyword,
-                                                     "doctype": doctype,
-                                                     "errors": errors}, context_instance=context)
+                                                      "query": query,
+                                                      "title": title,
+                                                      "author": author,
+                                                      "keyword": keyword,
+                                                      "doctype": doctype,
+                                                      "errors": errors}, context_instance=context)
