@@ -4,8 +4,8 @@ from dpb.admin import PageDownAdmin
 
 
 class ItemAdmin(PageDownAdmin):
-    list_display = ('title', 'author', 'doctype', 'active', 'reviewed', 'signature')
-    list_filter = ['doctype']
+    list_display = ('title', 'author', 'medartanalog', 'active', 'reviewed', 'signature')
+    list_filter = ['medartanalog']
     search_fields = ['signature', 'title', 'author']
     filter_horizontal = ('years',)
 
