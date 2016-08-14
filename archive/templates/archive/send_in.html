@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load bootstrap_tags %}
+
+{% block heading %}
+  <h1>Bundesarchiv - Uploadbereich</h1>
+{% endblock heading %}
+
+{% block content %}
+  <p>
+    Es gibt die Möglichkeit, dem Bundesarchiv Dokumente in elektronischer Form zur Verfügung zu stellen.<br>
+    Um uns die Arbeit zu erleichtern, sollten Dokumente nach Möglichkeit im PDF-Format abgeliefert werden, Fotos als JPG, Zeichnungen/Grafiken als PNG, Audio-/Videodateien möglichst als MP3 bzw MP4. Wenn mehrere Dateien zusammen gehören, sollten diese bitte als ZIP komprimiert werden.
+  </p>
+  <p>
+    Damit die Dokumente in den Katalog aufgenommen werden können, müssen einige beschreibende Informationen mitgeliefert werden. Mit * gekennzeichnete Felder sind Pflichtangaben. Je ausführlicher eine Beschreibung ist, desto besser. Bei Übermittlung eines Dokuments geht eine Information an das Bundesarchiv, damit der neue Eintrag geprüft und permanent in den Katalog übernommen werden kann. So lange steht der Eintrag mit der Markierung „ungeprüft“ im Katalog.<br>
+    Für Rückfragen gebt bitte Euren Namen und Eure Mailadresse an.
+  </p>
+  <p>
+    Es gibt die Möglichkeit, dem Bundesarchiv Dokumente zur Verfügung zu stellen. Diese können entweder vor Ort abgegeben oder nach Martinfeld geschickt werden, oder, im Falle von digital vorliegenden Dokumenten, im
+    <a href="{% url 'archive:send_in' %}">Uploadbereich</a> hochgeladen werden.
+  </p>
+  <p>
+    Interessierte treffen sich ein- bis zweimal im Jahr zur Pflege und Weiterentwicklung des Archivs, sowie zur Aufarbeitung der Geschichte des DPB. Neben der persönlichen Mitgestaltung am Archiv freuen wir uns auch jederzeit über finanzielle Unterstützung zur Aufrechterhaltung des Archivs.
+  </p>
+  <p>
+    Bei allen Fragen und Anregungen zum Bundesarchiv wende Dich bitte an henkel oder baron (<a href="mailto:bundesarchiv@deutscher-pfadfinderbund.de">bundesarchiv@deutscher-pfadfinderbund.de</a>).
+  </p>
+
+  <p>
+    <div class="alert alert-info" role="alert">
+      Diese Funktion steht noch nicht zur Verfügung. Wir arbeiten dran!
+    </div>
+  </p>
+{% endblock content %}

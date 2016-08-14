@@ -63,13 +63,13 @@ def search_extended(items, title, author, keyword, doctype):
     """
     If there are any additional search keywords provided, concatenate them with AND and return the result.
 
+    :param items: Potentially filtered collection of all items
     :param title:
     :param author:
     :param keyword:
     :param doctype:
     :return:
     """
-    queried = False
     try:
         if title and len(title) != 0:
             items = items.filter(Q(title__icontains=title))
@@ -90,7 +90,8 @@ def index(request):
 
 @login_required
 def send_in(request):
-    pass
+    context = RequestContext(request)
+    return render_to_response('archive/send_in.html', context_instance=context)
 
 
 @login_required
