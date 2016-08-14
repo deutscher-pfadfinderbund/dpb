@@ -108,7 +108,7 @@
           </thead>
           <tbody>
           {% for item in results %}
-            <tr class="archive-items" data-toggle="collapse" data-target="#archive-item-{{ forloop.counter0 }}" aria-expanded="false" aria-controls="archive-item-{{ forloop.counter0 }}">
+            <tr>
               <td>
                 {{ item.title }}
               </td>
@@ -120,11 +120,6 @@
                   {{ item.year }}
                 {% endif %}
               </td>
-            </tr>
-            <tr class="collapse" id="archive-item-{{ forloop.counter0 }}">
-              <td>{{ item.id }}</td>
-              <td></td>
-              <td></td>
             </tr>
           {% endfor %}
           </tbody>
