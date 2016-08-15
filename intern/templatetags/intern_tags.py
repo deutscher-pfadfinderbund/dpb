@@ -10,21 +10,21 @@ def sizify(value):
     
     {{ product.file.size|sizify }}
     """
-    #value = ing(value)
+    # value = ing(value)
     if value < 512000:
-        value = value / 1024.0
+        value /= 1024.0
         ext = 'KB'
     elif value < 4194304000:
-        value = value / 1048576.0
+        value /= 1048576.0
         ext = 'MB'
     else:
-        value = value / 1073741824.0
+        value /= 1073741824.0
         ext = 'GB'
     return '%s %s' % (str(round(value, 2)), ext)
 
 
 @register.filter(is_safe=True)
-def faAttachment(extension):
+def fa_attachment(extension):
     """
     Add fontawesome icon if found. Else return normal extension as string.
 
@@ -44,7 +44,7 @@ def faAttachment(extension):
 
 
 @register.filter(is_safe=True)
-def houseDetails(value, text):
+def house_details(value, text):
     if value:
         return """<div class="row">
             <div class="col-md-4">
@@ -61,7 +61,7 @@ def houseDetails(value, text):
 
 
 @register.filter(is_safe=True)
-def houseDetailsLink(value, text):
+def house_details_link(value, text):
     if value:
         return """<span style='margin-right: 1em;'>
                   <a href='{1}'>
