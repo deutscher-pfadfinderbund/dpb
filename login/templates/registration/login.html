@@ -11,14 +11,18 @@
     <p>Der Benutzername und das Passwort passen nicht zusammen.</p>
   {% endif %}
 
-  <form method="post" action=".">
-    {% csrf_token %}
-    {{ form|as_bootstrap }}
-    <div class="form-actions">
-      <input type="submit" value="Login" class="btn btn-default"/>
-      <input type="hidden" name="next" value="/" />
+  <div class="row">
+    <div class="col-md-4">
+      <form method="post" action=".">
+        {% csrf_token %}
+        {{ form|as_bootstrap }}
+        <div class="form-actions">
+          <input type="submit" value="Login" class="btn btn-default"/>
+          <input type="hidden" name="next" value="/" />
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
   {% comment %}
   <p>
     <br>
