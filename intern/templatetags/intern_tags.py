@@ -39,6 +39,8 @@ def fa_attachment(extension):
         return "<i class='fa fa-file-word-o fa-lg'></i>"
     elif extension == 'xls' or extension == 'xlsx':
         return "<i class='fa fa-file-excel-o fa-lg'></i>"
+    elif extension == 'extern':
+        return "<i class='fa fa-external-link'></i>"
     else:
         return extension
 

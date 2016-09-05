@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load pages %}
+{% load thumbnail %}
+{% load intern_tags %}
+
+{% block heading %}
+  <h1>Bündisches Segeln</h1>
+{% endblock %}
+
+{% block content %}
+
+  <style>
+    .fa-lg {
+      font-size: 0.9em;
+    }
+    .fa-external-link {
+      font-size: 0.8em;
+    }
+    h4 {
+      padding-top: 1em;
+    }
+  </style>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Brigantine Falado von Rhodos gem. e.V.</h3>
+      <h4> Infos zum Zustand und Untergang der Falado</h4>
+      <ul>
+        <li>
+          <a href="https://deutscher-pfadfinderbund.de/media/filer_public/67/e8/67e88e9e-5a24-466a-add3-619ef1cd6b75/gutachten_baykowski_1999.pdf">{{ "pdf"|fa_attachment }} Gutachten</a>, Sachverständiger für Klassische Yachten Uwe Baykowski, 23.01.1999
+        </li>
+        <li>
+          <a href="https://deutscher-pfadfinderbund.de/media/filer_public/49/bc/49bcca0c-8b0a-4021-8cc1-f052d94084c3/anschreiben_yacht-_und_bootswerft_stapelfeldt.pdf">{{ "pdf"|fa_attachment }} Anschreiben</a> der Yacht- & Bootswerft Stapelfeldt an Vereinsvorstand, 29.02.2012
+        </li>
+        <li>
+          <strong>Stimmen aus den eigenen Reihen / Verein</strong>
+          <ul>
+            <li>
+              <a href="https://deutscher-pfadfinderbund.de/media/filer_public/b6/97/b6978c23-902e-4fe1-ad98-ef5aadf348ba/absage_torn_martin.pdf">{{ "pdf"|fa_attachment }} "Absage Törn"</a> Martin Händel 02.03.2012
+            </li>
+            <li>
+              <a href="https://deutscher-pfadfinderbund.de/media/filer_public/aa/5b/aa5b8d35-df6c-4523-b4ba-6123f937856e/stellungnahme_nordatlantiktorn_matze.pdf">{{ "pdf"|fa_attachment }} "Stellungnahme zum Nordatlantiktörn"</a> matze (Matthias Hamann) 03.06.2012) (hiermit bin ich mit nicht so sicher...)</li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://deutscher-pfadfinderbund.de/media/filer_public/e1/da/e1dae875-4577-464d-b05d-ae6c3a3fdb67/protokoll_jahreshauptversammlung_08122013.pdf">{{ "pdf"|fa_attachment }} Protokoll</a> der Jahreshauptversammlung des Falado e.V. am 08.12.2013
+        </li>
+        <li>
+          <a href="https://deutscher-pfadfinderbund.de/media/filer_public/8f/c1/8fc174c9-490f-460c-b507-7ba74fd9162c/untersuchungsbericht_zum_untergang_der_falado.pdf">{{ "pdf"|fa_attachment }} Untersuchungsbericht</a> zum Untergang der Falado am 09.08.2013 (Bundesstelle für Seeunfalluntersuchung 15.12.2014)
+        </li>
+        <li>
+          <strong>Pressestimmen</strong>
+          <ul>
+            <li>
+              <a href="https://deutscher-pfadfinderbund.de/media/filer_public/9b/88/9b88e0fa-e510-4cfc-8257-2e73dcca1c86/die_letzten_stunden_der_falado_der_eisbrecher.pdf">{{ "pdf"|fa_attachment }} "Die letzten Stunden der Falado"</a> der eisbrecher Heft 214/2013
+            </li>
+            <li>
+              <a href="https://deutscher-pfadfinderbund.de/media/filer_public/4e/c0/4ec0c3db-7d2e-4bf0-9ee1-5ccce78b50f5/maengel_waren_bekannt.pdf">{{ "pdf"|fa_attachment }} "Mängel waren bekannt"</a> Yacht Heft 22/2013
+            </li>
+            <li>
+              <a href="https://deutscher-pfadfinderbund.de/media/filer_public/53/ee/53eea849-f774-4c74-9e3f-ee9ff8c18ceb/pressemitteilung_20-14_bsu.pdf">{{ "pdf"|fa_attachment }} "Pressemitteilung 20/14"</a> Bundesstelle für Seeunfalluntersuchung 11.12.2014
+            </li>
+            <li>
+              <a href="https://deutscher-pfadfinderbund.de/media/filer_public/0d/a7/0da70778-492d-48c0-941f-ac42f92e82af/segeltorn_mit_risiko_lippische_landeszeitung.pdf">{{ "pdf"|fa_attachment }} "Segeltörn mit Risiko"</a> Lippische Landeszeitung vom 23.04.2015
+            </li>
+            <li>
+              <a href="http://www.ndr.de/fernsehen/sendungen/panorama3/Sicherheitsluecken-bei-Vereinsschiffen,pfadfinder168.html" target="_blank">"Mangelnde Sicherheit bei Vereinsschiffen" <i class="fa fa-external-link" aria-hidden="true"></i></a> Panorama 3-Sendung 15.03.2015
+            </li>
+            <li>
+              <a href="http://www.ndr.de/fernsehen/sendungen/panorama3/Stellungnahme-des-NDR-zum-Offenen-Brief-des-Vereins-Falado,falado100.html" target="_blank">"Stellungnahme des NDR zum Offenen Brief des Vereins Falado" <i class="fa fa-external-link" aria-hidden="true"></i></a> 14.04.2016
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://deutscher-pfadfinderbund.de/media/filer_public/2d/d8/2dd8967c-6b89-4eae-8864-342f4c929316/offener-brief_bsu_bmvi_ndr_04-2016.pdf">{{ "pdf"|fa_attachment }} Offener Brief des Brigantine Falado von Rhodos e.V. an den NDR die BSU und das BMVI</a> 07.04.2016
+        </li>
+      </ul>
+
+      <h4> Offene Fragen zum Untergang des Schiffs Falado von Rhodos und der Zeit danach, die Vorstandsbesetzung vom "neuen" Verein, zu der Bereitschaft eines Präventionskonzepts:</h4>
+      <ul>
+        <li>
+          <a href="{% url 'intern:sailing_comments' %}">Kommentare aus dem DPB</a>
+        </li>
+        <li>
+          <a href="{% url 'intern:sailing_interview_falado' %}">Interview mit dem Verein</a>
+        </li>
+      </ul>
+
+      <h4> Infos zur Whydah of Bristol (neues Schiff des Falado e.V.)</h4>
+      <ul>
+        <li>
+          <a href="https://deutscher-pfadfinderbund.de/media/filer_public/31/45/31456ab6-ee89-4881-babd-6349a7dc2a71/alles_fur_die_crewgruppen_whydah.pdf">{{ "pdf"|fa_attachment }} Alles für Crew-Gruppen</a> (Vorbereitung auf den Törn, Mitgliedschaft, Törnbeitrag, Gruppengröße, Übergabehafen, Sonstige Kosten, Besonderheiten persönliche Packliste, Besonderheiten Gruppenpackliste, Sonstiges)
+        </li>
+        <li>
+          <a href="https://deutscher-pfadfinderbund.de/media/filer_public/af/5b/af5b0661-51cb-496a-b476-5f5ff7021e8f/segelplan_und_beleuchtung_whydah.pdf">{{ "pdf"|fa_attachment }} Segelplan und Beleuchtung</a>
+        </li>
+        <li>
+          <a href="https://deutscher-pfadfinderbund.de/media/filer_public/af/23/af23aa92-4d9a-4a05-866e-97bde4eb2fa8/antrag_auf_mitgliedschaft_whydah.pdf">{{ "pdf"|fa_attachment }} Antrag auf Mitgliedschaft</a>
+        </li>
+      </ul>
+    </div>
+
+    {# Second col #}
+    <div class="col-md-6">
+      <h3>Mytilus - Verein zur Erhaltung und Nutzung eines historischen Segelschiffes für Pfadfindergruppen e.V.</h3>
+      <ul>
+        <li>
+          <a href="http://www.mytilus.de/download/paedagogisches_konzept.pdf" target="_blank">Pädagogisches Konzept {{ "extern"|fa_attachment }}</a>
+        </li>
+        <li>
+          <a href="http://www.mytilus.de/verein_mitglied.shtml" target="_blank">Mitglied werden {{ "extern"|fa_attachment }}</a>
+        </li>
+        <li>
+          <a href="http://www.mytilus.de/" target="_blank">Homepage {{ "extern"|fa_attachment }}</a> mit Infos zum Schiff, zum Mitsegeln, zum Verein, zu Erlebnissen und zu Kontaktmöglichkeiten.
+        </li>
+      </ul>
+
+      <h3>Segeln auf allen Meeren e.V. </h3>
+      <ul>
+        <li>
+          <a href="http://www.segeln-auf-allen-meeren.de/">Homepage zum Schiff {{ "extern"|fa_attachment }}</a> Anitra mit Infos zum Beitritt, einem geschlossenen Mitgliederbereich, einer Galerie und Berichten.
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <p>Bei Fragen und Anregungen könnt ihr euch bei <a href="mailto:Wiebke.Weinstock@gmx.de">wiebke</a> melden.</p>
+
+{% endblock %}
