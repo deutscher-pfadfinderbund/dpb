@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'haeuser/$', views.houses, name='houses'),
     url(r'haeuser/neu/$', views.house_add, name='house_add'),
     url(r'haeuser/(?P<slug>[\w-]+)/$', views.house_detail, name='house_detail'),
+    url(r'segeln/$', views.sailing, name='sailing'),
 ]

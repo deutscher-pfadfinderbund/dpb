@@ -78,3 +78,8 @@ def house_add(request):
 def house_detail(request, slug):
     house = House.objects.get(slug=slug)
     return render(request, 'intern/house_detail.html', {'house': house})
+
+
+@login_required
+def sailing(request):
+    return render(request, 'intern/sailing_home.html')
