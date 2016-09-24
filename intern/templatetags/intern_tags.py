@@ -41,6 +41,8 @@ def fa_attachment(extension):
         return "<i class='fa fa-file-excel-o fa-lg'></i>"
     elif extension == 'extern':
         return "<i class='fa fa-external-link'></i>"
+    elif extension == 'zip':
+        return "<i class='fa fa-file-archive-o fa-lg'></i>"
     else:
         return extension
 
