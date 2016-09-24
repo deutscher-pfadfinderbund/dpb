@@ -63,13 +63,8 @@
                   {{ file.extension|fa_attachment|safe }}
                 </td>
                 <td>
-                  <a href="{{ file.url }}">
-                    {% if file.name %}
-                      {{ file.name }}
-                    {% else %}
-                      {{ file }}
-                    {% endif %}
-                  </a>
+                  <a href="{{ file.url }}">{% if file.name %}{{ file.name }}{% else %}{{ file }}{% endif %}</a>
+                  {% ifequal "Kompassnadel" folder.name %}- {{ file.description }}{% endifequal %}
                 </td>
                 <td>
                   {% if file.description %}
@@ -98,7 +93,7 @@
     <script type="text/javascript">
       // Settings for datatables
       $.extend( $.fn.dataTable.defaults, {
-        searching: false,
+        searching: false
       });
     </script>
 
