@@ -47,13 +47,12 @@
       <table class="table table-hover table-striped table-condensed table-responsive datatable">
         <thead>
           <th width="5%" class="text-center">Typ</th>
-          <th width="63%">Name</th>
-          <th width="5%">Info</th>
+          <th width="35%">Name</th>
+          <th width="40%">Beschreibung</th>
           {% if user.is_staff %}
             <th width="5%"></th>
           {% endif %}
           <th width="10%">Größe</th>
-          <th width="12%">Zuletzt geändert</th>
         </thead>
         <tbody>
           {% for file in files %}
@@ -64,11 +63,11 @@
                 </td>
                 <td>
                   <a href="{{ file.url }}">{% if file.name %}{{ file.name }}{% else %}{{ file }}{% endif %}</a>
-                  {% ifequal "Kompassnadel" folder.name %}- {{ file.description }}{% endifequal %}
                 </td>
                 <td>
                   {% if file.description %}
-                    <a data-toggle="tooltip" data-placement="top" title="{{ file.description }}"><i class="fa fa-info-circle fa-lg"></i></a>
+                    {{ file.description|truncatewords_html:10 }}
+                    <a data-toggle="tooltip" data-placement="top" title="{{ file.description }}">mehr</a>
                   {% endif %}
                 </td>
 
@@ -80,7 +79,6 @@
                 {% endif %}
 
                 <td>{{ file.size|sizify }}</td>
-                <td>{{ file.modified_at|date:"j. F Y" }}</td>
               </tr>
             {% endifequal %}
           {% endfor %}
