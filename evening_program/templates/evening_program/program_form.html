@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load intern_tags %}
+{% load bootstrap_tags %}
+
+{% block heading %}
+  <h1>Heimabendprogramm hinzufügen</h1>
+{% endblock %}
+
+{% block content %}
+  <p>
+    Füge hier dein Heimabendprogramm hinzu. Du kannst unten drei Dateien anhängen, die hilfreich sein könnten.
+  </p>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form|as_bootstrap_inline }}
+    <input type="submit" value="Abschicken" class="btn btn-default">
+  </form>
+
+{% endblock %}

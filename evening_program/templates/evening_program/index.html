@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load pages %}
+{% load markdown_deux_tags %}
 
 {% block sources %}{% endblock %}
 
@@ -12,7 +13,8 @@
 {% block content %}
   <p>
     Hier gibt es die Möglichkeit den anderen etwas über eure Heimabende zu erzählen. Worum ging es, was hat euch vor
-    allem besonders gut gefallen? Teilt eure Erfahrungen und schreibt doch einen kleinen Beitrag dazu!
+    allem besonders gut gefallen? Teilt eure Erfahrungen und
+    <a href="{% url 'evening_program:add' %}">schreibt doch einen kleinen Beitrag dazu</a>!
   </p>
 
   {% if programs %}
@@ -21,13 +23,13 @@
         <div class="col-md-8">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title"><a href="{# url 'intern:house_detail' slug=house.slug #}">{{ program.title }}</a></h3>
+              <h3 class="panel-title"><a href="{% url 'evening_program:details' slug=program.slug %}">{{ program.title }}</a></h3>
             </div>
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-8">
                   <h5>Was haben wir gemacht?</h5>
-                  {{ program.execution|truncatewords_html:50 }}
+                  {{ program.execution|markdown|truncatewords_html:50 }}
                 </div>
                 <div class="col-md-4">
                   <h5>Wie alt sind meine Mädchen / Jungen?</h5>
@@ -35,8 +37,7 @@
                 </div>
               </div>
               <p style="margin-bottom: 0; padding-bottom: 0;">
-                <a href="{# url 'intern:house_detail' slug=house.slug #}">Details</a>
-                {% include 'dpb/edit_item.html' with model="intern_house" id=house.id %}
+                <a href="{% url 'evening_program:details' slug=program.slug %}">Details</a>
               </p>
             </div>
           </div>
@@ -46,4 +47,5 @@
   {% else %}
     <p>Es hat noch keiner ein Heimabendprogramm eingestellt. Du könntest den ersten Beitrag schreiben!</p>
   {% endif %}
+  <a href="{% url 'evening_program:add' %}" class="btn btn-default">Heimabendprogramm hinzufügen</a>
 {% endblock %}

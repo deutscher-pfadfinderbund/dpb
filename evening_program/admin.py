@@ -10,7 +10,7 @@ class ProgramAdmin(PageDownAdmin):
     search_fields = ['title']
     fieldsets = [
         ('Allgemein', {'fields': ['title', 'target', 'preparation', 'execution', 'greatness']}),
-        ('Bilder', {'fields': ['image1', 'image2', 'image3']}),
+        ('Bilder', {'fields': ['file1', 'file2', 'file3']}),
         ('Ansprechpartner', {'fields': ['contact_name', 'contact_group', 'contact_mail']}),
     ]
     readonly_fields = ('created', 'modified')
