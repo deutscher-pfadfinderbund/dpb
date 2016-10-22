@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^intern/arbeitskreis/mitglieder/$', pageviews.page, {'url': '/intern/arbeitskreis/mitglieder/'}, name='arbeitskreis_mitglieder'),
     url(r'^intern/bundesgilde/$', pageviews.page, {'url': '/intern/bundesgilde/'}, name='bundesgilde'),
 
+    url(r'^heimabende/', include('evening_program.urls', namespace='evening_program')),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^account/', include('login.urls', namespace='login')),

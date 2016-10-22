@@ -67,6 +67,7 @@ INSTALLED_APPS = (
     'intern',
     'blog',
     'links',
+    'evening_program',
 )
 
 MIDDLEWARE_CLASSES = (
