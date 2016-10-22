@@ -6,6 +6,7 @@ from feedback.models import Feedback
 
 class FeedbackForm(ModelForm):
     captcha = ReCaptchaField()
+
     class Meta:
         model = Feedback
         fields = ['name', 'email', 'note']

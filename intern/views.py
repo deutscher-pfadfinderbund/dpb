@@ -57,7 +57,7 @@ class DateUpdate(PermissionRequiredMixin, UpdateView):
 
 @login_required
 def houses(request):
-    houses = House.objects.all().order_by("-name")
+    houses = House.objects.all().order_by("name")
     return render(request, 'intern/houses.html', {'houses': houses})
 
 

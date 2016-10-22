@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load pages %}
+{% load markdown_deux_tags %}
+
+{% block sources %}{% endblock %}
+
+{% block heading %}
+  <h1>Mein Heimabendprogramm</h1>
+{% endblock %}
+
+{% block content %}
+  <p>
+    Hier gibt es die Möglichkeit den anderen etwas über eure Heimabende zu erzählen. Worum ging es, was hat euch vor
+    allem besonders gut gefallen? Teilt eure Erfahrungen und schreibt doch einen kleinen Beitrag dazu!
+  </p>
+  <p class="padding-bottom">
+    <a href="{% url 'evening_program:add' %}" class="btn btn-primary">Heimabendprogramm hinzufügen</a>
+  </p>
+
+  {% if programs %}
+    {% for program in programs %}
+      <div class="row">
+        <div class="col-md-8">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><a href="{% url 'evening_program:details' slug=program.slug %}">{{ program.title }}</a></h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <h5>Was haben wir gemacht?</h5>
+                  {{ program.execution|markdown|truncatewords_html:50 }}
+                </div>
+                <div class="col-md-4">
+                  <h5>Wie alt sind meine Mädchen / Jungen?</h5>
+                  {{ program.target }}
+                </div>
+              </div>
+              <p style="margin-bottom: 0; padding-bottom: 0;">
+                <a href="{% url 'evening_program:details' slug=program.slug %}">Details</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Es hat noch keiner ein Heimabendprogramm eingestellt. Du könntest den ersten Beitrag schreiben!</p>
+  {% endif %}
+{% endblock %}
