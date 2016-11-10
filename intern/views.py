@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from datetime import datetime
 
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, UpdateView
@@ -12,7 +12,6 @@ from .models import Date, House
 from .forms import HouseForm
 
 
-@login_required
 def work_group(request):
     return render(request, 'intern/arbeitskreis.html')
 
