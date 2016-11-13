@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import CreateView
 
@@ -19,8 +19,7 @@ def evening_program_details(request, slug):
     return render(request, "evening_program/details.html", {"program": program})
 
 
-class ProgramCreate(PermissionRequiredMixin, CreateView):
+class ProgramCreate(LoginRequiredMixin, CreateView):
     model = Program
     fields = ["title", "target", "preparation", "execution", "greatness", "contact_name", "contact_group",
               "contact_mail", "file1", "file2", "file3"]
-    permission_required = "intern.can_view"
