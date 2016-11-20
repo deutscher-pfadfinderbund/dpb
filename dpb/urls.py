@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^intern/bundesgilde/$', pageviews.page, {'url': '/intern/bundesgilde/'}, name='bundesgilde'),
 
     url(r'^heimabende/', include('evening_program.urls', namespace='evening_program')),
+    url(r'^karten/', include('maps.urls', namespace='maps')),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^account/', include('login.urls', namespace='login')),

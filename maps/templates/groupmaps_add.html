@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load intern_tags %}
+{% load bootstrap_tags %}
+
+{% block heading %}
+  <h1>Neue Gruppe hinzufügen</h1>
+{% endblock %}
+
+{% block sources %}
+  <style>
+    form .col-md-2, form .col-md-3, form .col-md-4, form .col-md-6 {
+      padding-left: 0;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <p>
+    Wir möchten eine interaktive Karte erstellen! Das Ergebnis könnte (bei ausreichender Mitarbeit) in der
+    100. Kompassnadel erscheinen. Also fleißig mitmachen und tragt euch fleißig in die Karte ein!
+  </p>
+
+  <form action="" method="post">
+    {% csrf_token %}
+
+    <h2>Allgemein</h2>
+    <fieldset>
+      {{ form.name|form_item|safe }}
+      {{ form.situation|form_item|safe }}
+      {{ form.street|form_item|safe }}
+    </fieldset>
+
+    <div class="padding-bottom"></div>
+
+    <input type="submit" value="Abschicken" class="btn btn-default">
+  </form>
+
+  <script type="application/javascript">
+    $(document).ready(function() {
+      $(".form-group input").addClass("form-control");
+      $(".form-group select").addClass("form-control");
+      $(".form-group textarea").addClass("form-control");
+      // $(".footer-wrapper").hide();
+    });
+  </script>
+{% endblock content %}
