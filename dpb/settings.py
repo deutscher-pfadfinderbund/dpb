@@ -68,6 +68,7 @@ INSTALLED_APPS = (
     'blog',
     'links',
     'evening_program',
+    'maps',
 )
 
 MIDDLEWARE_CLASSES = (
