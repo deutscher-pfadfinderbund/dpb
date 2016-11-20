@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block heading %}
-  <h1>Deutschlandkarte mit unseren Gruppen</h1>
+  <h1>Übersichtskarte</h1>
 {% endblock %}
 
 {% block sources %}
@@ -18,5 +18,19 @@
     <a href="{% url 'maps:add' %}" class="btn btn-primary">Neue Gruppe eintragen</a>
   </p>
 
+  {% if maps %}
+    <h2>Eingetragene Gruppen</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <ul class="list-group">
+          {% for group in maps %}
+            <li class="list-group-item">{{ group.group }} ({{ group.location1 }})</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% else %}
+    <p>Scheinbar hat sich noch keine Gruppe eingetragen...</p>
+  {% endif %}
 
 {% endblock %}

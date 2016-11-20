@@ -20,7 +20,7 @@ def add(request):
             return render(request, "groupmaps_success.html", {"form": form})
         return render(request, "groupmaps_add.html", {"form": form})
     else:
-        form = HouseForm()
+        form = GroupMapsForm()
     return render(request, "groupmaps_add.html", {"form": form})
 
 

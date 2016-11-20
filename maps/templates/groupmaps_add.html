@@ -9,11 +9,6 @@
 {% endblock %}
 
 {% block sources %}
-  <style>
-    form .col-md-2, form .col-md-3, form .col-md-4, form .col-md-6 {
-      padding-left: 0;
-    }
-  </style>
 {% endblock %}
 
 {% block content %}
@@ -27,9 +22,25 @@
 
     <h2>Allgemein</h2>
     <fieldset>
-      {{ form.name|form_item|safe }}
-      {{ form.situation|form_item|safe }}
-      {{ form.street|form_item|safe }}
+      {{ form.boysgirls|form_item|safe }}
+      {{ form.group|form_item|safe }}
+      {{ form.leader|form_item|safe }}
+      {{ form.subgroups|form_item|safe }}
+      {{ form.website|form_item|safe }}
+      {{ form.special|form_item|safe }}
+      {{ form.other|form_item|safe }}
+    </fieldset>
+
+    <h2>Örtlichkeiten</h2>
+    <p>
+      Hier können bis zu drei Orte angegeben werden, welche das Zentrum eurer Gruppe darstellen. Dabei genügt es
+      den Namen der Stadt / des Orts anzugeben, bspw. "Standort 1: Remscheid". Der Standort wird dann automatisch
+      berechnet und in der Karte angezeigt.
+    </p>
+    <fieldset>
+      {{ form.location1|form_item|safe }}
+      {{ form.location2|form_item|safe }}
+      {{ form.location3|form_item|safe }}
     </fieldset>
 
     <div class="padding-bottom"></div>

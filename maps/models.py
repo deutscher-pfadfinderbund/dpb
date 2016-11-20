@@ -27,14 +27,14 @@ class GroupMaps(models.Model):
         ("Jungs", "Jungs"),
         ("Gemischt", "Gemischt"),
     )
-    boysgirls = models.CharField("Mädels / Jungs / gemischt", max_length=256, choices=boysgirls_choices, blank=False)
-    group = models.CharField("Gruppierung", max_length=256, blank=False)
-    leader = models.CharField("Unser/e Führer/in ist", max_length=256, blank=False)
+    boysgirls = models.CharField("* Mädels / Jungs / gemischt", max_length=256, choices=boysgirls_choices, blank=False)
+    group = models.CharField("* Gruppierung (bspw. MS Sturmvögel, JS Hohenstaufen, ...)", max_length=256, blank=False)
+    leader = models.CharField("* Unser/e Führer/in ist", max_length=256, blank=False)
     subgroups = models.CharField("Untergeordnete Gruppen", max_length=1024, blank=True, null=True)
     special = models.TextField("Das zeichnet uns aus", max_length=4096, blank=True)
     other = models.TextField("Was ihr uns sonst noch mitteilen möchtet", max_length=4096, blank=True)
 
-    location1 = models.CharField("Standort 1", max_length=1024, blank=False)
+    location1 = models.CharField("* Standort 1", max_length=1024, blank=False)
     latitude1 = models.FloatField("Breitengrad 1", max_length=4096, blank=True, null=True)
     longitude1 = models.FloatField("Längengrad 1", max_length=4096, blank=True, null=True)
     location2 = models.CharField("Standort 2", max_length=1024, blank=True)
@@ -47,7 +47,7 @@ class GroupMaps(models.Model):
     website = models.URLField("Webseite", blank=True)
     slug = AutoSlugField(populate_from='group', unique=True)
     public = models.BooleanField("Öffentlich?", default=False)
-    created = models.DateTimeField("Erstellt am", default=datetime.now)
+    created = models.DateTimeField("Erstellt am", auto_now_add=True)
     modified = models.DateTimeField("Zuletzt geändert", auto_now=True)
 
     def clean(self):

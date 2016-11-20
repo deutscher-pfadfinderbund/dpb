@@ -14,5 +14,4 @@ class GroupMapsAdmin(admin.ModelAdmin):
             ("location2", "latitude2", "longitude2"),
             ("location3", "latitude3", "longitude3"),
         ]}),
-        ("Erweitert", {"fields": ["created"], "classes": ["collapse"]}),
     ]
