@@ -34,8 +34,8 @@
     <h2>Örtlichkeiten</h2>
     <p>
       Hier können bis zu drei Orte angegeben werden, welche das Zentrum eurer Gruppe darstellen. Dabei genügt es
-      den Namen der Stadt / des Orts anzugeben, bspw. "Standort 1: Remscheid". Der Standort wird dann automatisch
-      berechnet und in der Karte angezeigt.
+      den Namen der Stadt / des Orts anzugeben, bspw. "Standort 1: Remscheid". Längen- und Breitengrade werden dann
+      automatisch berechnet und in der Karte angezeigt.
     </p>
     <fieldset>
       {{ form.location1|form_item|safe }}
@@ -53,6 +53,13 @@
       $(".form-group input").addClass("form-control");
       $(".form-group select").addClass("form-control");
       $(".form-group textarea").addClass("form-control");
+
+      $("#id_group").attr("placeholder", "z.B. Gau Sueben")
+      $("#id_leader").attr("placeholder", "z.B. ballack")
+      $("#id_subgroups").attr("placeholder", "z.B. MS Rheinmöwen, MS Tilman Riemenschneider, Hag Andarta")
+      $("#id_website").attr("placeholder", "z.B. www.irgendwasmitpfadfindern.de")
+      $("#id_special").attr("placeholder", "z.B. Wir sind der einzige, reine Mädchengau. Man erkennt uns recht gut an unserer Lautstärke, obwohl wir keine Stulpen oder Röcke tragen.")
+      $("#id_other").attr("placeholder", "z.B. Hier könnt ihr alles schreiben, was ihr noch loswerden wollt")
       // $(".footer-wrapper").hide();
     });
   </script>
