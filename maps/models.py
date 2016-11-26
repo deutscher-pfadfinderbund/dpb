@@ -29,6 +29,7 @@ class GroupMaps(models.Model):
     )
     boysgirls = models.CharField("* Mädels / Jungs / gemischt", max_length=256, choices=boysgirls_choices, blank=False)
     group = models.CharField("* Gruppierung (bspw. MS Sturmvögel, JS Hohenstaufen, ...)", max_length=256, blank=False)
+    emblem = models.ImageField(verbose_name="Wappen", upload_to="groupmaps", null=True, blank=True)
     leader = models.CharField("* Unser/e Führer/in ist", max_length=256, blank=False)
     subgroups = models.CharField("Untergeordnete Gruppen", max_length=1024, blank=True, null=True)
     special = models.TextField("Das zeichnet uns aus", max_length=4096, blank=True)
