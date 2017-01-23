@@ -4,13 +4,6 @@
 {% load pages %}
 
 {% block carousel %}
-    {% if user.is_authenticated %}
-    <div class="alert alert-info alert-dismissible" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <u>100. Kompassnadel</u> Helft uns eine Karte zu erstellen, wo alle Gruppen sich eintragen und zeigen wo sie ansässig sind.
-      <a href="{% url "maps:index" %}">Hier entsteht die Karte.</a>
-    </div>
-  {% endif %}
   {% include "owlcarousel.html" %}
 {% endblock %}
 
