@@ -24,12 +24,12 @@ urlpatterns = [
 
     # Members Area
     url(r'^intern/', include('intern.urls', namespace='intern')),
-    url(r'^intern/aktuelles/$', blogviews.blog_overview, {'category': 'Aktuelles'}, name='blog_page'),
-    url(r'^intern/aktuelles/(?P<page>[0-9]+)/$', blogviews.blog_overview, {'category': 'Aktuelles'}, name='blog_page'),
-    url(r'^intern/details/(?P<slug>[\w-]+)/$', blogviews.post, name='blog_detail'),
-    url(r'^intern/eintrag/neu/$', blogviews.PostCreate.as_view(), name='blog_post_add'),
-    url(r'^intern/eintrag/bearbeiten/(?P<pk>[0-9]+)/$', blogviews.PostUpdate.as_view(), name='blog_post_change'),
-    url(r'^intern/eintrag/entfernen/(?P<pk>[0-9]+)/$', blogviews.PostDelete.as_view(), name='blog_post_delete'),
+    url(r'^infos/$', blogviews.blog_overview, {'category': 'Aktuelles'}, name='blog_page'),
+    url(r'^infos/seite/(?P<page>[0-9]+)/$', blogviews.blog_overview, {'category': 'Aktuelles'}, name='blog_page'),
+    url(r'^infos/(?P<slug>[\w-]+)/$', blogviews.post, name='blog_detail'),
+    url(r'^infos/neu/$', blogviews.PostCreate.as_view(), name='blog_post_add'),
+    url(r'^infos/bearbeiten/(?P<pk>[0-9]+)/$', blogviews.PostUpdate.as_view(), name='blog_post_change'),
+    url(r'^infos/entfernen/(?P<pk>[0-9]+)/$', blogviews.PostDelete.as_view(), name='blog_post_delete'),
     url(r'^intern/themen/$', blogviews.blog_overview, {'category': 'Themen'}, name='blog_themen'),
     url(r'^intern/arbeitskreis/mitglieder/$', pageviews.page, {'url': '/intern/arbeitskreis/mitglieder/'}, name='arbeitskreis_mitglieder'),
     url(r'^intern/bundesgilde/$', pageviews.page, {'url': '/intern/bundesgilde/'}, name='bundesgilde'),
