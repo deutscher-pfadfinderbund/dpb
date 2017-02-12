@@ -10,7 +10,7 @@ class PostAdmin(PageDownAdmin):
     list_filter = ['created']
     search_fields = ['title']
     fieldsets = [
-        (None,        {'fields': ['title', 'category', ('archive', 'public'), 'content']}),
+        (None,        {'fields': ['title', 'category', 'file', ('archive', 'public'), 'content']}),
         ('Erweitert', {'fields': ['created', 'author'], 'classes': ['collapse']}),
     ]
 
