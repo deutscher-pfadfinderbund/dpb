@@ -22,6 +22,7 @@ class Post(models.Model):
     content = models.TextField('Inhalt', blank=False)
     slug = AutoSlugField(null=True, populate_from='title')
     archive = models.BooleanField('Archiviert?', default=False)
+    file = models.FileField(upload_to='blogpost', verbose_name='Anhang', blank=True, null=True)
     public = models.BooleanField('Öffentlich?', default=True)
     created = models.DateTimeField('Erstellt am', default=datetime.now)
     category = models.ForeignKey('Category', null=True, verbose_name="Kategorie")
