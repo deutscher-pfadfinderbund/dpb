@@ -11,3 +11,4 @@ migrations/
 *.css
 *.css.map
 __pycache__/
+.#*

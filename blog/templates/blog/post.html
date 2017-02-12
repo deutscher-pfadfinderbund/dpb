@@ -14,5 +14,13 @@
 
 {% block content %}
   {{ post.content|markdown|safe }}
+  
+  {% if post.file %}
+    <div style="margin-top: 1em">
+      <h4>Anhang</h4>
+      <a href="{{ post.file.url }}">{{ post.file }}</a>
+    </div>
+  {% endif %}
+
   {% include 'dpb/edit_item_generic.html' with model="blog_post" id=post.id %}
 {% endblock %}
