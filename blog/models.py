@@ -36,4 +36,4 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Beitrag'
         verbose_name_plural = 'Beiträge'
-        ordering = ('created',)
+        ordering = ('-created',)
