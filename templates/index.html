@@ -4,13 +4,13 @@
 {% load pages %}
 
 {% block carousel %}
-  {% if user.is_authenticated %}
-    <div class="alert alert-info">
-      <u>Informationen zum Bundeslager</u>
-      -
-      <a href="{% url "blog_detail" slug="bundeslager-2017" %}">Hier</a> gibt es die Dateien mit Informationen zum Bundeslager.
-    </div>
-  {% endif %}
+{#  {% if user.is_authenticated %}#}
+{#    <div class="alert alert-info">#}
+{#      <u>Informationen zum Bundeslager</u>#}
+{#      -#}
+{#      <a href="{% url "blog_detail" slug="bundeslager-2017" %}">Hier</a> gibt es die Dateien mit Informationen zum Bundeslager.#}
+{#    </div>#}
+{#  {% endif %}#}
   {% include "owlcarousel.html" %}
 {% endblock %}
 
