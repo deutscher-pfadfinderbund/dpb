@@ -5,7 +5,9 @@ from blog.models import Post
 
 
 def index(request):
-    news = Post.objects.filter(created__lte=datetime.datetime.today(), created__gt=datetime.datetime.today()-datetime.timedelta(days=365)).order_by('-created')[:3]
+    news = Post.objects.filter(created__lte=datetime.datetime.today(),
+                               created__gt=datetime.datetime.today() -
+                                           datetime.timedelta(days=365)).order_by('-created')[:3]
     return render(request, 'index.html', {'news': news})
 
 

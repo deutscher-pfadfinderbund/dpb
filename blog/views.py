@@ -62,18 +62,16 @@ def blog_overview(request, page=1, category="Aktuelles"):
     except Post.DoesNotExist:
         raise Http404("Diese Beiträge konnten leider nicht gefunden werden.")
     return render(request, 'blog/list.html',
-                  {'posts':     pack(posts),
+                  {'posts': pack(posts),
                    'paginator': posts,
-                   'length':    range(len(posts)),
-                   'category':  category[0]})
+                   'length': range(len(posts)),
+                   'category': category[0]})
 
 
-
-
-################################ Aux functions
+# Aux functions
 
 def pack(_list):
     nlist = list(_list)
-    if len(nlist) % 2:      # Append none if len is odd
+    if len(nlist) % 2:  # Append none if len is odd
         nlist.append(None)
     return zip(nlist[::2], nlist[1::2])

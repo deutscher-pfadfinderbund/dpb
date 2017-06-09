@@ -10,6 +10,7 @@ from .models import Page
 
 DEFAULT_TEMPLATE = 'pages/default.html'
 
+
 # This view is called from FlatpageFallbackMiddleware.process_response
 # when a 404 is raised, which often means CsrfViewMiddleware.process_view
 # has not been called even if CsrfViewMiddleware is installed. So we need
@@ -35,13 +36,11 @@ def page(request, url):
         url = '/' + url
     site_id = get_current_site(request).id
     try:
-        f = get_object_or_404(Page,
-            url=url, sites=site_id)
+        f = get_object_or_404(Page, url=url, sites=site_id)
     except Http404:
         if not url.endswith('/') and settings.APPEND_SLASH:
             url += '/'
-            f = get_object_or_404(Page,
-                url=url, sites=site_id)
+            f = get_object_or_404(Page, url=url, sites=site_id)
             return HttpResponsePermanentRedirect('%s/' % request.path)
         else:
             raise
