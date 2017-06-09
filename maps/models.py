@@ -7,7 +7,8 @@ import requests
 
 
 def query_latlong(location):
-    data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(location) + " Deutschland" + "&format=json&polygon=1&addressdetails=1").json()[0]
+    data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(location) + " Deutschland" +
+                        "&format=json&polygon=1&addressdetails=1").json()[0]
     return data["lat"], data["lon"]
 
 

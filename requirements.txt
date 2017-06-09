@@ -1,3 +1,5 @@
+captcha
+filer
 Django==1.9.10
 django-appconf==1.0.2
 django-autoslug==1.9.3

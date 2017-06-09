@@ -22,7 +22,8 @@ DEBUG = True
 try:
     from dpb.settings_local import *
 except ImportError:
-    print("[ERROR] dpb/settings_local.py not found. Please create it according to the template settings_local.py.template")
+    print("[ERROR] dpb/settings_local.py not found. Please create it according to the template "
+          "settings_local.py.template")
     sys.exit()
 
 if SECRET_KEY == "CHANGE_ME":

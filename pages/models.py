@@ -19,14 +19,16 @@ class Page(models.Model):
     attachment = FilerFileField(null=True, blank=True, related_name="attachment")
     enable_comments = models.BooleanField(_('enable comments'), default=False)
     template_name = models.CharField(_('template name'), max_length=70, blank=True,
-        help_text=_(
-            "Example: 'pages/contact_page.html'. If this isn't provided, "
-            "the system will use 'pages/default.html'."
-        ),
-    )
+                                     help_text=_(
+                                         "Example: 'pages/contact_page.html'. If this isn't provided, "
+                                         "the system will use 'pages/default.html'."
+                                     ),
+                                     )
     registration_required = models.BooleanField(_('registration required'),
-        help_text=_("If this is checked, only logged-in users will be able to view the page."),
-        default=False)
+                                                help_text=_(
+                                                    "If this is checked, only logged-in users will be able to view "
+                                                    "the page."),
+                                                default=False)
     sites = models.ManyToManyField(Site)
 
     class Meta:

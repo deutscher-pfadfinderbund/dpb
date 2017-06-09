@@ -8,7 +8,8 @@ class GroupMapsAdmin(admin.ModelAdmin):
     search_fields = ["group"]
     readonly_fields = ["latitude1", "longitude1", "latitude2", "longitude2", "latitude3", "longitude3"]
     fieldsets = [
-        ("Allgemein", {"fields": ["boysgirls", "group", "leader", "emblem", "subgroups", "special", "other", "website", "public"]}),
+        ("Allgemein", {"fields": ["boysgirls", "group", "leader", "emblem", "subgroups", "special", "other", "website",
+                                  "public"]}),
         ("Locations", {"fields": [
             ("location1", "latitude1", "longitude1"),
             ("location2", "latitude2", "longitude2"),
