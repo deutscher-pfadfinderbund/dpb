@@ -92,8 +92,12 @@ WSGI_APPLICATION = 'dpb.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASS,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }
 
@@ -181,32 +185,3 @@ THUMBNAIL_ALIASES = {
 
 # Needed for login
 django.contrib.auth.LOGIN_URL = '/'
-
-
-# Store this in settings_local.py
-# ### E-MAIL SETTINGS ###
-# EMAIL_HOST =
-# EMAIL_HOST_PASSWORD =
-# EMAIL_HOST_USER =
-# DEFAULT_FROM_EMAIL =
-# EMAIL_PORT =
-# EMAIL_SUBJECT_PREFIX =
-# EMAIL_USE_SSL =
-# ### END E-MAIL ###
-#
-# ### Google Recaptcha Support ###
-# RECAPTCHA_PUBLIC_KEY =
-# RECAPTCHA_PRIVATE_KEY =
-# NOCAPTCHA =
-# RECAPTCHA_USE_SSL =
-# ### END Recaptcha ###
-
-### Haystack+Solr Search Engine ###
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://127.0.0.1:8983/solr'
-        # ...or for multicore...
-        # 'URL': 'http://127.0.0.1:8983/solr/mysite',
-    },
-}
