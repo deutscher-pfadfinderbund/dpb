@@ -27,7 +27,7 @@ class Date(models.Model):
     location = models.CharField("Ort", max_length=128, blank=True)
     latitude = models.FloatField("Breitengrad", max_length=128, blank=True, null=True)
     longitude = models.FloatField("Längengrad", max_length=128, blank=True, null=True)
-    display_name = models.CharField("Berechneter Standort", max_length=128, blank=True, null=True)
+    display_name = models.CharField("Berechneter Standort", max_length=512, blank=True, null=True)
     description = models.TextField("Beschreibung", blank=True)
     host = models.CharField("Ausrichter", max_length=128, blank=True)
     attachment = models.FileField(upload_to="termine/", verbose_name="Anhang", null=True, blank=True)
