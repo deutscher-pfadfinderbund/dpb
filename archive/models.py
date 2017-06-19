@@ -62,8 +62,8 @@ class Item(models.Model):
         ("DPB vor 1945", "DPB vor 1945"),
         ("Jungenbund", "Jungenbund"),
         ("Mädchenbund", "Mädchenbund"),
-        ("Orden St.Georg", "Orden St.Georg"),
-        ("Orden St.Christophorus", "Orden St.Christophorus"),
+        ("Orden St.Georg", "Orden St. Georg"),
+        ("Orden St.Christophorus", "Orden St. Christophorus"),
         ("Gruppen des DPB", "Gruppen des DPB"),
         ("Überbündisches", "Überbündisches"),
     )
