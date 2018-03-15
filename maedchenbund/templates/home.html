@@ -29,7 +29,10 @@
       </li>
     </ul>
   {% endfor %}
+
+  {% if user.is_staff %}
   <div class="text-right">
     <a href="{% url 'admin:index' %}maedchenbund/document">Dokumente bearbeiten</a>
   </div>
+  {% endif %}
 {% endblock %}
