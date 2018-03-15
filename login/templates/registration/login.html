@@ -11,6 +11,11 @@
     <p>Der Benutzername und das Passwort passen nicht zusammen.</p>
   {% endif %}
 
+  <p>
+    Nach jedem Bundesthing ändern wir das Passwort. Bitte erfragt bei der Kanzlerin oder dem Bundesbeauftragen für
+    Internet das aktuelle Passwort.
+  </p>
+
   <div class="row">
     <div class="col-md-4">
       <form method="post" action=".">
@@ -18,7 +23,7 @@
         {{ form|as_bootstrap }}
         <div class="form-actions">
           <input type="submit" value="Login" class="btn btn-default"/>
-          <input type="hidden" name="next" value="/" />
+          <input type="hidden" name="next" value="/"/>
         </div>
       </form>
     </div>
