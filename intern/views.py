@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-from django.contrib.auth.decorators import login_required
-
 from datetime import datetime
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, UpdateView
 from filer.models import File, Folder
-from .models import Date, House
+
 from .forms import HouseForm
+from .models import Date, House
 
 
 def work_group(request):

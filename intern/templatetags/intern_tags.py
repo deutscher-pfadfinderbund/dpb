@@ -1,4 +1,7 @@
+import os
+
 from django import template
+from django.db.models import FileField
 
 register = template.Library()
 
@@ -45,6 +48,29 @@ def fa_attachment(extension):
         return "<i class='fa fa-file-archive-o fa-lg'></i>"
     else:
         return extension
+
+
+@register.filter
+def filename(file: FileField):
+    """
+    Return the filename.
+
+    :param file:
+    :return:
+    """
+    return os.path.basename(file.file.name)
+
+
+@register.filter
+def extension(file: FileField):
+    """
+    Return the filename.
+
+    :param file:
+    :return:
+    """
+    _, ext = os.path.splitext(file.file.name)
+    return ext[1:]
 
 
 @register.filter(is_safe=True)

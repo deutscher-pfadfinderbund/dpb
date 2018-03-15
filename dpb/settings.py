@@ -8,9 +8,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 SECRET_KEY = "CHANGE_ME"
-import django.contrib.auth
 import os
 import sys
+
+import django.contrib.auth
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -50,7 +51,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
 
     # 3rd party
-    'dpb.apps.MyFilerConfig',       # Use Django-Filer with own config for verbose name
+    'dpb.apps.MyFilerConfig',  # Use Django-Filer with own config for verbose name
     'mptt',
     'easy_thumbnails',
     'captcha',
@@ -70,6 +71,7 @@ INSTALLED_APPS = (
     'links',
     'evening_program',
     'maps',
+    'maedchenbund',
 )
 
 MIDDLEWARE_CLASSES = (
