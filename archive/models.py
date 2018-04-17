@@ -86,7 +86,7 @@ class Item(models.Model):
     collection = models.CharField('Sammlungsteil *', max_length=256, choices=collection_choices, blank=False)
     amount = models.IntegerField('Anzahl / Exemplare', default=1, null=True, blank=True)
     crossreference = models.CharField('Querverweis', max_length=256, blank=True)
-    active = models.BooleanField('Öffentlich? (intern)', default=False)
+    active = models.BooleanField('Öffentlich? (intern)', default=True)
     reviewed = models.BooleanField('Bearbeitet?', default=True)
     owner = models.CharField('Besitzer', max_length=256, blank=True)
     pub_date = models.DateTimeField('Hinzugefügt am', default=datetime.now)
@@ -94,6 +94,12 @@ class Item(models.Model):
 
     def __str__(self):
         return str(self.signature) + " - " + self.title
+
+    def has_file(self):
+        return self.file is not None
+
+    has_file.boolean = True
+    has_file.short_description = "Digital?"
 
 
 class Feedback(models.Model):
