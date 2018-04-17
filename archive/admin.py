@@ -1,18 +1,18 @@
 from django.contrib import admin
-from .models import Feedback, Item, Year
+
 from dpb.admin import PageDownAdmin
+from .models import Feedback, Item, Year
 
 
 class ItemAdmin(PageDownAdmin):
-    list_display = ('title', 'author', 'medartanalog', 'active', 'reviewed', 'signature', 'modified')
-    list_filter = ['medartanalog']
+    list_display = ('title', 'author', 'year', 'medartanalog', 'signature', 'location',)
+    list_filter = ['medartanalog', 'year']
     search_fields = ['signature', 'title', 'author']
     filter_horizontal = ('years',)
 
     fieldsets = [
         ('Allgemein', {'fields': ['signature', 'title', 'author',
                                   ('date', 'year'),
-                                  'years',
                                   'place',
                                   ('medartanalog', 'doctype'),
                                   'file',

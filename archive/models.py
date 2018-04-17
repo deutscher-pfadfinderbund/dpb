@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-from django.db import models
 from datetime import datetime
 
+from django.db import models
 from filer.fields.file import FilerFileField
 
 
 class Year(models.Model):
-    """ List of the states of Germany """
     year = models.IntegerField("Jahr", blank=False)
     created = models.DateTimeField("Erstellt am", default=datetime.now)
 
