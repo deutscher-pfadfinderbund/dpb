@@ -1,3 +1,5 @@
+import re
+
 from django.contrib import admin
 from django.http import HttpRequest
 
@@ -38,6 +40,18 @@ class HasFileFilter(admin.SimpleListFilter):
         return queryset
 
 
+def human_key(key):
+    """
+    Sort collection as humans would do it.
+
+    :param key:
+    :return:
+    """
+    parts = re.split('(\d*\.\d+|\d+)', key)
+    return tuple((e.swapcase() if i % 2 == 0 else float(e))
+                 for i, e in enumerate(parts))
+
+
 class ItemAdmin(PageDownAdmin):
     list_display = ('title', 'author', 'year', 'has_file', 'medartanalog', 'signature', 'location',)
     list_filter = ['medartanalog', HasFileFilter]
@@ -56,7 +70,8 @@ class ItemAdmin(PageDownAdmin):
     ]
     save_as = True
     readonly_fields = ['pub_date']
-    ordering = ('-modified',)
+    # ordering = [F('signature')]
+    # ordering = [Item('signature')].sort(key=human_key)
 
 
 class YearAdmin(PageDownAdmin):
