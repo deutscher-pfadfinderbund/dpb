@@ -34,8 +34,8 @@ if SECRET_KEY == "CHANGE_ME":
 elif len(SECRET_KEY) < 50:
     print("[WARNING] Your SECRET_KEY is too short. Please consider changing it.")
 
-
-ALLOWED_HOSTS = ['.deutscher-pfadfinderbund.de', 'deutscher-pfadfinderbund.de', '.jungenbund.de', '.maedchenbund.de']
+ALLOWED_HOSTS = ['.deutscher-pfadfinderbund.de', 'deutscher-pfadfinderbund.de', '.jungenbund.de', '.maedchenbund.de',
+                 '127.0.0.1']
 
 SITE_ID = 1
 
@@ -144,9 +144,9 @@ TEMPLATES = [{
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.media',
-                'django.core.context_processors.static',
-                'django.core.context_processors.request',
+                # 'django.core.context_processors.media',
+                # 'django.core.context_processors.static',
+                # 'django.core.context_processors.request',
             ],
             'debug': DEBUG,
         },
