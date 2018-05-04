@@ -1,12 +1,11 @@
-from django.conf.urls import include, url
-from django.contrib import admin
 from django.conf import settings
+from django.conf.urls import include, url
 from django.conf.urls.static import static
-
-from . import views
+from django.contrib import admin
 
 from blog import views as blogviews
 from pages import views as pageviews
+from . import views
 
 urlpatterns = [
     # Hard-coded pages
@@ -48,6 +47,7 @@ urlpatterns = [
 # Named Staticpages
 urlpatterns += [
     url(r'^impressum/$', pageviews.page, {'url': '/impressum/'}, name='impressum'),
+    url(r'^datenschutz/$', pageviews.page, {'url': '/datenschutz/'}, name='datenschutz'),
     url(r'^arbeitskreis/$', pageviews.page, {'url': '/arbeitskreis/'}, name='arbeitskreis'),
 
     url(r'^kontakt/$', pageviews.page, {'url': '/kontakt/'}, name='kontakt'),

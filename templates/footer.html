@@ -7,15 +7,11 @@
       10965 Berlin
     </p>
   </div>
-  <div class="col-md-6">
-    <h4>Allgemeine Informationen</h4>
-    <ul>
-      <li><a href="{% url 'index' %}">Home</a></li>
-      <li><a href="{% url 'kontakt' %}">Kontakt</a></li>
-      <li><a href="{% url 'impressum' %}">Impressum und Datenschutz</a></li>
-    </ul>
-    <p style="padding-bottom: 0;">
-      Diese Seite verwendet <a href="{% url 'impressum' %}#piwik">Piwik</a> zur anonymen Erfassung von Statistiken.
-    </p>
+  <p>&nbsp;</p>
+  <div class="col-md-6 text-right">
+    <a class="btn btn-link" href="{% url 'index' %}">Home</a>
+    <a class="btn btn-link" href="{% url 'kontakt' %}">Kontakt</a>
+    <a class="btn btn-link" href="{% url 'datenschutz' %}">Datenschutz</a>
+    <a class="btn btn-link" href="{% url 'impressum' %}">Impressum</a>
   </div>
 </div>
