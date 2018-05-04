@@ -18,45 +18,46 @@
   <h2>Gruppen im DPB</h2>
 
   <div class="row">
-  {% for state in states %}
     <div class="col-md-6">
-      <h4>{{ state }}</h4>
-      <ul>
-        {% for link in links %}
-          {% if link.public and link.state == state %}
-            <li>
-              <a href="{{ link.website }}" target="_blank">
-                {{ link }}
-                {% if link.city %}
-                  ({{ link.city }})
-                {% endif %}
-              </a>
-            </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
-  {% endfor %}
-  </div>
-
-  {% if cats %}
-    <div class="row">
-      {% for cat in cats %}
-        {% if cat.name != "Gruppen im DPB" %}
-          <div class="col-md-4">
-            <h2>{{ cat.name }}</h2>
-            <ul style="padding-bottom:2em;">
+      {% for state in states %}
+        {% if state != None %}
+          <h4>{{ state }}</h4>
+          <ul>
             {% for link in links %}
-              {% if link.public and link.category == cat %}
-                <li><a href="{{ link.website }}" target="_blank">{{ link }}</a></li>
+              {% if link.public and link.state == state %}
+                <li>
+                  <a href="{{ link.website }}" target="_blank">
+                    {{ link }}
+                    {% if link.city %}
+                      ({{ link.city }})
+                    {% endif %}
+                  </a>
+                </li>
               {% endif %}
             {% endfor %}
-            </ul>
-          </div>
+          </ul>
         {% endif %}
       {% endfor %}
     </div>
-  {% else %}
-    <p>Im Moment gibt es keine Links.</p>
-  {% endif %}
+
+    <div class="col-md-6">
+      {% if cats %}
+        {% for cat in cats %}
+          {% if cat.name != "Gruppen im DPB" %}
+            <h2>{{ cat.name }}</h2>
+            <ul style="padding-bottom:2em;">
+              {% for link in links %}
+                {% if link.public and link.category == cat %}
+                  <li><a href="{{ link.website }}" target="_blank">{{ link }}</a></li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <p>Im Moment gibt es keine Links.</p>
+      {% endif %}
+    </div>
+
+  </div>
 {% endblock %}
