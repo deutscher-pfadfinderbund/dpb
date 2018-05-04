@@ -17,10 +17,23 @@
   </p>
 
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <form method="post" action=".">
         {% csrf_token %}
         {{ form|as_bootstrap }}
+        <div class="row">
+          <div class="col-md-1">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" required>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-10">
+            Hiermit willige ich ein, dass mit meinem Login ein Logeintrag auf dem Server erfolgt, der den
+            letzten Zeitpunkt des Logins und den Zeitpunkt der letzten Aktion in der Datenbank vermerkt.
+          </div>
+        </div>
         <div class="form-actions">
           <input type="submit" value="Login" class="btn btn-default"/>
           <input type="hidden" name="next" value="/"/>
