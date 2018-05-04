@@ -1,7 +1,6 @@
-from django.template import RequestContext
-from django.shortcuts import render_to_response
-from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.shortcuts import render
 
 from .models import Item
 
@@ -84,14 +83,12 @@ def search_extended(items, title, author, keyword, doctype):
 
 @login_required
 def index(request):
-    context = RequestContext(request)
-    return render_to_response('archive/index.html', context_instance=context)
+    return render(request, 'archive/index.html')
 
 
 @login_required
 def send_in(request):
-    context = RequestContext(request)
-    return render_to_response('archive/send_in.html', context_instance=context)
+    return render(request, 'archive/send_in.html')
 
 
 @login_required
@@ -120,12 +117,10 @@ def search(request):
 
     results = results if results and results is not [] else None
 
-    context = RequestContext(request)
-
-    return render_to_response('archive/search.html', {"results": results,
-                                                      "query": query,
-                                                      "title": title,
-                                                      "author": author,
-                                                      "keyword": keyword,
-                                                      "doctype": doctype,
-                                                      "errors": errors}, context_instance=context)
+    return render(request, 'archive/search.html', {"results": results,
+                                                   "query": query,
+                                                   "title": title,
+                                                   "author": author,
+                                                   "keyword": keyword,
+                                                   "doctype": doctype,
+                                                   "errors": errors})
