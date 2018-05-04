@@ -54,7 +54,6 @@ INSTALLED_APPS = (
     'dpb.apps.MyFilerConfig',  # Use Django-Filer with own config for verbose name
     'mptt',
     'easy_thumbnails',
-    'captcha',
     'django_forms_bootstrap',
     'autoslug',
     'pagedown',
