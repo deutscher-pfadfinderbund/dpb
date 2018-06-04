@@ -78,6 +78,8 @@ class Item(models.Model):
     doctype = models.CharField('Dokumenttyp', max_length=256, choices=doctype_choices, blank=True)
 
     file = FilerFileField(null=True, blank=True, related_name="item_file", verbose_name='Datei')
+    file2 = FilerFileField(null=True, blank=True, related_name="item_file2", verbose_name='Datei 2')
+    file3 = FilerFileField(null=True, blank=True, related_name="item_file3", verbose_name='Datei 3')
 
     keywords = models.TextField('Schlagworte *', default="", max_length=1024)
     location = models.CharField('Standort (analoges Archiv)', max_length=256, blank=True)

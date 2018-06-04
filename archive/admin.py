@@ -55,14 +55,14 @@ def human_key(key):
 class ItemAdmin(PageDownAdmin):
     list_display = ('title', 'author', 'year', 'has_file', 'medartanalog', 'signature', 'location',)
     list_filter = ['medartanalog', HasFileFilter]
-    search_fields = ['signature', 'title', 'author']
+    search_fields = ['signature', 'title', 'author', 'keywords', 'notes']
 
     fieldsets = [
         ('Allgemein', {'fields': ['signature', 'title', 'author',
                                   ('date', 'year'),
                                   'place',
                                   ('medartanalog', 'doctype'),
-                                  'file',
+                                  ('file', 'file2', 'file3'),
                                   'keywords', 'location',
                                   'source', 'notes', 'collection', 'amount',
                                   'crossreference', 'owner']}),
