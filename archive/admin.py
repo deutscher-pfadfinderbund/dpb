@@ -62,7 +62,7 @@ class ItemAdmin(PageDownAdmin):
                                   ('date', 'year'),
                                   'place',
                                   ('medartanalog', 'doctype'),
-                                  'file',
+                                  ('file', 'file2', 'file3'),
                                   'keywords', 'location',
                                   'source', 'notes', 'collection', 'amount',
                                   'crossreference', 'owner']}),
