@@ -1,10 +1,24 @@
 import re
 
 from django.contrib import admin
+from django.db.models import QuerySet
 from django.http import HttpRequest
 
 from dpb.admin import PageDownAdmin
 from .models import Feedback, Item, Year
+
+
+class AlphanumericSignatureFilter(admin.SimpleListFilter):
+    title = 'Signatur (alphanumerisch)'
+    parameter_name = 'signature_alphanumeric'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('signature', 'Signatur (alphanumerisch)'),
+        )
+
+    def queryset(self, request, queryset: QuerySet):
+        return queryset.order_by('signature')
 
 
 class HasFileFilter(admin.SimpleListFilter):
@@ -24,7 +38,7 @@ class HasFileFilter(admin.SimpleListFilter):
             ('nicht digital', 'nicht digital'),
         )
 
-    def queryset(self, request: HttpRequest, queryset):
+    def queryset(self, request: HttpRequest, queryset: QuerySet):
         """
         Filter items by presence of file. self.value() is the selection in the django admin and possible values are
         from lookups/3.
@@ -53,7 +67,9 @@ def human_key(key):
 
 
 class ItemAdmin(PageDownAdmin):
-    list_display = ('title', 'author', 'year', 'has_file', 'medartanalog', 'signature', 'location',)
+    list_display = (
+        'title', 'author', 'year', 'has_file', 'medartanalog', 'signature', 'location',
+    )
     list_filter = ['medartanalog', HasFileFilter]
     search_fields = ['signature', 'title', 'author', 'keywords', 'notes']
 

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 
 from django.db import models
+from django.utils import timezone
 from filer.fields.file import FilerFileField
 
 
 class Year(models.Model):
     year = models.IntegerField("Jahr", blank=False)
-    created = models.DateTimeField("Erstellt am", default=datetime.now)
+    created = models.DateTimeField("Erstellt am", default=timezone.now)
 
     def __str__(self):
         return str(self.year)
@@ -72,7 +72,6 @@ class Item(models.Model):
     title = models.CharField('Titel *', max_length=256)
     date = models.CharField('Datum (Vorlage)', max_length=256, blank=True)
     year = models.IntegerField('Jahr', null=True, blank=True)
-    years = models.ManyToManyField(Year, verbose_name=("Jahre"), blank=True)
     place = models.CharField('Ort / Veröffentlichung', max_length=256, blank=True)
     medartanalog = models.CharField('Medienart *', max_length=256, choices=medartanalog_choices, blank=False)
     doctype = models.CharField('Dokumenttyp', max_length=256, choices=doctype_choices, blank=True)
@@ -91,7 +90,7 @@ class Item(models.Model):
     active = models.BooleanField('Öffentlich? (intern)', default=True)
     reviewed = models.BooleanField('Bearbeitet?', default=True)
     owner = models.CharField('Besitzer', max_length=256, blank=True)
-    pub_date = models.DateTimeField('Hinzugefügt am', default=datetime.now)
+    pub_date = models.DateTimeField('Hinzugefügt am', default=timezone.now)
     modified = models.DateTimeField('Zuletzt geändert', auto_now=True)
 
     def __str__(self):
@@ -111,7 +110,7 @@ class Feedback(models.Model):
     note = models.TextField('Anmerkung *', max_length=1024, blank=False)
     archive = models.BooleanField('Bearbeitet?', default=False)
     item = models.ForeignKey(Item, verbose_name="Bezieht sich auf", blank=False)
-    created = models.DateTimeField('Erstellt am', default=datetime.now)
+    created = models.DateTimeField('Erstellt am', default=timezone.now)
     modified = models.DateTimeField('Zuletzt geändert', auto_now=True)
 
     def __str__(self):
