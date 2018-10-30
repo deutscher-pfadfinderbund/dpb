@@ -2,6 +2,8 @@
 
 {% load staticfiles %}
 {% load bootstrap_tags %}
+{% load markdown_deux_tags %}
+{% load intern_tags %}
 
 {% block heading %}
   <h1>Bundesarchiv</h1>
@@ -32,4 +34,32 @@
     Bei allen Fragen und Anregungen zum Bundesarchiv wende Dich bitte an henkel oder baron (<a
           href="mailto:bundesarchiv@deutscher-pfadfinderbund.de">bundesarchiv@deutscher-pfadfinderbund.de</a>).
   </p>
+
+  <hr style="margin: 2em 0">
+
+  <h3>Neues aus dem Bundesarchiv</h3>
+  <br>
+  {% if posts %}
+    {% for post in posts %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            {{ post.title }}
+            <small class="pull-right">{{ post.created }}</small>
+          </h3>
+        </div>
+        <div class="panel-body">
+          {{ post.content|markdown|safe }}
+          {% if post.file %}
+            <a href="{{ post.file.url }}">
+              {{ post.file|extension|fa_attachment|safe }}
+              {{ post.file|filename }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Aktuell gibt es keine Nachrichten aus dem Bundesarchiv.</p>
+  {% endif %}
 {% endblock content %}
