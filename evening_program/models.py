@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
 from autoslug import AutoSlugField
 from django.db import models
-from datetime import datetime
 
 
 class Program(models.Model):
@@ -25,7 +26,7 @@ class Program(models.Model):
 
     @staticmethod
     def get_absolute_url():
-        from django.core.urlresolvers import reverse
+        from django.urls import reverse
         return reverse('evening_program:index')
 
     class Meta:

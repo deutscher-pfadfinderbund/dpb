@@ -1,10 +1,10 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import render
-from django.db.models import Q
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
 
 from .models import Post, Category
