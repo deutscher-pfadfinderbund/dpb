@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from autoslug import AutoSlugField
 from django.contrib.auth.models import User
 from django.db import models
@@ -26,7 +24,7 @@ class Post(models.Model):
     archive = models.BooleanField('Archiviert?', default=False)
     file = models.FileField(upload_to='blogpost', verbose_name='Anhang', blank=True, null=True)
     public = models.BooleanField('Öffentlich?', default=True)
-    created = models.DateTimeField('Erstellt am', default=datetime.now)
+    created = models.DateTimeField("Erstellt am", auto_now_add=True)
     category = models.ForeignKey('Category', null=True, verbose_name="Kategorie", on_delete=models.SET_NULL)
 
     def __str__(self):
