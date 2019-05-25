@@ -5,7 +5,6 @@ from django.db import models, migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('blog', '0002_auto_20150802_0017'),
     ]
@@ -18,6 +17,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='post',
             name='category',
-            field=models.ForeignKey(to='blog.Category', null=True),
+            field=models.ForeignKey(to='blog.Category', null=True, on_delete=models.SET_NULL),
         ),
     ]
