@@ -1,8 +1,9 @@
+import django.contrib.auth.views as authviews
 from django.conf.urls import url
 
 from . import views
-import django.contrib.auth.views as authviews
 
+app_name = 'login'
 
 urlpatterns = [
     url(r'^$', authviews.login),

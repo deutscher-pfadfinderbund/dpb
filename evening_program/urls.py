@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'evening_program'
 
 urlpatterns = [
     url(r'^$', views.evening_program, name='index'),
