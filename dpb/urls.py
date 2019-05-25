@@ -38,7 +38,7 @@ urlpatterns = [
                   url(r'^heimabende/', include('evening_program.urls')),
                   url(r'^karten/', include('maps.urls')),
 
-                  url(r'^admin/', include(admin.site.urls)),
+                  url(r'^admin/', admin.site.urls),
                   url(r'^account/', include('login.urls')),
                   url(r'^accounts/', include('login.urls')),
                   url(r'^tinymce/', include('tinymce.urls')),
