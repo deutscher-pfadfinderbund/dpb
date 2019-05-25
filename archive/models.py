@@ -76,9 +76,12 @@ class Item(models.Model):
     medartanalog = models.CharField('Medienart *', max_length=256, choices=medartanalog_choices, blank=False)
     doctype = models.CharField('Dokumenttyp', max_length=256, choices=doctype_choices, blank=True)
 
-    file = FilerFileField(null=True, blank=True, related_name="item_file", verbose_name='Datei')
-    file2 = FilerFileField(null=True, blank=True, related_name="item_file2", verbose_name='Datei 2')
-    file3 = FilerFileField(null=True, blank=True, related_name="item_file3", verbose_name='Datei 3')
+    file = FilerFileField(null=True, blank=True, related_name="item_file", verbose_name='Datei',
+                          on_delete=models.CASCADE)
+    file2 = FilerFileField(null=True, blank=True, related_name="item_file2", verbose_name='Datei 2',
+                           on_delete=models.CASCADE)
+    file3 = FilerFileField(null=True, blank=True, related_name="item_file3", verbose_name='Datei 3',
+                           on_delete=models.CASCADE)
 
     keywords = models.TextField('Schlagworte *', default="", max_length=1024)
     location = models.CharField('Standort (analoges Archiv)', max_length=256, blank=True)
@@ -109,7 +112,7 @@ class Feedback(models.Model):
     group = models.CharField('Gruppierung', max_length=1024, blank=True)
     note = models.TextField('Anmerkung *', max_length=1024, blank=False)
     archive = models.BooleanField('Bearbeitet?', default=False)
-    item = models.ForeignKey(Item, verbose_name="Bezieht sich auf", blank=False)
+    item = models.ForeignKey(Item, verbose_name="Bezieht sich auf", blank=False, on_delete=models.SET_NULL)
     created = models.DateTimeField('Erstellt am', default=timezone.now)
     modified = models.DateTimeField('Zuletzt geändert', auto_now=True)
 

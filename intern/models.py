@@ -35,7 +35,7 @@ class Date(models.Model):
 
     def clean(self):
         try:
-            data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(self.location)+
+            data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(self.location) +
                                 "&format=json&polygon=1&addressdetails=1").json()[0]
             self.latitude = data["lat"]
             self.longitude = data["lon"]
@@ -65,7 +65,7 @@ class House(models.Model):
     street = models.CharField("Straße", max_length=4096, blank=True)
     plz = models.CharField("PLZ", max_length=4096, blank=True)
     city = models.CharField("Stadt", max_length=4096, blank=True)
-    state = models.ForeignKey(State, verbose_name="Bundesland", null=True, blank=True)
+    state = models.ForeignKey(State, verbose_name="Bundesland", null=True, blank=True, on_delete=models.SET_NULL)
 
     # Web
     gmaps_location = models.URLField("Google Maps Link", blank=True, null=True)

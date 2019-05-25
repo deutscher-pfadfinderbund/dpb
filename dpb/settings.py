@@ -34,8 +34,9 @@ if SECRET_KEY == "CHANGE_ME":
 elif len(SECRET_KEY) < 50:
     print("[WARNING] Your SECRET_KEY is too short. Please consider changing it.")
 
-ALLOWED_HOSTS = ['.deutscher-pfadfinderbund.de', 'deutscher-pfadfinderbund.de', '.jungenbund.de', '.maedchenbund.de',
-                 '127.0.0.1']
+# ALLOWED_HOSTS = ['.deutscher-pfadfinderbund.de', 'deutscher-pfadfinderbund.de', '.jungenbund.de', '.maedchenbund.de',
+#                  '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 SITE_ID = 1
 
@@ -52,7 +53,6 @@ INSTALLED_APPS = (
 
     # 3rd party
     'dpb.apps.MyFilerConfig',  # Use Django-Filer with own config for verbose name
-    'mptt',
     'easy_thumbnails',
     'django_forms_bootstrap',
     'autoslug',
@@ -86,7 +86,6 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'dpb.urls'
 
 WSGI_APPLICATION = 'dpb.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -130,25 +129,24 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-
 # Configure Templates
 TEMPLATES = [{
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                # 'django.core.context_processors.media',
-                # 'django.core.context_processors.static',
-                # 'django.core.context_processors.request',
-            ],
-            'debug': DEBUG,
-        },
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': [os.path.join(BASE_DIR, 'templates')],
+    'APP_DIRS': True,
+    'OPTIONS': {
+        'context_processors': [
+            'django.template.context_processors.debug',
+            'django.template.context_processors.request',
+            'django.contrib.auth.context_processors.auth',
+            'django.contrib.messages.context_processors.messages',
+            # 'django.core.context_processors.media',
+            # 'django.core.context_processors.static',
+            # 'django.core.context_processors.request',
+        ],
+        'debug': DEBUG,
     },
+},
 ]
 
 # Filer Settings
