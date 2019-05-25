@@ -112,7 +112,7 @@ class Feedback(models.Model):
     group = models.CharField('Gruppierung', max_length=1024, blank=True)
     note = models.TextField('Anmerkung *', max_length=1024, blank=False)
     archive = models.BooleanField('Bearbeitet?', default=False)
-    item = models.ForeignKey(Item, verbose_name="Bezieht sich auf", blank=False, on_delete=models.SET_NULL)
+    item = models.ForeignKey(Item, verbose_name="Bezieht sich auf", blank=False, null=True, on_delete=models.SET_NULL)
     created = models.DateTimeField('Erstellt am', default=timezone.now)
     modified = models.DateTimeField('Zuletzt geändert', auto_now=True)
 
