@@ -3,6 +3,7 @@ from datetime import datetime
 from autoslug import AutoSlugField
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -31,9 +32,8 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    @models.permalink
     def get_absolute_url(self):
-        return 'blog:post', (self.slug,)
+        return reverse('blog:post', args=[self.slug])
 
     class Meta:
         verbose_name = 'Beitrag'
