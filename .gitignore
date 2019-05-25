@@ -7,7 +7,6 @@ static/
 db.sqlite3
 media/
 dpb/settings_local.py
-migrations/
 *.css
 *.css.map
 __pycache__/
