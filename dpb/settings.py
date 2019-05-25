@@ -7,32 +7,16 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
-SECRET_KEY = "CHANGE_ME"
 import os
 import sys
 
 import django.contrib.auth
 
+SECRET_KEY = os.getenv("SECRET_KEY", "CHANGE_ME")
+DEBUG = os.getenv("DEBUG", "").lower() == "true"
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-# Import SECRET_KEY and check it
-try:
-    from dpb.settings_local import *
-except ImportError:
-    print("[ERROR] dpb/settings_local.py not found. Please create it according to the template "
-          "settings_local.py.template")
-    sys.exit()
-
-if SECRET_KEY == "CHANGE_ME":
-    print("[ERROR] Please change your secret key, stored in dpb/settings_local.py")
-    print("More information: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-SECRET_KEY")
-    sys.exit()
-elif len(SECRET_KEY) < 50:
-    print("[WARNING] Your SECRET_KEY is too short. Please consider changing it.")
 
 # ALLOWED_HOSTS = ['.deutscher-pfadfinderbund.de', 'deutscher-pfadfinderbund.de', '.jungenbund.de', '.maedchenbund.de',
 #                  '127.0.0.1']
@@ -92,11 +76,11 @@ WSGI_APPLICATION = 'dpb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASS,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
+        'NAME': os.getenv("DB_NAME", "dpb"),
+        'USER': os.getenv("DB_USER", "dpb"),
+        'PASSWORD': os.getenv("DB_PASS", "razupaltuff"),
+        'HOST': os.getenv("DB_HOST", "localhost"),
+        'PORT': os.getenv("DB_PORT", "5432"),
     }
 }
 

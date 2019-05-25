@@ -1,10 +1,10 @@
+import os
 from datetime import datetime
 
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from dpb.settings import EMAIL_RECIPIENT
 from .forms import EmailForm
 
 
@@ -29,8 +29,8 @@ Nachricht:
             send_mail(
                 subject,
                 message,
-                cd.get('email', EMAIL_RECIPIENT),
-                [EMAIL_RECIPIENT],
+                cd.get('email', os.getenv("EMAIL_RECIPIENT", "cmeter@googlemail.com")),
+                [os.getenv("EMAIL_RECIPIENT", "cmeter@googlemail.com")],
             )
             return HttpResponseRedirect('/kontakt/verschickt/')
     else:
