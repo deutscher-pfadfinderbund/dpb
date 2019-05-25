@@ -1,163 +1,175 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    {% load staticfiles %}
-    {% load pages %}
+  {% load staticfiles %}
+  {% load pages %}
 
-    <!-- Vendor Stylesheets -->
-    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'assets/bootswatch/bootswatch.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'assets/fontawesome/css/fontawesome.min.css' %}"/>
+  <!-- Vendor Stylesheets -->
+  <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'assets/bootswatch/bootswatch.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'assets/fontawesome/css/fontawesome.min.css' %}"/>
 
-    <!-- Own Stylesheets -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+  <!-- Own Stylesheets -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
 
-    <!-- Vendor Javascript -->
-    <script src="{% static 'assets/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+  <!-- Vendor Javascript -->
+  <script src="{% static 'assets/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
 
-    <!-- Own Javascript -->
-    <script type="text/javascript">
-      $(document).ready(function(){
-        // Enable Popovers and tooltips
-        $('[data-toggle="popover"]').popover();
-        $('[data-toggle="tooltip"]').tooltip();
+  <!-- Own Javascript -->
+  <script type="text/javascript">
+      $(document).ready(function () {
+          // Enable Popovers and tooltips
+          $('[data-toggle="popover"]').popover();
+          $('[data-toggle="tooltip"]').tooltip();
       });
-    </script>
-    <!-- None -->
+  </script>
+  <!-- None -->
 
-    {# Reserved for scripts and stylesheets #}
-    {% block sources %}
-    {% endblock %}
+  {# Reserved for scripts and stylesheets #}
+  {% block sources %}
+  {% endblock %}
 
-    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+  <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
-    <title>Deutscher Pfadfinderbund</title>
-  </head>
+  <title>Deutscher Pfadfinderbund</title>
+</head>
 
-  <body role="document">
-    <!-- navbar -->
-    <div class="navbar navbar-default">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+<body role="document">
+<!-- navbar -->
+<div class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+              aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
 
-          <a class="navbar-brand" href="{% url 'index' %}">
-            <img class="navbar-brand navbar-brand-img" src="{% static 'img/lilie100.png' %}" alt="Lilie"/>
-            DPB
+      <a class="navbar-brand" href="{% url 'index' %}">
+        <img class="navbar-brand navbar-brand-img" src="{% static 'img/lilie100.png' %}" alt="Lilie"/>
+        DPB
+      </a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
+            Über den DPB
+            <span class="caret"></span>
           </a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Über den DPB <span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="themes">
-                <li><a href="{% url 'dpb' %}">Der Deutsche Pfadfinderbund</a></li>
-                <li><a href="{% url 'bundesordnung' %}">Bundesordnung</a></li>
-                <li><a href="{% url 'pfadfinder' %}">Pfadfinder und bündische Jugend</a></li>
-                <li><a href="{% url 'arbeitskreis' %}">Arbeitskreis Macht und Sexualität</a></li>
-              </ul>
-            </li>
-
-            {% if user.is_authenticated %}
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Infos <span class="caret"></span></a>
-                <ul class="dropdown-menu" aria-labelledby="themes">
-                  <li><a href="{% url 'intern:dates' %}">Zusammenkünfte</a></li>
-                  <li><a href="{% url 'intern:sailing' %}">Bündisches Segeln</a></li>
-                  <li><a href="{% url 'blog_page' %}">Aktuelles</a></li>
-                  <li><a href="{% url 'blog_themen' %}">Themen</a></li>
-                  <li><a href="{% url 'bundesgilde' %}">Die Bundesgilde</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Inhalte <span class="caret"></span></a>
-                <ul class="dropdown-menu" aria-labelledby="themes">
-                  <li><a href="{% url 'maps:index' %}">Übersichtskarte</a></li>
-                  <li><a href="{% url 'intern:houses' %}">Häuser und Zeltplätze</a></li>
-                  <li><a href="{% url 'intern:documents' %}">Dokumente</a></li>
-                  <li><a href="{% url 'evening_program:index' %}">Heimabendprogramme</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Bundesarchiv <span class="caret"></span></a>
-                <ul class="dropdown-menu" aria-labelledby="themes">
-                  <li><a href="{% url 'archive:index' %}">Übersicht</a></li>
-                  <li><a href="{% url 'archive:search' %}">Online-Katalog</a></li>
-                  <li><a href="{% url 'archive:send_in' %}">Uploadbereich</a></li>
-                </ul>
-              </li>
-
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Präventionsrat <span
-                        class="caret"></span></a>
-                <ul class="dropdown-menu" aria-labelledby="themes">
-                  <li><a href="{% url 'intern:arbeitskreis' %}">Überblick</a></li>
-                  <li><a href="{% url 'arbeitskreis_mitglieder' %}">Mitglieder</a></li>
-                </ul>
-              </li>
-              <li><a href="{% url 'intern:maedchenbund' %}">Mädchenbund</a></li>
-            {% endif %}
-
-            <li><a href="{% url 'kontakt' %}">Kontakt</a></li>
-            <li><a href="{% url 'links:index' %}">Links</a></li>
+          <ul class="dropdown-menu" aria-labelledby="themes">
+            <li><a href="{% url 'dpb' %}">Der Deutsche Pfadfinderbund</a></li>
+            <li><a href="{% url 'bundesordnung' %}">Bundesordnung</a></li>
+            <li><a href="{% url 'pfadfinder' %}">Pfadfinder und bündische Jugend</a></li>
+            <li><a href="{% url 'arbeitskreis' %}">Arbeitskreis Macht und Sexualität</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-{#            <li><a href="{% url 'feedback:index' %}"><button type="button" class="btn btn-primary">Feedback geben</button></a></li>#}
-            {% if user.is_authenticated %}
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                   aria-expanded="false">Verwaltung <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  {% if user.is_staff %}
-                    <li><a href="{% url 'admin:index' %}">Adminbereich</a></li>
-                    <li role="separator" class="divider"></li>
-                  {% endif %}
-                  <li><a href="#">Eingeloggt als {{ user }}</a></li>
-                  <li><a href="{% url 'login:logout' %}">Ausloggen</a></li>
-                </ul>
-              </li>
-            {% else %}
-              <li><a href="{% url 'login:login' %}">Login</a></li>
-            {% endif %}
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
+        </li>
+
+        {% if user.is_authenticated %}
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Infos <span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="themes">
+              <li><a href="{% url 'intern:dates' %}">Zusammenkünfte</a></li>
+              <li><a href="{% url 'intern:sailing' %}">Bündisches Segeln</a></li>
+              <li><a href="{% url 'blog_page' %}">Aktuelles</a></li>
+              <li><a href="{% url 'blog_themen' %}">Themen</a></li>
+              <li><a href="{% url 'bundesgilde' %}">Die Bundesgilde</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
+              Inhalte
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="themes">
+              <li><a href="{% url 'maps:index' %}">Übersichtskarte</a></li>
+              <li><a href="{% url 'intern:houses' %}">Häuser und Zeltplätze</a></li>
+              <li><a href="{% url 'intern:documents' %}">Dokumente</a></li>
+              <li><a href="{% url 'evening_program:index' %}">Heimabendprogramme</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
+              Bundesarchiv
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="themes">
+              <li><a href="{% url 'archive:index' %}">Übersicht</a></li>
+              <li><a href="{% url 'archive:search' %}">Online-Katalog</a></li>
+              <li><a href="{% url 'archive:send_in' %}">Uploadbereich</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
+              Präventionsrat
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="themes">
+              <li><a href="{% url 'intern:arbeitskreis' %}">Überblick</a></li>
+              <li><a href="{% url 'arbeitskreis_mitglieder' %}">Mitglieder</a></li>
+            </ul>
+          </li>
+          <li><a href="{% url 'intern:maedchenbund' %}">Mädchenbund</a></li>
+        {% endif %}
+
+        <li><a href="{% url 'kontakt' %}">Kontakt</a></li>
+        <li><a href="{% url 'links:index' %}">Links</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {#            <li><a href="{% url 'feedback:index' %}"><button type="button" class="btn btn-primary">Feedback geben</button></a></li>#}
+        {% if user.is_authenticated %}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false">Verwaltung <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              {% if user.is_staff %}
+                <li><a href="{% url 'admin:index' %}">Adminbereich</a></li>
+                <li role="separator" class="divider"></li>
+              {% endif %}
+              <li><a href="#">Eingeloggt als {{ user }}</a></li>
+              <li><a href="{% url 'logout' %}">Ausloggen</a></li>
+            </ul>
+          </li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+
+<div id="main">
+  <div class="container" id="owl-container">
+    {% block carousel %}{% endblock %}
+  </div>
+
+  <div class="container">
+    {% block heading %}{% endblock %}
+  </div>
+
+  <div class="container" role="main">
+    {% block content %}{% endblock %}
+  </div>
+</div>
+
+<div class="footer-wrapper">
+  <footer class="stripe">
+    <div class="container">
+      {% include 'footer.html' %}
     </div>
+  </footer>
+</div>
 
-    <div id="main">
-      <div class="container" id="owl-container">
-       {% block carousel %}{% endblock %}
-      </div>
-
-      <div class="container">
-        {% block heading %}{% endblock %}
-      </div>
-
-      <div class="container" role="main">
-        {% block content %}{% endblock %}
-      </div>
-    </div>
-
-    <div class="footer-wrapper">
-      <footer class="stripe">
-        <div class="container">
-          {% include 'footer.html' %}
-        </div>
-      </footer>
-    </div>
-
-  </body>
+</body>
 </html>

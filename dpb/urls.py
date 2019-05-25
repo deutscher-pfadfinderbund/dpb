@@ -39,8 +39,8 @@ urlpatterns = [
                   url(r'^karten/', include('maps.urls')),
 
                   url(r'^admin/', admin.site.urls),
-                  url(r'^account/', include('login.urls')),
-                  url(r'^accounts/', include('login.urls')),
+                  # url(r'^account/', include('login.urls')),
+                  # url(r'^accounts/', include('login.urls')),
                   url(r'^tinymce/', include('tinymce.urls')),
                   url(r'^', include('django.contrib.auth.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

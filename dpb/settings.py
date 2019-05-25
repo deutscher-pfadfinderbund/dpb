@@ -39,6 +39,7 @@ elif len(SECRET_KEY) < 50:
 ALLOWED_HOSTS = ['*']
 
 SITE_ID = 1
+LOGOUT_REDIRECT_URL = 'index'
 
 # Application definition
 
@@ -61,7 +62,6 @@ INSTALLED_APPS = (
 
     # Own apps
     'pages',
-    'login',
     'archive',
     'contact',
     'feedback',
