@@ -3,6 +3,7 @@ version: "3.7"
 services:
   web:
     image: cmeter/dpb
+    restart: unless-stopped
     volumes:
       - ./static/:/code/static
       - ./media/:/code/media
@@ -13,6 +14,7 @@ services:
 
   db:
     image: postgres:11-alpine
+    restart: unless-stopped
     volumes:
       - ./db/entrypoint:/docker-entrypoint-initdb.d
       - ./db/data:/var/lib/postgresql/data
