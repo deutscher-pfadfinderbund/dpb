@@ -1,14 +1,14 @@
 FROM python:3.7-alpine
 
-COPY Pipfile /code/Pipfile
-COPY Pipfile.lock /code/Pipfile.lock
+RUN apk add --no-cache build-base python-dev py-pip jpeg-dev zlib-dev musl-dev postgresql-dev && \
+    pip install -U pipenv pip
 
 WORKDIR /code
 
-RUN apk add --no-cache build-base python-dev py-pip jpeg-dev zlib-dev musl-dev postgresql-dev
+COPY Pipfile /code/Pipfile
+COPY Pipfile.lock /code/Pipfile.lock
 
-RUN pip install -U pipenv pip && \
-    pipenv install --system --deploy --ignore-pipfile
+RUN pipenv install --system --deploy --ignore-pipfile
 
 COPY . /code
 

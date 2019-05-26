@@ -12,7 +12,7 @@ services:
       - dpb
 
   db:
-    image: postgres:10-alpine
+    image: postgres:11-alpine
     volumes:
       - ./db/entrypoint:/docker-entrypoint-initdb.d
       - ./db/data:/var/lib/postgresql/data
@@ -20,11 +20,6 @@ services:
       - production.env
     networks:
       - dpb
-    environment:
-      POSTGRES_PASSWORD: ${DB_PASS}
-      POSTGRES_ROOT_PASSWORD: ${DB_PASS}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_DB: ${DB_NAME}
 
   proxy:
     image: nginx:1-alpine
