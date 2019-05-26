@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
 import datetime
+
+from django.db import models, migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
     ]
 
@@ -40,6 +40,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='link',
             name='category',
-            field=models.ForeignKey(to='links.LinkCategory'),
+            field=models.ForeignKey(to='links.LinkCategory', on_delete=models.CASCADE),
         ),
     ]

@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
 import filer.fields.file
 import filer.fields.image
+from django.db import models, migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('filer', '0002_auto_20150606_2003'),
         ('sites', '0001_initial'),
@@ -22,10 +21,17 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=200, verbose_name='title')),
                 ('content', models.TextField(blank=True, verbose_name='content')),
                 ('enable_comments', models.BooleanField(verbose_name='enable comments', default=False)),
-                ('template_name', models.CharField(max_length=70, blank=True, verbose_name='template name', help_text="Example: 'pages/contact_page.html'. If this isn't provided, the system will use 'pages/default.html'.")),
-                ('registration_required', models.BooleanField(verbose_name='registration required', help_text='If this is checked, only logged-in users will be able to view the page.', default=False)),
-                ('attachment', filer.fields.file.FilerFileField(null=True, related_name='attachment', blank=True, to='filer.File')),
-                ('image', filer.fields.image.FilerImageField(null=True, related_name='image', blank=True, to='filer.Image')),
+                ('template_name', models.CharField(max_length=70, blank=True, verbose_name='template name',
+                                                   help_text="Example: 'pages/contact_page.html'. If this isn't provided, the system will use 'pages/default.html'.")),
+                ('registration_required', models.BooleanField(verbose_name='registration required',
+                                                              help_text='If this is checked, only logged-in users will be able to view the page.',
+                                                              default=False)),
+                ('attachment',
+                 filer.fields.file.FilerFileField(null=True, related_name='attachment', blank=True, to='filer.File',
+                                                  on_delete=models.CASCADE)),
+                ('image',
+                 filer.fields.image.FilerImageField(null=True, related_name='image', blank=True, to='filer.Image',
+                                                    on_delete=models.CASCADE)),
                 ('sites', models.ManyToManyField(to='sites.Site')),
             ],
             options={

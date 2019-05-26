@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
 import filer.fields.file
+from django.db import models, migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('intern', '0006_date_attachment'),
     ]
@@ -15,7 +14,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='date',
             name='attachment',
-            field=filer.fields.file.FilerFileField(related_name='date_attachment', verbose_name='Anhang', null=True, blank=True, to='filer.File'),
+            field=filer.fields.file.FilerFileField(related_name='date_attachment', verbose_name='Anhang', null=True,
+                                                   blank=True, to='filer.File', on_delete=models.CASCADE),
         ),
         migrations.AlterField(
             model_name='date',

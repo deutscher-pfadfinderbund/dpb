@@ -87,11 +87,14 @@ def search_extended(items, title, author, keyword, doctype):
 def index(request):
     try:
         category = Category.objects.filter(name="Bundesarchiv")
-        posts = Post.objects.filter(
-            Q(category=category[0].id),
-            Q(public=True),
-            Q(archive=False),
-        ).order_by("-created")
+        if len(category) == 0:
+            posts = None
+        else:
+            posts = Post.objects.filter(
+                Q(category=category[0].id),
+                Q(public=True),
+                Q(archive=False),
+            ).order_by("-created")
     except Post.DoesNotExist:
         raise Http404("Diese Beiträge konnten leider nicht gefunden werden.")
     return render(request, 'archive/index.html', {"posts": posts})

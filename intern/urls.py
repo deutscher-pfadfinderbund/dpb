@@ -4,6 +4,8 @@ import maedchenbund.views as maedchenbundviews
 from . import views
 from .views import DateCreate, DateDelete, DateUpdate
 
+app_name = 'intern'
+
 urlpatterns = [
     url(r'arbeitskreis/$', views.work_group, name='arbeitskreis'),
     url(r'dokumente/$', views.documents, name='documents'),

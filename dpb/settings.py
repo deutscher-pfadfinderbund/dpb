@@ -7,37 +7,23 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
-SECRET_KEY = "CHANGE_ME"
 import os
 import sys
 
 import django.contrib.auth
 
+SECRET_KEY = os.getenv("SECRET_KEY", "CHANGE_ME")
+DEBUG = os.getenv("DEBUG", "").lower() == "true"
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-# Import SECRET_KEY and check it
-try:
-    from dpb.settings_local import *
-except ImportError:
-    print("[ERROR] dpb/settings_local.py not found. Please create it according to the template "
-          "settings_local.py.template")
-    sys.exit()
-
-if SECRET_KEY == "CHANGE_ME":
-    print("[ERROR] Please change your secret key, stored in dpb/settings_local.py")
-    print("More information: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-SECRET_KEY")
-    sys.exit()
-elif len(SECRET_KEY) < 50:
-    print("[WARNING] Your SECRET_KEY is too short. Please consider changing it.")
-
-ALLOWED_HOSTS = ['.deutscher-pfadfinderbund.de', 'deutscher-pfadfinderbund.de', '.jungenbund.de', '.maedchenbund.de',
-                 '127.0.0.1']
+# ALLOWED_HOSTS = ['.deutscher-pfadfinderbund.de', 'deutscher-pfadfinderbund.de', '.jungenbund.de', '.maedchenbund.de',
+#                  '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 SITE_ID = 1
+LOGOUT_REDIRECT_URL = 'index'
 
 # Application definition
 
@@ -52,7 +38,6 @@ INSTALLED_APPS = (
 
     # 3rd party
     'dpb.apps.MyFilerConfig',  # Use Django-Filer with own config for verbose name
-    'mptt',
     'easy_thumbnails',
     'django_forms_bootstrap',
     'autoslug',
@@ -61,7 +46,6 @@ INSTALLED_APPS = (
 
     # Own apps
     'pages',
-    'login',
     'archive',
     'contact',
     'feedback',
@@ -73,12 +57,11 @@ INSTALLED_APPS = (
     'maedchenbund',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -87,18 +70,17 @@ ROOT_URLCONF = 'dpb.urls'
 
 WSGI_APPLICATION = 'dpb.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASS,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
+        'NAME': os.getenv("DB_NAME", "dpb"),
+        'USER': os.getenv("DB_USER", "dpb"),
+        'PASSWORD': os.getenv("DB_PASS", "razupaltuff"),
+        'HOST': os.getenv("DB_HOST", "localhost"),
+        'PORT': os.getenv("DB_PORT", "5432"),
     }
 }
 
@@ -114,6 +96,7 @@ USE_L10N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
+FILE_UPLOAD_PERMISSIONS = 0o777
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
@@ -130,25 +113,21 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-
 # Configure Templates
 TEMPLATES = [{
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                # 'django.core.context_processors.media',
-                # 'django.core.context_processors.static',
-                # 'django.core.context_processors.request',
-            ],
-            'debug': DEBUG,
-        },
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': [os.path.join(BASE_DIR, 'templates')],
+    'APP_DIRS': True,
+    'OPTIONS': {
+        'context_processors': [
+            'django.template.context_processors.debug',
+            'django.template.context_processors.request',
+            'django.contrib.auth.context_processors.auth',
+            'django.contrib.messages.context_processors.messages',
+        ],
+        'debug': DEBUG,
     },
+},
 ]
 
 # Filer Settings

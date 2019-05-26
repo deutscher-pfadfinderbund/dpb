@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
+
+import requests
 from autoslug import AutoSlugField
 from django.db import models
-
-from datetime import datetime
-import requests
 
 
 class State(models.Model):
     """ List of the states of Germany """
     name = models.CharField("Name", max_length=1024, blank=False)
-    created = models.DateTimeField("Erstellt am", default=datetime.now)
+    created = models.DateTimeField("Erstellt am", auto_now_add=True)
 
     def __str__(self):
         return self.name
@@ -31,11 +30,11 @@ class Date(models.Model):
     description = models.TextField("Beschreibung", blank=True)
     host = models.CharField("Ausrichter", max_length=128, blank=True)
     attachment = models.FileField(upload_to="termine/", verbose_name="Anhang", null=True, blank=True)
-    created = models.DateTimeField("Erstellt am", default=datetime.now)
+    created = models.DateTimeField("Erstellt am", auto_now_add=True)
 
     def clean(self):
         try:
-            data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(self.location)+
+            data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(self.location) +
                                 "&format=json&polygon=1&addressdetails=1").json()[0]
             self.latitude = data["lat"]
             self.longitude = data["lon"]
@@ -50,7 +49,7 @@ class Date(models.Model):
 
     @staticmethod
     def get_absolute_url():
-        from django.core.urlresolvers import reverse
+        from django.urls import reverse
         return reverse('intern:dates')
 
     class Meta:
@@ -65,7 +64,7 @@ class House(models.Model):
     street = models.CharField("Straße", max_length=4096, blank=True)
     plz = models.CharField("PLZ", max_length=4096, blank=True)
     city = models.CharField("Stadt", max_length=4096, blank=True)
-    state = models.ForeignKey(State, verbose_name="Bundesland", null=True, blank=True)
+    state = models.ForeignKey(State, verbose_name="Bundesland", null=True, blank=True, on_delete=models.SET_NULL)
 
     # Web
     gmaps_location = models.URLField("Google Maps Link", blank=True, null=True)

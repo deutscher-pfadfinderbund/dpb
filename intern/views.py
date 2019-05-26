@@ -3,8 +3,8 @@ from datetime import datetime
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, UpdateView
 from filer.models import File, Folder
 
