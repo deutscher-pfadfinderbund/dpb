@@ -1,11 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.db.models import Q
-from django.http import Http404, HttpRequest
+from django.db.models import Q, QuerySet
+from django.http import Http404, HttpRequest, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 
+from archive.forms import FeedbackForm
 from blog.models import Post, Category
-from .models import Item
+from .models import Item, Feedback
 
 MINIMUM_LENGTH_OF_QUERY = 4
 
@@ -29,13 +31,17 @@ def _parse_form_field(request: HttpRequest, param: str) -> str:
     return query
 
 
+def _remove_blocked_items(items: QuerySet) -> QuerySet:
+    return items.filter(reviewed=True).filter(active=True)
+
+
 def _search_fulltext(items, query):
     """
     Given a query, search complete database
     """
     try:
         # Specify which fields are searchable
-        return items.filter(  # '|' = OR; ',' = AND
+        items = items.filter(  # '|' = OR; ',' = AND
             Q(signature__icontains=query) |
             Q(author__icontains=query) |
             Q(title__icontains=query) |
@@ -56,6 +62,7 @@ def _search_fulltext(items, query):
             Q(owner__icontains=query) |
             Q(pub_date__icontains=query)
         )
+        return _remove_blocked_items(items)
     except Item.DoesNotExist:
         return items
 
@@ -126,7 +133,7 @@ def search(request):
     if lengths >= MINIMUM_LENGTH_OF_QUERY:
         items = _search_fulltext(items, query)
         items = _search_extended(items, title, author, keyword)
-        results = items.order_by('title')
+        results = _remove_blocked_items(items.order_by('title'))
     elif 0 < lengths < MINIMUM_LENGTH_OF_QUERY:
         errors = True
         results = None
@@ -140,12 +147,28 @@ def search(request):
                                                    "keyword": keyword,
                                                    "doctype": doctype,
                                                    "errors": errors,
-                                                   "forloop_modifier": 0,
                                                    "min_length_of_query": MINIMUM_LENGTH_OF_QUERY})
 
 
 @login_required()
 def detail(request: HttpRequest, pk: Item):
-    item_db = get_object_or_404(Item, pk=pk)
-    item = item_db if item_db.reviewed and item_db.active else None
-    return render(request, "archive/detail.html", {"item": item})
+    item = get_object_or_404(Item, pk=pk, active=True, reviewed=True)
+    return render(request, "archive/detail.html", {"item": item,
+                                                   "feedback_form": FeedbackForm()})
+
+
+@login_required()
+def feedback(request: HttpRequest):
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        item = request.POST.get('item')
+        if form.is_valid() and item is not None:
+            form.cleaned_data['item'] = Item.objects.get(id=item)
+            Feedback(**form.cleaned_data).save()
+            return HttpResponseRedirect(reverse('archive:feedback_erfolgreich'))
+    return HttpResponseRedirect(reverse('archive:search'))
+
+
+@login_required()
+def feedback_danke(request: HttpRequest):
+    return render(request, 'archive/feedback_danke.html')

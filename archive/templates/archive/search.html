@@ -124,7 +124,7 @@
           <tbody>
           {% for item in results %}
             <tr>
-              <td>{{ forloop.counter|add:forloop_modifier }}</td>
+              <td>{{ forloop.counter }}</td>
               <td>
                 <a href="{% url 'archive:details' pk=item.pk %}">
                   {{ item.title }}

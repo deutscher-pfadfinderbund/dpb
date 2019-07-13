@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load markdown_deux_tags %}
+{% load bootstrap_tags %}
 {% load archive_tags %}
 
 {% block heading %}
@@ -63,6 +64,28 @@
       </div>
     </div>
   {% endif %}
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Rückmeldung zum Artikel geben
+      </h3>
+    </div>
+    <div class="panel-body">
+      <p>
+        Falls die Fehler in dem Artikel auffallen oder du uns noch weitere Informationen dazu geben kannst und möchtest,
+        dann fülle doch bitte dieses Formular aus. Wir freuen uns sehr über deine Mitarbeit und werden spätestens beim
+        nächsten Archivtreffen an der Umsetzung der Vorschläge arbeiten.
+      </p>
+      <form action="/bundesarchiv/feedback/" method="post">
+        {% csrf_token %}
+        {{ feedback_form|as_bootstrap }}
+        <input type="hidden" name="item" value="{{ item.pk }}">
+        <input type="submit" value="Feedback abschicken">
+      </form>
+    </div>
+  </div>
+
 
   {% if user.is_staff %}
     <br>
