@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q
 from django.http import Http404, HttpRequest
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from blog.models import Post, Category
 from .models import Item
@@ -60,16 +60,9 @@ def _search_fulltext(items, query):
         return items
 
 
-def _search_extended(items, title, author, keyword, doctype):
+def _search_extended(items, title, author, keyword):
     """
     If there are any additional search keywords provided, concatenate them with AND and return the result.
-
-    :param items: Potentially filtered collection of all items
-    :param title:
-    :param author:
-    :param keyword:
-    :param doctype:
-    :return:
     """
     try:
         if title and len(title) != 0:
@@ -132,7 +125,7 @@ def search(request):
 
     if lengths >= MINIMUM_LENGTH_OF_QUERY:
         items = _search_fulltext(items, query)
-        items = _search_extended(items, title, author, keyword, doctype)
+        items = _search_extended(items, title, author, keyword)
         results = items.order_by('title')
     elif 0 < lengths < MINIMUM_LENGTH_OF_QUERY:
         errors = True
@@ -147,4 +140,12 @@ def search(request):
                                                    "keyword": keyword,
                                                    "doctype": doctype,
                                                    "errors": errors,
+                                                   "forloop_modifier": 0,
                                                    "min_length_of_query": MINIMUM_LENGTH_OF_QUERY})
+
+
+@login_required()
+def detail(request: HttpRequest, pk: Item):
+    item_db = get_object_or_404(Item, pk=pk)
+    item = item_db if item_db.reviewed and item_db.active else None
+    return render(request, "archive/detail.html", {"item": item})

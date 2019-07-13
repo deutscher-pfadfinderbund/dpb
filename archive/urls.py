@@ -1,11 +1,12 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 app_name = 'archive'
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'katalog/$', views.search, name='search'),
-    url(r'einschicken/$', views.send_in, name='send_in'),
+    path('', views.index, name='index'),
+    path('katalog/', views.search, name='search'),
+    path('katalog/<int:pk>', views.detail, name='details'),
+    path('einschicken/', views.send_in, name='send_in'),
 ]
