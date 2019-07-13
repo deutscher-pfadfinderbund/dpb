@@ -99,11 +99,20 @@ class YearAdmin(PageDownAdmin):
 
 
 class FeedbackAdmin(PageDownAdmin):
-    list_display = ('name', 'email', 'note', 'archive')
+    list_display = ('name', 'email', 'archive', 'mailto_link')
     list_filter = ['created']
     search_fields = ['name', 'email', 'note', 'archive']
     actions = ['to_archive']
-    readonly_fields = ('created', 'modified')
+    readonly_fields = ('created', 'modified', 'mailto_link')
+    fieldsets = [
+        ('Allgemein', {'fields': [
+            'name', ('email', 'mailto_link'), 'group',
+            'note', 'item'
+        ]}),
+        ('Meta', {'fields': [
+            'archive', 'created', 'modified'
+        ]})
+    ]
 
     def to_archive(self, request, queryset):
         queryset.update(archive=True)
