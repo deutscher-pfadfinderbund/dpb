@@ -116,6 +116,7 @@
             <th>#</th>
             <th width="60%">Titel</th>
             <th>Autor</th>
+            <th>Medienart</th>
             <th data-sortable="true">Jahr</th>
             <th>Signatur</th>
           </tr>
@@ -130,6 +131,7 @@
                 </a>
               </td>
               <td>{{ item.author }}</td>
+              <td>{{ item.medartanalog }}</td>
               <td>
                 {% if not item.year == 0 %}
                   {{ item.year }}

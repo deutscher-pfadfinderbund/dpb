@@ -13,10 +13,9 @@
             },
             columnDefs: [
                 {type: 'natural', targets: '_all'}
-            ]
-        });
-        $.extend($.fn.dataTable.defaults, {
-            searching: false
+            ],
+            "pageLength": 20,
+            "searching": true
         });
     });
 </script>
