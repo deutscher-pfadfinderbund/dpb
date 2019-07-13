@@ -1,13 +1,16 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q
-from django.http import Http404
+from django.http import Http404, HttpRequest
 from django.shortcuts import render
 
 from blog.models import Post, Category
 from .models import Item
 
+MINIMUM_LENGTH_OF_QUERY = 4
 
-def parse_form_field(request, param):
+
+def _parse_form_field(request: HttpRequest, param: str) -> str:
     """
     Parse parameter from request and return empty string if not provided or not parsable.
 
@@ -15,7 +18,7 @@ def parse_form_field(request, param):
     :param param: to be parsed
     :return: str
     """
-    req = request.POST.get(param)
+    req = request.GET.get(param)
     query = ""
     if req:
         query = req
@@ -26,12 +29,9 @@ def parse_form_field(request, param):
     return query
 
 
-def search_fulltext(items, query):
+def _search_fulltext(items, query):
     """
     Given a query, search complete database
-
-    :param query:
-    :return:
     """
     try:
         # Specify which fields are searchable
@@ -60,7 +60,7 @@ def search_fulltext(items, query):
         return items
 
 
-def search_extended(items, title, author, keyword, doctype):
+def _search_extended(items, title, author, keyword, doctype):
     """
     If there are any additional search keywords provided, concatenate them with AND and return the result.
 
@@ -105,29 +105,38 @@ def send_in(request):
     return render(request, 'archive/send_in.html')
 
 
+def _paginate_results(items, page):
+    paginator = Paginator(items, 20)
+    try:
+        prepared_items = paginator.page(page)
+    except PageNotAnInteger:
+        prepared_items = paginator.page(1)
+    except EmptyPage:
+        prepared_items = paginator.page(paginator.num_pages)
+    return prepared_items
+
+
 @login_required
 def search(request):
-    query = title = author = keyword = doctype = results = None
     items = Item.objects.exclude(active=False)
     errors = False
-    min_length = 4
+    results = []
 
-    if request.method == 'POST':
-        query = parse_form_field(request, "q")
-        title = parse_form_field(request, "title")
-        author = parse_form_field(request, "author")
-        keyword = parse_form_field(request, "keyword")
-        doctype = parse_form_field(request, "doctype")
+    query = _parse_form_field(request, "q")
+    title = _parse_form_field(request, "title")
+    author = _parse_form_field(request, "author")
+    keyword = _parse_form_field(request, "keyword")
+    doctype = _parse_form_field(request, "doctype")
 
-        lengths = len(query) + len(title) + len(author) + len(keyword) + len(doctype)
+    lengths = len(query) + len(title) + len(author) + len(keyword) + len(doctype)
 
-        if lengths >= min_length:
-            items = search_fulltext(items, query)
-            items = search_extended(items, title, author, keyword, doctype)
-            results = items.order_by('title')
-        else:
-            errors = True
-            results = None
+    if lengths >= MINIMUM_LENGTH_OF_QUERY:
+        items = _search_fulltext(items, query)
+        items = _search_extended(items, title, author, keyword, doctype)
+        results = items.order_by('title')
+    elif 0 < lengths < MINIMUM_LENGTH_OF_QUERY:
+        errors = True
+        results = None
 
     results = results if results and results is not [] else None
 
@@ -137,4 +146,5 @@ def search(request):
                                                    "author": author,
                                                    "keyword": keyword,
                                                    "doctype": doctype,
-                                                   "errors": errors})
+                                                   "errors": errors,
+                                                   "min_length_of_query": MINIMUM_LENGTH_OF_QUERY})
