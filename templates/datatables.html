@@ -6,16 +6,21 @@
 <script src="{% static 'assets/datatables-naturalsort/natural.js' %}"></script>
 <link rel="stylesheet" href="{% static 'assets/datatables/css/dataTables.bootstrap.min.css' %}"/>
 <script type="text/javascript">
+    $.extend($.fn.dataTable.defaults, {
+        searching: false,
+        columnDefs: [
+            {type: 'natural', targets: '_all'}
+        ],
+        "language": {
+            "url": "{% static 'assets/datatables/german.json' %}"
+        }
+    });
+
     $(document).ready(function () {
         $('.datatable').dataTable({
-            "language": {
-                "url": "{% static 'assets/datatables/german.json' %}"
-            },
-            columnDefs: [
-                {type: 'natural', targets: '_all'}
-            ],
             "pageLength": 20,
-            "searching": true
+            "searching": true,
+            "stateSave": true
         });
     });
 </script>
