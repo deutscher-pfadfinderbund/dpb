@@ -6,9 +6,9 @@ register = template.Library()
 
 
 @register.filter
-def extension(file: File):
+def dispatch_file(file: File):
     """
-    Return the filename.
+    Dispatch file by extension.
     """
     if file.extension in ["jpg", "png", "svg", "gif"]:
         return _prepare_image(file)
@@ -17,9 +17,7 @@ def extension(file: File):
         <div class='panel panel-default'>
             <div class='panel-body'>
                 <p>{}</p>
-                <p>
-                    <a class='btn btn-default' href='{}' target='_blank'>Datei öffnen</a>
-                </p>
+                <a class='btn btn-default' href='{}' target='_blank'>Datei öffnen</a>
             </div>
         </div>
     """.format(file, file.url)

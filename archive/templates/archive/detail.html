@@ -46,18 +46,18 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-md-4">
-            {{ item.file|extension|safe }}
+            {{ item.file|dispatch_file|safe }}
           </div>
 
           {% if item.file2 %}
             <div class="col-md-4">
-              {{ item.file2|extension|safe }}
+              {{ item.file2|dispatch_file|safe }}
             </div>
           {% endif %}
 
           {% if item.file3 %}
             <div class="col-md-4">
-              {{ item.file3|extension|safe }}
+              {{ item.file3|dispatch_file|safe }}
             </div>
           {% endif %}
         </div>
