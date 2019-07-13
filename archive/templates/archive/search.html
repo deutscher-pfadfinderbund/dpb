@@ -49,8 +49,7 @@
       </div>
     {% endif %}
 
-    <p>
-    <form action="" class="form-horizontal" id="search-form">{% csrf_token %}
+    <form action="" class="form-horizontal" id="search-form">
       <div class="form-group">
         <label for="id_q" class="col-sm-2 control-label">Volltextsuche</label>
         <div class="col-sm-10">
@@ -72,7 +71,7 @@
         <div class="form-group">
           <label for="id_author" class="col-sm-2 control-label">Autor</label>
           <div class="col-sm-10">
-            <input type="text" name="author" id="id_author" value="{{ author|default_if_none:'' }}" class="form-control"
+            <input type="text" name="autor" id="id_author" value="{{ author|default_if_none:'' }}" class="form-control"
                    placeholder="z.B. Deutscher Pfadfinderbund"/>
           </div>
         </div>
@@ -80,7 +79,7 @@
         <div class="form-group">
           <label for="id_keyword" class="col-sm-2 control-label">Schlagwort</label>
           <div class="col-sm-10">
-            <input type="text" name="keyword" id="id_keyword" value="{{ keyword|default_if_none:'' }}"
+            <input type="text" name="schlagwort" id="id_keyword" value="{{ keyword|default_if_none:'' }}"
                    class="form-control" placeholder="Schlagwort"/>
           </div>
         </div>
@@ -88,8 +87,8 @@
         <div class="form-group">
           <label for="id_doctype" class="col-sm-2 control-label">Dokumententyp</label>
           <div class="col-sm-10">
-            <input type="text" name="doctype" id="id_doctype" value="{{ doctype|default_if_none:'' }}"
-                   class="form-control" placeholder="Dokumentyp" disabled/>
+            <input type="text" name="dokumenttyp" id="id_doctype" value="{{ doctype|default_if_none:'' }}"
+                   class="form-control" placeholder="Dokumenttyp" disabled/>
           </div>
         </div>
       </div>
@@ -104,7 +103,6 @@
       </button>
       <button class="btn btn-xs btn-default" id="reset-button">Formular leeren</button>
     </div>
-    </p>
 
     <hr>
 

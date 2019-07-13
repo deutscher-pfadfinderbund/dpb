@@ -123,10 +123,10 @@ def search(request):
     results = []
 
     query = _parse_form_field(request, "q")
-    title = _parse_form_field(request, "title")
-    author = _parse_form_field(request, "author")
-    keyword = _parse_form_field(request, "keyword")
-    doctype = _parse_form_field(request, "doctype")
+    title = _parse_form_field(request, "titel")
+    author = _parse_form_field(request, "autor")
+    keyword = _parse_form_field(request, "schlagwort")
+    doctype = _parse_form_field(request, "dokumenttyp")
 
     lengths = len(query) + len(title) + len(author) + len(keyword) + len(doctype)
 
