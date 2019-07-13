@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
 {% block heading %}
   <h1>Bundesarchiv - Online-Katalog</h1>
 {% endblock %}
@@ -108,7 +110,7 @@
 
     <p>
       {% if results %}
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover datatable">
           <thead>
           <tr>
             <th>#</th>
@@ -147,4 +149,8 @@
       Das Bundesarchiv ist noch nicht öffentlich für alle Mitglieder des DPBs einsehbar, aber wir arbeiten dran!
     </p>
   {% endif %}
+{% endblock %}
+
+{% block sources %}
+  {% include "datatables.html" %}
 {% endblock %}
