@@ -1,11 +1,11 @@
+from django import forms
 from django.forms import ModelForm
-from pagedown.forms import PagedownField
-from .models import Item
+
+from .models import Feedback
 
 
-class ItemForm(ModelForm):
+class FeedbackForm(ModelForm):
     class Meta:
-        model = Item
-        widgets = {
-            'name': PagedownField()
-        }
+        model = Feedback
+        widgets = {'item': forms.HiddenInput()}
+        exclude = ['archive', 'created', 'modified', 'item']

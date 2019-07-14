@@ -68,9 +68,9 @@ def human_key(key):
 
 class ItemAdmin(PageDownAdmin):
     list_display = (
-        'title', 'author', 'year', 'has_file', 'medartanalog', 'signature', 'location',
+        'title', 'author', 'year', 'medartanalog', 'signature', 'location', 'has_file', 'reviewed',
     )
-    list_filter = ['medartanalog', HasFileFilter]
+    list_filter = ['medartanalog', 'doctype', 'reviewed', HasFileFilter]
     search_fields = ['signature', 'title', 'author', 'keywords', 'notes']
 
     fieldsets = [
@@ -78,7 +78,7 @@ class ItemAdmin(PageDownAdmin):
                                   ('date', 'year'),
                                   'place',
                                   ('medartanalog', 'doctype'),
-                                  ('file', 'file2', 'file3'),
+                                  'file', 'file2', 'file3',
                                   'keywords', 'location',
                                   'source', 'notes', 'collection', 'amount',
                                   'crossreference', 'owner']}),
@@ -99,11 +99,20 @@ class YearAdmin(PageDownAdmin):
 
 
 class FeedbackAdmin(PageDownAdmin):
-    list_display = ('name', 'email', 'note', 'archive')
+    list_display = ('name', 'email', 'archive', 'mailto_link')
     list_filter = ['created']
     search_fields = ['name', 'email', 'note', 'archive']
     actions = ['to_archive']
-    readonly_fields = ('created', 'modified')
+    readonly_fields = ('created', 'modified', 'mailto_link')
+    fieldsets = [
+        ('Allgemein', {'fields': [
+            'name', ('email', 'mailto_link'), 'group',
+            'note', 'item'
+        ]}),
+        ('Meta', {'fields': [
+            'archive', 'created', 'modified'
+        ]})
+    ]
 
     def to_archive(self, request, queryset):
         queryset.update(archive=True)

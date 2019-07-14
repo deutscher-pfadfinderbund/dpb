@@ -1,13 +1,18 @@
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
-from django.http import Http404
-from django.shortcuts import render
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Q, QuerySet
+from django.http import Http404, HttpRequest, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 
+from archive.forms import FeedbackForm
 from blog.models import Post, Category
-from .models import Item
+from .models import Item, Feedback
+
+MINIMUM_LENGTH_OF_QUERY = 4
 
 
-def parse_form_field(request, param):
+def _parse_form_field(request: HttpRequest, param: str) -> str:
     """
     Parse parameter from request and return empty string if not provided or not parsable.
 
@@ -15,7 +20,7 @@ def parse_form_field(request, param):
     :param param: to be parsed
     :return: str
     """
-    req = request.POST.get(param)
+    req = request.GET.get(param)
     query = ""
     if req:
         query = req
@@ -26,16 +31,17 @@ def parse_form_field(request, param):
     return query
 
 
-def search_fulltext(items, query):
+def _remove_blocked_items(items: QuerySet) -> QuerySet:
+    return items.filter(reviewed=True).filter(active=True)
+
+
+def _search_fulltext(items, query):
     """
     Given a query, search complete database
-
-    :param query:
-    :return:
     """
     try:
         # Specify which fields are searchable
-        return items.filter(  # '|' = OR; ',' = AND
+        items = items.filter(  # '|' = OR; ',' = AND
             Q(signature__icontains=query) |
             Q(author__icontains=query) |
             Q(title__icontains=query) |
@@ -56,20 +62,14 @@ def search_fulltext(items, query):
             Q(owner__icontains=query) |
             Q(pub_date__icontains=query)
         )
+        return _remove_blocked_items(items)
     except Item.DoesNotExist:
         return items
 
 
-def search_extended(items, title, author, keyword, doctype):
+def _search_extended(items, title, author, keyword):
     """
     If there are any additional search keywords provided, concatenate them with AND and return the result.
-
-    :param items: Potentially filtered collection of all items
-    :param title:
-    :param author:
-    :param keyword:
-    :param doctype:
-    :return:
     """
     try:
         if title and len(title) != 0:
@@ -105,29 +105,38 @@ def send_in(request):
     return render(request, 'archive/send_in.html')
 
 
+def _paginate_results(items, page):
+    paginator = Paginator(items, 20)
+    try:
+        prepared_items = paginator.page(page)
+    except PageNotAnInteger:
+        prepared_items = paginator.page(1)
+    except EmptyPage:
+        prepared_items = paginator.page(paginator.num_pages)
+    return prepared_items
+
+
 @login_required
 def search(request):
-    query = title = author = keyword = doctype = results = None
     items = Item.objects.exclude(active=False)
     errors = False
-    min_length = 4
+    results = []
 
-    if request.method == 'POST':
-        query = parse_form_field(request, "q")
-        title = parse_form_field(request, "title")
-        author = parse_form_field(request, "author")
-        keyword = parse_form_field(request, "keyword")
-        doctype = parse_form_field(request, "doctype")
+    query = _parse_form_field(request, "q")
+    title = _parse_form_field(request, "titel")
+    author = _parse_form_field(request, "autor")
+    keyword = _parse_form_field(request, "schlagwort")
+    doctype = _parse_form_field(request, "dokumenttyp")
 
-        lengths = len(query) + len(title) + len(author) + len(keyword) + len(doctype)
+    lengths = len(query) + len(title) + len(author) + len(keyword) + len(doctype)
 
-        if lengths >= min_length:
-            items = search_fulltext(items, query)
-            items = search_extended(items, title, author, keyword, doctype)
-            results = items.order_by('title')
-        else:
-            errors = True
-            results = None
+    if lengths >= MINIMUM_LENGTH_OF_QUERY:
+        items = _search_fulltext(items, query)
+        items = _search_extended(items, title, author, keyword)
+        results = _remove_blocked_items(items.order_by('title'))
+    elif 0 < lengths < MINIMUM_LENGTH_OF_QUERY:
+        errors = True
+        results = None
 
     results = results if results and results is not [] else None
 
@@ -137,4 +146,29 @@ def search(request):
                                                    "author": author,
                                                    "keyword": keyword,
                                                    "doctype": doctype,
-                                                   "errors": errors})
+                                                   "errors": errors,
+                                                   "min_length_of_query": MINIMUM_LENGTH_OF_QUERY})
+
+
+@login_required()
+def detail(request: HttpRequest, pk: Item):
+    item = get_object_or_404(Item, pk=pk, active=True, reviewed=True)
+    return render(request, "archive/detail.html", {"item": item,
+                                                   "feedback_form": FeedbackForm()})
+
+
+@login_required()
+def feedback(request: HttpRequest):
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        item = request.POST.get('item')
+        if form.is_valid() and item is not None:
+            form.cleaned_data['item'] = Item.objects.get(id=item)
+            Feedback(**form.cleaned_data).save()
+            return HttpResponseRedirect(reverse('archive:feedback_erfolgreich'))
+    return HttpResponseRedirect(reverse('archive:search'))
+
+
+@login_required()
+def feedback_danke(request: HttpRequest):
+    return render(request, 'archive/feedback_danke.html')
