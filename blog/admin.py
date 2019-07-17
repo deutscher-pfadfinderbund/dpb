@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import Post, Category
 from dpb.admin import PageDownAdmin
+from .models import Post, Category
 
 
 @admin.register(Post)
@@ -9,8 +9,9 @@ class PostAdmin(PageDownAdmin):
     list_display = ('title', 'category', 'archive', 'public', 'created')
     list_filter = ['created']
     search_fields = ['title']
+    readonly_fields = ['created']
     fieldsets = [
-        (None,        {'fields': ['title', 'category', 'file', ('archive', 'public'), 'content']}),
+        (None, {'fields': ['title', 'category', 'file', ('archive', 'public'), 'content']}),
         ('Erweitert', {'fields': ['created', 'author'], 'classes': ['collapse']}),
     ]
 
