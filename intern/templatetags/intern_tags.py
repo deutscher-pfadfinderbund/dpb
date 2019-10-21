@@ -10,7 +10,7 @@ register = template.Library()
 def sizify(value):
     """
     Simple kb/mb/gb size snippet for templates:
-    
+
     {{ product.file.size|sizify }}
     """
     # value = ing(value)
