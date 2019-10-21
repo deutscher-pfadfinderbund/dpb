@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Date, House, State
+
 from dpb.admin import PageDownAdmin
+from .models import Date, House, State
 
 
 @admin.register(Date)
@@ -10,7 +11,7 @@ class DateAdmin(admin.ModelAdmin):
     search_fields = ["title"]
     readonly_fields = ["latitude", "longitude", "display_name"]
     fieldsets = [
-        (None,        {"fields": ["title", "start", "end", "attachment", "location", "host", "description"]}),
+        (None, {"fields": ["title", "start", "end", "attachment", "location", "host", "description"]}),
         ("Erweitert", {"fields": ["created", "latitude", "longitude", "display_name"], "classes": ["collapse"]}),
     ]
 
@@ -85,5 +86,6 @@ class HouseAdmin(PageDownAdmin):
             "modified",
         ], "classes": ["collapse"]}),
     ]
+
 
 admin.site.register(State)

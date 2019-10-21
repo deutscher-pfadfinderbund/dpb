@@ -3,6 +3,7 @@
 import requests
 from autoslug import AutoSlugField
 from django.db import models
+from django.urls import reverse
 
 
 class State(models.Model):
@@ -39,7 +40,7 @@ class Date(models.Model):
             self.latitude = data["lat"]
             self.longitude = data["lon"]
             self.display_name = data["display_name"]
-        except:
+        except Exception:
             self.latitude = None
             self.longitude = None
             self.display_name = None
@@ -49,7 +50,6 @@ class Date(models.Model):
 
     @staticmethod
     def get_absolute_url():
-        from django.urls import reverse
         return reverse('intern:dates')
 
     class Meta:

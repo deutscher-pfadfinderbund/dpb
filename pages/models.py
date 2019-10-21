@@ -20,8 +20,7 @@ class Page(models.Model):
     template_name = models.CharField(_('template name'), max_length=70, blank=True,
                                      help_text=_(
                                          "Example: 'pages/contact_page.html'. If this isn't provided, "
-                                         "the system will use 'pages/default.html'."
-                                     ),
+                                         "the system will use 'pages/default.html'."),
                                      )
     registration_required = models.BooleanField(_('registration required'),
                                                 help_text=_(
