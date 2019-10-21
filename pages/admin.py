@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Page
-from .forms import PageForm
 from dpb.admin import PageDownAdmin
+from .forms import PageForm
+from .models import Page
 
 
 class PageAdmin(PageDownAdmin):
