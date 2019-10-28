@@ -67,11 +67,13 @@ def _search_fulltext(items, query):
         return items
 
 
-def _search_extended(items, title, author, keyword):
+def _search_extended(items, title, author, keyword, mediatype="alle"):
     """
     If there are any additional search keywords provided, concatenate them with AND and return the result.
     """
     try:
+        if mediatype and len(mediatype) > 0:
+            items = items.filter(medartanalog=mediatype)
         if title and len(title) != 0:
             items = items.filter(Q(title__icontains=title))
         if author and len(author) != 0:
@@ -126,13 +128,13 @@ def search(request):
     title = _parse_form_field(request, "titel")
     author = _parse_form_field(request, "autor")
     keyword = _parse_form_field(request, "schlagwort")
-    doctype = _parse_form_field(request, "dokumenttyp")
+    mediatype = _parse_form_field(request, "medientyp")
 
-    lengths = len(query) + len(title) + len(author) + len(keyword) + len(doctype)
+    lengths = len(query) + len(title) + len(author) + len(keyword) + len(mediatype)
 
     if lengths >= MINIMUM_LENGTH_OF_QUERY:
         items = _search_fulltext(items, query)
-        items = _search_extended(items, title, author, keyword)
+        items = _search_extended(items, title, author, keyword, mediatype)
         results = _remove_blocked_items(items.order_by('title'))
     elif 0 < lengths < MINIMUM_LENGTH_OF_QUERY:
         errors = True
@@ -145,9 +147,10 @@ def search(request):
                                                    "title": title,
                                                    "author": author,
                                                    "keyword": keyword,
-                                                   "doctype": doctype,
+                                                   "medientyp": mediatype,
                                                    "errors": errors,
-                                                   "min_length_of_query": MINIMUM_LENGTH_OF_QUERY})
+                                                   "min_length_of_query": MINIMUM_LENGTH_OF_QUERY,
+                                                   "mediatypes": Item.medartanalog_choices})
 
 
 @login_required()
