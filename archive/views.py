@@ -72,7 +72,7 @@ def _search_extended(items, title, author, keyword, mediatype="alle"):
     If there are any additional search keywords provided, concatenate them with AND and return the result.
     """
     try:
-        if mediatype and len(mediatype) > 0:
+        if mediatype and len(mediatype) > 0 and mediatype != "alle":
             items = items.filter(medartanalog=mediatype)
         if title and len(title) != 0:
             items = items.filter(Q(title__icontains=title))
