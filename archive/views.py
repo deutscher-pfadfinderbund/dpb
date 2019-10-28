@@ -130,7 +130,7 @@ def search(request):
     keyword = _parse_form_field(request, "schlagwort")
     mediatype = _parse_form_field(request, "medientyp")
 
-    lengths = len(query) + len(title) + len(author) + len(keyword) + len(mediatype)
+    lengths = len(query) + len(title) + len(author) + len(keyword)
 
     if lengths >= MINIMUM_LENGTH_OF_QUERY:
         items = _search_fulltext(items, query)
