@@ -67,13 +67,15 @@ def _search_fulltext(items, query):
         return items
 
 
-def _search_extended(items, title, author, keyword, mediatype="alle"):
+def _search_extended(items, title, author, keyword, mediatype="alle", doctype="alle"):
     """
     If there are any additional search keywords provided, concatenate them with AND and return the result.
     """
     try:
         if mediatype and len(mediatype) > 0 and mediatype != "alle":
             items = items.filter(medartanalog=mediatype)
+        if doctype and len(doctype) > 0 and doctype != "alle":
+            items = items.filter(doctype=doctype)
         if title and len(title) != 0:
             items = items.filter(Q(title__icontains=title))
         if author and len(author) != 0:
@@ -129,12 +131,13 @@ def search(request):
     author = _parse_form_field(request, "autor")
     keyword = _parse_form_field(request, "schlagwort")
     mediatype = _parse_form_field(request, "medientyp")
+    doctype = _parse_form_field(request, "dokumenttyp")
 
     lengths = len(query) + len(title) + len(author) + len(keyword)
 
     if lengths >= MINIMUM_LENGTH_OF_QUERY:
         items = _search_fulltext(items, query)
-        items = _search_extended(items, title, author, keyword, mediatype)
+        items = _search_extended(items, title, author, keyword, mediatype, doctype)
         results = _remove_blocked_items(items.order_by('title'))
     elif 0 < lengths < MINIMUM_LENGTH_OF_QUERY:
         errors = True
@@ -150,7 +153,8 @@ def search(request):
                                                    "medientyp": mediatype,
                                                    "errors": errors,
                                                    "min_length_of_query": MINIMUM_LENGTH_OF_QUERY,
-                                                   "mediatypes": Item.medartanalog_choices})
+                                                   "mediatypes": Item.medartanalog_choices,
+                                                   "doctypes": Item.doctype_choices})
 
 
 @login_required()
