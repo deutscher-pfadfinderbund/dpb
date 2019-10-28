@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load staticfiles %}
+{% load archive_tags %}
 
 {% block heading %}
   <h1>Bundesarchiv - Online-Katalog</h1>
@@ -117,6 +118,8 @@
             <th width="60%">Titel</th>
             <th>Autor</th>
             <th>Medienart</th>
+            <th>Dokumenttyp</th>
+            <th>Hat Datei?</th>
             <th data-sortable="true">Jahr</th>
             <th>Signatur</th>
           </tr>
@@ -131,9 +134,11 @@
               </td>
               <td>{{ item.author }}</td>
               <td>{{ item.medartanalog }}</td>
+              <td>{{ item.doctype }}</td>
+              <td>{{ item.has_file|check_or_cross|safe }}</td>
               <td>
                 {% if not item.year == 0 %}
-                  {{ item.year }}
+                  {{ item.year|default_if_none:"" }}
                 {% endif %}
               </td>
               <td>{{ item.signature }}</td>
