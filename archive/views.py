@@ -1,3 +1,5 @@
+from typing import Union, Tuple
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchQuery, SearchVector
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -41,16 +43,28 @@ def _search_fulltext(items: QuerySet, query: str) -> QuerySet:
     Given a query, search complete database
     """
     try:
-        searchable_fields = "signature", "author", "title", "date", "year", "place", "doctype", "medartanalog", \
-                            "keywords", "location", "source", "notes", "collection", "amount", "crossreference", \
-                            "active", "reviewed", "owner", "pub_date"
-
-        search_query = SearchQuery(query)
-        search_vector = SearchVector(*searchable_fields)
-        items = items.annotate(search=search_vector).filter(search=search_query)
-        return items
+        searchable_fields = ("signature", "author", "title", "date", "year", "place", "doctype", "medartanalog",
+                             "keywords", "location", "source", "notes", "collection", "amount", "crossreference",
+                             "active", "reviewed", "owner", "pub_date")
+        return _vector_based_search(items, searchable_fields, query)
     except Item.DoesNotExist:
         return items
+
+
+def _vector_based_search(queryset: QuerySet, vector: Union[str, Tuple[str, ...]], query: str) -> QuerySet:
+    """
+    Performs a search based on vectors and query. Vector can be one or multiple strings, same for query.
+
+    :param queryset:
+    :param vector:
+    :param query:
+    :return:
+    """
+    if isinstance(vector, tuple):
+        search_vector = SearchVector(*vector)
+    else:
+        search_vector = SearchVector(vector)
+    return queryset.annotate(search=SearchVector(search_vector)).filter(search=SearchQuery(query))
 
 
 def _search_extended(items: QuerySet, title: str, author: str, keyword: str, mediatype="alle", doctype="alle"):
@@ -59,15 +73,15 @@ def _search_extended(items: QuerySet, title: str, author: str, keyword: str, med
     """
     try:
         if mediatype and len(mediatype) > 0 and mediatype != "alle":
-            items = items.filter(medartanalog=mediatype)
+            items = _vector_based_search(items, "medartanalog", mediatype)
         if doctype and len(doctype) > 0 and doctype != "alle":
             items = items.filter(doctype=doctype)
         if title and len(title) != 0:
-            items = items.filter(Q(title__icontains=title))
+            items = _vector_based_search(items, "title", title)
         if author and len(author) != 0:
-            items = items.filter(Q(author__icontains=author))
+            items = _vector_based_search(items, "author", author)
         if keyword and len(keyword) != 0:
-            items = items.filter(keywords__icontains=keyword)
+            items = _vector_based_search(items, "keyword", keyword)
         return items
     except Item.DoesNotExist:
         return None
