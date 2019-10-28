@@ -43,3 +43,10 @@ def row_if_exists(field, name):
             </div>
         """.format(name, field)
     return ""
+
+
+@register.filter(is_safe=True)
+def check_or_cross(check: bool) -> str:
+    if check:
+        return '<span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>'
+    return '<span class="glyphicon glyphicon-remove text-muted" aria-hidden="true"></span>'

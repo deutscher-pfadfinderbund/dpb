@@ -1,4 +1,7 @@
+from typing import Union, Tuple
+
 from django.contrib.auth.decorators import login_required
+from django.contrib.postgres.search import SearchQuery, SearchVector
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest, HttpResponseRedirect
@@ -35,49 +38,47 @@ def _remove_blocked_items(items: QuerySet) -> QuerySet:
     return items.filter(reviewed=True).filter(active=True)
 
 
-def _search_fulltext(items, query):
+def _search_fulltext(items: QuerySet, query: str) -> QuerySet:
     """
     Given a query, search complete database
     """
     try:
-        # Specify which fields are searchable
-        items = items.filter(  # '|' = OR; ',' = AND
-            Q(signature__icontains=query) |
-            Q(author__icontains=query) |
-            Q(title__icontains=query) |
-            Q(date__icontains=query) |
-            Q(year__icontains=query) |
-            Q(place__icontains=query) |
-            Q(doctype__icontains=query) |
-            Q(medartanalog__icontains=query) |
-            Q(keywords__icontains=query) |
-            Q(location__icontains=query) |
-            Q(source__icontains=query) |
-            Q(notes__icontains=query) |
-            Q(collection__icontains=query) |
-            Q(amount__icontains=query) |
-            Q(crossreference__icontains=query) |
-            Q(active__icontains=query) |
-            Q(reviewed__icontains=query) |
-            Q(owner__icontains=query) |
-            Q(pub_date__icontains=query)
-        )
-        return _remove_blocked_items(items)
+        return _vector_based_search(items, Item.searchable_fields, query)
     except Item.DoesNotExist:
         return items
 
 
-def _search_extended(items, title, author, keyword):
+def _vector_based_search(queryset: QuerySet, vector: Union[str, Tuple[str, ...]], query: str) -> QuerySet:
+    """
+    Performs a search based on vectors and query. Vector can be one or multiple strings, same for query.
+
+    :param queryset:
+    :param vector:
+    :param query:
+    :return:
+    """
+    if isinstance(vector, tuple):
+        search_vector = SearchVector(*vector)
+    else:
+        search_vector = SearchVector(vector)
+    return queryset.annotate(search=SearchVector(search_vector)).filter(search=SearchQuery(query))
+
+
+def _search_extended(items: QuerySet, title: str, author: str, keyword: str, mediatype="alle", doctype="alle"):
     """
     If there are any additional search keywords provided, concatenate them with AND and return the result.
     """
     try:
+        if mediatype and len(mediatype) > 0 and mediatype != "alle":
+            items = _vector_based_search(items, "medartanalog", mediatype)
+        if doctype and len(doctype) > 0 and doctype != "alle":
+            items = _vector_based_search(items, "doctype", doctype)
         if title and len(title) != 0:
-            items = items.filter(Q(title__icontains=title))
+            items = _vector_based_search(items, "title", title)
         if author and len(author) != 0:
-            items = items.filter(Q(author__icontains=author))
+            items = _vector_based_search(items, "author", author)
         if keyword and len(keyword) != 0:
-            items = items.filter(keywords__icontains=keyword)
+            items = _vector_based_search(items, "keyword", keyword)
         return items
     except Item.DoesNotExist:
         return None
@@ -126,13 +127,14 @@ def search(request):
     title = _parse_form_field(request, "titel")
     author = _parse_form_field(request, "autor")
     keyword = _parse_form_field(request, "schlagwort")
+    mediatype = _parse_form_field(request, "medientyp")
     doctype = _parse_form_field(request, "dokumenttyp")
 
-    lengths = len(query) + len(title) + len(author) + len(keyword) + len(doctype)
+    lengths = len(query) + len(title) + len(author) + len(keyword)
 
     if lengths >= MINIMUM_LENGTH_OF_QUERY:
         items = _search_fulltext(items, query)
-        items = _search_extended(items, title, author, keyword)
+        items = _search_extended(items, title, author, keyword, mediatype, doctype)
         results = _remove_blocked_items(items.order_by('title'))
     elif 0 < lengths < MINIMUM_LENGTH_OF_QUERY:
         errors = True
@@ -145,9 +147,12 @@ def search(request):
                                                    "title": title,
                                                    "author": author,
                                                    "keyword": keyword,
+                                                   "mediatype": mediatype,
                                                    "doctype": doctype,
                                                    "errors": errors,
-                                                   "min_length_of_query": MINIMUM_LENGTH_OF_QUERY})
+                                                   "min_length_of_query": MINIMUM_LENGTH_OF_QUERY,
+                                                   "mediatypes": Item.medartanalog_choices,
+                                                   "doctypes": Item.doctype_choices})
 
 
 @login_required()
