@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from django.db import models
 from django.utils import timezone
 from django.utils.html import format_html
@@ -20,7 +19,10 @@ class Year(models.Model):
 
 
 class Item(models.Model):
-    # Define Choices
+    searchable_fields = ("signature", "author", "title", "date", "year", "place", "doctype", "medartanalog",
+                         "keywords", "location", "source", "notes", "collection", "amount", "crossreference",
+                         "active", "reviewed", "owner", "pub_date")
+
     doctype_choices = (
         ("Adressverzeichnis", "Adressverzeichnis"),
         ("Chronik / Dokumentation", "Chronik / Dokumentation"),
@@ -126,8 +128,8 @@ class Feedback(models.Model):
 
     def mailto_link(self):
         mail = f"mailto:{self.email}?" \
-            f"subject=Deine Rückmeldung ans Bundesarchiv&" \
-            f"body=Rückmeldung zum Artikel {self.item}"
+               f"subject=Deine Rückmeldung ans Bundesarchiv&" \
+               f"body=Rückmeldung zum Artikel {self.item}"
         return format_html(f"<a href='{mail}'>Per Mail antworten</a>")
 
     mailto_link.allow_tags = True

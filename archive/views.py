@@ -43,10 +43,7 @@ def _search_fulltext(items: QuerySet, query: str) -> QuerySet:
     Given a query, search complete database
     """
     try:
-        searchable_fields = ("signature", "author", "title", "date", "year", "place", "doctype", "medartanalog",
-                             "keywords", "location", "source", "notes", "collection", "amount", "crossreference",
-                             "active", "reviewed", "owner", "pub_date")
-        return _vector_based_search(items, searchable_fields, query)
+        return _vector_based_search(items, Item.searchable_fields, query)
     except Item.DoesNotExist:
         return items
 
@@ -75,7 +72,7 @@ def _search_extended(items: QuerySet, title: str, author: str, keyword: str, med
         if mediatype and len(mediatype) > 0 and mediatype != "alle":
             items = _vector_based_search(items, "medartanalog", mediatype)
         if doctype and len(doctype) > 0 and doctype != "alle":
-            items = items.filter(doctype=doctype)
+            items = _vector_based_search(items, "doctype", doctype)
         if title and len(title) != 0:
             items = _vector_based_search(items, "title", title)
         if author and len(author) != 0:
