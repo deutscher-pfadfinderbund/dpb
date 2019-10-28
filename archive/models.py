@@ -96,6 +96,7 @@ class Item(models.Model):
     owner = models.CharField('Besitzer', max_length=256, blank=True)
     pub_date = models.DateTimeField('Hinzugefügt am', default=timezone.now)
     modified = models.DateTimeField('Zuletzt geändert', auto_now=True)
+    sent_in_by = models.CharField("Eingereicht von *", max_length=256, blank=True)
 
     def __str__(self):
         return str(self.signature) + " - " + self.title
@@ -126,8 +127,8 @@ class Feedback(models.Model):
 
     def mailto_link(self):
         mail = f"mailto:{self.email}?" \
-            f"subject=Deine Rückmeldung ans Bundesarchiv&" \
-            f"body=Rückmeldung zum Artikel {self.item}"
+               f"subject=Deine Rückmeldung ans Bundesarchiv&" \
+               f"body=Rückmeldung zum Artikel {self.item}"
         return format_html(f"<a href='{mail}'>Per Mail antworten</a>")
 
     mailto_link.allow_tags = True

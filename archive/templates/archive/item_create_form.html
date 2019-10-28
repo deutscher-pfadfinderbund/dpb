@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load intern_tags %}
+{% load bootstrap_tags %}
+
+{% block heading %}
+  <h1>Archiveintrag erstellen</h1>
+{% endblock %}
+
+{% block content %}
+  <p>
+    Trage bitte soviele Details ein wie möglich. Das Archivteam wird dann beim nächsten Treffen diesen Eintrag
+    bearbeiten.
+  </p>
+  <p>
+    Vielen Dank für deine Hilfe!
+  </p>
+
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|as_bootstrap }}
+    <input type="submit" value="Abschicken" class="btn btn-default">
+  </form>
+
+{% endblock %}

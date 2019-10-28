@@ -1,9 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q, QuerySet
+from django.forms import ModelForm
 from django.http import Http404, HttpRequest, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.views.generic.edit import CreateView
 
 from archive.forms import FeedbackForm
 from blog.models import Post, Category
@@ -104,6 +106,31 @@ def index(request):
     return render(request, 'archive/index.html', {"posts": posts})
 
 
+class ItemCreateForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ItemCreateForm, self).__init__(*args, **kwargs)
+        self.fields['sent_in_by'].required = True
+
+    class Meta:
+        model = Item
+        fields = (
+            "title", "medartanalog", "doctype", "collection", "author", "year", "place", "amount", "notes", "file",
+            "file2", "file3", "sent_in_by")
+        exclude = ("modified", "pub_date", "crossreference", "source", "keywords",
+                   "location", "active", "reviewed", "owner", "signature", "date")
+
+        help_texts = {"sent_in_by": "Dein Name und/oder E-Mail Adresse. Bspw.: Fahrtenname, fahrtenname@hotmail.com"}
+
+
+class ItemCreate(CreateView):
+    model = Item
+    form_class = ItemCreateForm
+    template_name_suffix = "_create_form"
+
+    def get_success_url(self):
+        return reverse('archive:search')
+
+
 @login_required
 def send_in(request):
     return render(request, 'archive/send_in.html')
@@ -145,24 +172,28 @@ def search(request):
 
     results = results if results and results is not [] else None
 
-    return render(request, 'archive/search.html', {"results": results,
-                                                   "query": query,
-                                                   "title": title,
-                                                   "author": author,
-                                                   "keyword": keyword,
-                                                   "mediatype": mediatype,
-                                                   "doctype": doctype,
-                                                   "errors": errors,
-                                                   "min_length_of_query": MINIMUM_LENGTH_OF_QUERY,
-                                                   "mediatypes": Item.medartanalog_choices,
-                                                   "doctypes": Item.doctype_choices})
+    return render(request, 'archive/search.html', {
+        "results": results,
+        "query": query,
+        "title": title,
+        "author": author,
+        "keyword": keyword,
+        "mediatype": mediatype,
+        "doctype": doctype,
+        "errors": errors,
+        "min_length_of_query": MINIMUM_LENGTH_OF_QUERY,
+        "mediatypes": Item.medartanalog_choices,
+        "doctypes": Item.doctype_choices
+    })
 
 
 @login_required()
 def detail(request: HttpRequest, pk: Item):
     item = get_object_or_404(Item, pk=pk, active=True, reviewed=True)
-    return render(request, "archive/detail.html", {"item": item,
-                                                   "feedback_form": FeedbackForm()})
+    return render(request, "archive/detail.html", {
+        "item": item,
+        "feedback_form": FeedbackForm()
+    })
 
 
 @login_required()
