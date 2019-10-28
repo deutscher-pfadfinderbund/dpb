@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.postgres.search import SearchQuery, SearchVector
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest, HttpResponseRedirect
@@ -35,39 +36,24 @@ def _remove_blocked_items(items: QuerySet) -> QuerySet:
     return items.filter(reviewed=True).filter(active=True)
 
 
-def _search_fulltext(items, query):
+def _search_fulltext(items: QuerySet, query: str) -> QuerySet:
     """
     Given a query, search complete database
     """
     try:
-        # Specify which fields are searchable
-        items = items.filter(  # '|' = OR; ',' = AND
-            Q(signature__icontains=query) |
-            Q(author__icontains=query) |
-            Q(title__icontains=query) |
-            Q(date__icontains=query) |
-            Q(year__icontains=query) |
-            Q(place__icontains=query) |
-            Q(doctype__icontains=query) |
-            Q(medartanalog__icontains=query) |
-            Q(keywords__icontains=query) |
-            Q(location__icontains=query) |
-            Q(source__icontains=query) |
-            Q(notes__icontains=query) |
-            Q(collection__icontains=query) |
-            Q(amount__icontains=query) |
-            Q(crossreference__icontains=query) |
-            Q(active__icontains=query) |
-            Q(reviewed__icontains=query) |
-            Q(owner__icontains=query) |
-            Q(pub_date__icontains=query)
-        )
-        return _remove_blocked_items(items)
+        searchable_fields = "signature", "author", "title", "date", "year", "place", "doctype", "medartanalog", \
+                            "keywords", "location", "source", "notes", "collection", "amount", "crossreference", \
+                            "active", "reviewed", "owner", "pub_date"
+
+        search_query = SearchQuery(query)
+        search_vector = SearchVector(*searchable_fields)
+        items = items.annotate(search=search_vector).filter(search=search_query)
+        return items
     except Item.DoesNotExist:
         return items
 
 
-def _search_extended(items, title, author, keyword, mediatype="alle", doctype="alle"):
+def _search_extended(items: QuerySet, title: str, author: str, keyword: str, mediatype="alle", doctype="alle"):
     """
     If there are any additional search keywords provided, concatenate them with AND and return the result.
     """
