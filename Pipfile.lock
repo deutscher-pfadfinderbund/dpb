@@ -66,10 +66,10 @@
         },
         "django-filer": {
             "hashes": [
-                "sha256:23562564e681c1292d6c9aadbe9cb14cca1c822dd6c6422c71e8009787603fbe"
+                "sha256:3f2045cfd9e53c1a29cd8a71747e984faead630ee72baab29d6b3b45584d52e0"
             ],
             "index": "pypi",
-            "version": "==1.5.0"
+            "version": "==1.6.0"
         },
         "django-forms-bootstrap": {
             "hashes": [
