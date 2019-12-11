@@ -1,4 +1,4 @@
-from typing import Union, Tuple
+from typing import Union, Tuple, Optional
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchQuery, SearchVector
@@ -64,7 +64,8 @@ def _vector_based_search(queryset: QuerySet, vector: Union[str, Tuple[str, ...]]
     return queryset.annotate(search=SearchVector(search_vector)).filter(search=SearchQuery(query))
 
 
-def _search_extended(items: QuerySet, title: str, author: str, keyword: str, mediatype="alle", doctype="alle"):
+def _search_extended(items: QuerySet, title: str, author: str, keyword: str, mediatype="alle", doctype="alle") -> \
+        Optional[QuerySet]:
     """
     If there are any additional search keywords provided, concatenate them with AND and return the result.
     """

@@ -1,7 +1,8 @@
 import re
 
 from django.contrib import admin
-from django.db.models import QuerySet
+from django.db.models import QuerySet, Value
+from django.db.models.functions import Coalesce, Substr, NullIf, StrIndex, Length
 from django.http import HttpRequest
 
 from dpb.admin import PageDownAdmin
@@ -17,8 +18,14 @@ class AlphanumericSignatureFilter(admin.SimpleListFilter):
             ('signature', 'Signatur (alphanumerisch)'),
         )
 
-    def queryset(self, request, queryset: QuerySet):
-        return queryset.order_by('signature')
+    def queryset(self, request, queryset):
+        if self.value() == 'signature':
+            return queryset.order_by(
+                Coalesce(Substr('signature', Value(0), NullIf(StrIndex('signature', Value(' ')), Value(0))),
+                         'signature'),
+                Length('signature'),
+                'signature'
+            )
 
 
 class HasFileFilter(admin.SimpleListFilter):
@@ -70,7 +77,7 @@ class ItemAdmin(PageDownAdmin):
     list_display = (
         'title', 'author', 'year', 'medartanalog', 'signature', 'location', 'has_file', 'reviewed',
     )
-    list_filter = ['medartanalog', 'doctype', 'reviewed', HasFileFilter]
+    list_filter = [AlphanumericSignatureFilter, 'medartanalog', 'doctype', 'reviewed', HasFileFilter]
     search_fields = ['signature', 'title', 'author', 'keywords', 'notes']
 
     fieldsets = [
@@ -86,8 +93,6 @@ class ItemAdmin(PageDownAdmin):
     ]
     save_as = True
     readonly_fields = ['pub_date']
-    # ordering = [F('signature')]
-    # ordering = [Item('signature')].sort(key=human_key)
 
 
 class YearAdmin(PageDownAdmin):
