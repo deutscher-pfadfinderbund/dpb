@@ -104,10 +104,11 @@
         },
         "django-pagedown": {
             "hashes": [
-                "sha256:cd24550256879077bc5699c41407e4f1f2c0d3409bf033ccdb68fc9502844b15"
+                "sha256:2558c14167baf05bb5205dccd880d1efc62b3a16530d98b165dc85fc26692eb1",
+                "sha256:83b30134131a49358196f8c2f0e2e25d730ee7a820482a7fda5ef386c22b1d6c"
             ],
             "index": "pypi",
-            "version": "==1.0.6"
+            "version": "==2.0.3"
         },
         "django-pipeline": {
             "hashes": [
