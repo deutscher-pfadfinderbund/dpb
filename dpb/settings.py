@@ -66,6 +66,8 @@ MIDDLEWARE = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+MIDDLEWARE_CLASSES = MIDDLEWARE
+
 ROOT_URLCONF = 'dpb.urls'
 
 WSGI_APPLICATION = 'dpb.wsgi.application'
