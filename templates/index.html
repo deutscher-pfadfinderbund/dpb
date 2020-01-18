@@ -4,13 +4,6 @@
 {% load pages %}
 
 {% block carousel %}
-  {#  {% if user.is_authenticated %}#}
-  {#    <div class="alert alert-info">#}
-  {#      <u>Informationen zum Bundeslager</u>#}
-  {#      -#}
-  {#      <a href="{% url "blog_detail" slug="bundeslager-2017" %}">Hier</a> gibt es die Dateien mit Informationen zum Bundeslager.#}
-  {#    </div>#}
-  {#  {% endif %}#}
   {% include "owlcarousel.html" %}
 {% endblock %}
 
@@ -40,29 +33,6 @@
   </p>
 
   <hr>
-  {#  {% if user.is_authenticated and news %}#}
-  {#    </div>#}
-  {#    <div class="col-md-4">#}
-  {#      <div class="panel panel-default">#}
-  {#        <div class="panel-heading">#}
-  {#          <h3 class="panel-title">#}
-  {#            Aktuelles#}
-  {#          </h3>#}
-  {#        </div>#}
-  {#        <div class="panel-body">#}
-  {#          {% for post in news %}#}
-  {#            <h4><a href="{% url 'blog_detail' slug=post.slug %}">{{ post.title }}</a><br><small>{{ post.created|date:"d. M  Y" }} von {{ post.author }}</small></h4>#}
-  {#            <p>#}
-  {#              {{ post.content|striptags|truncatewords:15 }}<br>#}
-  {#              <a href="{% url 'blog_detail' slug=post.slug %}">Zum Beitrag</a>#}
-  {#            </p>#}
-  {#          {% endfor %}#}
-  {#        </div>#}
-  {#      </div>#}
-  {#    </div>#}
-  {#  </div>#}
-  {#  {% endif %}#}
-
   {# Preview Row 1 #}
   <div class="row" style="padding-bottom:0;">
     {# Der Deutsche Pfadfinderbund #}
@@ -143,10 +113,10 @@
       <h3>Präventionsarbeit</h3>
       <div class="row">
         <div class="col-md-6">
-          <a href="{% url 'dpb' %}">
+          <a href="{% url 'arbeitskreis' %}">
             <img src="{% static 'img/arbeitskreis/arbeitskreis_header.png' %}"
                  class="img-thumbnail img-responsive margin-top-10px"
-                 alt="Bundeslager 2013"/>
+                 alt="Präventionsrat"/>
           </a>
         </div>
 
