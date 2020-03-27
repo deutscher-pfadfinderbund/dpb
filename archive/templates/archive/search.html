@@ -16,161 +16,155 @@
       })
   </script>
 
-  {% if user.is_staff %}
-    <p>
-      Der Online-Katalog informiert über die bereits erfassten Bestände des Bundesarchivs. Diese können entweder vor
-      Ort im Archiv bei Schloss Martinfeld genutzt werden, oder sind bereits digital verfügbar und im entsprechenden
-      Eintrag verlinkt.
-    </p>
-    <p>
-      Gesucht werden kann in den beschreibenden Daten der einzelnen Dokumente. Über eine erweiterte Suche kann auch in
-      einzelnen Unterkategorien gesucht werden. Eine Suche nach "Kompassnadel" findet beispielsweise alle im Archiv
-      vorhandenen Kompassnadeln.
-    </p>
-    <p>
-      Das Suchergebnis listet alle gefundenen Dokumente. Durch Anklicken eines Titels kann die ausführliche Beschreibung
-      des Dokuments aufgerufen werden. Aus dieser ist dann auch ersichtlich, wo genau das Dokument im Archiv zu finden
-      ist.
-    </p>
-    <p>
-      Bei jedem Eintrag befindet sich ein Feedback-Button. Über diesen können zu diesem Eintrag gefundene Fehler oder
-      auch Ergänzungen an das Bundesarchiv gesendet werden.
-    </p>
-    <p>
-      <strong>Alle Dokumente sind nur für den internen Gebrauch gedacht.</strong>
-    </p>
+  <p>
+    Der Online-Katalog informiert über die bereits erfassten Bestände des Bundesarchivs. Diese können entweder vor
+    Ort im Archiv bei Schloss Martinfeld genutzt werden, oder sind bereits digital verfügbar und im entsprechenden
+    Eintrag verlinkt.
+  </p>
+  <p>
+    Gesucht werden kann in den beschreibenden Daten der einzelnen Dokumente. Über eine erweiterte Suche kann auch in
+    einzelnen Unterkategorien gesucht werden. Eine Suche nach "Kompassnadel" findet beispielsweise alle im Archiv
+    vorhandenen Kompassnadeln.
+  </p>
+  <p>
+    Das Suchergebnis listet alle gefundenen Dokumente. Durch Anklicken eines Titels kann die ausführliche Beschreibung
+    des Dokuments aufgerufen werden. Aus dieser ist dann auch ersichtlich, wo genau das Dokument im Archiv zu finden
+    ist.
+  </p>
+  <p>
+    Bei jedem Eintrag befindet sich ein Feedback-Button. Über diesen können zu diesem Eintrag gefundene Fehler oder
+    auch Ergänzungen an das Bundesarchiv gesendet werden.
+  </p>
+  <p>
+    <strong>Alle Dokumente sind nur für den internen Gebrauch gedacht.</strong>
+  </p>
 
-    <hr>
+  <hr>
 
-    <h2>Suche</h2>
+  <h2>Suche</h2>
 
-    {% if errors %}
-      <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-            aria-hidden="true">&times;</span></button>
-        Deine Eingabe ist leider zu kurz. Du musst mindestens {{ min_length_of_query }} Zeichen angeben.
+  {% if errors %}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
+      Deine Eingabe ist leider zu kurz. Du musst mindestens {{ min_length_of_query }} Zeichen angeben.
+    </div>
+  {% endif %}
+
+  <form action="" class="form-horizontal" id="search-form">
+    <div class="form-group">
+      <label for="id_q" class="col-sm-2 control-label">Volltextsuche</label>
+      <div class="col-sm-10">
+        <input type="text" name="q" id="id_q" value="{{ query|default_if_none:'' }}" class="form-control"
+               placeholder="z.B. Kompassnadel, ..."/>
       </div>
-    {% endif %}
-
-    <form action="" class="form-horizontal" id="search-form">
-      <div class="form-group">
-        <label for="id_q" class="col-sm-2 control-label">Volltextsuche</label>
-        <div class="col-sm-10">
-          <input type="text" name="q" id="id_q" value="{{ query|default_if_none:'' }}" class="form-control"
-                 placeholder="z.B. Kompassnadel, ..."/>
-        </div>
-      </div>
-
-      <div
-          class="collapse {% if title and title != "" or author and author != "" or keyword and keyword != "" or doctype and doctype != "" %}in{% endif %}"
-          id="extended-search">
-        <div class="form-group">
-          <label for="id_title" class="col-sm-2 control-label">Titel</label>
-          <div class="col-sm-10">
-            <input type="text" name="titel" id="id_title" value="{{ title|default_if_none:'' }}" class="form-control"
-                   placeholder="z.B. Kompassnadel"/>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="id_author" class="col-sm-2 control-label">Autor</label>
-          <div class="col-sm-10">
-            <input type="text" name="autor" id="id_author" value="{{ author|default_if_none:'' }}" class="form-control"
-                   placeholder="z.B. Deutscher Pfadfinderbund"/>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="id_keyword" class="col-sm-2 control-label">Schlagwort</label>
-          <div class="col-sm-10">
-            <input type="text" name="schlagwort" id="id_keyword" value="{{ keyword|default_if_none:'' }}"
-                   class="form-control" placeholder="Schlagwort"/>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="id_mediatype" class="col-sm-2 control-label">Medienart</label>
-          <div class="col-sm-10">
-            <select id="id_mediatype" name="medientyp" class="form-control">
-              <option value="alle" {% ifequal mediatype "" %}selected{% endifequal %}>-- Alle --</option>
-              {% for key, label in mediatypes %}
-                <option value="{{ key }}" {% ifequal mediatype key %}selected{% endifequal %}>{{ label }}</option>
-              {% endfor %}
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="id_doctype" class="col-sm-2 control-label">Dokumenttyp</label>
-          <div class="col-sm-10">
-            <select id="id_doctype" name="dokumenttyp" class="form-control">
-              <option value="alle" {% ifequal doctype "" %}selected{% endifequal %}>-- Alle --</option>
-              {% for key, label in doctypes %}
-                <option value="{{ key }}" {% ifequal doctype key %}selected{% endifequal %}>{{ label }}</option>
-              {% endfor %}
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="pull-right">
-        <input type="submit" value="Suchen" class="btn btn-primary"/>
-      </div>
-    </form>
-    <div>
-      <button class="btn btn-xs btn-default" data-toggle="collapse" data-target="#extended-search" aria-expanded="false"
-              aria-controls="extended-search">Erweiterte Suche
-      </button>
-      <button class="btn btn-xs btn-default" id="reset-button">Formular leeren</button>
     </div>
 
-    <hr>
+    <div
+        class="collapse {% if title and title != "" or author and author != "" or keyword and keyword != "" or doctype and doctype != "" %}in{% endif %}"
+        id="extended-search">
+      <div class="form-group">
+        <label for="id_title" class="col-sm-2 control-label">Titel</label>
+        <div class="col-sm-10">
+          <input type="text" name="titel" id="id_title" value="{{ title|default_if_none:'' }}" class="form-control"
+                 placeholder="z.B. Kompassnadel"/>
+        </div>
+      </div>
 
-    <p>
-      {% if results %}
-        <table class="table table-striped table-hover datatable bundesarchiv-ergebnisse">
-          <thead>
+      <div class="form-group">
+        <label for="id_author" class="col-sm-2 control-label">Autor</label>
+        <div class="col-sm-10">
+          <input type="text" name="autor" id="id_author" value="{{ author|default_if_none:'' }}" class="form-control"
+                 placeholder="z.B. Deutscher Pfadfinderbund"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="id_keyword" class="col-sm-2 control-label">Schlagwort</label>
+        <div class="col-sm-10">
+          <input type="text" name="schlagwort" id="id_keyword" value="{{ keyword|default_if_none:'' }}"
+                 class="form-control" placeholder="Schlagwort"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="id_mediatype" class="col-sm-2 control-label">Medienart</label>
+        <div class="col-sm-10">
+          <select id="id_mediatype" name="medientyp" class="form-control">
+            <option value="alle" {% ifequal mediatype "" %}selected{% endifequal %}>-- Alle --</option>
+            {% for key, label in mediatypes %}
+              <option value="{{ key }}" {% ifequal mediatype key %}selected{% endifequal %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="id_doctype" class="col-sm-2 control-label">Dokumenttyp</label>
+        <div class="col-sm-10">
+          <select id="id_doctype" name="dokumenttyp" class="form-control">
+            <option value="alle" {% ifequal doctype "" %}selected{% endifequal %}>-- Alle --</option>
+            {% for key, label in doctypes %}
+              <option value="{{ key }}" {% ifequal doctype key %}selected{% endifequal %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="pull-right">
+      <input type="submit" value="Suchen" class="btn btn-primary"/>
+    </div>
+  </form>
+  <div>
+    <button class="btn btn-xs btn-default" data-toggle="collapse" data-target="#extended-search" aria-expanded="false"
+            aria-controls="extended-search">Erweiterte Suche
+    </button>
+    <button class="btn btn-xs btn-default" id="reset-button">Formular leeren</button>
+  </div>
+
+  <hr>
+
+  <p>
+    {% if results %}
+      <table class="table table-striped table-hover datatable bundesarchiv-ergebnisse">
+        <thead>
+        <tr>
+          <th width="60%">Titel</th>
+          <th>Autor</th>
+          <th>Medienart</th>
+          <th>Dokumenttyp</th>
+          <th>Hat Datei?</th>
+          <th data-sortable="true">Jahr</th>
+          <th>Signatur</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in results %}
           <tr>
-            <th width="60%">Titel</th>
-            <th>Autor</th>
-            <th>Medienart</th>
-            <th>Dokumenttyp</th>
-            <th>Hat Datei?</th>
-            <th data-sortable="true">Jahr</th>
-            <th>Signatur</th>
+            <td>
+              <a href="{% url 'archive:details' pk=item.pk %}">
+                {{ item.title }}
+              </a>
+            </td>
+            <td>{{ item.author }}</td>
+            <td>{{ item.medartanalog }}</td>
+            <td>{{ item.doctype }}</td>
+            <td>{{ item.has_file|check_or_cross|safe }}</td>
+            <td>
+              {% if not item.year == 0 %}
+                {{ item.year|default_if_none:"" }}
+              {% endif %}
+            </td>
+            <td>{{ item.signature }}</td>
           </tr>
-          </thead>
-          <tbody>
-          {% for item in results %}
-            <tr>
-              <td>
-                <a href="{% url 'archive:details' pk=item.pk %}">
-                  {{ item.title }}
-                </a>
-              </td>
-              <td>{{ item.author }}</td>
-              <td>{{ item.medartanalog }}</td>
-              <td>{{ item.doctype }}</td>
-              <td>{{ item.has_file|check_or_cross|safe }}</td>
-              <td>
-                {% if not item.year == 0 %}
-                  {{ item.year|default_if_none:"" }}
-                {% endif %}
-              </td>
-              <td>{{ item.signature }}</td>
-            </tr>
-          {% endfor %}
-          </tbody>
-        </table>
-      {% elif query != "" %}
-        Keine Einträge gefunden.
-      {% endif %}
-    </p>
-  {% else %}
-    <p>
-      Das Bundesarchiv ist noch nicht öffentlich für alle Mitglieder des DPBs einsehbar, aber wir arbeiten dran!
-    </p>
-  {% endif %}
+        {% endfor %}
+        </tbody>
+      </table>
+    {% elif query != "" %}
+      Keine Einträge gefunden.
+    {% endif %}
+  </p>
 {% endblock %}
 
 {% block sources %}
