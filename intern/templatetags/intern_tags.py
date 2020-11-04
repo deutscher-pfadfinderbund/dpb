@@ -76,16 +76,15 @@ def extension(file: FileField):
 @register.filter(is_safe=True)
 def house_details(value, text):
     if value:
-        return """<div class="row">
+        return f"""<div class="row">
             <div class="col-md-4">
-              {0}
+              {text}
             </div>
             <div class="col-md-8">
-              {1}
+              {value}
             </div>
           </div>
-        """.format(text, value)
-
+        """
     else:
         return ""
 
@@ -93,12 +92,12 @@ def house_details(value, text):
 @register.filter(is_safe=True)
 def house_details_link(value, text):
     if value:
-        return """<span style='margin-right: 1em;'>
-                  <a href='{1}'>
-                    {0}
+        return f"""<span style='margin-right: 1em;'>
+                  <a href='{value}'>
+                    {text}
                   </a>
               </span>
-        """.format(text, value)
+        """
     else:
         return ""
 
@@ -107,11 +106,11 @@ def house_details_link(value, text):
 def has_errors(value):
     try:
         if value.errors:
-            return """
+            return f"""
                 <div class="alert alert-warning" role="alert">
-                    <strong>{0}</strong>
+                    <strong>{value.errors}</strong>
                 </div>
-            """.format(value.errors)
+            """
     except AttributeError:
         pass
     return ""
@@ -122,21 +121,21 @@ def table_row(value, args):
     if value or value == 0:
         args = args.split(",")
         text = args[0]
-        tdurl = "<td>{0}</td>".format(value)
+        tdurl = f"<td>{value}</td>"
         errors = has_errors(value)
         if len(args) > 1:
             if len(value) > 40:
                 url = value[:40] + "..."
             else:
                 url = value
-            tdurl = "<td><a href='{0}' target='_blank'>{1}</a></td>".format(value, url)
-        return """
-            {2}
+            tdurl = f"<td><a href='{value}' target='_blank'>{url}</a></td>"
+        return f"""
+            {errors}
             <tr>
-                <td>{0}</td>
-                {1}
+                <td>{text}</td>
+                {tdurl}
             </tr>
-        """.format(text, tdurl, errors)
+        """
     return ""
 
 
@@ -146,7 +145,7 @@ def bool_icon(value, text=""):
         icon = "<i class='fa fa-check'></i>"
     else:
         icon = "<i class='fa fa-times'></i>"
-    return "{0} {1}".format(icon, text)
+    return f"{icon} {text}"
 
 
 @register.filter(is_safe=True)
@@ -156,20 +155,20 @@ def form_item(val):
         label = val.label_tag()
     except AttributeError:
         label = ""
-    return """
+    return f"""
         <div class="form-group">
-            {1}
-            {0}
-            {2}
-        </div>""".format(errors, label, val)
+            {label}
+            {errors}
+            {val}
+        </div>"""
 
 
 @register.filter(is_safe=True)
 def form_checkbox(val):
-    return """
+    return f"""
         <div class="checkbox">
-            {0}
+            {val.errors}
             <label>
-            {2} {3}
+            {val} {val.label}
             </label>
-        </div>""".format(val.errors, val.label_tag(), val, val.label)
+        </div>"""
