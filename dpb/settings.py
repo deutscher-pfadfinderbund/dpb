@@ -54,7 +54,6 @@ INSTALLED_APPS = (
     'links',
     'evening_program',
     'maps',
-    'maedchenbund',
 )
 
 MIDDLEWARE = (
