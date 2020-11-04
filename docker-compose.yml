@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   web:
-    image: cmeter/dpb
+    image: ghcr.io/deutscher-pfadfinderbund/dpb:latest
     restart: unless-stopped
     volumes:
       - ./static/:/code/static
