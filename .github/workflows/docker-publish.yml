@@ -49,11 +49,11 @@ jobs:
 
       - name: Build image
         run: >
-        docker build .
-        --file Dockerfile
-        --tag $IMAGE_NAME
-        --label "org.opencontainers.image.source=https://github.com/${{ github.repository }}"
-        --label "org.opencontainers.image.revision=${{ github.sha }}"
+          docker build .
+          --file Dockerfile
+          --tag $IMAGE_NAME
+          --label "org.opencontainers.image.source=https://github.com/${{ github.repository }}"
+          --label "org.opencontainers.image.revision=${{ github.sha }}"
 
       - name: Log into GitHub Container Registry
       # TODO: Create a PAT with `read:packages` and `write:packages` scopes and save it as an Actions secret `CR_PAT`
