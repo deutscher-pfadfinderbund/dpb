@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  sut:
+    build: .
+    command: python manage.py test
+    depends_on:
+      - db
+
+  db:
+    image: postgres:11-alpine
