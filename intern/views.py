@@ -93,3 +93,9 @@ def sailing_comments(request):
 @login_required
 def sailing_interview_falado(request):
     return render(request, 'intern/sailing_interview_falado.html')
+
+
+# Calender
+@login_required
+def calendar(request):
+    return render(request, 'intern/calendar.html')

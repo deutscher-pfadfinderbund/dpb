@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'segeln/$', views.sailing, name='sailing'),
     url(r'segeln/kommentare-aus-dem-DPB$', views.sailing_comments, name='sailing_comments'),
     url(r'segeln/interview-mit-dem-falado-ev$', views.sailing_interview_falado, name='sailing_interview_falado'),
+
+    url(r"kalender/$", views.calendar, name='calendar'),
 ]

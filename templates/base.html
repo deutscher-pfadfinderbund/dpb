@@ -118,11 +118,20 @@
             <ul class="dropdown-menu" aria-labelledby="themes">
               <li><a href="{% url 'intern:arbeitskreis' %}">Überblick</a></li>
               <li>
-                <a href="https://deutscher-pfadfinderbund.de/media/filer_public/78/60/7860715a-342e-4cfc-b6ca-164505fbe4f1/schutzkonzept_des_deutschen_pfadfinderbundes.pdf">
+                <a href="/media/filer_public/78/60/7860715a-342e-4cfc-b6ca-164505fbe4f1/schutzkonzept_des_deutschen_pfadfinderbundes.pdf">
                   Schutzkonzept
                 </a>
               </li>
               <li><a href="{% url 'arbeitskreis_mitglieder' %}">Mitglieder</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="digital">
+              Digitales
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="digital">
+              <li><a href="{% url 'intern:calendar' %}">Kalender</a></li>
             </ul>
           </li>
         {% endif %}

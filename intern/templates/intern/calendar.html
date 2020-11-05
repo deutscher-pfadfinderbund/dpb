@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load pages %}
+{% load thumbnail %}
+
+{% block heading %}
+  <h1>Kalender des Bundes</h1>
+{% endblock %}
+
+{% block content %}
+  <iframe width="100%" height="500" style="resize: vertical;"
+          src="https://cloud.deutscher-pfadfinderbund.de/apps/calendar/embed/GqrGPt5cJBFm8sxR">
+  </iframe>
+
+  <h2 id="ical">Abonnieren (nur Lesezugriff)</h2>
+  <p>
+    Das abonnieren des Kalenders ist die einfachste Methode an die Termine zu kommen, da man nur einen Link benötigt und
+    keinen Account in der Bundes-Cloud.
+    Allerdings kann man dann keine Termine hinzufügen, ändern oder löschen.
+    <br>
+    Folgender Link muss dazu kopiert werden und an die entsprechende Stelle eingefügt werden:
+  </p>
+
+  <label style="width: 100%">
+    iCal Link:
+    <input
+        style="width: 100%"
+        type="text" readonly
+        onclick="this.select();"
+        value="webcal://cloud.deutscher-pfadfinderbund.de/remote.php/dav/public-calendars/GqrGPt5cJBFm8sxR?export"
+    />
+  </label>
+
+
+  <h3>iPhone & iPad</h3>
+  Einstellungen → Kalender → Accounts → Account hinzufügen → Andere → Kalenderabo
+  hinzufügen
+  Da dann den Link einfügen und auf "Weiter" drücken.
+
+  <h3>Google Kalender</h3>
+  Besucht <a href="https://calendar.google.com/" target=”_blank” rel=”noopener noreferrer”>calendar.google.com</a>.
+  Dort findet ihr auf der linken Seite eine Liste eurer Kalender und einen Punkt "Weitere Kalender".
+  An diesem Punkt drückt ihr auf das + und dann "Per URL". Fügt da den Link ein und drückt "Kalender hinzufügen".
+
+  <h3>macOS</h3>
+  Kalender App → Neues Kalenderabonnement...
+  Den Link einfügen und "Abonnieren" drücken.
+
+  <h3>Hilfe! Mein Programm ist nicht aufgelistet.</h3>
+  Sollte dein Programm nicht aufgeführt sein, dann google bitte zunächst nach:
+  <input
+      style="width: 240px"
+      type="text" readonly
+      onclick="this.select();"
+      value="ical abonnieren <mein-program>"
+  /><br>
+  Sollte das nicht weiterhelfen meldet euch bitte bei uns, dann können wir euch weiterhelfen:
+  <a href="mailto:bjoern@dpb-remscheid.de">Mail an Björn</a>. <br>
+  Natürlich könnt ihr uns auch eine Anleitung zukommen lassen, die wir dann hier hinzufügen.
+
+  <h2 id="caldav">Zugang mit Schreibzugriff</h2>
+  Ihr benötigt einen Account bei
+  <a href="https://cloud.deutscher-pfadfinderbund.de/" target=”_blank” rel=”noopener noreferrer”>cloud.deutscher-pfadfinderbund.de</a>
+  .
+  Besucht dann
+  <a href="https://cloud.deutscher-pfadfinderbund.de/apps/calendar" target=”_blank” rel=”noopener noreferrer”>cloud.deutscher-pfadfinderbund.de/apps/calendar</a>
+  und klickt unten links in der Ecke auf das Zahnrad Symbol mit "Einstellungen & Import". Scrollt ggf. da nach unten und
+  klickt dann auf "Primäre CalDAV-Adresse kopieren" oder "iOS/macOS CalDAV-Adresse kopieren", je nach Betriebssystem.
+
+  <h3>iPhone & iPad</h3>
+  Einstellungen → Kalender → Accounts → Account hinzufügen → Andere → CalDAV Account hinzufügen <br>
+  Hier bei "Server" die Adresse, die ihr eben kopiert habt einfügen.
+  Als Nutzername und Passwort gebt ihr eure Daten von cloud.deutscher-pfadfinderbund.de an.
+  Bei der Beschreibung könnt ihr euch einen passenden Namen ausdenken.
+  Zum abschließen auf "Weiter" drücken.
+
+
+
+{% endblock %}
