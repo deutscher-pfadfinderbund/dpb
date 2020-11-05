@@ -1,10 +1,13 @@
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
-from django.contrib import admin
+from django.contrib import admin, sitemaps
+from django.contrib.sitemaps.views import sitemap
+from django.urls import path, reverse
 
 from blog import views as blogviews
 from pages import views as pageviews
+from pages.sitemaps import PageSitemap
 from . import views
 
 urlpatterns = [url(r'^$', views.index, name='index'),
@@ -51,3 +54,21 @@ urlpatterns += [
 
     url(r'^(?P<url>.*/)$', pageviews.page, name='page'),
 ]
+
+
+class StaticViewSitemap(sitemaps.Sitemap):
+    changefreq = None
+
+    def items(self):
+        return ['dpb', 'bundesordnung', 'pfadfinder', 'impressum', 'datenschutz', 'arbeitskreis', 'kontakt']
+
+    def location(self, item):
+        return reverse(item)
+
+
+sitemaps = {
+    'static': StaticViewSitemap,
+    'pages': PageSitemap
+}
+
+urlpatterns.append(path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'))

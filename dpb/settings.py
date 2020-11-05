@@ -35,6 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.postgres',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     # 3rd party
     'dpb.apps.MyFilerConfig',  # Use Django-Filer with own config for verbose name
