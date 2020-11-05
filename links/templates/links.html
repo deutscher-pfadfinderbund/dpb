@@ -26,7 +26,7 @@
             {% for link in links %}
               {% if link.public and link.state == state %}
                 <li>
-                  <a href="{{ link.website }}" target="_blank">
+                  <a href="{{ link.website }}" target="_blank" rel=”noopener noreferrer”>
                     {{ link }}
                     {% if link.city %}
                       ({{ link.city }})
@@ -48,7 +48,7 @@
             <ul style="padding-bottom:2em;">
               {% for link in links %}
                 {% if link.public and link.category == cat %}
-                  <li><a href="{{ link.website }}" target="_blank">{{ link }}</a></li>
+                  <li><a href="{{ link.website }}" target="_blank" rel=”noopener noreferrer”>{{ link }}</a></li>
                 {% endif %}
               {% endfor %}
             </ul>
