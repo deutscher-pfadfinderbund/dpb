@@ -9,8 +9,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 import os
 
-import django.contrib.auth
-
 SECRET_KEY = os.getenv("SECRET_KEY", "CHANGE_ME")
 DEBUG = os.getenv("DEBUG", "").lower() != "false"
 
