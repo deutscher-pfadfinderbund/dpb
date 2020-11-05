@@ -1,14 +1,16 @@
 FROM python:3.9-alpine
 
-RUN apk add --no-cache build-base python3-dev py-pip jpeg-dev zlib-dev musl-dev postgresql-dev && \
-    pip install -U pipenv pip
+RUN apk add --no-cache --virtual build-deps python3-dev && \
+    pip install -U pipenv pip && \
+    apk del build-deps
 
 WORKDIR /code
 
-COPY Pipfile /code/Pipfile
 COPY Pipfile.lock /code/Pipfile.lock
 
-RUN pipenv install --system --deploy --ignore-pipfile
+RUN apk add --no-cache --virtual build-deps build-base python3-dev jpeg-dev zlib-dev musl-dev postgresql-dev && \
+    pipenv install --system --deploy --ignore-pipfile && \
+    apk del build-deps
 
 COPY . /code
 
