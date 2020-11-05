@@ -1,206 +1,263 @@
 .archive-items {
-  cursor: pointer; }
-  .archive-items:hover {
-    text-decoration: underline; }
+    cursor: pointer;
+}
+
+.archive-items:hover {
+    text-decoration: underline;
+}
 
 @font-face {
     font-family: "Open Sans";
     src: url("fonts/open_sans/OpenSans-Regular.ttf");
 }
+
 body {
-  color: #333;
+    color: #333;
     background-color: #f6f6f6;
     font-family: "Open Sans", sans-serif;
 }
 
 p {
-  padding-bottom: 0.5em; }
+    padding-bottom: 0.5em;
+}
 
 h4 a {
-  color: #333; }
+    color: #333;
+}
 
 .img-float-right {
-  float: right;
-  margin-left: 1em; }
+    float: right;
+    margin-left: 1em;
+}
 
 .img-float-left {
-  float: left; }
+    float: left;
+}
 
 .padding-bottom {
-  padding-bottom: 1em; }
+    padding-bottom: 1em;
+}
 
 .padding-bottom-2 {
-  padding-bottom: 2em; }
+    padding-bottom: 2em;
+}
 
 header h1 {
-  height: 100%;
-  padding-top: 0.4em; }
+    height: 100%;
+    padding-top: 0.4em;
+}
 
 #header-wrapper {
-  padding: 1em 0; }
+    padding: 1em 0;
+}
 
 .ak-images {
-  float: right;
-  max-width: 250px;
-  margin: 0 0 1em 5em; }
+    float: right;
+    max-width: 250px;
+    margin: 0 0 1em 5em;
+}
 
 .navbar-nav > li > a, .navbar-brand, .navbar-toggle, .navbar-header {
-  padding-top: 0;
-  padding-bottom: 0;
-  line-height: 80px; }
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 80px;
+}
 
 .navbar-toggle {
-  height: 80px;
-  line-height: 80px; }
+    height: 80px;
+    line-height: 80px;
+}
 
 @media (max-width: 767px) {
-  .navbar-brand {
-    margin-top: 0.1em; }
+    .navbar-brand {
+        margin-top: 0.1em;
+    }
 
-  .navbar-nav > li > a {
-    line-height: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px; } }
-.navbar-brand {
-  height: 80px; }
+    .navbar-nav > li > a {
+        line-height: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
 
 .navbar-brand {
-  padding-left: 1em; }
-  .navbar-brand img {
-    padding: 0.1em 1em 0.1em 0.6em; }
+    height: 80px;
+}
+
+.navbar-brand {
+    padding-left: 1em;
+}
+
+.navbar-brand img {
+    padding: 0.1em 1em 0.1em 0.6em;
+}
 
 @media (max-width: 767px) {
-  .navbar-brand img {
-    padding: 0.1em 1em 0.1em 0.1em; } }
+    .navbar-brand img {
+        padding: 0.1em 1em 0.1em 0.1em;
+    }
+}
+
 .container {
-  padding-bottom: 1em; }
+    padding-bottom: 1em;
+}
 
 .row {
-  padding-bottom: 1em; }
+    padding-bottom: 1em;
+}
 
 .navbar .container {
-  padding-bottom: 0; }
+    padding-bottom: 0;
+}
 
 .stripe {
-  background-color: white;
-  border-color: #eeeeee; }
+    background-color: white;
+    border-color: #eeeeee;
+}
 
 .alert {
-  font-weight: bold; }
+    font-weight: bold;
+}
 
 .stripe .container {
-  padding-top: 1em; }
+    padding-top: 1em;
+}
 
 .footer-wrapper {
-  box-shadow: 0 1px 2px #aaa; }
+    box-shadow: 0 1px 2px #aaa;
+}
 
 footer .row {
-  padding-bottom: 0; }
+    padding-bottom: 0;
+}
 
 ul.no-dot > li {
-  list-style-type: none; }
+    list-style-type: none;
+}
 
 #dpb-carousel .item img {
-  display: block;
-  width: 100%;
-  height: auto; }
+    display: block;
+    width: 100%;
+    height: auto;
+}
 
 #owl-container {
-  padding-bottom: 0; }
+    padding-bottom: 0;
+}
 
 #toc-panel {
-  float: right;
-  width: 300px;
-  margin-left: 2em;
-  margin-bottom: 2em; }
+    float: right;
+    width: 300px;
+    margin-left: 2em;
+    margin-bottom: 2em;
+}
 
 /* Make footer sticky */
 /* Sticky footer styles */
 html {
-  position: relative;
-  min-height: 100%; }
+    position: relative;
+    min-height: 100%;
+}
 
 #main {
-  /* Margin bottom by footer height */ }
-  @media only screen and (min-width: 1000px) {
+    /* Margin bottom by footer height */
+}
+
+@media only screen and (min-width: 1000px) {
     #main {
         margin-bottom: 146px;
     }
-  }
+}
 
 .footer-wrapper {
-  margin-top: 50px; }
-  @media only screen and (min-width: 1000px) {
+    margin-top: 50px;
+}
+
+@media only screen and (min-width: 1000px) {
     .footer-wrapper {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      /* Set the fixed height of the footer here */
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
         height: 146px;
     }
-  }
+}
 
 /* END Make footer sticky */
 /* Style images in text */
 .image-inline-right {
-  float: right;
-  padding-left: 1em;
-  padding-bottom: 1em;
-  max-width: 300px;
-  max-height: 300px; }
+    float: right;
+    padding-left: 1em;
+    padding-bottom: 1em;
+    max-width: 300px;
+    max-height: 300px;
+}
 
 /* General padding and margin */
 .margin-top-10px {
-  margin-top: 10px; }
+    margin-top: 10px;
+}
 
 /* Table stylings */
 table {
-  font-size: 13px; }
+    font-size: 14px;
+}
 
 td {
-  vertical-align: middle !important; }
+    vertical-align: middle !important;
+}
+
+.bundesarchiv-ergebnisse a:visited {
+    color: green;
+}
 
 /* Use classical pagination theme */
 .pagination {
-  display: inline-block;
-  padding-left: 0;
-  margin: 20px 0;
-  border-radius: 4px; }
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
 
 .pagination > li {
-  display: inline; }
+    display: inline;
+}
 
 .pagination > li > a,
 .pagination > li > span {
-  position: relative;
-  float: left;
-  padding: 6px 12px;
-  margin-left: -1px;
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
     line-height: 1.42857143;
-  color: #337ab7;
-  text-decoration: none;
-  background-color: #fff;
-  border: 1px solid #ddd; }
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
 
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
-  margin-left: 0;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px; }
+    margin-left: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
 
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px; }
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
 
 .pagination > li > a:hover,
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-  z-index: 3;
-  color: #23527c;
-  background-color: #eee;
-  border-color: #ddd; }
+    z-index: 3;
+    color: #23527c;
+    background-color: #eee;
+    border-color: #ddd;
+}
 
 .pagination > .active > a,
 .pagination > .active > span,
@@ -208,11 +265,12 @@ td {
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-  z-index: 2;
-  color: #fff;
-  cursor: default;
-  background-color: #337ab7;
-  border-color: #337ab7; }
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
 
 .pagination > .disabled > span,
 .pagination > .disabled > span:hover,
@@ -220,42 +278,48 @@ td {
 .pagination > .disabled > a,
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
-  color: #777;
-  cursor: not-allowed;
-  background-color: #fff;
-  border-color: #ddd; }
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd;
+}
 
 .pagination-lg > li > a,
 .pagination-lg > li > span {
-  padding: 10px 16px;
-  font-size: 18px;
+    padding: 10px 16px;
+    font-size: 18px;
     line-height: 1.3333333;
 }
 
 .pagination-lg > li:first-child > a,
 .pagination-lg > li:first-child > span {
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px; }
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
 
 .pagination-lg > li:last-child > a,
 .pagination-lg > li:last-child > span {
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px; }
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
 
 .pagination-sm > li > a,
 .pagination-sm > li > span {
-  padding: 5px 10px;
-  font-size: 12px;
-  line-height: 1.5; }
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+}
 
 .pagination-sm > li:first-child > a,
 .pagination-sm > li:first-child > span {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px; }
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
 
 .pagination-sm > li:last-child > a,
 .pagination-sm > li:last-child > span {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px; }
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
 
 /*# sourceMappingURL=style.css.map */

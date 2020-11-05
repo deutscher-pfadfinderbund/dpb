@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
+import requests
 from autoslug import AutoSlugField
 from django.db import models
-from datetime import datetime
-
-import requests
 
 
 def query_latlong(location):

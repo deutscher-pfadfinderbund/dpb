@@ -1,7 +1,8 @@
 import re
 
 from django.contrib import admin
-from django.db.models import QuerySet
+from django.db.models import QuerySet, Value
+from django.db.models.functions import Coalesce, Substr, NullIf, StrIndex, Length
 from django.http import HttpRequest
 
 from dpb.admin import PageDownAdmin
@@ -17,8 +18,14 @@ class AlphanumericSignatureFilter(admin.SimpleListFilter):
             ('signature', 'Signatur (alphanumerisch)'),
         )
 
-    def queryset(self, request, queryset: QuerySet):
-        return queryset.order_by('signature')
+    def queryset(self, request, queryset):
+        if self.value() == 'signature':
+            return queryset.order_by(
+                Coalesce(Substr('signature', Value(0), NullIf(StrIndex('signature', Value(' ')), Value(0))),
+                         'signature'),
+                Length('signature'),
+                'signature'
+            )
 
 
 class HasFileFilter(admin.SimpleListFilter):
@@ -68,9 +75,9 @@ def human_key(key):
 
 class ItemAdmin(PageDownAdmin):
     list_display = (
-        'title', 'author', 'year', 'has_file', 'medartanalog', 'signature', 'location',
+        'title', 'author', 'year', 'medartanalog', 'signature', 'location', 'has_file', 'reviewed',
     )
-    list_filter = ['medartanalog', HasFileFilter]
+    list_filter = [AlphanumericSignatureFilter, 'medartanalog', 'doctype', 'reviewed', HasFileFilter]
     search_fields = ['signature', 'title', 'author', 'keywords', 'notes']
 
     fieldsets = [
@@ -78,7 +85,7 @@ class ItemAdmin(PageDownAdmin):
                                   ('date', 'year'),
                                   'place',
                                   ('medartanalog', 'doctype'),
-                                  ('file', 'file2', 'file3'),
+                                  'file', 'file2', 'file3',
                                   'keywords', 'location',
                                   'source', 'notes', 'collection', 'amount',
                                   'crossreference', 'owner']}),
@@ -86,8 +93,6 @@ class ItemAdmin(PageDownAdmin):
     ]
     save_as = True
     readonly_fields = ['pub_date']
-    # ordering = [F('signature')]
-    # ordering = [Item('signature')].sort(key=human_key)
 
 
 class YearAdmin(PageDownAdmin):
@@ -99,11 +104,20 @@ class YearAdmin(PageDownAdmin):
 
 
 class FeedbackAdmin(PageDownAdmin):
-    list_display = ('name', 'email', 'note', 'archive')
+    list_display = ('name', 'email', 'archive', 'mailto_link')
     list_filter = ['created']
     search_fields = ['name', 'email', 'note', 'archive']
     actions = ['to_archive']
-    readonly_fields = ('created', 'modified')
+    readonly_fields = ('created', 'modified', 'mailto_link')
+    fieldsets = [
+        ('Allgemein', {'fields': [
+            'name', ('email', 'mailto_link'), 'group',
+            'note', 'item'
+        ]}),
+        ('Meta', {'fields': [
+            'archive', 'created', 'modified'
+        ]})
+    ]
 
     def to_archive(self, request, queryset):
         queryset.update(archive=True)

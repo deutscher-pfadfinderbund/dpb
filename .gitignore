@@ -11,3 +11,4 @@ media/
 __pycache__/
 .#*
 production.env
+db/entrypoint/*.sql

@@ -4,13 +4,6 @@
 {% load pages %}
 
 {% block carousel %}
-{#  {% if user.is_authenticated %}#}
-{#    <div class="alert alert-info">#}
-{#      <u>Informationen zum Bundeslager</u>#}
-{#      -#}
-{#      <a href="{% url "blog_detail" slug="bundeslager-2017" %}">Hier</a> gibt es die Dateien mit Informationen zum Bundeslager.#}
-{#    </div>#}
-{#  {% endif %}#}
   {% include "owlcarousel.html" %}
 {% endblock %}
 
@@ -23,39 +16,23 @@
   </div>
 
   <p>
-    Der Deutsche Pfadfinderbund (DPB) ist ein unabhängiger, interkonfessioneller und bündisch geprägter Pfadfinderbund. Er dient gemeinnützigen Zwecken und wird ehrenamtlich getragen. Der Bund ist Mitglied des Ringes junger Bünde (RjB).
+    Der Deutsche Pfadfinderbund (DPB) ist ein unabhängiger, interkonfessioneller und bündisch geprägter Pfadfinderbund.
+    Er dient gemeinnützigen Zwecken und wird ehrenamtlich getragen. Der Bund ist Mitglied des Ringes junger Bünde (RjB).
   </p>
   <p>
-    Der Deutsche Pfadfinderbund will seine jungen Menschen vor einseitiger Beeinflussung bewahren, sie jedoch zur Kritikfähigkeit erziehen und ihnen zur Selbstentwicklung ihrer Anlagen Wege weisen, die sie zu weltoffenen, selbständig denkenden Menschen und mündigen Staatsbürgern werden lässt. Wegweiser hierfür bilden Gesetz und Versprechen der Pfadfinder sowie die Meißnerformel.
+    Der Deutsche Pfadfinderbund will seine jungen Menschen vor einseitiger Beeinflussung bewahren, sie jedoch zur
+    Kritikfähigkeit erziehen und ihnen zur Selbstentwicklung ihrer Anlagen Wege weisen, die sie zu weltoffenen,
+    selbständig denkenden Menschen und mündigen Staatsbürgern werden lässt. Wegweiser hierfür bilden Gesetz und
+    Versprechen der Pfadfinder sowie die Meißnerformel.
   </p>
   <p>
-    In der Erkenntnis, dass das Wesentliche im Zusammenleben der Menschen nicht die Betonung des Trennenden, sondern die des Gemeinsamen und die Achtung vor der freien, menschlichen Persönlichkeit ist, sieht der Deutsche Pfadfinderbund eine seiner gesellschaftlichen Aufgaben darin, eine demokratische Gesinnung zu fördern und totalitären Bestrebungen entgegenzuwirken.
+    In der Erkenntnis, dass das Wesentliche im Zusammenleben der Menschen nicht die Betonung des Trennenden, sondern die
+    des Gemeinsamen und die Achtung vor der freien, menschlichen Persönlichkeit ist, sieht der Deutsche Pfadfinderbund
+    eine seiner gesellschaftlichen Aufgaben darin, eine demokratische Gesinnung zu fördern und totalitären Bestrebungen
+    entgegenzuwirken.
   </p>
 
   <hr>
-{#  {% if user.is_authenticated and news %}#}
-{#    </div>#}
-{#    <div class="col-md-4">#}
-{#      <div class="panel panel-default">#}
-{#        <div class="panel-heading">#}
-{#          <h3 class="panel-title">#}
-{#            Aktuelles#}
-{#          </h3>#}
-{#        </div>#}
-{#        <div class="panel-body">#}
-{#          {% for post in news %}#}
-{#            <h4><a href="{% url 'blog_detail' slug=post.slug %}">{{ post.title }}</a><br><small>{{ post.created|date:"d. M  Y" }} von {{ post.author }}</small></h4>#}
-{#            <p>#}
-{#              {{ post.content|striptags|truncatewords:15 }}<br>#}
-{#              <a href="{% url 'blog_detail' slug=post.slug %}">Zum Beitrag</a>#}
-{#            </p>#}
-{#          {% endfor %}#}
-{#        </div>#}
-{#      </div>#}
-{#    </div>#}
-{#  </div>#}
-{#  {% endif %}#}
-
   {# Preview Row 1 #}
   <div class="row" style="padding-bottom:0;">
     {# Der Deutsche Pfadfinderbund #}
@@ -64,7 +41,8 @@
       <div class="row">
         <div class="col-md-4 col-sm-5 col-xs-6">
           <a href="{% url 'bundesordnung' %}">
-            <img src="{% static 'img/bundesordnung_200px.png' %}" class="img-thumbnail img-responsive margin-top-10px" alt="Bundesordnung"/>
+            <img src="{% static 'img/bundesordnung_200px.png' %}" class="img-thumbnail img-responsive margin-top-10px"
+                 alt="Bundesordnung"/>
           </a>
         </div>
 
@@ -74,7 +52,7 @@
             <h4>{{ page.title }}</h4>
             <p>
               {{ page.content|striptags|truncatewords:15 }}<br>
-              <a href="{{ page.url }}">Mehr</a>
+              <a class="btn btn-link" href="{{ page.url }}">Mehr</a>
             </p>
           {% endfor %}
         </div>
@@ -87,7 +65,8 @@
       <div class="row" style="padding-bottom: 0;">
         <div class="col-md-4 col-sm-5 col-xs-6">
           <a href="{% url 'pfadfinder' %}">
-            <img src="{% static 'img/schweden2011_200px.jpg' %}" class="img-thumbnail img-responsive margin-top-10px" alt="Schweden 2011"/>
+            <img src="{% static 'img/schweden2011_200px.jpg' %}" class="img-thumbnail img-responsive margin-top-10px"
+                 alt="Schweden 2011"/>
           </a>
         </div>
 
@@ -97,7 +76,7 @@
             <h4>{{ page.title }}</h4>
             <p>
               {{ page.content|striptags|truncatewords:15 }}<br>
-              <a href="{{ page.url }}">Mehr</a>
+              <a class="btn btn-link" href="{{ page.url }}">Mehr</a>
             </p>
           {% endfor %}
         </div>
@@ -112,7 +91,8 @@
       <div class="row">
         <div class="col-md-4 col-sm-5 col-xs-6">
           <a href="{% url 'dpb' %}">
-            <img src="{% static 'img/bundeslager2013_200px.jpg' %}" class="img-thumbnail img-responsive margin-top-10px" alt="Bundeslager 2013"/>
+            <img src="{% static 'img/bundeslager2013_200px.jpg' %}" class="img-thumbnail img-responsive margin-top-10px"
+                 alt="Bundeslager 2013"/>
           </a>
         </div>
 
@@ -122,10 +102,41 @@
             <h4>{{ page.title }}</h4>
             <p>
               {{ page.content|striptags|truncatewords:15 }}<br>
-              <a href="{{ page.url }}">Mehr</a>
+              <a class="btn btn-link" href="{{ page.url }}">Mehr</a>
             </p>
           {% endfor %}
         </div>
       </div>
+    </div>
+
+    <div class="col-md-6">
+      <h3>Präventionsarbeit</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <a href="{% url 'arbeitskreis' %}">
+            <img src="{% static 'img/arbeitskreis/arbeitskreis_header.png' %}"
+                 class="img-thumbnail img-responsive margin-top-10px"
+                 alt="Präventionsrat"/>
+          </a>
+        </div>
+
+        <div class="col-md-6">
+          {% get_pages '/arbeitskreis/' as pages %}
+          {% for page in pages %}
+            <h4>{{ page.title }}</h4>
+            <p>
+              {{ page.content|striptags|truncatewords:15 }}<br>
+              <a class="btn btn-link" href="{{ page.url }}">Mehr</a>
+            </p>
+          {% endfor %}
+          <h4>Schutzkonzept</h4>
+          <p>
+            <a class="btn btn-link"
+               href="https://deutscher-pfadfinderbund.de/media/filer_public/78/60/7860715a-342e-4cfc-b6ca-164505fbe4f1/schutzkonzept_des_deutschen_pfadfinderbundes.pdf">
+              Klicken Sie hier</a>, um unser Schutzkonzept herunterzuladen.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock %}

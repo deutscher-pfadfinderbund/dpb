@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import Feedback
 from dpb.admin import PageDownAdmin
+from .models import Feedback
 
 
 class FeedbackAdmin(PageDownAdmin):
@@ -11,8 +11,10 @@ class FeedbackAdmin(PageDownAdmin):
 
     actions = ['to_archive']
 
-    def to_archive(self, request, queryset):
+    def to_archive(self, _request, queryset):
         queryset.update(archive=True)
+
     to_archive.short_description = "Markierte Einträge archivieren"
+
 
 admin.site.register(Feedback, FeedbackAdmin)

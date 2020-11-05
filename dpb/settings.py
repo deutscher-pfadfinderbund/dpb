@@ -8,12 +8,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 import os
-import sys
 
 import django.contrib.auth
 
 SECRET_KEY = os.getenv("SECRET_KEY", "CHANGE_ME")
-DEBUG = os.getenv("DEBUG", "").lower() == "true"
+DEBUG = os.getenv("DEBUG", "").lower() != "false"
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -33,8 +32,10 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.postgres',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     # 3rd party
     'dpb.apps.MyFilerConfig',  # Use Django-Filer with own config for verbose name
@@ -54,7 +55,6 @@ INSTALLED_APPS = (
     'links',
     'evening_program',
     'maps',
-    'maedchenbund',
 )
 
 MIDDLEWARE = (
@@ -65,6 +65,8 @@ MIDDLEWARE = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+MIDDLEWARE_CLASSES = MIDDLEWARE
 
 ROOT_URLCONF = 'dpb.urls'
 

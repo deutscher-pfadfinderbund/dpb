@@ -12,7 +12,7 @@
     Füge hier dein Heimabendprogramm hinzu. Du kannst unten drei Dateien anhängen, die hilfreich sein könnten.
   </p>
 
-  <form action="" method="post">
+  <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form|as_bootstrap_inline }}
     <input type="submit" value="Abschicken" class="btn btn-default">

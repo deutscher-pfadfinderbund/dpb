@@ -71,7 +71,7 @@
             <li><a href="{% url 'dpb' %}">Der Deutsche Pfadfinderbund</a></li>
             <li><a href="{% url 'bundesordnung' %}">Bundesordnung</a></li>
             <li><a href="{% url 'pfadfinder' %}">Pfadfinder und bündische Jugend</a></li>
-            <li><a href="{% url 'arbeitskreis' %}">Arbeitskreis Macht und Sexualität</a></li>
+            <li><a href="{% url 'arbeitskreis' %}">Präventionsarbeit</a></li>
           </ul>
         </li>
 
@@ -117,10 +117,14 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="themes">
               <li><a href="{% url 'intern:arbeitskreis' %}">Überblick</a></li>
+              <li>
+                <a href="https://deutscher-pfadfinderbund.de/media/filer_public/78/60/7860715a-342e-4cfc-b6ca-164505fbe4f1/schutzkonzept_des_deutschen_pfadfinderbundes.pdf">
+                  Schutzkonzept
+                </a>
+              </li>
               <li><a href="{% url 'arbeitskreis_mitglieder' %}">Mitglieder</a></li>
             </ul>
           </li>
-          <li><a href="{% url 'intern:maedchenbund' %}">Mädchenbund</a></li>
         {% endif %}
 
         <li><a href="{% url 'kontakt' %}">Kontakt</a></li>

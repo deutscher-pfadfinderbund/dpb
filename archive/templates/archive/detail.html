@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% load markdown_deux_tags %}
+{% load bootstrap_tags %}
+{% load archive_tags %}
+
+{% block heading %}
+  <h1>Bundesarchiv - Detailansicht</h1>
+{% endblock %}
+
+{% block content %}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        {{ item.title }}
+      </h3>
+    </div>
+    <div class="panel-body">
+      {{ item.signature|row_if_exists:"Signatur"|safe }}
+      {{ item.author|row_if_exists:"Autor"|safe }}
+      {{ item.date|row_if_exists:"Datum (Vorlage)"|safe }}
+      {{ item.year|row_if_exists:"Jahr"|safe }}
+      {{ item.place|row_if_exists:"Ort der Veröffentlichung"|safe }}
+      {{ item.medartanalog|row_if_exists:"Medienart"|safe }}
+      {{ item.doctype|row_if_exists:"Dokumenttyp"|safe }}
+      <hr>
+      {{ item.keywords|row_if_exists:"Schlagworte"|safe }}
+      {{ item.location|row_if_exists:"Standort (analoges Archiv)"|safe }}
+      {{ item.source|row_if_exists:"Quelle"|safe }}
+      {{ item.notes|row_if_exists:"Anmerkungen"|safe }}
+      <hr>
+      {{ item.amount|row_if_exists:"Anzahl / Exemplare"|safe }}
+      {{ item.crossreference|row_if_exists:"Querverweis"|safe }}
+      {{ item.owner|row_if_exists:"Besitzer"|safe }}
+      {{ item.pub_date|row_if_exists:"Hinzugefügt am"|safe }}
+    </div>
+  </div>
+
+  {% if item.file %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Anhänge
+        </h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-4">
+            {{ item.file|dispatch_file|safe }}
+          </div>
+
+          {% if item.file2 %}
+            <div class="col-md-4">
+              {{ item.file2|dispatch_file|safe }}
+            </div>
+          {% endif %}
+
+          {% if item.file3 %}
+            <div class="col-md-4">
+              {{ item.file3|dispatch_file|safe }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Rückmeldung zum Artikel geben
+      </h3>
+    </div>
+    <div class="panel-body">
+      <p>
+        Falls dir Fehler in dem Artikel auffallen oder du uns noch weitere Informationen dazu geben kannst und möchtest,
+        dann fülle doch bitte dieses Formular aus. Wir freuen uns sehr über deine Mitarbeit und werden spätestens beim
+        nächsten Archivtreffen an der Umsetzung der Vorschläge arbeiten.
+      </p>
+      <form action="/bundesarchiv/feedback/" method="post">
+        {% csrf_token %}
+        {{ feedback_form|as_bootstrap }}
+        <input type="hidden" name="item" value="{{ item.pk }}">
+        <input type="submit" value="Feedback abschicken">
+      </form>
+    </div>
+  </div>
+
+
+  {% if user.is_staff %}
+    <br>
+    <p>
+      <a type="button" class="btn btn-info btn-sm btn-white"
+         href="{% url "admin:archive_item_change" item.id %}">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        Artikel bearbeiten
+      </a>
+    </p>
+  {% endif %}
+
+{% endblock %}

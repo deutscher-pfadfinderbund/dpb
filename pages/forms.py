@@ -11,8 +11,7 @@ class PageForm(forms.ModelForm):
                                        " and trailing slashes."),
                            error_messages={
                                "invalid": _("This value must contain only letters, numbers,"
-                                            " dots, underscores, dashes, slashes or tildes."),
-                           },
+                                            " dots, underscores, dashes, slashes or tildes."), },
                            )
 
     class Meta:
@@ -27,7 +26,7 @@ class PageForm(forms.ModelForm):
                 code='missing_leading_slash',
             )
         if (settings.APPEND_SLASH and
-                    'django.middleware.common.CommonMiddleware' in settings.MIDDLEWARE_CLASSES and
+                'django.middleware.common.CommonMiddleware' in settings.MIDDLEWARE_CLASSES and
                 not url.endswith('/')):
             raise forms.ValidationError(
                 ugettext("URL is missing a trailing slash."),
