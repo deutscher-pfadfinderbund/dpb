@@ -8,9 +8,7 @@ This is a Python3 Django project. The requirements are defined in `requirements.
 Assuming `/usr/local/bin/python3` is the path to your python3 binary and `python` is an alias to `python3`:
 ```bash
 $ cd /path/to/this/project
-$ mkvirtualenv --python=/usr/local/bin/python3 dpb
-$ workon dpb
-$ pip install -r requirements.txt
+$ pipenv install
 $ python manage.py runserver
 ```
 
