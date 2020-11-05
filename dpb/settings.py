@@ -22,6 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 ALLOWED_HOSTS = ['*']
 
 SITE_ID = 1
+LOGIN_URL = '/login/'
 LOGOUT_REDIRECT_URL = 'index'
 
 # Application definition
@@ -162,6 +163,3 @@ THUMBNAIL_ALIASES = {
         'pages': {'size': (350, 350), 'crop': "scale", 'quality': 100},
     },
 }
-
-# Needed for login
-django.contrib.auth.LOGIN_URL = '/'
