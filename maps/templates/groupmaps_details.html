@@ -14,191 +14,191 @@
 
   {% if house.description %}
     <div class="well">
-     {{ house.description|markdown }}
+      {{ house.description|markdown }}
     </div>
   {% endif %}
 
   <div class="row">
-  {% if house.street or house.plz or house.city or house.state %}
-    <div class="col-md-4">
-      <h3>Adresse</h3>
-      <table class="table table-hover">
-        <tbody>
-        {{ house.street|table_row:"Straße"|safe }}
-        {% with house.plz|add:" "|add:house.city as plzcity %}
-          {{ plzcity|table_row:"PLZ / Ort"|safe }}
-        {% endwith %}
-        {{ house.state|table_row:"Bundesland"|safe }}
-        </tbody>
-      </table>
-    </div>
-  {% endif %}
-  {% if house.owner or house.contact_name or house.contact_tel or house.contact_email %}
-    <div class="col-md-4">
-      <h3>Kontakt</h3>
-      <table class="table table-hover">
-      	<tbody>
-        {{ house.owner|table_row:"Bundesgruppe des Heimes"|safe }}
-        {{ house.contact_name|table_row:"Ansprechpartner für die Vermietung"|safe }}
-        {{ house.contact_tel|table_row:"Telefon"|safe }}
-        {{ house.contact_email|table_row:"E-Mail"|safe }}
-      	</tbody>
-      </table>
-    </div>
-  {% endif %}
+    {% if house.street or house.plz or house.city or house.state %}
+      <div class="col-md-4">
+        <h3>Adresse</h3>
+        <table class="table table-hover">
+          <tbody>
+          {{ house.street|table_row:"Straße"|safe }}
+          {% with house.plz|add:" "|add:house.city as plzcity %}
+            {{ plzcity|table_row:"PLZ / Ort"|safe }}
+          {% endwith %}
+          {{ house.state|table_row:"Bundesland"|safe }}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+    {% if house.owner or house.contact_name or house.contact_tel or house.contact_email %}
+      <div class="col-md-4">
+        <h3>Kontakt</h3>
+        <table class="table table-hover">
+          <tbody>
+          {{ house.owner|table_row:"Bundesgruppe des Heimes"|safe }}
+          {{ house.contact_name|table_row:"Ansprechpartner für die Vermietung"|safe }}
+          {{ house.contact_tel|table_row:"Telefon"|safe }}
+          {{ house.contact_email|table_row:"E-Mail"|safe }}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
 
-  {% if house.website or house.gmaps_location or house.osm_location %}
-    <div class="col-md-4">
-      <h3>Web</h3>
-      <table class="table table-hover">
-      	<tbody>
-        {{ house.website|table_row:"Webseite,url"|safe }}
-        {{ house.gmaps_location|table_row:"Google Maps Link,url"|safe }}
-        {{ house.osm_location|table_row:"OSM Link,url"|safe }}
-      	</tbody>
-      </table>
-    </div>
-  {% endif %}
+    {% if house.website or house.gmaps_location or house.osm_location %}
+      <div class="col-md-4">
+        <h3>Web</h3>
+        <table class="table table-hover">
+          <tbody>
+          {{ house.website|table_row:"Webseite,url"|safe }}
+          {{ house.gmaps_location|table_row:"Google Maps Link,url"|safe }}
+          {{ house.osm_location|table_row:"OSM Link,url"|safe }}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
   </div>
 
   <div class="row">
-  {% if house.price_intern or house.price_extern or house.price_other %}
-    <div class="col-md-4">
-      <h3>Preise</h3>
-      <table class="table table-hover">
-      	<tbody>
-        {{ house.price_intern|table_row:"Preise für Pfadfinder"|safe }}
-        {{ house.price_extern|table_row:"Preise für Externe"|safe }}
-        {{ house.price_other|table_row:"Sonstige Kosten"|safe }}
-      	</tbody>
-      </table>
-    </div>
-  {% endif %}
-  
-  {% if house.kitchen_stove or house.kitchen_oven or house.kitchen_fridge or house.kitchen_sink or house.kitchen_dishwasher or house.kitchen_dishes or house.kitchen_pots or house.kitchen_hot_water or house.kitchen_other %}
-    <div class="col-md-4">
-      <h3>Küche</h3>
-      <table class="table table-hover">
-      	<tbody>
-        <tr>
-          <td>
-            <ul class="no-dot">
-              <li>{{ house.kitchen_stove|bool_icon:"Herd"|safe }}</li>
-              <li>{{ house.kitchen_oven|bool_icon:"Backofen"|safe }}</li>
-              <li>{{ house.kitchen_fridge|bool_icon:"Kühlschrank"|safe }}</li>
-              <li>{{ house.kitchen_sink|bool_icon:"Spüle"|safe }}</li>
-            </ul>
-          </td>
-          <td>
-            <ul class="no-dot">
-              <li>{{ house.kitchen_dishwasher|bool_icon:"Geschirrspüler"|safe }}</li>
-              <li>{{ house.kitchen_dishes|bool_icon:"Geschirr und Besteck"|safe }}</li>
-              <li>{{ house.kitchen_pots|bool_icon:"Große Töpfe"|safe }}</li>
-              <li>{{ house.kitchen_hot_water|bool_icon:"Heißes Wasser"|safe }}</li>
-            </ul>
-          </td>
-        </tr>
-        {{ house.kitchen_other|table_row:"Sonstige Küchengeräte"|safe }}
-      	</tbody>
-      </table>
-    </div>
-  {% endif %}
-  {% if house.toilets_total or house.toilets_washbasin or house.toilets_shower %}
-    <div class="col-md-4">
-      <h3>Bad</h3>
-      <table class="table table-hover">
-      	<tbody>
-        <tr>
-          <td>Geschlechtergetrennt?</td>
-          <td>{{ house.toilets_separate|bool_icon|safe }}</td>
-        </tr>
-        {{ house.toilets_total|table_row:"Anzahl der Toiletten"|safe }}
-        {{ house.toilets_washbasin|table_row:"Anzahl der Waschbecken"|safe }}
-        {{ house.toilets_shower|table_row:"Anzahl der Duschen"|safe }}
-      	</tbody>
-      </table>
-    </div>
-  {% endif %}
+    {% if house.price_intern or house.price_extern or house.price_other %}
+      <div class="col-md-4">
+        <h3>Preise</h3>
+        <table class="table table-hover">
+          <tbody>
+          {{ house.price_intern|table_row:"Preise für Pfadfinder"|safe }}
+          {{ house.price_extern|table_row:"Preise für Externe"|safe }}
+          {{ house.price_other|table_row:"Sonstige Kosten"|safe }}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+
+    {% if house.kitchen_stove or house.kitchen_oven or house.kitchen_fridge or house.kitchen_sink or house.kitchen_dishwasher or house.kitchen_dishes or house.kitchen_pots or house.kitchen_hot_water or house.kitchen_other %}
+      <div class="col-md-4">
+        <h3>Küche</h3>
+        <table class="table table-hover">
+          <tbody>
+          <tr>
+            <td>
+              <ul class="no-dot">
+                <li>{{ house.kitchen_stove|bool_icon:"Herd"|safe }}</li>
+                <li>{{ house.kitchen_oven|bool_icon:"Backofen"|safe }}</li>
+                <li>{{ house.kitchen_fridge|bool_icon:"Kühlschrank"|safe }}</li>
+                <li>{{ house.kitchen_sink|bool_icon:"Spüle"|safe }}</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="no-dot">
+                <li>{{ house.kitchen_dishwasher|bool_icon:"Geschirrspüler"|safe }}</li>
+                <li>{{ house.kitchen_dishes|bool_icon:"Geschirr und Besteck"|safe }}</li>
+                <li>{{ house.kitchen_pots|bool_icon:"Große Töpfe"|safe }}</li>
+                <li>{{ house.kitchen_hot_water|bool_icon:"Heißes Wasser"|safe }}</li>
+              </ul>
+            </td>
+          </tr>
+          {{ house.kitchen_other|table_row:"Sonstige Küchengeräte"|safe }}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+    {% if house.toilets_total or house.toilets_washbasin or house.toilets_shower %}
+      <div class="col-md-4">
+        <h3>Bad</h3>
+        <table class="table table-hover">
+          <tbody>
+          <tr>
+            <td>Geschlechtergetrennt?</td>
+            <td>{{ house.toilets_separate|bool_icon|safe }}</td>
+          </tr>
+          {{ house.toilets_total|table_row:"Anzahl der Toiletten"|safe }}
+          {{ house.toilets_washbasin|table_row:"Anzahl der Waschbecken"|safe }}
+          {{ house.toilets_shower|table_row:"Anzahl der Duschen"|safe }}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
   </div>
 
   <div class="row">
-  {% if house.sleep_beds or house.sleep_mattresses or house.sleep_floor or house.sleep_outdoor %}
-    <div class="col-md-4">
-      <h3>Schlafmöglichkeiten</h3>
-      <table class="table table-hover">
-        <tbody>
-        {{ house.sleep_beds|table_row:"Anzahl Betten"|safe }}
-        {{ house.sleep_mattresses|table_row:"Anzahl Matrazen"|safe }}
-        {{ house.sleep_floor|table_row:"Fußboden"|safe }}
-        {{ house.sleep_outdoor|table_row:"Schlafplätze auf dem Gelände"|safe }}
-        </tbody>
-      </table>
-    </div>
-  {% endif %}
+    {% if house.sleep_beds or house.sleep_mattresses or house.sleep_floor or house.sleep_outdoor %}
+      <div class="col-md-4">
+        <h3>Schlafmöglichkeiten</h3>
+        <table class="table table-hover">
+          <tbody>
+          {{ house.sleep_beds|table_row:"Anzahl Betten"|safe }}
+          {{ house.sleep_mattresses|table_row:"Anzahl Matrazen"|safe }}
+          {{ house.sleep_floor|table_row:"Fußboden"|safe }}
+          {{ house.sleep_outdoor|table_row:"Schlafplätze auf dem Gelände"|safe }}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
 
-  {% if house.room_size or house.room_tables or house.room_chairs %}
-    <div class="col-md-4">
-      <h3>Gruppenraum</h3>
-      <table class="table table-hover">
-        <tbody>
-        {{ house.room_size|table_row:"Größe"|safe }}
-        {{ house.room_tables|table_row:"Anzahl der Tische"|safe }}
-        {{ house.room_chairs|table_row:"Anzahl der Stühle"|safe }}
-        </tbody>
-      </table>
-    </div>
-  {% endif %}
+    {% if house.room_size or house.room_tables or house.room_chairs %}
+      <div class="col-md-4">
+        <h3>Gruppenraum</h3>
+        <table class="table table-hover">
+          <tbody>
+          {{ house.room_size|table_row:"Größe"|safe }}
+          {{ house.room_tables|table_row:"Anzahl der Tische"|safe }}
+          {{ house.room_chairs|table_row:"Anzahl der Stühle"|safe }}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
 
-  {% if house.rooms_total or house.rooms_tables or house.rooms_chairs or house.rooms_other %}
-    <div class="col-md-4">
-      <h3>Weitere Räume</h3>
-      <table class="table table-hover">
-      	<tbody>
-        {{ house.rooms_total|table_row:"Anzahl weiterer Räume"|safe }}
-        {{ house.rooms_tables|table_row:"Anzahl der Tische in weiteren Räumen"|safe }}
-        {{ house.rooms_chairs|table_row:"Anzahl der Stühle in weiteren Räumen"|safe }}
-        {{ house.rooms_other|table_row:"Sonstiges zu den Räumen"|safe }}
-      	</tbody>
-      </table>
-    </div>
-  {% endif %}
+    {% if house.rooms_total or house.rooms_tables or house.rooms_chairs or house.rooms_other %}
+      <div class="col-md-4">
+        <h3>Weitere Räume</h3>
+        <table class="table table-hover">
+          <tbody>
+          {{ house.rooms_total|table_row:"Anzahl weiterer Räume"|safe }}
+          {{ house.rooms_tables|table_row:"Anzahl der Tische in weiteren Räumen"|safe }}
+          {{ house.rooms_chairs|table_row:"Anzahl der Stühle in weiteren Räumen"|safe }}
+          {{ house.rooms_other|table_row:"Sonstiges zu den Räumen"|safe }}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
   </div>
 
   <div class="row">
-  {% if house.accessibility_parking or house.accessibility_train or house.accessibility_bus or house.accessibility_shop or house.accessibility_baker or house.accessibility_other %}
-    <div class="col-md-4">
-      <h3>Anbindung</h3>
-      <table class="table table-hover">
-      	<tbody>
-        {{ house.accessibility_parking|table_row:"Anzahl der Parkplätze"|safe }}
-        {{ house.accessibility_train|table_row:"Entfernung zum nächsten Bahnhof"|safe }}
-        {{ house.accessibility_bus|table_row:"Entfernung zum nächsten Bus"|safe }}
-        {{ house.accessibility_shop|table_row:"Entfernung zur Einkaufsmöglichkeit"|safe }}
-        {{ house.accessibility_baker|table_row:"Entfernung zum nächsten Bäcker"|safe }}
-        {{ house.accessibility_other|table_row:"Sonstiges in der Nähe"|safe }}
-      	</tbody>
-      </table>
-    </div>
-  {% endif %}
+    {% if house.accessibility_parking or house.accessibility_train or house.accessibility_bus or house.accessibility_shop or house.accessibility_baker or house.accessibility_other %}
+      <div class="col-md-4">
+        <h3>Anbindung</h3>
+        <table class="table table-hover">
+          <tbody>
+          {{ house.accessibility_parking|table_row:"Anzahl der Parkplätze"|safe }}
+          {{ house.accessibility_train|table_row:"Entfernung zum nächsten Bahnhof"|safe }}
+          {{ house.accessibility_bus|table_row:"Entfernung zum nächsten Bus"|safe }}
+          {{ house.accessibility_shop|table_row:"Entfernung zur Einkaufsmöglichkeit"|safe }}
+          {{ house.accessibility_baker|table_row:"Entfernung zum nächsten Bäcker"|safe }}
+          {{ house.accessibility_other|table_row:"Sonstiges in der Nähe"|safe }}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
 
-  {% if house.location_urban or house.location_country or house.location_special %}
-    <div class="col-md-4">
-      <h3>Lage</h3>
-      <table class="table table-hover">
-        <tbody>
-        <tr>
-          <td>Städtisch?</td>
-          <td>{{ house.location_urban|bool_icon|safe }}</td>
-        </tr>
-        <tr>
-          <td>Ländlich?</td>
-          <td>{{ house.location_country|bool_icon|safe }}</td>
-        </tr>
-        {{ house.location_special|table_row:"Besonderheiten"|safe }}
-        </tbody>
-      </table>
-    </div>
-  {% endif %}
+    {% if house.location_urban or house.location_country or house.location_special %}
+      <div class="col-md-4">
+        <h3>Lage</h3>
+        <table class="table table-hover">
+          <tbody>
+          <tr>
+            <td>Städtisch?</td>
+            <td>{{ house.location_urban|bool_icon|safe }}</td>
+          </tr>
+          <tr>
+            <td>Ländlich?</td>
+            <td>{{ house.location_country|bool_icon|safe }}</td>
+          </tr>
+          {{ house.location_special|table_row:"Besonderheiten"|safe }}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
   </div>
 
   {% if house.image1 %}
@@ -206,20 +206,23 @@
     <div class="row">
       <div class="col-md-4">
         <a href="{{ house.image1.url }}">
-          <img src="{% thumbnail house.image1 300x200 crop %}" class="img-thumbnail img-responsive" alt="{{ house.image1 }}"/>
+          <img src="{% thumbnail house.image1 300x200 crop %}" class="img-thumbnail img-fluid"
+               alt="{{ house.image1 }}"/>
         </a>
       </div>
       {% if house.image2 %}
         <div class="col-md-4">
           <a href="{{ house.image2.url }}">
-            <img src="{% thumbnail house.image2 300x200 crop %}" class="img-thumbnail img-responsive" alt="{{ house.image2 }}"/>
+            <img src="{% thumbnail house.image2 300x200 crop %}" class="img-thumbnail img-fluid"
+                 alt="{{ house.image2 }}"/>
           </a>
         </div>
       {% endif %}
       {% if house.image3 %}
         <div class="col-md-4">
           <a href="{{ house.image3.url }}">
-            <img src="{% thumbnail house.image3 300x200 crop %}" class="img-thumbnail img-responsive" alt="{{ house.image3 }}"/>
+            <img src="{% thumbnail house.image3 300x200 crop %}" class="img-thumbnail img-fluid"
+                 alt="{{ house.image3 }}"/>
           </a>
         </div>
       {% endif %}

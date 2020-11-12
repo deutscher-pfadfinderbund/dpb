@@ -17,7 +17,7 @@ def dispatch_file(file: File):
         <div class='panel panel-default'>
             <div class='panel-body'>
                 <p>{}</p>
-                <a class='btn btn-default' href='{}' target='_blank'>Datei öffnen</a>
+                <a class='btn btn-outline-dark' href='{}' target='_blank'>Datei öffnen</a>
             </div>
         </div>
     """.format(file, file.url)

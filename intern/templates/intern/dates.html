@@ -11,13 +11,13 @@
   <script src="{% static 'assets/datatables/js/dataTables.bootstrap.min.js' %}"></script>
   <link rel="stylesheet" href="{% static 'assets/datatables/css/dataTables.bootstrap.min.css' %}"/>
   <script type="text/javascript">
-    $(document).ready(function() {
-      $('.datatable').dataTable( {
-        "language": {
-          "url": "{% static 'assets/datatables/german.json' %}"
-        }
+      $(document).ready(function () {
+          $('.datatable').dataTable({
+              "language": {
+                  "url": "{% static 'assets/datatables/german.json' %}"
+              }
+          });
       });
-    });
   </script>
 {% endblock %}
 
@@ -31,15 +31,15 @@
   {% if dates %}
     <table class="table table-hover table-striped table-condensed table-responsive">
       <thead>
-        <tr>
-          <th>Titel</th>
-          <th>Ort</th>
-          <th>Beginn</th>
-          <th>Ende</th>
-        </tr>
+      <tr>
+        <th>Titel</th>
+        <th>Ort</th>
+        <th>Beginn</th>
+        <th>Ende</th>
+      </tr>
       </thead>
       <tbody>
-        {% for date in dates %}
+      {% for date in dates %}
         <tr>
           <td><a href="{% url 'intern:date_detail' id=date.id %}">{{ date.title }}</a></td>
           <td>{{ date.location }}</td>
@@ -47,7 +47,7 @@
           <td>{{ date.end|date:"j. F Y" }}</td>
           <td>{% include 'dpb/edit_item_generic.html' with model="intern:date" id=date.id %}</td>
         </tr>
-        {% endfor %}
+      {% endfor %}
       </tbody>
     </table>
   {% else %}
@@ -55,6 +55,6 @@
   {% endif %}
 
   {% if user.is_staff %}
-    <a href="{% url 'intern:date_add' %}" class="btn btn-default">Zusammenkunft hinzufügen</a>
+    <a href="{% url 'intern:date_add' %}" class="btn btn-outline-dark">Zusammenkunft hinzufügen</a>
   {% endif %}
 {% endblock %}

@@ -10,34 +10,36 @@
 
 {% block content %}
   <p>
-    Der Deutsche Pfadfinderbund hat zwei Wurzeln: Die aus England stammende weltweite Pfadfinderbewegung und die Deutsche Jugendbewegung.
+    Der Deutsche Pfadfinderbund hat zwei Wurzeln: Die aus England stammende weltweite Pfadfinderbewegung und die
+    Deutsche Jugendbewegung.
   </p>
 
   {% get_pages '/pfadfinder/' as pages %}
-    {% for page in pages %}
+  {% for page in pages %}
 
-      <div class="row">
-        {% if page.image %}
-          <div class="col-md-2 col-sm-3 col-xs-4">
-            <a href="{{ page.url }}">
-              <img src="{% thumbnail page.image 200x133 crop %}" class="img-thumbnail img-responsive margin-top-10px" alt="{{ page.image }}"/>
-            </a>
-          </div>
-          <div class="col-md-10">
-        {% else %}
-          <div class="col-md-12">
-        {% endif %}
-            <h4><a href="{{ page.url }}">{{ page.title }}</a></h4>
-            <p>
-              {{ page.content|striptags|truncatewords:50 }}
-            </p>
-            <p>
-              <a href="{{ page.url }}">
-                <button type="button" class="btn btn-default btn-sm">Weiterlesen</button>
-              </a>
-            </p>
-          </div>
+    <div class="row">
+    {% if page.image %}
+      <div class="col-md-2 col-sm-3 col-xs-4">
+        <a href="{{ page.url }}">
+          <img src="{% thumbnail page.image 200x133 crop %}" class="img-thumbnail img-fluid margin-top-10px"
+               alt="{{ page.image }}"/>
+        </a>
       </div>
+      <div class="col-md-10">
+    {% else %}
+      <div class="col-md-12">
+    {% endif %}
+  <h4><a href="{{ page.url }}">{{ page.title }}</a></h4>
+  <p>
+    {{ page.content|striptags|truncatewords:50 }}
+  </p>
+  <p>
+    <a href="{{ page.url }}">
+      <button type="button" class="btn btn-outline-dark btn-sm">Weiterlesen</button>
+    </a>
+  </p>
+  </div>
+  </div>
 
-    {% endfor %}
+  {% endfor %}
 {% endblock %}
