@@ -9971,6 +9971,18 @@ h3 {
   background-color: var(--dark);
 }
 
+.carousel-indicators {
+  position: static;
+  bottom: -50px;
+  margin-bottom: 0;
+}
+.carousel-indicators li {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--dark);
+}
+
 @font-face {
   font-family: "Open Sans";
   src: url("fonts/open_sans/OpenSans-Regular.ttf");
@@ -10052,16 +10064,6 @@ footer .row {
 
 ul.no-dot > li {
   list-style-type: none;
-}
-
-#dpb-carousel .item img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-#owl-container {
-  padding-bottom: 0;
 }
 
 #toc-panel {
