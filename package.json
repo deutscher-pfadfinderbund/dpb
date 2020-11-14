@@ -1,0 +1,10 @@
+{
+  "name": "dpb-site",
+  "description": "",
+  "version": "v1.0.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "jquery": "^3.5.1"
+  }
+}
