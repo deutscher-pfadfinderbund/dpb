@@ -18,6 +18,8 @@ RUN apk --update add --no-cache --virtual build-deps build-base postgresql-dev &
 
 COPY . /code
 
+RUN python manage.py collectstatic --noinput
+
 EXPOSE 8000
 
 CMD ["pipenv", "run", "gunicorn", "-b", "0.0.0.0:8000", "dpb.wsgi"]
