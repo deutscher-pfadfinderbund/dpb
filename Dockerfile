@@ -21,7 +21,7 @@ COPY . /code
 RUN apk add --update npm && \
     npm install -g sass && \
     npm install && \
-    sass -I . --style=compressed --no-source-map css/style.sass:style.css && \
+    sass -I . --style=compressed --no-source-map styles/style.sass:style.css && \
     npm uninstall -g sass && \
     apk del npm && \
     python manage.py collectstatic --noinput && \

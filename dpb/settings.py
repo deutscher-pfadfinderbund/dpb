@@ -111,7 +111,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'contact/templates/contact'),
     ("bootstrap", os.path.join(BASE_DIR, 'node_modules/bootstrap/dist/js')),
     ("jquery", os.path.join(BASE_DIR, 'node_modules/jquery/dist')),
-    ("styles", os.path.join(BASE_DIR, 'css')),
+    ("styles", os.path.join(BASE_DIR, 'styles')),
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
