@@ -9,10 +9,8 @@
 
 {% block content %}
   <hr>
-  <div class="row">
-    <div class="col-md-offset-2 col-md-8">
-      <img class="img-responsive" src="{% static 'img/schriftzug-dpb.svg' %}" alt="">
-    </div>
+  <div class="row justify-content-md-center">
+    <img class="img-fluid col-md-8" src="{% static 'img/schriftzug-dpb.svg' %}" alt="Schriftzug des DPB">
   </div>
 
   <p>
@@ -41,7 +39,7 @@
       <div class="row">
         <div class="col-md-4 col-sm-5 col-xs-6">
           <a href="{% url 'bundesordnung' %}">
-            <img src="{% static 'img/bundesordnung_200px.png' %}" class="img-thumbnail img-responsive margin-top-10px"
+            <img src="{% static 'img/bundesordnung_200px.png' %}" class="img-thumbnail img-fluid margin-top-10px"
                  alt="Bundesordnung"/>
           </a>
         </div>
@@ -52,7 +50,7 @@
             <h4>{{ page.title }}</h4>
             <p>
               {{ page.content|striptags|truncatewords:15 }}<br>
-              <a class="btn btn-link" href="{{ page.url }}">Mehr</a>
+              <a class="btn btn-sm btn-link" href="{{ page.url }}">Mehr</a>
             </p>
           {% endfor %}
         </div>
@@ -65,7 +63,7 @@
       <div class="row" style="padding-bottom: 0;">
         <div class="col-md-4 col-sm-5 col-xs-6">
           <a href="{% url 'pfadfinder' %}">
-            <img src="{% static 'img/schweden2011_200px.jpg' %}" class="img-thumbnail img-responsive margin-top-10px"
+            <img src="{% static 'img/schweden2011_200px.jpg' %}" class="img-thumbnail img-fluid margin-top-10px"
                  alt="Schweden 2011"/>
           </a>
         </div>
@@ -76,7 +74,7 @@
             <h4>{{ page.title }}</h4>
             <p>
               {{ page.content|striptags|truncatewords:15 }}<br>
-              <a class="btn btn-link" href="{{ page.url }}">Mehr</a>
+              <a class="btn btn-sm btn-link" href="{{ page.url }}">Mehr</a>
             </p>
           {% endfor %}
         </div>
@@ -91,7 +89,7 @@
       <div class="row">
         <div class="col-md-4 col-sm-5 col-xs-6">
           <a href="{% url 'dpb' %}">
-            <img src="{% static 'img/bundeslager2013_200px.jpg' %}" class="img-thumbnail img-responsive margin-top-10px"
+            <img src="{% static 'img/bundeslager2013_200px.jpg' %}" class="img-thumbnail img-fluid margin-top-10px"
                  alt="Bundeslager 2013"/>
           </a>
         </div>
@@ -102,7 +100,7 @@
             <h4>{{ page.title }}</h4>
             <p>
               {{ page.content|striptags|truncatewords:15 }}<br>
-              <a class="btn btn-link" href="{{ page.url }}">Mehr</a>
+              <a class="btn btn-sm btn-link" href="{{ page.url }}">Mehr</a>
             </p>
           {% endfor %}
         </div>
@@ -115,7 +113,7 @@
         <div class="col-md-6">
           <a href="{% url 'arbeitskreis' %}">
             <img src="{% static 'img/arbeitskreis/arbeitskreis_header.png' %}"
-                 class="img-thumbnail img-responsive margin-top-10px"
+                 class="img-thumbnail img-fluid margin-top-10px"
                  alt="Präventionsrat"/>
           </a>
         </div>
@@ -126,7 +124,7 @@
             <h4>{{ page.title }}</h4>
             <p>
               {{ page.content|striptags|truncatewords:15 }}<br>
-              <a class="btn btn-link" href="{{ page.url }}">Mehr</a>
+              <a class="btn btn-sm btn-link" href="{{ page.url }}">Mehr</a>
             </p>
           {% endfor %}
           <h4>Schutzkonzept</h4>

@@ -1,0 +1,12 @@
+$indicator-size: 10px;
+
+.carousel-indicators {
+  position: static;
+
+  li {
+    width: $indicator-size;
+    height: $indicator-size;
+    border-radius: 50%;
+    background-color: var(--dark);
+  }
+}

@@ -62,7 +62,8 @@
           {% endif %}
 
           {% for i in paginator.paginator.page_range %}
-            <li {% if paginator.number == i %} class="active" {% endif %}><a href="{% url 'blog_page' page=i %}">{{ i }}</a></li>
+            <li {% if paginator.number == i %} class="active" {% endif %}><a
+                href="{% url 'blog_page' page=i %}">{{ i }}</a></li>
           {% endfor %}
 
           {% if paginator.has_next %}
@@ -80,6 +81,6 @@
   {% endif %}
 
   {% if user.is_staff %}
-    <a href="{% url 'blog_post_add' %}" class="btn btn-default">Eintrag hinzufügen</a>
+    <a href="{% url 'blog_post_add' %}" class="btn btn-outline-dark">Eintrag hinzufügen</a>
   {% endif %}
 {% endblock %}

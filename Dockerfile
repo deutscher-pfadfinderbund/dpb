@@ -18,7 +18,14 @@ RUN apk --update add --no-cache --virtual build-deps build-base postgresql-dev &
 
 COPY . /code
 
-RUN python manage.py collectstatic --noinput
+RUN apk add --update npm && \
+    npm install -g sass && \
+    npm install && \
+    sass -I . --style=compressed --no-source-map styles/style.sass:style.css && \
+    npm uninstall -g sass && \
+    apk del npm && \
+    python manage.py collectstatic --noinput && \
+    rm -rf node_modules
 
 EXPOSE 8000
 

@@ -12,3 +12,5 @@ __pycache__/
 .#*
 production.env
 db/entrypoint/*.sql
+
+/node_modules

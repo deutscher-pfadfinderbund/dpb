@@ -1,0 +1,22 @@
+.navbar-dark .navbar-nav .nav-link {
+  color: var(--light);
+}
+
+.navbar-dark {
+  .dropdown-item {
+    color: var(--light);
+
+    &:hover, &:focus {
+      color: var(--dark);
+    }
+
+    &:active {
+      color: var(--light);
+      background-color: black;
+    }
+  }
+
+  .dropdown-menu {
+    background-color: var(--dark);
+  }
+}

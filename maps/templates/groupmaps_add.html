@@ -46,22 +46,22 @@
 
     <div class="padding-bottom"></div>
 
-    <input type="submit" value="Abschicken" class="btn btn-default">
+    <input type="submit" value="Abschicken" class="btn btn-outline-dark">
   </form>
 
   <script type="application/javascript">
-    $(document).ready(function() {
-      $(".form-group input").addClass("form-control");
-      $(".form-group select").addClass("form-control");
-      $(".form-group textarea").addClass("form-control");
+      $(document).ready(function () {
+          $(".form-group input").addClass("form-control");
+          $(".form-group select").addClass("form-control");
+          $(".form-group textarea").addClass("form-control");
 
-      $("#id_group").attr("placeholder", "z.B. Gau Sueben")
-      $("#id_leader").attr("placeholder", "z.B. ballack")
-      $("#id_subgroups").attr("placeholder", "z.B. MS Rheinmöwen, MS Tilman Riemenschneider")
-      $("#id_website").attr("placeholder", "z.B. www.irgendwasmitpfadfindern.de")
-      $("#id_special").attr("placeholder", "z.B. Wir sind der einzige, reine Mädchengau. Man erkennt uns recht gut an unserer Lautstärke, obwohl wir keine Stulpen oder Röcke tragen.")
-      $("#id_other").attr("placeholder", "Hier könnt ihr alles schreiben, was ihr noch loswerden wollt")
-      // $(".footer-wrapper").hide();
-    });
+          $("#id_group").attr("placeholder", "z.B. Gau Sueben")
+          $("#id_leader").attr("placeholder", "z.B. ballack")
+          $("#id_subgroups").attr("placeholder", "z.B. MS Rheinmöwen, MS Tilman Riemenschneider")
+          $("#id_website").attr("placeholder", "z.B. www.irgendwasmitpfadfindern.de")
+          $("#id_special").attr("placeholder", "z.B. Wir sind der einzige, reine Mädchengau. Man erkennt uns recht gut an unserer Lautstärke, obwohl wir keine Stulpen oder Röcke tragen.")
+          $("#id_other").attr("placeholder", "Hier könnt ihr alles schreiben, was ihr noch loswerden wollt")
+          // $(".footer-wrapper").hide();
+      });
   </script>
 {% endblock content %}

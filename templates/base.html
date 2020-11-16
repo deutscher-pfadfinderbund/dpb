@@ -12,16 +12,14 @@
   {% load pages %}
 
   <!-- Vendor Stylesheets -->
-  <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}"/>
-  <link rel="stylesheet" href="{% static 'assets/bootswatch/bootswatch.min.css' %}"/>
   <link rel="stylesheet" href="{% static 'assets/fontawesome/css/fontawesome.min.css' %}"/>
 
   <!-- Own Stylesheets -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+  <link rel="stylesheet" href="{% static 'styles/style.css' %}"/>
 
-  <!-- Vendor Javascript -->
-  <script src="{% static 'assets/jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+  <scrip src="{% static 'img/favicon.ico' %}"></scrip>
+  <script src="{% static 'jquery/jquery.slim.min.js' %}"></script>
+  <script src="{% static "bootstrap/bootstrap.bundle.min.js" %}"></script>
 
   <!-- Own Javascript -->
   <script type="text/javascript">
@@ -44,134 +42,132 @@
 
 <body role="document">
 <!-- navbar -->
-<div class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-              aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+<nav class="navbar navbar-dark navbar-expand-xl bg-dark mb-3">
+  <div class="container-xl">
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+      <img height="50" class="mr-3" src="{% static 'img/lilie100.png' %}" alt="Bundeslilie"/>
+      DPB
+    </a>
 
-      <a class="navbar-brand" href="{% url 'index' %}">
-        <img class="navbar-brand navbar-brand-img" src="{% static 'img/lilie100.png' %}" alt="Lilie"/>
-        DPB
-      </a>
-    </div>
+    <button type="button" class="navbar-toggler border-0" data-toggle="collapse" data-target="#navbar"
+            aria-expanded="false" aria-controls="navbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"
+             data-toggle="dropdown" href="#" id="themes" role="button"
+             aria-haspopup="true" aria-expanded="false">
             Über den DPB
-            <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" aria-labelledby="themes">
-            <li><a href="{% url 'dpb' %}">Der Deutsche Pfadfinderbund</a></li>
-            <li><a href="{% url 'bundesordnung' %}">Bundesordnung</a></li>
-            <li><a href="{% url 'pfadfinder' %}">Pfadfinder und bündische Jugend</a></li>
-            <li><a href="{% url 'arbeitskreis' %}">Präventionsarbeit</a></li>
+            <li><a class="dropdown-item" href="{% url 'dpb' %}">Der Deutsche Pfadfinderbund</a></li>
+            <li><a class="dropdown-item" href="{% url 'bundesordnung' %}">Bundesordnung</a>
+            </li>
+            <li><a class="dropdown-item" href="{% url 'pfadfinder' %}">Pfadfinder und
+              bündische Jugend</a></li>
+            <li><a class="dropdown-item" href="{% url 'arbeitskreis' %}">Präventionsarbeit</a>
+            </li>
           </ul>
         </li>
 
         {% if user.is_authenticated %}
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Infos <span class="caret"></span></a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Infos <span
+                class="caret"></span></a>
             <ul class="dropdown-menu" aria-labelledby="themes">
-              <li><a href="{% url 'intern:dates' %}">Zusammenkünfte</a></li>
-              <li><a href="{% url 'intern:sailing' %}">Bündisches Segeln</a></li>
-              <li><a href="{% url 'blog_page' %}">Aktuelles</a></li>
-              <li><a href="{% url 'blog_themen' %}">Themen</a></li>
-              <li><a href="{% url 'bundesgilde' %}">Die Bundesgilde</a></li>
+              <li><a class="dropdown-item" href="{% url 'intern:dates' %}">Zusammenkünfte</a></li>
+              <li><a class="dropdown-item" href="{% url 'intern:sailing' %}">Bündisches Segeln</a></li>
+              <li><a class="dropdown-item" href="{% url 'blog_page' %}">Aktuelles</a></li>
+              <li><a class="dropdown-item" href="{% url 'blog_themen' %}">Themen</a></li>
+              <li><a class="dropdown-item" href="{% url 'bundesgilde' %}">Die Bundesgilde</a></li>
             </ul>
           </li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
               Inhalte
-              <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="themes">
-              <li><a href="{% url 'maps:index' %}">Übersichtskarte</a></li>
-              <li><a href="{% url 'intern:houses' %}">Häuser und Zeltplätze</a></li>
-              <li><a href="{% url 'intern:documents' %}">Dokumente</a></li>
-              <li><a href="{% url 'evening_program:index' %}">Heimabendprogramme</a></li>
+              <li><a class="dropdown-item" href="{% url 'maps:index' %}">Übersichtskarte</a></li>
+              <li><a class="dropdown-item" href="{% url 'intern:houses' %}">Häuser und Zeltplätze</a></li>
+              <li><a class="dropdown-item" href="{% url 'intern:documents' %}">Dokumente</a></li>
+              <li><a class="dropdown-item" href="{% url 'evening_program:index' %}">Heimabendprogramme</a></li>
             </ul>
           </li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
               Bundesarchiv
-              <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="themes">
-              <li><a href="{% url 'archive:index' %}">Übersicht</a></li>
-              <li><a href="{% url 'archive:search' %}">Online-Katalog</a></li>
-              <li><a href="{% url 'archive:send_in' %}">Uploadbereich</a></li>
+              <li><a class="dropdown-item" href="{% url 'archive:index' %}">Übersicht</a></li>
+              <li><a class="dropdown-item" href="{% url 'archive:search' %}">Online-Katalog</a></li>
+              <li><a class="dropdown-item" href="{% url 'archive:send_in' %}">Uploadbereich</a></li>
             </ul>
           </li>
 
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
               Präventionsrat
-              <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="themes">
-              <li><a href="{% url 'intern:arbeitskreis' %}">Überblick</a></li>
+              <li><a class="dropdown-item" href="{% url 'intern:arbeitskreis' %}">Überblick</a></li>
               <li>
-                <a href="/media/filer_public/78/60/7860715a-342e-4cfc-b6ca-164505fbe4f1/schutzkonzept_des_deutschen_pfadfinderbundes.pdf">
+                <a class="dropdown-item"
+                   href="/media/filer_public/78/60/7860715a-342e-4cfc-b6ca-164505fbe4f1/schutzkonzept_des_deutschen_pfadfinderbundes.pdf">
                   Schutzkonzept
                 </a>
               </li>
-              <li><a href="{% url 'arbeitskreis_mitglieder' %}">Mitglieder</a></li>
+              <li><a class="dropdown-item" href="{% url 'arbeitskreis_mitglieder' %}">Mitglieder</a></li>
             </ul>
           </li>
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="digital">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="digital">
               Digitales
-              <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="digital">
-              <li><a href="{% url 'intern:calendar' %}">Kalender</a></li>
+              <li><a class="dropdown-item" href="{% url 'intern:calendar' %}">Kalender</a></li>
             </ul>
           </li>
         {% endif %}
 
-        <li><a href="{% url 'kontakt' %}">Kontakt</a></li>
-        <li><a href="{% url 'links:index' %}">Links</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'kontakt' %}">Kontakt</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'links:index' %}">Links</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {#            <li><a href="{% url 'feedback:index' %}"><button type="button" class="btn btn-primary">Feedback geben</button></a></li>#}
         {% if user.is_authenticated %}
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-               aria-expanded="false">Verwaltung <span class="caret"></span></a>
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false">Verwaltung </a>
             <ul class="dropdown-menu">
               {% if user.is_staff %}
-                <li><a href="{% url 'admin:index' %}">Adminbereich</a></li>
-                <li role="separator" class="divider"></li>
+                <li><a class="dropdown-item" href="{% url 'admin:index' %}">Adminbereich</a></li>
+                <li role="separator" class="dropdown-divider"></li>
               {% endif %}
-              <li><a href="#">Eingeloggt als {{ user }}</a></li>
-              <li><a href="{% url 'logout' %}">Ausloggen</a></li>
+              <li class="dropdown-item">Eingeloggt als {{ user }}</li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}">Ausloggen</a></li>
             </ul>
           </li>
         {% else %}
-          <li><a href="{% url 'login' %}">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
         {% endif %}
       </ul>
     </div><!--/.nav-collapse -->
   </div>
-</div>
+</nav>
 
 <div id="main">
-  <div class="container" id="owl-container">
+  <div class="container-xl" id="owl-container">
     {% block carousel %}{% endblock %}
   </div>
 
-  <div class="container">
+  <div class="container-xl">
     {% block heading %}{% endblock %}
   </div>
 
-  <div class="container" role="main">
+  <div class="container-xl" role="main">
     {% block content %}{% endblock %}
   </div>
 </div>

@@ -1,19 +1,20 @@
-$primary-color: #12006b
-$grey: #333
+@use "node_modules/bootstrap/scss/bootstrap" as b with ($dark: #333333, $enable-responsive-font-sizes: true)
+@use "archive"
+@use "navbar"
+@use "carousel"
+
+$grey: #333333
 $background-color: #f6f6f6
-$navbar-height: 80px
 $footer-height: 146px
 
-@import 'archive'
-
-@font-face
-  font-family: 'Open Sans'
-  src: url('fonts/open_sans/OpenSans-Regular.ttf')
+//@font-face
+//  font-family: 'Open Sans'
+//  src: url('fonts/open_sans/OpenSans-Regular.ttf')
 
 body
   color: $grey
   background-color: $background-color
-  font-family: 'Open Sans', sans-serif
+//  font-family: 'Open Sans', sans-serif
 
 p
   padding-bottom: 0.5em
@@ -21,7 +22,7 @@ p
 h4 a
   color: $grey
 
-// Image formatting
+// Image formatting // deprecated?
 .img-float-right
   float: right
   margin-left: 1em
@@ -51,37 +52,6 @@ header
   max-width: 250px
   margin: 0 0 1em 5em
 
-// Navbar
-.navbar-nav > li > a, .navbar-brand, .navbar-toggle, .navbar-header
-  padding-top: 0
-  padding-bottom: 0
-  line-height: $navbar-height
-
-.navbar-toggle
-  height: $navbar-height
-  line-height: $navbar-height
-
-@media (max-width: 767px)
-  .navbar-brand
-    margin-top: 0.1em
-  .navbar-nav > li > a
-    line-height: 20px
-    padding-top: 10px
-    padding-bottom: 10px
-
-.navbar-brand
-  height: $navbar-height
-
-.navbar-brand
-  padding-left: 1em
-
-  img
-    padding: 0.1em 1em 0.1em 0.6em
-
-@media (max-width: 767px)
-  .navbar-brand
-    img
-      padding: 0.1em 1em 0.1em 0.1em
 
 // Container
 .container
@@ -89,9 +59,6 @@ header
 
 .row
   padding-bottom: 1em
-
-.navbar .container
-  padding-bottom: 0
 
 .stripe
   background-color: white
@@ -113,15 +80,6 @@ footer .row
 // Lists
 ul.no-dot > li
   list-style-type: none
-
-// Owl Carousel
-#dpb-carousel .item img
-  display: block
-  width: 100%
-  height: auto
-
-#owl-container
-  padding-bottom: 0
 
 // Styles for Table of contents
 #toc-panel
