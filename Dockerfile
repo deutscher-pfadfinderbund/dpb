@@ -21,4 +21,4 @@ COPY . /code
 EXPOSE 8000
 
 # Hierfür ist rambo verantwortlich.
-CMD ["sh", "-c", "'./build_static.sh && python manage.py migrate --no-input && pipenv run server'"]
+CMD "./run_server.sh"
