@@ -18,15 +18,7 @@ RUN apk --update add --no-cache --virtual build-deps build-base postgresql-dev &
 
 COPY . /code
 
-RUN apk add --update npm && \
-    npm install -g sass && \
-    npm install && \
-    sass -I . --style=compressed --no-source-map styles/style.sass:styles/style.css && \
-    npm uninstall -g sass && \
-    apk del npm && \
-    python manage.py collectstatic --noinput && \
-    rm -rf node_modules
-
 EXPOSE 8000
 
-CMD ["pipenv", "run", "gunicorn", "-b", "0.0.0.0:8000", "dpb.wsgi"]
+# Hierfür ist rambo verantwortlich.
+CMD ["sh", "-c", "'./build_static.sh && python manage.py migrate --no-input && pipenv run server'"]
