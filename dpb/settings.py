@@ -163,6 +163,7 @@ MARKDOWNIFY_WHITELIST_TAGS = [
     'p',
     'strong',
     'ul',
+    'script',
 ]
 MARKDOWNIFY_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.fenced_code',
