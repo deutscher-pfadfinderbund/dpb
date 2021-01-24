@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'django_forms_bootstrap',
     'autoslug',
     'pagedown',
-    'markdown_deux',
     'markdownify',
 
     # Own apps
@@ -137,27 +136,6 @@ TEMPLATES = [{
 
 # Filer Settings
 FILER_CANONICAL_URL = 'filer/'
-
-# Markdown Deux Settings
-MARKDOWN_DEUX_STYLES = {
-    "default": {
-        "extras": {
-            "code-friendly": None,
-        },
-        # Allow raw HTML (WARNING: don't use this for user-generated
-        # Markdown for your site!).
-        "safe_mode": False,
-    },
-    "nohtml": {
-        "extras": {
-            "code-friendly": None,
-        },
-        # Allow raw HTML (WARNING: don't use this for user-generated
-        # Markdown for your site!).
-        "safe_mode": "escape",
-    },
-}
-# END MARKDOWN DEUX
 
 # Configure Easy Thumbnails
 THUMBNAIL_ALIASES = {

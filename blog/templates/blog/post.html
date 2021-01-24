@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% load bootstrap_tags %}
-{% load markdown_deux_tags %}
+{% load markdownify %}
 
 {% block heading %}
   <h1>{{ post.title }}</h1>
@@ -13,8 +13,8 @@
 {% endblock %}
 
 {% block content %}
-  {{ post.content|markdown|safe }}
-  
+  {{ post.content|markdownify|safe }}
+
   {% if post.file %}
     <div style="margin-top: 1em">
       <h4>Anhang</h4>

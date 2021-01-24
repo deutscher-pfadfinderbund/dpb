@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 {% load bootstrap_tags %}
-{% load markdown_deux_tags %}
+{% load markdownify %}
 {% load intern_tags %}
 
 {% block heading %}
@@ -32,7 +32,7 @@
   </p>
   <p>
     Bei allen Fragen und Anregungen zum Bundesarchiv wende Dich bitte an henkel oder baron (<a
-          href="mailto:bundesarchiv@deutscher-pfadfinderbund.de">bundesarchiv@deutscher-pfadfinderbund.de</a>).
+      href="mailto:bundesarchiv@deutscher-pfadfinderbund.de">bundesarchiv@deutscher-pfadfinderbund.de</a>).
   </p>
 
   <hr style="margin: 2em 0">
@@ -49,7 +49,7 @@
           </h3>
         </div>
         <div class="panel-body">
-          {{ post.content|markdown|safe }}
+          {{ post.content|markdownify|safe }}
           {% if post.file %}
             <a href="{{ post.file.url }}">
               {{ post.file|extension|fa_attachment|safe }}

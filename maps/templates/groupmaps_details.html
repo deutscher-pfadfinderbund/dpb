@@ -3,7 +3,7 @@
 {% load staticfiles %}
 {% load intern_tags %}
 {% load thumbnail %}
-{% load markdown_deux_tags %}
+{% load markdownify %}
 
 {% block heading %}
   <h1>{{ house.name }}</h1>
@@ -14,7 +14,7 @@
 
   {% if house.description %}
     <div class="well">
-      {{ house.description|markdown }}
+      {{ house.description|markdownify|safe }}
     </div>
   {% endif %}
 

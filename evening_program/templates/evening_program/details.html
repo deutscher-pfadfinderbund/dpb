@@ -2,7 +2,7 @@
 
 {% load intern_tags %}
 {% load bootstrap_tags %}
-{% load markdown_deux_tags %}
+{% load markdownify %}
 
 {% block heading %}
   <h1>{{ program.title }}</h1>
@@ -16,17 +16,17 @@
 
   {% if program.preparation %}
     <h4>Was habe ich vorbereitet?</h4>
-    {{ program.preparation|markdown|safe }}
+    {{ program.preparation|markdownify|safe }}
   {% endif %}
 
   {% if program.execution %}
     <h4>Was haben wir gemacht?</h4>
-    {{ program.execution|markdown|safe }}
+    {{ program.execution|markdownify|safe }}
   {% endif %}
 
   {% if program.greatness %}
     <h4>Was war daran so toll?</h4>
-    {{ program.greatness|markdown|safe }}
+    {{ program.greatness|markdownify|safe }}
   {% endif %}
 
   {% if program.file1 or program.file2 or program.file3 %}
