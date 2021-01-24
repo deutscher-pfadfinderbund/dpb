@@ -10,6 +10,7 @@ class Person(models.Model):
     nickname = models.CharField('Fahrtenname', max_length=50, blank=False, null=True)
     birthdate = models.DateField("Geburtstag", null=True)
     date_of_death = models.DateField("Todestag", null=True)
+    email = models.EmailField("Email", null=True)
 
     def common_name(self):
         return f"{self.first_name} {self.last_name}"
