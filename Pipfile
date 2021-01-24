@@ -37,6 +37,7 @@ Pillow = "*"
 Unidecode = "*"
 gunicorn = "*"
 markdown = "*"
+django-markdownify = "*"
 
 [requires]
 python_version = "3.9"

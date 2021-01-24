@@ -43,9 +43,9 @@ INSTALLED_APPS = (
     'autoslug',
     'pagedown',
     'markdown_deux',
+    'markdownify',
 
     # Own apps
-    'dpb',
     'pages',
     'archive',
     'contact',
@@ -165,3 +165,28 @@ THUMBNAIL_ALIASES = {
         'pages': {'size': (350, 350), 'crop': "scale", 'quality': 100},
     },
 }
+
+MARKDOWNIFY_WHITELIST_TAGS = [
+    'table',
+    'thead',
+    'tbody',
+    'th',
+    'tr',
+    'td',
+    'a',
+    'abbr',
+    'acronym',
+    'b',
+    'blockquote',
+    'em',
+    'i',
+    'li',
+    'ol',
+    'p',
+    'strong',
+    'ul',
+]
+MARKDOWNIFY_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.fenced_code',
+    'markdown.extensions.extra',
+]
