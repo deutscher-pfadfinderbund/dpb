@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'markdown_deux',
 
     # Own apps
+    'dpb',
     'pages',
     'archive',
     'contact',
