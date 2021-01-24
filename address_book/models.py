@@ -43,3 +43,8 @@ class PhoneNumber(models.Model):
     label = models.CharField("Bezeichner", max_length=100)
     phone_regex = RegexValidator(regex=r'^\d+$')
     number = models.CharField(validators=[phone_regex], max_length=20)
+
+
+class Group(models.Model):
+    name = models.CharField("Bezeichner")
+    part_of = models.ForeignKey("self", null=True, on_delete=models.SET_NULL)
