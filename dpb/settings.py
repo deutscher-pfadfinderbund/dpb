@@ -163,9 +163,15 @@ MARKDOWNIFY_WHITELIST_TAGS = [
     'p',
     'strong',
     'ul',
-    'script',
 ]
 MARKDOWNIFY_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.fenced_code',
     'markdown.extensions.extra',
+]
+MARKDOWNIFY_WHITELIST_ATTRS = [
+    'href',
+    'src',
+    'alt',
+    'class',
+    'id',
 ]
