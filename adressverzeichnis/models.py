@@ -15,16 +15,16 @@ class ErstelltModifiziertModel(models.Model):
 
 
 class Person(ErstelltModifiziertModel):
-    anrede = models.CharField("Anrede", max_length=50)
-    titel = models.CharField("Titel", max_length=50, null=True)
+    anrede = models.CharField("Anrede", max_length=50, blank=True, default="")
+    titel = models.CharField("Titel", max_length=50, blank=True, default="")
     vorname = models.CharField('Vorname', max_length=50)
     nachname = models.CharField('Nachname', max_length=50)
-    fahrtenname = models.CharField('Fahrtenname', max_length=50, null=True)
-    geburtstag = models.DateField("Geburtstag", null=True)
-    todestag = models.DateField("Todestag", null=True)
-    email = models.EmailField("Email", null=True)
+    fahrtenname = models.CharField('Fahrtenname', max_length=50, blank=True, default="")
+    geburtstag = models.DateField("Geburtstag", null=True, blank=True)
+    todestag = models.DateField("Todestag", null=True, blank=True)
+    email = models.EmailField("Email", null=True, blank=True, default="")
 
-    anmerkung = models.TextField("Anmerkung", null=True, blank=True)
+    anmerkung = models.TextField("Anmerkung", blank=True, default="")
 
     def common_name(self):
         return f"{self.vorname} {self.nachname}"
@@ -45,13 +45,13 @@ class Person(ErstelltModifiziertModel):
 
 class Adresse(ErstelltModifiziertModel):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    label = models.CharField("Bezeichner (Privat, ...)", max_length=50)
+    label = models.CharField("Bezeichner (Privat, ...)", max_length=50, blank=True, default="")
 
-    strasse = models.CharField("Straßenname", max_length=100)
-    zusatz = models.CharField("Zusatz", max_length=50)
-    plz = models.CharField("PLZ", max_length=15)
-    stadt = models.CharField("Stadt", max_length=100)
-    land = models.CharField("Land", max_length=100, default="Deutschland")
+    strasse = models.CharField("Straßenname", max_length=100, blank=True, default="")
+    zusatz = models.CharField("Zusatz", max_length=50, blank=True, default="")
+    plz = models.CharField("PLZ", max_length=15, blank=True, default="")
+    stadt = models.CharField("Stadt", max_length=100, blank=True, default="")
+    land = models.CharField("Land", max_length=100, default="Deutschland", blank=True)
 
     def __str__(self):
         return "%s %s, %s %s %s".format(self.strasse, self.zusatz, self.plz, self.stadt, self.land)
@@ -63,7 +63,7 @@ class Adresse(ErstelltModifiziertModel):
 
 class Telefon(ErstelltModifiziertModel):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    label = models.TextField("Bezeichner (Privat, ...)")
+    label = models.CharField("Bezeichner (Privat, ...)", max_length=50, blank=True)
     phone_regex = RegexValidator(regex=r'^\d+$')
     nummer = models.TextField("Nummer", validators=[phone_regex])
 
@@ -75,10 +75,21 @@ class Telefon(ErstelltModifiziertModel):
         verbose_name_plural = 'Telefonnummern'
 
 
+class GruppierungsTyp(ErstelltModifiziertModel):
+    name = models.CharField("Name", max_length=40)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Gruppierungs Typ"
+        verbose_name_plural = "Gruppierungs Typen"
+
+
 class Gruppierung(ErstelltModifiziertModel):
-    name = models.TextField("Bezeichner")
-    type = models.TextField(choices=[("stamm", "Stamm"), ("js", "Jungenschaft")], null=True, blank=True)
-    obergruppe = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL)
+    name = models.CharField("Bezeichner", max_length=100)
+    type = models.ForeignKey(GruppierungsTyp, null=True, blank=True, default="", on_delete=models.SET_NULL)
+    obergruppe = models.ForeignKey("self", null=True, blank=True, default="", on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
