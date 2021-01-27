@@ -2,7 +2,7 @@
 
 {% load bootstrap_tags %}
 {% load blog_tags %}
-{% load markdown_deux_tags %}
+{% load markdownify %}
 
 {% block heading %}
   <h1>{{ category.name }}</h1>
@@ -27,7 +27,7 @@
               <small>{{ p1.created|date:"j. N Y" }}{% if p1.author %} von {{ p1.author }}{% endif %}</small>
             </h4>
             <p>
-              {{ p1.content|striptags|markdown|truncatewords:20 }}<br>
+              {{ p1.content|striptags|markdownify|truncatewords:20 }}<br>
               <a href="{% url 'blog_detail' slug=p1.slug %}">Mehr</a>
             </p>
           </div>
