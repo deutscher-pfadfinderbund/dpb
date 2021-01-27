@@ -65,7 +65,7 @@ class Telefon(ErstelltModifiziertModel):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     label = models.CharField("Bezeichner (Privat, ...)", max_length=50, blank=True)
     phone_regex = RegexValidator(regex=r'^\d+$')
-    nummer = models.TextField("Nummer", validators=[phone_regex])
+    nummer = models.CharField("Nummer", validators=[phone_regex], max_length=20)
 
     def __str__(self):
         return self.nummer
@@ -92,7 +92,10 @@ class Gruppierung(ErstelltModifiziertModel):
     obergruppe = models.ForeignKey("self", null=True, blank=True, default="", on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.name
+        if self.type:
+            return f"{self.type.name} {self.name}"
+        else:
+            return self.name
 
     class Meta:
         verbose_name = "Gruppierung"
@@ -103,6 +106,9 @@ class Amt(ErstelltModifiziertModel):
     bezeichnung = models.TextField("Bezeichnung")
     gruppierung = models.ForeignKey(Gruppierung, on_delete=models.CASCADE)
     person = models.ForeignKey(Person, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f"{self.bezeichnung} - {self.gruppierung} - {self.person}"
 
     class Meta:
         verbose_name = "Amt"
