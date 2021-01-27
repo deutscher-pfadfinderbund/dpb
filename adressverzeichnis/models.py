@@ -45,25 +45,54 @@ class Person(ErstelltModifiziertModel):
 
 class Adresse(ErstelltModifiziertModel):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    strasse = models.TextField("Straßenname")
-    zusatz = models.TextField("Zusatz")
-    plz = models.TextField("PLZ")
-    stadt = models.TextField("Stadt")
+    label = models.CharField("Bezeichner (Privat, ...)", max_length=50)
+
+    strasse = models.CharField("Straßenname", max_length=100)
+    zusatz = models.CharField("Zusatz", max_length=50)
+    plz = models.CharField("PLZ", max_length=15)
+    stadt = models.CharField("Stadt", max_length=100)
+    land = models.CharField("Land", max_length=100, default="Deutschland")
+
+    def __str__(self):
+        return "%s %s, %s %s %s".format(self.strasse, self.zusatz, self.plz, self.stadt, self.land)
+
+    class Meta:
+        verbose_name = 'Adresse'
+        verbose_name_plural = 'Adressen'
 
 
 class Telefon(ErstelltModifiziertModel):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    label = models.TextField("Bezeichner")
+    label = models.TextField("Bezeichner (Privat, ...)")
     phone_regex = RegexValidator(regex=r'^\d+$')
     nummer = models.TextField("Nummer", validators=[phone_regex])
+
+    def __str__(self):
+        return self.nummer
+
+    class Meta:
+        verbose_name = 'Telefonnummer'
+        verbose_name_plural = 'Telefonnummern'
 
 
 class Gruppierung(ErstelltModifiziertModel):
     name = models.TextField("Bezeichner")
-    obergruppe = models.ForeignKey("self", null=True, on_delete=models.SET_NULL)
+    type = models.TextField(choices=[("stamm", "Stamm"), ("js", "Jungenschaft")], null=True, blank=True)
+    obergruppe = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Gruppierung"
+        verbose_name_plural = "Gruppierungen"
 
 
 class Amt(ErstelltModifiziertModel):
     bezeichnung = models.TextField("Bezeichnung")
     gruppierung = models.ForeignKey(Gruppierung, on_delete=models.CASCADE)
     person = models.ForeignKey(Person, null=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        verbose_name = "Amt"
+        verbose_name_plural = "Ämter"
