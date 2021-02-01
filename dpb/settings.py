@@ -165,6 +165,12 @@ MARKDOWNIFY_WHITELIST_TAGS = [
     'ul',
     'img',
     'style',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
 ]
 MARKDOWNIFY_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.fenced_code',
