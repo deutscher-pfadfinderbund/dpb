@@ -171,6 +171,7 @@ MARKDOWNIFY_WHITELIST_TAGS = [
     'h4',
     'h5',
     'h6',
+    'br',
 ]
 MARKDOWNIFY_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.fenced_code',
