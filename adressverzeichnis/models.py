@@ -56,7 +56,7 @@ class Person(ErstelltModifiziertModel):
 
     def __str__(self):
         if self.fahrtenname:
-            return f"{self.vorname} \"{self.fahrtenname}\" {self.nachname}"
+            return f"{self.fahrtenname} ({self.vorname} {self.nachname})"
         else:
             return self.common_name()
 
