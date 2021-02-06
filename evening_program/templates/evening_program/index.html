@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 {% load pages %}
-{% load markdown_deux_tags %}
+{% load markdownify %}
 
 {% block sources %}{% endblock %}
 
@@ -25,13 +25,15 @@
         <div class="col-md-8">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title"><a href="{% url 'evening_program:details' slug=program.slug %}">{{ program.title }}</a></h3>
+              <h3 class="panel-title">
+                <a href="{% url 'evening_program:details' slug=program.slug %}">{{ program.title }}</a>
+              </h3>
             </div>
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-8">
                   <h5>Was haben wir gemacht?</h5>
-                  {{ program.execution|markdown|truncatewords_html:50 }}
+                  {{ program.execution|markdownify|truncatewords_html:50 }}
                 </div>
                 <div class="col-md-4">
                   <h5>Wie alt sind meine Mädchen / Jungen?</h5>

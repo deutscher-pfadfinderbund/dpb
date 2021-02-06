@@ -1,6 +1,5 @@
 *.pyc
-.idea
-*.iml
+/*.iml
 *.bak
 .sass-cache/
 static/

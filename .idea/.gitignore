@@ -1,0 +1,21 @@
+# User-specific stuffs
+workspace.xml
+tasks.xml
+usage.statistics.xml
+dictionaries
+shelf/
+
+# Generated files
+/contentModel.xml
+
+# Sensitive or high-churn files
+/dataSources/
+/dataSources.local.xml
+dataSources.ids
+sqlDataSources.xml
+
+# File-based project format
+*.iws
+
+# Editor-based Rest Client
+httpRequests
