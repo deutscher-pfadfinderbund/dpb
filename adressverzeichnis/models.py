@@ -22,7 +22,7 @@ class Person(ErstelltModifiziertModel):
     fahrtenname = models.CharField('Fahrtenname', max_length=50, blank=True, default="")
     geburtstag = models.DateField("Geburtstag", null=True, blank=True)
     todestag = models.DateField("Todestag", null=True, blank=True)
-    email = models.EmailField("Email", null=True, blank=True, default="")
+    email = models.EmailField("E-Mail", null=True, blank=True, default="")
 
     anmerkung = models.TextField("Anmerkung", blank=True, default="")
 
@@ -34,7 +34,7 @@ class Person(ErstelltModifiziertModel):
 
     def __str__(self):
         if self.fahrtenname:
-            return f"{self.vorname} '{self.fahrtenname}' {self.nachname}"
+            return f"{self.vorname} \"{self.fahrtenname}\" {self.nachname}"
         else:
             return self.common_name()
 
