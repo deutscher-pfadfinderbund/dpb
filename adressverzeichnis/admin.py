@@ -35,32 +35,42 @@ class ErstelltModifiziertAdmin(admin.ModelAdmin):
 class AdresseInline(admin.StackedInline):
     exclude = ["erstellt_von", "veraendert_von"]
     model = Adresse
-    extra = 1
+    extra = 0
 
 
 class TelefonInline(admin.TabularInline):
     exclude = ["erstellt_von", "veraendert_von"]
     model = Telefon
-    extra = 1
+    extra = 0
+
+
+class AmtInline(admin.TabularInline):
+    exclude = ["erstellt_von", "veraendert_von"]
+    model = Amt
+    extra = 0
 
 
 @admin.register(Person)
 class PersonAdmin(ErstelltModifiziertAdmin):
     fieldsets = [
-        ("Person", {"fields": [
-            ("anrede", "titel"),
-            ("vorname", "nachname"),
-            "fahrtenname",
-            ("geburtstag", "todestag"),
-            "email",
-            "anmerkung"
-        ]}),
-        ("Meta", {"fields": [
-            ("erstellt_von", "erstellt"),
-            ("veraendert_von", "veraendert")
-        ]}),
+        ("Person", {
+            "fields": [
+                ("anrede", "titel"),
+                ("vorname", "nachname"),
+                "fahrtenname",
+                ("geburtstag", "todestag"),
+                "email",
+                "anmerkung"
+            ]
+        }),
+        ("Meta", {
+            "fields": [
+                ("erstellt_von", "erstellt"),
+                ("veraendert_von", "veraendert")
+            ]
+        }),
     ]
-    inlines = (AdresseInline, TelefonInline,)
+    inlines = (AmtInline, AdresseInline, TelefonInline,)
 
 
 admin.site.register(Amt, ErstelltModifiziertAdmin)
