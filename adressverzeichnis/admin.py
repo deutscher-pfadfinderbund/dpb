@@ -5,11 +5,6 @@ from django.contrib import admin
 
 from .models import Person, Amt, AmtTyp, GruppierungsTyp, Gruppierung, Adresse, Telefon
 
-admin.site.register(Amt)
-admin.site.register(AmtTyp)
-admin.site.register(Gruppierung)
-admin.site.register(GruppierungsTyp)
-
 
 class ErstelltModifiziertAdmin(admin.ModelAdmin):
     readonly_fields = ("erstellt", "erstellt_von", "veraendert", "veraendert_von")
@@ -66,3 +61,9 @@ class PersonAdmin(ErstelltModifiziertAdmin):
         ]}),
     ]
     inlines = (AdresseInline, TelefonInline,)
+
+
+admin.site.register(Amt, ErstelltModifiziertAdmin)
+admin.site.register(AmtTyp, ErstelltModifiziertAdmin)
+admin.site.register(Gruppierung, ErstelltModifiziertAdmin)
+admin.site.register(GruppierungsTyp, ErstelltModifiziertAdmin)
