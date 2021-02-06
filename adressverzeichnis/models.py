@@ -54,7 +54,7 @@ class Adresse(ErstelltModifiziertModel):
     land = models.CharField("Land", max_length=100, default="Deutschland", blank=True)
 
     def __str__(self):
-        return "%s %s, %s %s %s".format(self.strasse, self.zusatz, self.plz, self.stadt, self.land)
+        return f"({self.label}) {self.strasse} {self.zusatz}, {self.plz} {self.stadt} {self.land}"
 
     class Meta:
         verbose_name = 'Adresse'
