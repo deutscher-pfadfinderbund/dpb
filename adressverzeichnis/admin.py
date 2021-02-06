@@ -3,9 +3,10 @@
 
 from django.contrib import admin
 
-from .models import Person, Amt, GruppierungsTyp, Gruppierung, Adresse, Telefon
+from .models import Person, Amt, AmtTyp, GruppierungsTyp, Gruppierung, Adresse, Telefon
 
 admin.site.register(Amt)
+admin.site.register(AmtTyp)
 admin.site.register(Gruppierung)
 admin.site.register(GruppierungsTyp)
 
