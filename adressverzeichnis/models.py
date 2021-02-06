@@ -14,6 +14,24 @@ class ErstelltModifiziertModel(models.Model):
         abstract = True
 
 
+staende = [
+    ("St.-Georgs-Ritter", "St.-Georgs-Ritter"),
+    ("Ordensritter", "Ordensritter"),
+    ("St.-Georgs-Knappe", "St.-Georgs-Knappe"),
+    ("Späher", "Späher"),
+    ("Knappe", "Knappe"),
+    ("Jungwolf", "Jungwolf"),
+    ("Wölfling", "Wölfling"),
+
+    ("Gildenmeisterin", "Gildenmeisterin"),
+    ("Pilgerin", "Pilgerin"),
+    ("Novizin", "Novizin"),
+    ("Gildin", "Gildin"),
+    ("Gildenmädchen", "Gildenmädchen"),
+    ("Jungpfadfinderin", "Jungpfadfinderin")
+]
+
+
 class Person(ErstelltModifiziertModel):
     anrede = models.CharField("Anrede", max_length=50, blank=True, default="")
     titel = models.CharField("Titel", max_length=50, blank=True, default="")
@@ -23,8 +41,12 @@ class Person(ErstelltModifiziertModel):
     geburtstag = models.DateField("Geburtstag", null=True, blank=True)
     todestag = models.DateField("Todestag", null=True, blank=True)
     email = models.EmailField("E-Mail", null=True, blank=True, default="")
+    stand = models.TextField("Stand", null=True, blank=True, choices=staende)
 
     anmerkung = models.TextField("Anmerkung", blank=True, default="")
+
+    nicht_abdrucken = models.BooleanField("Nicht im Adressverzeichnis abdrucken?", default=False)
+    nrw = models.BooleanField("Kommt aus NRW?", default=False)
 
     def common_name(self):
         return f"{self.vorname} {self.nachname}"
@@ -63,12 +85,12 @@ class Adresse(ErstelltModifiziertModel):
 
 class Telefon(ErstelltModifiziertModel):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    label = models.CharField("Bezeichner (Privat, ...)", max_length=50, blank=True)
     phone_regex = RegexValidator(regex=r'^\d+$')
     nummer = models.CharField("Nummer", validators=[phone_regex], max_length=20)
+    label = models.CharField("Bezeichner (Privat, ...)", max_length=50, blank=True)
 
     def __str__(self):
-        return self.nummer
+        return f"Nummer von {self.person} ({self.nummer})"
 
     class Meta:
         verbose_name = 'Telefonnummer'
@@ -117,6 +139,7 @@ class Amt(ErstelltModifiziertModel):
     typ = models.ForeignKey(AmtTyp, null=True, on_delete=models.SET_NULL)
     gruppierung = models.ForeignKey(Gruppierung, null=True, on_delete=models.SET_NULL)
     person = models.ForeignKey(Person, null=True, on_delete=models.SET_NULL)
+    bestaetigt = models.BooleanField("Bestätigt?", default=True)
 
     def __str__(self):
         return f"{self.typ} - {self.gruppierung} - {self.person}"
@@ -124,3 +147,28 @@ class Amt(ErstelltModifiziertModel):
     class Meta:
         verbose_name = "Amt"
         verbose_name_plural = "Ämter"
+
+
+class Organ(ErstelltModifiziertModel):
+    name = models.CharField("Name", max_length=100)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Organ"
+        verbose_name_plural = "Organe"
+
+
+class ManuelleBerechtigung(ErstelltModifiziertModel):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    organ = models.ForeignKey(Organ, on_delete=models.CASCADE)
+    bekommt_einladung = models.BooleanField("Bekommt Einladung?", default=False, help_text="Zum überschreiben")
+    bekommt_protokoll = models.BooleanField("Bekommt Protokoll?", default=False)
+
+    def __str__(self):
+        return f"{self.person} ist teil von {self.organ}"
+
+    class Meta:
+        verbose_name = "Manuelle Berechtigung"
+        verbose_name_plural = "Manuelle Berechtigungen"

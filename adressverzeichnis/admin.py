@@ -3,7 +3,7 @@
 
 from django.contrib import admin
 
-from .models import Person, Amt, AmtTyp, GruppierungsTyp, Gruppierung, Adresse, Telefon
+from .models import Person, Amt, AmtTyp, GruppierungsTyp, Gruppierung, Adresse, Telefon, Organ, ManuelleBerechtigung
 
 
 class ErstelltModifiziertAdmin(admin.ModelAdmin):
@@ -50,6 +50,12 @@ class AmtInline(admin.TabularInline):
     extra = 0
 
 
+class ManuelleBerechtigungInline(admin.TabularInline):
+    exclude = ["erstellt_von", "veraendert_von"]
+    model = ManuelleBerechtigung
+    extra = 0
+
+
 @admin.register(Person)
 class PersonAdmin(ErstelltModifiziertAdmin):
     fieldsets = [
@@ -57,10 +63,11 @@ class PersonAdmin(ErstelltModifiziertAdmin):
             "fields": [
                 ("anrede", "titel"),
                 ("vorname", "nachname"),
-                "fahrtenname",
+                ("fahrtenname", "stand"),
                 ("geburtstag", "todestag"),
                 "email",
-                "anmerkung"
+                "anmerkung",
+                ("nicht_abdrucken", "nrw")
             ]
         }),
         ("Meta", {
@@ -70,10 +77,12 @@ class PersonAdmin(ErstelltModifiziertAdmin):
             ]
         }),
     ]
-    inlines = (AmtInline, AdresseInline, TelefonInline,)
+    inlines = (AmtInline, AdresseInline, TelefonInline, ManuelleBerechtigungInline,)
 
 
 admin.site.register(Amt, ErstelltModifiziertAdmin)
 admin.site.register(AmtTyp, ErstelltModifiziertAdmin)
 admin.site.register(Gruppierung, ErstelltModifiziertAdmin)
 admin.site.register(GruppierungsTyp, ErstelltModifiziertAdmin)
+admin.site.register(Organ, ErstelltModifiziertAdmin)
+admin.site.register(ManuelleBerechtigung, ErstelltModifiziertAdmin)
