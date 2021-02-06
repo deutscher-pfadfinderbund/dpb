@@ -89,13 +89,13 @@ admin.site.register(Organ, ErstelltModifiziertAdmin)
 admin.site.register(ManuelleBerechtigung, ErstelltModifiziertAdmin)
 
 
-def get_untergruppen_as_html(gruppierung: Gruppierung):
+def get_organigram_as_html(gruppierung: Gruppierung):
     untergruppen: QuerySet[Gruppierung] = gruppierung.untergruppen.all()
 
     if untergruppen:
         untergruppen_html = format_html_join(
             "\n", "<li>{}</li>",
-            [(get_untergruppen_as_html(untergruppe),) for untergruppe in untergruppen],
+            [[get_organigram_as_html(untergruppe)] for untergruppe in untergruppen],
         )
 
         return format_html(
@@ -109,9 +109,9 @@ def get_untergruppen_as_html(gruppierung: Gruppierung):
 @admin.register(Gruppierung)
 class GrupppierungAdmin(ErstelltModifiziertAdmin):
     exclude = ["erstellt_von", "veraendert_von"]
-    readonly_fields = ("organigram",)
+    readonly_fields = ["organigram"]
 
     def organigram(self, instance: Gruppierung):
-        return get_untergruppen_as_html(instance)
+        return get_organigram_as_html(instance)
 
     organigram.short_description = "Organigram"
