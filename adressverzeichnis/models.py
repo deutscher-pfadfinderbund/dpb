@@ -88,12 +88,12 @@ class GruppierungsTyp(ErstelltModifiziertModel):
 
 class Gruppierung(ErstelltModifiziertModel):
     name = models.CharField("Bezeichner", max_length=100)
-    type = models.ForeignKey(GruppierungsTyp, null=True, blank=True, default="", on_delete=models.SET_NULL)
+    typ = models.ForeignKey(GruppierungsTyp, null=True, blank=True, default="", on_delete=models.SET_NULL)
     obergruppe = models.ForeignKey("self", null=True, blank=True, default="", on_delete=models.SET_NULL)
 
     def __str__(self):
-        if self.type:
-            return f"{self.type.name} {self.name}"
+        if self.typ:
+            return f"{self.typ.name} {self.name}"
         else:
             return self.name
 
