@@ -11,7 +11,7 @@ admin.site.register(GruppierungsTyp)
 
 
 class ErstelltModifiziertAdmin(admin.ModelAdmin):
-    exclude = ["erstellt_von", "veraendert_von"]
+    readonly_fields = ("erstellt", "erstellt_von", "veraendert", "veraendert_von")
 
     def save_formset(self, request, form, formset, change):
         instances = formset.save(commit=False)
@@ -50,4 +50,18 @@ class TelefonInline(admin.TabularInline):
 
 @admin.register(Person)
 class PersonAdmin(ErstelltModifiziertAdmin):
+    fieldsets = [
+        ("Person", {"fields": [
+            ("anrede", "titel"),
+            ("vorname", "nachname"),
+            "fahrtenname",
+            ("geburtstag", "todestag"),
+            "email",
+            "anmerkung"
+        ]}),
+        ("Meta", {"fields": [
+            ("erstellt_von", "erstellt"),
+            ("veraendert_von", "veraendert")
+        ]}),
+    ]
     inlines = (AdresseInline, TelefonInline,)
