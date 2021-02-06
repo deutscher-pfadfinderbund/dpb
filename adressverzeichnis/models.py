@@ -102,13 +102,24 @@ class Gruppierung(ErstelltModifiziertModel):
         verbose_name_plural = "Gruppierungen"
 
 
+class AmtTyp(ErstelltModifiziertModel):
+    name = models.CharField("Name", max_length=100)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Amt Typ"
+        verbose_name_plural = "Amt Typen"
+
+
 class Amt(ErstelltModifiziertModel):
-    bezeichnung = models.TextField("Bezeichnung")
+    typ = models.ForeignKey(AmtTyp, null=True, on_delete=models.SET_NULL)
     gruppierung = models.ForeignKey(Gruppierung, on_delete=models.CASCADE)
     person = models.ForeignKey(Person, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return f"{self.bezeichnung} - {self.gruppierung} - {self.person}"
+        return f"{self.typ} - {self.gruppierung} - {self.person}"
 
     class Meta:
         verbose_name = "Amt"
