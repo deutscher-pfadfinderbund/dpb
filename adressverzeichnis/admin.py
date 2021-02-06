@@ -2,6 +2,8 @@
 # speichere zuletzt angefasst von nutzer und wann
 
 from django.contrib import admin
+from django.db.models import QuerySet
+from django.utils.html import format_html_join, format_html
 
 from .models import Person, Amt, AmtTyp, GruppierungsTyp, Gruppierung, Adresse, Telefon, Organ, ManuelleBerechtigung
 
@@ -82,7 +84,34 @@ class PersonAdmin(ErstelltModifiziertAdmin):
 
 admin.site.register(Amt, ErstelltModifiziertAdmin)
 admin.site.register(AmtTyp, ErstelltModifiziertAdmin)
-admin.site.register(Gruppierung, ErstelltModifiziertAdmin)
 admin.site.register(GruppierungsTyp, ErstelltModifiziertAdmin)
 admin.site.register(Organ, ErstelltModifiziertAdmin)
 admin.site.register(ManuelleBerechtigung, ErstelltModifiziertAdmin)
+
+
+def get_untergruppen_as_html(gruppierung: Gruppierung):
+    untergruppen: QuerySet[Gruppierung] = gruppierung.untergruppen.all()
+
+    if untergruppen:
+        untergruppen_html = format_html_join(
+            "\n", "<li>{}</li>",
+            [(get_untergruppen_as_html(untergruppe),) for untergruppe in untergruppen],
+        )
+
+        return format_html(
+            "<details><summary>{}</summary><ul style='margin-left: 8px'>{}</ul></details>",
+            gruppierung, untergruppen_html
+        )
+    else:
+        return gruppierung
+
+
+@admin.register(Gruppierung)
+class GrupppierungAdmin(ErstelltModifiziertAdmin):
+    exclude = ["erstellt_von", "veraendert_von"]
+    readonly_fields = ("organigram",)
+
+    def organigram(self, instance: Gruppierung):
+        return get_untergruppen_as_html(instance)
+
+    organigram.short_description = "Organigram"
