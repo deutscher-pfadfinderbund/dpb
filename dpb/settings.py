@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'links',
     'evening_program',
     'maps',
+    'adressverzeichnis'
 )
 
 MIDDLEWARE = (
