@@ -115,7 +115,7 @@ class AmtTyp(ErstelltModifiziertModel):
 
 class Amt(ErstelltModifiziertModel):
     typ = models.ForeignKey(AmtTyp, null=True, on_delete=models.SET_NULL)
-    gruppierung = models.ForeignKey(Gruppierung, on_delete=models.CASCADE)
+    gruppierung = models.ForeignKey(Gruppierung, null=True, on_delete=models.SET_NULL)
     person = models.ForeignKey(Person, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
