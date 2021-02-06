@@ -67,7 +67,8 @@ class Person(ErstelltModifiziertModel):
 
 class Adresse(ErstelltModifiziertModel):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    label = models.CharField("Bezeichner (Privat, ...)", max_length=50, blank=True, default="")
+    label = models.CharField("Bezeichner (Privat, ...)", max_length=50, blank=True, default="",
+                             help_text="(Privat, ...)")
 
     strasse = models.CharField("Straßenname", max_length=100, blank=True, default="")
     zusatz = models.CharField("Zusatz", max_length=50, blank=True, default="")
