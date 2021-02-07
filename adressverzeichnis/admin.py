@@ -60,6 +60,7 @@ class ManuelleBerechtigungInline(admin.TabularInline):
 
 @admin.register(Person)
 class PersonAdmin(ErstelltModifiziertAdmin):
+    list_filter = ("stand",)
     fieldsets = [
         ("Person", {
             "fields": [
