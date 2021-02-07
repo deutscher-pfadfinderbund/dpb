@@ -147,8 +147,8 @@ class Amt(ErstelltModifiziertModel):
         return f"{self.typ} - {self.gruppierung} - {self.person}"
 
     class Meta:
-        verbose_name = "Amt"
-        verbose_name_plural = "Ämter"
+        verbose_name = "Amt oder Mitgliedschaften"
+        verbose_name_plural = "Ämter und Mitgliedschaften"
 
 
 class Organ(ErstelltModifiziertModel):
