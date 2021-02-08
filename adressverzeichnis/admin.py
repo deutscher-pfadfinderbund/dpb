@@ -115,4 +115,4 @@ class GrupppierungAdmin(ErstelltModifiziertAdmin):
     def organigram(self, instance: Gruppierung):
         return get_organigram_as_html(instance)
 
-    organigram.short_description = "Organigram"
+    organigram.short_description = "Organigramm"
