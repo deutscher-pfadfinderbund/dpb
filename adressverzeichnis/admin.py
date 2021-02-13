@@ -1,8 +1,10 @@
 # https://docs.djangoproject.com/en/3.1/ref/contrib/admin/#django.contrib.admin.ModelAdmin.save_model
 # speichere zuletzt angefasst von nutzer und wann
+import csv
 
 from django.contrib import admin
 from django.db.models import QuerySet
+from django.http import HttpResponse, HttpRequest
 from django.utils.html import format_html_join, format_html
 
 from .models import Person, Amt, AmtTyp, GruppierungsTyp, Gruppierung, Adresse, Telefon, Organ, ManuelleBerechtigung
@@ -96,9 +98,27 @@ class PersonAdmin(ErstelltModifiziertAdmin):
 
     aemter.short_description = "Ämter"
 
+    def export_as_csv(self, request: HttpRequest, queryset):
+        field_names = ['id', 'anrede', 'titel', 'vorname', 'nachname', 'fahrtenname', 'geburtstag', 'todestag', 'stand',
+                       'email',
+                       'anmerkung', 'veraendert', 'nrw', 'nicht_abdrucken']
+
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=anschriftenverzeichnis.csv'
+        writer = csv.writer(response)
+
+        writer.writerow(field_names)
+        for person in queryset:
+            writer.writerow([getattr(person, field) for field in field_names])
+
+        return response
+
+    export_as_csv.short_description = "Export (csv)"
+
     list_display = ("__str__", "fahrtenname", "vorname", "nachname", "aemter")
     search_fields = ("fahrtenname", "vorname", "nachname",)
     list_filter = (AmtListFilter, GruppierungTypListFilter, "stand", "nicht_abdrucken")
+    actions = ["export_as_csv"]
     fieldsets = [
         ("Person", {
             "fields": [
