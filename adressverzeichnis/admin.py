@@ -85,7 +85,7 @@ class GruppierungTypListFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset: QuerySet):
         if self.value():
             grupperierung_typ_pk = int(self.value())
-            return queryset.filter(amt__gruppierung__pk__exact=grupperierung_typ_pk)
+            return queryset.filter(amt__gruppierung__typ__pk__exact=grupperierung_typ_pk)
 
         return queryset
 
