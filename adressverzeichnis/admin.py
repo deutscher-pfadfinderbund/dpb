@@ -60,7 +60,13 @@ class ManuelleBerechtigungInline(admin.TabularInline):
 
 @admin.register(Person)
 class PersonAdmin(ErstelltModifiziertAdmin):
-    list_filter = ("stand",)
+
+    def aemter(self, person: Person):
+        return [f"{amt.typ} - {amt.gruppierung}" for amt in person.amt_set.all()]
+
+    list_display = ("__str__", "fahrtenname", "vorname", "nachname", "aemter")
+    search_fields = ("fahrtenname", "vorname", "nachname",)
+    list_filter = ("stand", "nicht_abdrucken")
     fieldsets = [
         ("Person", {
             "fields": [
