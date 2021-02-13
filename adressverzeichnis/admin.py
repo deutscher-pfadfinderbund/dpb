@@ -58,15 +58,47 @@ class ManuelleBerechtigungInline(admin.TabularInline):
     extra = 0
 
 
+class AmtListFilter(admin.SimpleListFilter):
+    title = "Amt"
+    parameter_name = "amt"
+
+    def lookups(self, request, model_admin):
+        return [(amt_typ.pk, amt_typ) for amt_typ in AmtTyp.objects.all()]
+
+    def queryset(self, request, queryset: QuerySet):
+        if self.value():
+            amt_typ_pk = int(self.value())
+            return queryset.filter(amt__typ__pk__exact=amt_typ_pk)
+
+        return queryset
+
+
+class GruppierungTypListFilter(admin.SimpleListFilter):
+    title = "Gruppierungstyp"
+    parameter_name = "gt"
+
+    def lookups(self, request, model_admin):
+        return [(gruppierungs_typ.pk, gruppierungs_typ) for gruppierungs_typ in GruppierungsTyp.objects.all()]
+
+    def queryset(self, request, queryset: QuerySet):
+        if self.value():
+            grupperierung_typ_pk = int(self.value())
+            return queryset.filter(amt__gruppierung__pk__exact=grupperierung_typ_pk)
+
+        return queryset
+
+
 @admin.register(Person)
 class PersonAdmin(ErstelltModifiziertAdmin):
 
     def aemter(self, person: Person):
         return [f"{amt.typ} - {amt.gruppierung}" for amt in person.amt_set.all()]
 
+    aemter.short_description = "Ämter"
+
     list_display = ("__str__", "fahrtenname", "vorname", "nachname", "aemter")
     search_fields = ("fahrtenname", "vorname", "nachname",)
-    list_filter = ("stand", "nicht_abdrucken")
+    list_filter = (AmtListFilter, GruppierungTypListFilter, "stand", "nicht_abdrucken")
     fieldsets = [
         ("Person", {
             "fields": [
