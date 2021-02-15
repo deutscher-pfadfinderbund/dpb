@@ -116,10 +116,7 @@ class Gruppierung(ErstelltModifiziertModel):
                                    related_name="untergruppen")
 
     def __str__(self):
-        if self.typ:
-            return f"{self.typ.name} {self.name}"
-        else:
-            return self.name
+        return self.name
 
     class Meta:
         verbose_name = "Gruppierung"
