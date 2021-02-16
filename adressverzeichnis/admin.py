@@ -105,7 +105,7 @@ class PersonAdmin(ErstelltModifiziertAdmin):
 
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename=anschriftenverzeichnis.csv'
-        writer = csv.writer(response)
+        writer = csv.writer(response, delimiter=';')
 
         writer.writerow(field_names)
         for person in queryset:
