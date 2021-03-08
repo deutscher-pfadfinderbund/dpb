@@ -64,6 +64,16 @@ class Person(ErstelltModifiziertModel):
         verbose_name = 'Person'
         verbose_name_plural = 'Personen'
 
+    def csv_dict(self):
+        field_names = ['id', 'anrede', 'titel', 'vorname', 'nachname', 'fahrtenname', 'geburtstag', 'todestag', 'stand',
+                       'email',
+                       'anmerkung', 'veraendert', 'nrw', 'nicht_abdrucken']
+        return {key: self.__dict__[key] for key in field_names}
+
+    def legacy_csv_dict(self):
+        return self.csv_dict() \
+               | self.adresse_set.first().csv_dict() if self.adresse_set.first() else {}
+
 
 class Adresse(ErstelltModifiziertModel):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
@@ -82,6 +92,10 @@ class Adresse(ErstelltModifiziertModel):
     class Meta:
         verbose_name = 'Adresse'
         verbose_name_plural = 'Adressen'
+
+    def csv_dict(self):
+        field_names = ["strasse", "zusatz", "plz", "stadt", "land"]
+        return {key: self.__dict__[key] for key in field_names}
 
 
 class Telefon(ErstelltModifiziertModel):

@@ -99,17 +99,15 @@ class PersonAdmin(ErstelltModifiziertAdmin):
     aemter.short_description = "Ämter"
 
     def export_as_csv(self, request: HttpRequest, queryset):
-        field_names = ['id', 'anrede', 'titel', 'vorname', 'nachname', 'fahrtenname', 'geburtstag', 'todestag', 'stand',
-                       'email',
-                       'anmerkung', 'veraendert', 'nrw', 'nicht_abdrucken']
+        field_names = queryset[0].legacy_csv_dict().keys()
 
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename=anschriftenverzeichnis.csv'
-        writer = csv.writer(response, delimiter=';')
+        writer = csv.DictWriter(response, delimiter=';', fieldnames=field_names, extrasaction='ignore')
 
-        writer.writerow(field_names)
+        writer.writeheader()
         for person in queryset:
-            writer.writerow([getattr(person, field) for field in field_names])
+            writer.writerow(person.legacy_csv_dict())
 
         return response
 
