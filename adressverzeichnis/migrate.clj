@@ -179,4 +179,4 @@
                               :address :permissions :numbers) persons)]
     []))
 
-(print (str/join "\n" (map (comp person-sql parse-person) old)))
+(print (str "BEGIN;\n" (str/join "\n" (map (comp person-sql parse-person) old)) "\nCOMMIT;"))
