@@ -139,6 +139,7 @@ class PersonAdmin(ErstelltModifiziertAdmin):
         }),
         ("Meta", {
             "fields": [
+                ("alte_id"),
                 ("erstellt_von", "erstellt"),
                 ("veraendert_von", "veraendert")
             ]

@@ -50,6 +50,8 @@ class Person(ErstelltModifiziertModel):
     nicht_abdrucken = models.BooleanField("Nicht im Adressverzeichnis abdrucken?", default=False)
     nrw = models.BooleanField("Kommt aus NRW?", default=False)
 
+    alte_id = models.PositiveIntegerField("Alte ID", unique=True, blank=True, null=True)
+
     def common_name(self):
         return f"{self.vorname} {self.nachname}"
 
