@@ -71,8 +71,14 @@ class Person(ErstelltModifiziertModel):
         return {key: self.__dict__[key] for key in field_names}
 
     def legacy_csv_dict(self):
-        return self.csv_dict() \
-               | self.adresse_set.first().csv_dict() if self.adresse_set.first() else {}
+        csv_dict = self.csv_dict()
+
+        csv_dict |= self.adresse_set.first().csv_dict() if self.adresse_set.first() else {}
+
+        for index, telefonnummer in enumerate(self.telefon_set.all()):
+            csv_dict |= telefonnummer.csv_dict(index=index + 1)
+
+        return csv_dict
 
 
 class Adresse(ErstelltModifiziertModel):
@@ -93,9 +99,13 @@ class Adresse(ErstelltModifiziertModel):
         verbose_name = 'Adresse'
         verbose_name_plural = 'Adressen'
 
-    def csv_dict(self):
-        field_names = ["strasse", "zusatz", "plz", "stadt", "land"]
-        return {key: self.__dict__[key] for key in field_names}
+    def csv_dict(self, index=""):
+        field_mappings = [("strasse", "Straße"),
+                          ("zusatz", "Zusatz"),
+                          ("plz", "Postleitzahl"),
+                          ("stadt", "Ort"),
+                          ("land", "Land")]
+        return {label + str(index): getattr(self, key) for (key, label) in field_mappings}
 
 
 class Telefon(ErstelltModifiziertModel):
@@ -110,6 +120,11 @@ class Telefon(ErstelltModifiziertModel):
     class Meta:
         verbose_name = 'Telefonnummer'
         verbose_name_plural = 'Telefonnummern'
+
+    def csv_dict(self, index=""):
+        field_mappings = [("nummer", "Telefonnummer"),
+                          ("label", "Telefonbezeichner")]
+        return {label + str(index): getattr(self, key) for (key, label) in field_mappings}
 
 
 class GruppierungsTyp(ErstelltModifiziertModel):
