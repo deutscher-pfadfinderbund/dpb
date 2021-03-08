@@ -1,6 +1,7 @@
 # https://docs.djangoproject.com/en/3.1/ref/contrib/admin/#django.contrib.admin.ModelAdmin.save_model
 # speichere zuletzt angefasst von nutzer und wann
 import csv
+from collections import OrderedDict
 
 from django.contrib import admin
 from django.db.models import QuerySet
@@ -99,15 +100,22 @@ class PersonAdmin(ErstelltModifiziertAdmin):
     aemter.short_description = "Ämter"
 
     def export_as_csv(self, request: HttpRequest, queryset):
-        field_names = queryset[0].legacy_csv_dict().keys()
-
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename=anschriftenverzeichnis.csv'
+
+        csv_dicts = [person.legacy_csv_dict() for person in queryset]
+
+        master_dict = OrderedDict()
+        for csv_dict in csv_dicts:
+            master_dict |= csv_dict
+
+        field_names = master_dict.keys()
+
         writer = csv.DictWriter(response, delimiter=';', fieldnames=field_names, extrasaction='ignore')
 
         writer.writeheader()
-        for person in queryset:
-            writer.writerow(person.legacy_csv_dict())
+        for csv_dict in csv_dicts:
+            writer.writerow(csv_dict)
 
         return response
 

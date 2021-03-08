@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from django.contrib.auth.backends import UserModel
 from django.core.validators import RegexValidator
 from django.db import models
@@ -68,7 +70,8 @@ class Person(ErstelltModifiziertModel):
         field_names = ['id', 'anrede', 'titel', 'vorname', 'nachname', 'fahrtenname', 'geburtstag', 'todestag', 'stand',
                        'email',
                        'anmerkung', 'veraendert', 'nrw', 'nicht_abdrucken']
-        return {key: self.__dict__[key] for key in field_names}
+
+        return OrderedDict({key: self.__dict__[key] for key in field_names})
 
     def legacy_csv_dict(self):
         csv_dict = self.csv_dict()
