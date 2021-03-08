@@ -198,9 +198,10 @@ class ManuelleBerechtigung(ErstelltModifiziertModel):
     organ = models.ForeignKey(Organ, on_delete=models.CASCADE)
     bekommt_einladung = models.BooleanField("Bekommt Einladung?", default=False, help_text="Zum überschreiben")
     bekommt_protokoll = models.BooleanField("Bekommt Protokoll?", default=False)
+    hat_stimmrecht = models.BooleanField("Hat Stimmrecht?", default=False)
 
     def __str__(self):
-        return f"{self.person} ist teil von {self.organ}"
+        return f"{self.person} ist Teil von {self.organ}"
 
     class Meta:
         verbose_name = "Manuelle Berechtigung"
