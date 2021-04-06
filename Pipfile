@@ -9,7 +9,7 @@ server = "gunicorn -b 0.0.0.0:8000 dpb.wsgi"
 [dev-packages]
 
 [packages]
-Django = "~=2.2.10"
+Django = "~=2.2.18"
 Pillow = "*"
 Unidecode = "*"
 certifi = "*"
