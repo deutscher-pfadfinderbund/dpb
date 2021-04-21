@@ -157,6 +157,7 @@ admin.site.register(ManuelleBerechtigung, ErstelltModifiziertAdmin)
 
 def get_organigram_as_html(gruppierung: Gruppierung):
     untergruppen: QuerySet[Gruppierung] = gruppierung.untergruppen.all()
+    gruppierungs_link = f"/admin/adressverzeichnis/gruppierung/{gruppierung.id}"
 
     if untergruppen:
         untergruppen_html = format_html_join(
@@ -165,15 +166,23 @@ def get_organigram_as_html(gruppierung: Gruppierung):
         )
 
         return format_html(
-            "<details><summary>{}</summary><ul style='margin-left: 8px'>{}</ul></details>",
+            "<details><summary><a href=\"{}\">{}</a></summary><ul style='margin-left: 8px'>{}</ul></details>",
+            gruppierungs_link,
             gruppierung, untergruppen_html
         )
     else:
-        return gruppierung
+        return format_html("<a href=\"{}\">{}</a>", gruppierungs_link, gruppierung)
+
+
+class UntergruppenInline(admin.TabularInline):
+    exclude = ["erstellt_von", "veraendert_von"]
+    model = Gruppierung
+    extra = 0
 
 
 @admin.register(Gruppierung)
 class GrupppierungAdmin(ErstelltModifiziertAdmin):
+    list_display = ("__str__", "obergruppe")
     exclude = ["erstellt_von", "veraendert_von"]
     readonly_fields = ["organigram"]
 
@@ -181,3 +190,5 @@ class GrupppierungAdmin(ErstelltModifiziertAdmin):
         return get_organigram_as_html(instance)
 
     organigram.short_description = "Organigramm"
+
+    inlines = (UntergruppenInline, AmtInline,)
