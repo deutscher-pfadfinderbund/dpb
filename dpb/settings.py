@@ -85,6 +85,7 @@ DATABASES = {
         'PORT': os.getenv("DB_PORT", "5432"),
     }
 }
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -144,44 +145,47 @@ THUMBNAIL_ALIASES = {
         'pages': {'size': (350, 350), 'crop': "scale", 'quality': 100},
     },
 }
-
-MARKDOWNIFY_WHITELIST_TAGS = [
-    'table',
-    'thead',
-    'tbody',
-    'th',
-    'tr',
-    'td',
-    'a',
-    'abbr',
-    'acronym',
-    'b',
-    'blockquote',
-    'em',
-    'i',
-    'li',
-    'ol',
-    'p',
-    'strong',
-    'ul',
-    'img',
-    'style',
-    'h1',
-    'h2',
-    'h3',
-    'h4',
-    'h5',
-    'h6',
-    'br',
-]
-MARKDOWNIFY_MARKDOWN_EXTENSIONS = [
-    'markdown.extensions.fenced_code',
-    'markdown.extensions.extra',
-]
-MARKDOWNIFY_WHITELIST_ATTRS = [
-    'href',
-    'src',
-    'alt',
-    'class',
-    'id',
-]
+MARKDOWNIFY = {
+    "default": {
+        "WHITELIST_TAGS": [
+            'table',
+            'thead',
+            'tbody',
+            'th',
+            'tr',
+            'td',
+            'a',
+            'abbr',
+            'acronym',
+            'b',
+            'blockquote',
+            'em',
+            'i',
+            'li',
+            'ol',
+            'p',
+            'strong',
+            'ul',
+            'img',
+            'style',
+            'h1',
+            'h2',
+            'h3',
+            'h4',
+            'h5',
+            'h6',
+            'br',
+        ],
+        "MARKDOWN_EXTENSIONS": [
+            'markdown.extensions.fenced_code',
+            'markdown.extensions.extra',
+        ],
+        "WHITELIST_ATTRS": [
+            'href',
+            'src',
+            'alt',
+            'class',
+            'id',
+        ]
+    }
+}
