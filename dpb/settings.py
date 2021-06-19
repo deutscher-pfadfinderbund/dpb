@@ -85,6 +85,7 @@ DATABASES = {
         'PORT': os.getenv("DB_PORT", "5432"),
     }
 }
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
