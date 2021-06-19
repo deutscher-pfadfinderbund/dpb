@@ -1,12 +1,92 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block heading %}
+  <h1>Adressverzeichnis</h1>
   <p class="lead">
-    Ausschließlich für den internen Gebrauch im Deutschen Pfadfinderbund durch befugte Personen (Bundesführung und deren
-    Kanzler:innen) bestimmt.
+    Willkommen beim DPB-Adressverzeichnis!
   </p>
+
   <p>
-    Zuwiderhandlung wird zur Anzeige gebracht!<br>
-    Alle Rechte beim Bundesamt des Deutschen Pfadfinderbund e.V.
+    Wenn euch etwas fehlt oder ihr hier noch einen Knopf mehr sehen wollt, so meldet euch bitte beim Bundesbeauftragten
+    Internet :-) Diese Tools sollen euch unterstützen und können daher exakt für euch angepasst werden.
   </p>
+{% endblock %}
+
+{% block content %}
+  <section>
+    <h2>Verwaltung</h2>
+    <p>
+      Ihr kommt hier in die Datenbank. Das ist der Mitarbeiter:innenbereich, wo ihr die Daten komplett einsehen und auch
+      verändern könnt. Dort habt ihr auch die Möglichkeit eure Datensätze zu filtern und nur die passenden Daten
+      herauszuziehen, die ihr benötigt.
+    </p>
+    <p>
+      <a type="button" class="btn btn-info" href="{% url "admin:adressverzeichnis_person_changelist" %}">
+        Zur Verwaltung
+      </a>
+    </p>
+  </section>
+
+
+  <section>
+    <h2>Abfragen</h2>
+    <p>
+      Von hier aus können Abfragen an die Datenbank gestellt werden, um Adressinformationen zu erhalten. Es gibt hier
+      ein
+      paar Komfortfunktionen, mit denen ihr schnell eure Exports erhalten könnt. Typischerweise erhaltet ihr eine
+      CSV-Datei, die ihr dann in Numbers, Sheets, Excel, LibreOffice Calc oder ähnliches öffnen könnt.
+    </p>
+    <div class="row">
+      <div class="col-3 text-center">
+        <h6>Bundesthing</h6>
+        <div class="btn-group-vertical" role="group" aria-label="Abfragen zum Bundesthing">
+          <button type="button" class="btn btn-outline-primary">Einladung</button>
+          <button type="button" class="btn btn-outline-primary">Protokoll</button>
+          <button type="button" class="btn btn-outline-primary">Stimmberechtigung</button>
+        </div>
+      </div>
+      <div class="col-3 text-center">
+        <h6>Bundesrat</h6>
+        <div class="btn-group-vertical" role="group" aria-label="Abfragen zum Bundesrat">
+          <button type="button" class="btn btn-outline-primary">Einladung</button>
+          <button type="button" class="btn btn-outline-primary">Protokoll</button>
+          <button type="button" class="btn btn-outline-primary">Stimmberechtigung</button>
+        </div>
+      </div>
+      <div class="col-3 text-center">
+        <h6>Bundesjungenrat</h6>
+        <div class="btn-group-vertical" role="group" aria-label="Abfragen zum Bundesjungenrat">
+          <button type="button" class="btn btn-outline-primary">Einladung</button>
+          <button type="button" class="btn btn-outline-primary">Protokoll</button>
+          <button type="button" class="btn btn-outline-primary">Stimmberechtigung</button>
+        </div>
+      </div>
+      <div class="col-3 text-center">
+        <h6>Bundesmädchenrat</h6>
+        <div class="btn-group-vertical" role="group" aria-label="Abfragen zum Bundesmädchenrat">
+          <button type="button" class="btn btn-outline-primary">Einladung</button>
+          <button type="button" class="btn btn-outline-primary">Protokoll</button>
+          <button type="button" class="btn btn-outline-primary">Stimmberechtigung</button>
+        </div>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-3 text-center">
+        <h6>Allgemeine Abfragen</h6>
+        <div class="btn-group-vertical" role="group" aria-label="Sonstige Abfragen">
+          <button type="button" class="btn btn-outline-primary">Alle mit Amt (Bund + Orden)</button>
+          <button type="button" class="btn btn-outline-primary">Alle mit Amt (ohne Orden)</button>
+          <button type="button" class="btn btn-outline-primary">Komplettabfrage</button>
+        </div>
+      </div>
+      <div class="col-3 text-center">
+        <h6>Älterengemeinschaften</h6>
+        <div class="btn-group-vertical" role="group" aria-label="Sonstige Abfragen">
+          <button type="button" class="btn btn-outline-primary">Orden St. Georg</button>
+          <button type="button" class="btn btn-outline-primary">Orden St. Christophorus</button>
+          <button type="button" class="btn btn-outline-primary">Bundesgilde</button>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}

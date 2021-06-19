@@ -1,8 +1,10 @@
+import csv
 from collections import OrderedDict
 
 from django.contrib.auth.backends import UserModel
 from django.core.validators import RegexValidator
 from django.db import models
+from django.http import HttpResponse
 
 
 class ErstelltModifiziertModel(models.Model):
@@ -84,6 +86,27 @@ class Person(ErstelltModifiziertModel):
             csv_dict |= telefonnummer.csv_dict(index=index + 1)
 
         return csv_dict
+
+    @staticmethod
+    def export_as_csv(queryset) -> HttpResponse:
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=anschriftenverzeichnis.csv'
+
+        csv_dicts = [person.legacy_csv_dict() for person in queryset]
+
+        master_dict = OrderedDict()
+        for csv_dict in csv_dicts:
+            master_dict |= csv_dict
+
+        field_names = master_dict.keys()
+
+        writer = csv.DictWriter(response, delimiter=';', fieldnames=field_names, extrasaction='ignore')
+
+        writer.writeheader()
+        for csv_dict in csv_dicts:
+            writer.writerow(csv_dict)
+
+        return response
 
 
 class Adresse(ErstelltModifiziertModel):

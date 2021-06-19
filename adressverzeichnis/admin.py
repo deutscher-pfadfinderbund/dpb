@@ -1,11 +1,9 @@
 # https://docs.djangoproject.com/en/3.1/ref/contrib/admin/#django.contrib.admin.ModelAdmin.save_model
 # speichere zuletzt angefasst von nutzer und wann
-import csv
-from collections import OrderedDict
 
 from django.contrib import admin
 from django.db.models import QuerySet
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpRequest
 from django.utils.html import format_html_join, format_html
 
 from .models import Person, Amt, AmtTyp, GruppierungsTyp, Gruppierung, Adresse, Telefon, Organ, ManuelleBerechtigung
@@ -100,24 +98,7 @@ class PersonAdmin(ErstelltModifiziertAdmin):
     aemter.short_description = "Ämter"
 
     def export_as_csv(self, request: HttpRequest, queryset):
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename=anschriftenverzeichnis.csv'
-
-        csv_dicts = [person.legacy_csv_dict() for person in queryset]
-
-        master_dict = OrderedDict()
-        for csv_dict in csv_dicts:
-            master_dict |= csv_dict
-
-        field_names = master_dict.keys()
-
-        writer = csv.DictWriter(response, delimiter=';', fieldnames=field_names, extrasaction='ignore')
-
-        writer.writeheader()
-        for csv_dict in csv_dicts:
-            writer.writerow(csv_dict)
-
-        return response
+        return self.export_as_csv(queryset)
 
     export_as_csv.short_description = "Export (csv)"
 
