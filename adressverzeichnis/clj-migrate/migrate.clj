@@ -105,15 +105,19 @@
                         :as person}]
   {"Bundesthing" 
    {:bekommt_einladung (Boolean/parseBoolean Bundesthing)
+    :hat_stimmrecht (Boolean/parseBoolean (get person (keyword "Stimmberechtigung Bundesthing")))
     :bekommt_protokoll (Boolean/parseBoolean (get person (keyword "Protokoll Bundesthing")))}
-   "Bundesrat" 
+   "Bundesrat"
    {:bekommt_einladung (Boolean/parseBoolean Bundesrat)
+    :hat_stimmrecht (Boolean/parseBoolean (get person (keyword "Stimmberechtigung Bundesrat")))
     :bekommt_protokoll (Boolean/parseBoolean (get person (keyword "Protokoll Bundesrat")))}
-   "Bundesmädchenrat" 
+   "Bundesmädchenrat"
    {:bekommt_einladung (Boolean/parseBoolean Bundesmädchenrat)
+    :hat_stimmrecht (Boolean/parseBoolean (get person (keyword "Stimmberechtigung Bundesmädchenrat")))
     :bekommt_protokoll (Boolean/parseBoolean (get person (keyword "Protokoll Bundesmädchenrat")))}
-   "Bundesjungenrat" 
+   "Bundesjungenrat"
    {:bekommt_einladung (Boolean/parseBoolean Bundesjungenrat)
+    :hat_stimmrecht (Boolean/parseBoolean (get person (keyword "Stimmberechtigung Bundesjungenrat")))
     :bekommt_protokoll (Boolean/parseBoolean (get person (keyword "Protokoll Bundesjungenrat")))}})
 
 (defn parse-out-permissions [person]
@@ -142,6 +146,7 @@
   (str "'" value "'"))
 (defmethod format-value Boolean [value] value)
 (defmethod format-value nil [_] "NULL")
+#_(defmethod format-value :default [value] (str "ERROR: " value))
 
 (defn adress-sql [address old-id]
   (let [fields (keys address)
@@ -164,19 +169,40 @@
 (defn phones-sql [phones old-id]
   (str/join "\n" (map #(phone-sql % old-id) phones)))
 
+(defn permissions-sql [permissions old-id]
+  (let [fields (keys (second (first permissions)))
+        values
+        (for [[organ-name permission] permissions
+              :let [values (map #(format-value (get permission %)) fields)]
+              :when (some true? values)]
+          (str "(" (str/join "," values) ",'now','now',"
+               "(SELECT id FROM public.adressverzeichnis_person WHERE adressverzeichnis_person.alte_id = " old-id "),"
+               "(SELECT id FROM public.adressverzeichnis_organ WHERE name = '" organ-name "'))"))]
+    (when (seq values)
+      (str
+       "INSERT INTO public.adressverzeichnis_manuelleberechtigung (" (str/join "," (map name fields)) ", erstellt, veraendert, person_id, organ_id) "
+       "VALUES "(str/join ", " values)";"))))
+
 (defn person-sql [person]
   (let [person (dissoc person :Gruppe :Älterengemeinschaft :Ordensgruppe :Amt :Ordensamt :Übergeordnetegruppe :Änderungsdatum :Hilfsgruppe
-                       :permissions)
-        fields (keys (dissoc person :address :numbers))
+                      )
+        fields (keys (dissoc person :address :numbers :permissions))
         old-id (:alte_id person)]
-    (str 
-     "INSERT INTO adressverzeichnis_person (" (str/join "," (map name fields)) ",erstellt,veraendert) VALUES (" (str/join "," (map #(format-value (get person %)) fields)) ",'now','now');"
-     (adress-sql (:address person) old-id)
-     (phones-sql (:numbers person) old-id))))
+    (str/join "\n"
+     [(str "INSERT INTO adressverzeichnis_person (" (str/join "," (map name fields)) ",erstellt, veraendert) VALUES (" (str/join "," (map #(format-value (get person %)) fields)) ",'now','now');")
+      (adress-sql (:address person) old-id)
+      (phones-sql (:numbers person) old-id)
+      (permissions-sql (:permissions person) old-id)
+      ""])))
 
 (defn persons-sql [persons]
   (let [persons (map #(dissoc % :Gruppe :ID :Älterengemeinschaft :Ordensgruppe :Amt :Ordensamt :Übergeordnetegruppe :Änderungsdatum :Hilfsgruppe
                               :address :permissions :numbers) persons)]
     []))
 
-(print (str "BEGIN;\n" (str/join "\n" (map (comp person-sql parse-person) old)) "\nCOMMIT;"))
+
+(print
+  (str "BEGIN;\n"
+    (str/join "\n"
+      (map (comp person-sql parse-person) old))
+    "\nCOMMIT;"))
