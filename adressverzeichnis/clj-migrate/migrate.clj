@@ -11,12 +11,12 @@
 
 (deps/add-deps 
  '{:deps 
-   {honeysql/honeysql {:mvn/version "1.0.444"}
+   {com.github.seancorfield/honeysql {:mvn/version "2.1.818"}
     org.clojure/data.csv {:mvn/version "1.0.0"}}})
 
 (require '[clojure.data.csv :as csv]
-         '[honeysql.core :as sql]
-         '[honeysql.helpers :as helpers])
+         '[honey.sql :as sql]
+         '[honey.sql.helpers :as helpers :refer [select insert-into values from where on-conflict do-nothing]])
 
 (def path-to-csv (first *command-line-args*))
 
@@ -183,26 +183,85 @@
        "INSERT INTO public.adressverzeichnis_manuelleberechtigung (" (str/join "," (map name fields)) ", erstellt, veraendert, person_id, organ_id) "
        "VALUES "(str/join ", " values)";"))))
 
+(defn ordensgruppe-mitgliedschaft-sql [ordensgruppe old-id]
+  (when-not (str/blank? ordensgruppe)
+    (str
+      "INSERT INTO public.adressverzeichnis_amt (erstellt, veraendert, bestaetigt, gruppierung_id, person_id, typ_id)
+       VALUES ('now', 'now', false, " 
+      (str/join ","
+        [(str "(SELECT id from public.adressverzeichnis_gruppierung WHERE adressverzeichnis_gruppierung.name = '" ordensgruppe "')")
+         (str "(SELECT id from public.adressverzeichnis_person WHERE adressverzeichnis_person.alte_id = " old-id ")")
+         (str "(SELECT id from public.adressverzeichnis_amttyp WHERE adressverzeichnis_amttyp.name = 'Mitglied')")])
+      ");")))
+
 (defn person-sql [person]
-  (let [person (dissoc person :Gruppe :Älterengemeinschaft :Ordensgruppe :Amt :Ordensamt :Übergeordnetegruppe :Änderungsdatum :Hilfsgruppe
-                      )
-        fields (keys (dissoc person :address :numbers :permissions))
+  (let [person (dissoc person :Gruppe :Älterengemeinschaft  :Amt :Ordensamt :Übergeordnetegruppe :Änderungsdatum :Hilfsgruppe)
+                      
+        fields (keys (dissoc person :address :numbers :permissions :Ordensgruppe))
         old-id (:alte_id person)]
     (str/join "\n"
      [(str "INSERT INTO adressverzeichnis_person (" (str/join "," (map name fields)) ",erstellt, veraendert) VALUES (" (str/join "," (map #(format-value (get person %)) fields)) ",'now','now');")
       (adress-sql (:address person) old-id)
       (phones-sql (:numbers person) old-id)
       (permissions-sql (:permissions person) old-id)
+      (ordensgruppe-mitgliedschaft-sql (:Ordensgruppe person) old-id)
       ""])))
 
-(defn persons-sql [persons]
-  (let [persons (map #(dissoc % :Gruppe :ID :Älterengemeinschaft :Ordensgruppe :Amt :Ordensamt :Übergeordnetegruppe :Änderungsdatum :Hilfsgruppe
-                              :address :permissions :numbers) persons)]
-    []))
+(defn ordensgruppe-typ [ordensgruppe]
+  (cond
+    (str/includes? ordensgruppe "Konvent") "Konvent"
+    (str/includes? ordensgruppe "Aufbaukollegium") "Aufbaukollegium"
+    (str/includes? ordensgruppe "Kollegium") "Kollegium"))
 
+(defn ordensgruppe-types-sql [ordensgruppe-types]
+  (-> 
+   (insert-into :public.adressverzeichnis_gruppierungstyp)
+   (values (for [ordensgruppe-typ ordensgruppe-types]
+              {:name ordensgruppe-typ}))))
+
+(defn ordensgruppen-sql [ordensgruppen]
+  (->
+   (insert-into :public.adressverzeichnis_gruppierung)
+   (values
+     (for [{:keys [Ordensgruppe Älterengemeinschaft]} ordensgruppen
+           :when (not (str/blank? Ordensgruppe))]
+       {:name Ordensgruppe
+        :obergruppe_id 
+        (when-not (str/blank? Älterengemeinschaft)
+          (-> (select :id)
+              (from :public.adressverzeichnis_gruppierung)
+              (where [:= :name Älterengemeinschaft])))
+        :typ_id 
+        (when-let [typ (ordensgruppe-typ Ordensgruppe)] 
+          (-> (select :id) 
+              (from :public.adressverzeichnis_gruppierungstyp) 
+              (where [:= :name typ])))}))))
+
+(defn älterengemeinschaften-sql [älterengemeinschaften]
+  (-> 
+   (insert-into :public.adressverzeichnis_gruppierung)
+   (values (for [gemeinschaft älterengemeinschaften
+                 :when (not (str/blank? gemeinschaft))]
+             {:name gemeinschaft}))))
+             
+
+(defn format-sql [sql-map]
+  (-> sql-map
+   (update :values (fn [values] (map #(assoc % :veraendert "now", :erstellt "now") values)))
+   on-conflict do-nothing ; do-update-set
+   (sql/format {:inline true, :checking :strict})
+   (first)
+   (str ";")))
 
 (print
-  (str "BEGIN;\n"
-    (str/join "\n"
-      (map (comp person-sql parse-person) old))
-    "\nCOMMIT;"))
+  (let [persons (map parse-person old)]
+      (str "BEGIN;\n"
+        (str/join "\n"
+          (concat
+            (map format-sql
+              (let [ordensgruppen (into #{} (map #(select-keys % #{:Ordensgruppe :Älterengemeinschaft})) persons)]
+                [(älterengemeinschaften-sql (set (map :Älterengemeinschaft ordensgruppen)))
+                 (ordensgruppe-types-sql (disj (set (map ordensgruppe-typ (map :Ordensgruppe ordensgruppen))) nil))
+                 (ordensgruppen-sql ordensgruppen)]))
+            (map person-sql persons)))
+        "\nCOMMIT;")))
