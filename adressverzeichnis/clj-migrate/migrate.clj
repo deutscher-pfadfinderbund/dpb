@@ -6,7 +6,8 @@
    [clojure.pprint :as pprint]
    [clojure.string :as str]
    [clojure.set :as set]
-   [clojure.java.io :as io])
+   [clojure.java.io :as io]
+   [flatland.ordered.map :refer [ordered-map]])
   (:import java.util.Date))
 
 (deps/add-deps 
@@ -20,12 +21,16 @@
 
 (def path-to-csv (first *command-line-args*))
 
+(defn remove-empty-or-nil-fields [m]
+  (into {} (remove (comp str/blank? second)) m))
+
 (defn csv-data->maps [csv-data]
-  (map zipmap
+  (map remove-empty-or-nil-fields
+    (map zipmap
        (->> (first csv-data) ;; First row is the header
             (map keyword) ;; Drop if you want string keys instead
             repeat)
-       (rest csv-data)))
+       (rest csv-data))))
 
 (def old
   (csv-data->maps
@@ -139,14 +144,13 @@
       (update :todestag parse-date)
       (update :nrw #(Boolean/parseBoolean %))
       (update :nicht_abdrucken #(Boolean/parseBoolean %))
-      (update :stand #(get stand-map % ""))))
+      (update :stand #(get stand-map % nil))))
 
 (defmulti format-value type)
 (defmethod format-value String [value]
   (str "'" value "'"))
 (defmethod format-value Boolean [value] value)
 (defmethod format-value nil [_] "NULL")
-#_(defmethod format-value :default [value] (str "ERROR: " value))
 
 (defn adress-sql [address old-id]
   (let [fields (keys address)
@@ -208,10 +212,11 @@
       ""])))
 
 (defn ordensgruppe-typ [ordensgruppe]
-  (cond
-    (str/includes? ordensgruppe "Konvent") "Konvent"
-    (str/includes? ordensgruppe "Aufbaukollegium") "Aufbaukollegium"
-    (str/includes? ordensgruppe "Kollegium") "Kollegium"))
+  (and ordensgruppe
+    (cond
+      (str/includes? ordensgruppe "Konvent") "Konvent"
+      (str/includes? ordensgruppe "Aufbaukollegium") "Aufbaukollegium"
+      (str/includes? ordensgruppe "Kollegium") "Kollegium")))
 
 (defn ordensgruppe-types-sql [ordensgruppe-types]
   (-> 
@@ -243,25 +248,89 @@
    (values (for [gemeinschaft älterengemeinschaften
                  :when (not (str/blank? gemeinschaft))]
              {:name gemeinschaft}))))
-             
+
+
+(defn unmittelbar? 
+  ([{:keys [Übergeordnetegruppe Gruppe]}] 
+   (= Übergeordnetegruppe Gruppe))
+  ([gruppierung gruppierungen]
+   (or (unmittelbar? gruppierung)
+      (not (contains? (set (map :Gruppe gruppierungen))
+                      (:Übergeordnetegruppe gruppierung))))))
+
+(def gruppen-indexer (map #(vector (:Gruppe %) %)))
+
+(defn topo-sort [gruppierungen]
+  (let [unmittelbare-gruppen (filter #(unmittelbar? % gruppierungen) gruppierungen)]
+    (loop [index (into (ordered-map) gruppen-indexer unmittelbare-gruppen)
+           undecided (remove (set unmittelbare-gruppen) gruppierungen)]
+      (if (empty? undecided)
+        (vals index)
+        (let [parents-in-index (filter #(contains? index (:Übergeordnetegruppe %)) undecided)]
+          (recur (into index gruppen-indexer parents-in-index)
+                 (remove (set parents-in-index) undecided)))))))
+
+(def gruppen-typen 
+  #{"Gilde" "Horte" "Trupp"
+    "Aufbauhag" "Aufbaustamm"
+    "Hag" "Stamm"
+    "Mädelschaft" "Jungenschaft"
+    "Ring"
+    "Gau"})
+
+(defn gruppen-typ [gruppierung]
+  (when-let [gruppe (:Gruppe gruppierung)]
+    (let [[typ _] (str/split gruppe #"\s")]
+      (gruppen-typen typ))))
+
+(defn gruppierungs-typ-sql []
+  (-> (insert-into :public.adressverzeichnis_gruppierungstyp)
+      (values (for [typ gruppen-typen]
+                {:name typ}))))
+
+(defn gruppe-sql [gruppe]
+  {:name (:Gruppe gruppe)
+   :obergruppe_id
+   (when-not (unmittelbar? gruppe)
+     (-> (select :id)
+         (from :public.adressverzeichnis_gruppierung)
+         (where [:= :name (:Übergeordnetegruppe gruppe)])))
+   :typ_id
+   (when-let [typ (gruppen-typ gruppe)]
+     (-> (select :id)
+         (from :public.adressverzeichnis_gruppierungstyp)
+         (where [:= :name typ])))})
+
+(defn gruppierungen-sql [gruppierungen]
+  (let [unmittelbare (filter unmittelbar? gruppierungen)]
+    (cons (-> (insert-into :public.adressverzeichnis_gruppierung)
+              (values (map gruppe-sql unmittelbare)))
+          (for [gruppe (remove unmittelbar? gruppierungen)]
+            (->
+             (insert-into :public.adressverzeichnis_gruppierung)
+             (values [(gruppe-sql gruppe)]))))))
 
 (defn format-sql [sql-map]
   (-> sql-map
    (update :values (fn [values] (map #(assoc % :veraendert "now", :erstellt "now") values)))
    on-conflict do-nothing ; do-update-set
-   (sql/format {:inline true, :checking :strict})
+   (sql/format {:inline true, :checking :strict, :pretty true})
    (first)
    (str ";")))
 
 (print
-  (let [persons (map parse-person old)]
+  (let [persons (map parse-person old)
+        gruppierungen (disj (into #{} (map #(select-keys % #{:Übergeordnetegruppe :Gruppe})) persons) {})] 
       (str "BEGIN;\n"
         (str/join "\n"
           (concat
             (map format-sql
-              (let [ordensgruppen (into #{} (map #(select-keys % #{:Ordensgruppe :Älterengemeinschaft})) persons)]
-                [(älterengemeinschaften-sql (set (map :Älterengemeinschaft ordensgruppen)))
-                 (ordensgruppe-types-sql (disj (set (map ordensgruppe-typ (map :Ordensgruppe ordensgruppen))) nil))
-                 (ordensgruppen-sql ordensgruppen)]))
-            (map person-sql persons)))
+              (concat
+                [(gruppierungs-typ-sql)]
+                (gruppierungen-sql (topo-sort gruppierungen))
+                (let [ordensgruppen (into #{} (map #(select-keys % #{:Ordensgruppe :Älterengemeinschaft})) persons)]
+                  [(älterengemeinschaften-sql (set (map :Älterengemeinschaft ordensgruppen)))
+                   (ordensgruppe-types-sql (disj (set (map ordensgruppe-typ (map :Ordensgruppe ordensgruppen))) nil))
+                   (ordensgruppen-sql ordensgruppen)])))
+            #_(map person-sql persons)))
         "\nCOMMIT;")))
