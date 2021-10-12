@@ -13,3 +13,6 @@ production.env
 db/entrypoint/*.sql
 
 /node_modules
+
+output.sql
+.clj-kondo
