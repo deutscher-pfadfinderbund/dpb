@@ -69,10 +69,11 @@
 (defn get-adress [{:keys [Straße Zusatz Postleitzahl Ort]}]
   (when-not (every? str/blank? [Straße Zusatz Postleitzahl Ort])
     {:label ""
-     :strasse Straße
-     :zusatz Zusatz
-     :plz Postleitzahl
-     :stadt Ort}))
+     :strasse (or Straße "")
+     :zusatz (or Zusatz "")
+     :plz (or Postleitzahl "")
+     :stadt (or Ort "")
+     :land "Deutschland"}))
 
 (defn build-number [vorwahl nummer]
   (str vorwahl nummer))
@@ -83,15 +84,15 @@
   (let [not-blank? (complement str/blank?)]
     (cond-> []
       (not-blank? Telefonnummer1)
-      (conj {:label Telefonbezeichner1
+      (conj {:label (or Telefonbezeichner1 "")
              :nummer (build-number Vorwahl1 Telefonnummer1)})
       
       (not-blank? Telefonnummer2)
-      (conj {:label Telefonbezeichner2
+      (conj {:label (or Telefonbezeichner2 "")
              :nummer (build-number Vorwahl2 Telefonnummer2)})
       
       (not-blank? Telefonnummer3)
-      (conj {:label Telefonbezeichner3
+      (conj {:label (or Telefonbezeichner3 "")
              :nummer (build-number Vorwahl3 Telefonnummer3)}))))
 
 (defn parse-out-tel [person]
@@ -146,70 +147,81 @@
       (update :nicht_abdrucken #(Boolean/parseBoolean %))
       (update :stand #(get stand-map % nil))))
 
-(defmulti format-value type)
-(defmethod format-value String [value]
-  (str "'" value "'"))
-(defmethod format-value Boolean [value] value)
-(defmethod format-value nil [_] "NULL")
 
-(defn adress-sql [address old-id]
-  (let [fields (keys address)
-        values (map #(format-value (get address %)) fields)]
-    (if (every? str/blank? values)
-      ""
-      (str
-       "INSERT INTO public.adressverzeichnis_adresse (" (str/join "," (map name fields)) ",erstellt,veraendert,land,person_id) VALUES ("
-       (str/join "," values)
-       ",'now','now', 'Deutschland', (SELECT id FROM public.adressverzeichnis_person WHERE adressverzeichnis_person.alte_id = " old-id "));"))))
+;;;; SQL-Map generation functions
 
-(defn phone-sql [phone old-id]
-  (let [fields (keys phone)
-        values (map #(format-value (get phone %)) fields)]
-    (str
-      "INSERT INTO public.adressverzeichnis_telefon (" (str/join "," (map name fields)) ",erstellt,veraendert,person_id) VALUES ("
-      (str/join "," values)
-      ",'now','now', (SELECT id FROM public.adressverzeichnis_person WHERE adressverzeichnis_person.alte_id = " old-id "));")))
+(defn amttypen-sql [_persons]
+  (-> (insert-into :public.adressverzeichnis_amttyp)
+      (values [{:name "Mitglied"}])))
 
-(defn phones-sql [phones old-id]
-  (str/join "\n" (map #(phone-sql % old-id) phones)))
+(defn ordensmitgliedschaften-sql [persons]
+  (-> (insert-into :public.adressverzeichnis_amt)
+      (values
+       (for [{:keys [Ordensgruppe alte_id]} persons
+             :when Ordensgruppe]
+         {:bestaetigt false
+          :gruppierung_id 
+          (-> (select :id) (from :public.adressverzeichnis_gruppierung) (where [:= :name Ordensgruppe]))
+          :person_id
+          (-> (select :id) (from :public.adressverzeichnis_person) (where [:= :alte_id alte_id]))
+          :typ_id
+          (-> (select :id) (from :public.adressverzeichnis_amttyp) (where [:= :name "Mitglied"]))}))))
 
-(defn permissions-sql [permissions old-id]
-  (let [fields (keys (second (first permissions)))
-        values
-        (for [[organ-name permission] permissions
-              :let [values (map #(format-value (get permission %)) fields)]
-              :when (some true? values)]
-          (str "(" (str/join "," values) ",'now','now',"
-               "(SELECT id FROM public.adressverzeichnis_person WHERE adressverzeichnis_person.alte_id = " old-id "),"
-               "(SELECT id FROM public.adressverzeichnis_organ WHERE name = '" organ-name "'))"))]
-    (when (seq values)
-      (str
-       "INSERT INTO public.adressverzeichnis_manuelleberechtigung (" (str/join "," (map name fields)) ", erstellt, veraendert, person_id, organ_id) "
-       "VALUES "(str/join ", " values)";"))))
+(defn addresses-sql [persons]
+  (-> (insert-into :public.adressverzeichnis_adresse)
+      (values (for [{:keys [address alte_id]} persons]
+                (assoc address
+                       :person_id
+                       (-> (select :id)
+                           (from :public.adressverzeichnis_person)
+                           (where [:= :alte_id alte_id])))))))
 
-(defn ordensgruppe-mitgliedschaft-sql [ordensgruppe old-id]
-  (when-not (str/blank? ordensgruppe)
-    (str
-      "INSERT INTO public.adressverzeichnis_amt (erstellt, veraendert, bestaetigt, gruppierung_id, person_id, typ_id)
-       VALUES ('now', 'now', false, " 
-      (str/join ","
-        [(str "(SELECT id from public.adressverzeichnis_gruppierung WHERE adressverzeichnis_gruppierung.name = '" ordensgruppe "')")
-         (str "(SELECT id from public.adressverzeichnis_person WHERE adressverzeichnis_person.alte_id = " old-id ")")
-         (str "(SELECT id from public.adressverzeichnis_amttyp WHERE adressverzeichnis_amttyp.name = 'Mitglied')")])
-      ");")))
+(defn phones-sql [persons]
+  (-> (insert-into :public.adressverzeichnis_telefon)
+      (values
+       (apply concat
+        (for [{:keys [numbers alte_id]} persons]
+          (for [phone numbers]
+            (assoc phone
+                   :person_id
+                   (-> (select :id)
+                       (from :public.adressverzeichnis_person)
+                       (where [:= :alte_id alte_id])))))))))
 
-(defn person-sql [person]
-  (let [person (dissoc person :Gruppe :Älterengemeinschaft  :Amt :Ordensamt :Übergeordnetegruppe :Änderungsdatum :Hilfsgruppe)
-                      
-        fields (keys (dissoc person :address :numbers :permissions :Ordensgruppe))
-        old-id (:alte_id person)]
-    (str/join "\n"
-     [(str "INSERT INTO adressverzeichnis_person (" (str/join "," (map name fields)) ",erstellt, veraendert) VALUES (" (str/join "," (map #(format-value (get person %)) fields)) ",'now','now');")
-      (adress-sql (:address person) old-id)
-      (phones-sql (:numbers person) old-id)
-      (permissions-sql (:permissions person) old-id)
-      (ordensgruppe-mitgliedschaft-sql (:Ordensgruppe person) old-id)
-      ""])))
+(defn persons-sql [persons]
+  (-> (insert-into :public.adressverzeichnis_person)
+      (values 
+       (map #(merge 
+              {:anmerkung ""
+               :anrede ""
+               :titel ""
+               :vorname ""
+               :fahrtenname ""
+               :nachname ""}
+              (select-keys % #{:stand :anmerkung :email :nicht_abdrucken :geburtstag :titel :fahrtenname :nachname :alte_id :todestag :vorname :nrw :anrede}))
+          persons))))
+
+(def organe #{"Bundesrat" "Bundesmädchenrat" "Bundesjungenrat" "Bundesthing"})
+
+(defn organs-sql []
+  (-> (insert-into :public.adressverzeichnis_organ)
+      (values (for [organ organe]
+                {:name organ}))))
+
+(defn permission-sql [permissions alte_id]
+  (for [[organ permission] permissions
+        :when (some true? (map second permission))]
+    (assoc permission
+           :organ_id (-> (select :id) (from :public.adressverzeichnis_organ) (where [:= :name organ]))
+           :person_id (-> (select :id) (from :public.adressverzeichnis_person) (where [:= :alte_id alte_id])))))
+
+(defn pemissions-sql [persons]
+  [(organs-sql)
+   (-> (insert-into :public.adressverzeichnis_manuelleberechtigung)
+       (values
+        (apply concat 
+          (for [{:keys [permissions alte_id]} persons]
+            (permission-sql permissions alte_id)))))])
 
 (defn ordensgruppe-typ [ordensgruppe]
   (and ordensgruppe
@@ -248,7 +260,6 @@
    (values (for [gemeinschaft älterengemeinschaften
                  :when (not (str/blank? gemeinschaft))]
              {:name gemeinschaft}))))
-
 
 (defn unmittelbar? 
   ([{:keys [Übergeordnetegruppe Gruppe]}] 
@@ -318,19 +329,26 @@
    (first)
    (str ";")))
 
+(defn wrap-in-transaction [& x]
+  (str (apply str "BEGIN;\n" x) "\nCOMMIT;"))
+
 (print
   (let [persons (map parse-person old)
         gruppierungen (disj (into #{} (map #(select-keys % #{:Übergeordnetegruppe :Gruppe})) persons) {})] 
-      (str "BEGIN;\n"
-        (str/join "\n"
+    (wrap-in-transaction
+      (str/join "\n"
+        (map format-sql
           (concat
-            (map format-sql
-              (concat
-                [(gruppierungs-typ-sql)]
-                (gruppierungen-sql (topo-sort gruppierungen))
-                (let [ordensgruppen (into #{} (map #(select-keys % #{:Ordensgruppe :Älterengemeinschaft})) persons)]
-                  [(älterengemeinschaften-sql (set (map :Älterengemeinschaft ordensgruppen)))
-                   (ordensgruppe-types-sql (disj (set (map ordensgruppe-typ (map :Ordensgruppe ordensgruppen))) nil))
-                   (ordensgruppen-sql ordensgruppen)])))
-            #_(map person-sql persons)))
-        "\nCOMMIT;")))
+           [(gruppierungs-typ-sql)]
+           (gruppierungen-sql (topo-sort gruppierungen))
+           (let [ordensgruppen (into #{} (map #(select-keys % #{:Ordensgruppe :Älterengemeinschaft})) persons)]
+             [(älterengemeinschaften-sql (set (map :Älterengemeinschaft ordensgruppen)))
+              (ordensgruppe-types-sql (disj (set (map ordensgruppe-typ (map :Ordensgruppe ordensgruppen))) nil))
+              (ordensgruppen-sql ordensgruppen)])
+           [(persons-sql persons)
+            (addresses-sql persons)
+            (phones-sql persons)]
+           (pemissions-sql persons)
+           [(amttypen-sql persons)
+            (ordensmitgliedschaften-sql persons)]))))))
+     
