@@ -150,9 +150,34 @@
 
 ;;;; SQL-Map generation functions
 
-(defn amttypen-sql [_persons]
+(defn valid-amttyp [amt]
+  (when amt
+    (cond
+      (or (str/includes? amt "führer")
+          (str/includes? amt "vogt")
+          (str/includes? amt "vögtin")) "Führer:in/Vögtin/Vogt"
+      (re-matches #"(?i).*kanzler.*" amt) "Kanzler:in"
+      (re-matches #"(?i).*kämmer.*" amt) "Kämmerin/Kämerer"
+      :else amt)))
+
+(defn amttypen-sql [persons]
   (-> (insert-into :public.adressverzeichnis_amttyp)
-      (values [{:name "Mitglied"}])))
+      (values (cons {:name "Mitglied"}
+                    (for [amt (set (keep (comp valid-amttyp :Amt) persons))]
+                      {:name amt})))))
+
+(defn ämter [persons]
+  (-> (insert-into :public.adressverzeichnis_amt)
+      (values (for [{:keys [Amt Gruppe alte_id]} persons
+                    :let [norm-amt (valid-amttyp Amt)]
+                    :when norm-amt]
+                {:bestaetigt true
+                 :gruppierung_id
+                 (-> (select :id) (from :public.adressverzeichnis_gruppierung) (where [:= :name Gruppe]))
+                 :typ_id
+                 (-> (select :id) (from :public.adressverzeichnis_amttyp) (where [:= :name norm-amt]))
+                 :person_id
+                 (-> (select :id) (from :public.adressverzeichnis_person) (where [:= :alte_id alte_id]))}))))
 
 (defn ordensmitgliedschaften-sql [persons]
   (-> (insert-into :public.adressverzeichnis_amt)
@@ -169,12 +194,13 @@
 
 (defn addresses-sql [persons]
   (-> (insert-into :public.adressverzeichnis_adresse)
-      (values (for [{:keys [address alte_id]} persons]
+      (values (for [{:keys [address alte_id]} persons
+                    :when address]
                 (assoc address
                        :person_id
                        (-> (select :id)
                            (from :public.adressverzeichnis_person)
-                           (where [:= :alte_id alte_id])))))))
+                            (where [:= :alte_id alte_id])))))))
 
 (defn phones-sql [persons]
   (-> (insert-into :public.adressverzeichnis_telefon)
@@ -350,5 +376,6 @@
             (phones-sql persons)]
            (pemissions-sql persons)
            [(amttypen-sql persons)
+            (ämter persons)
             (ordensmitgliedschaften-sql persons)]))))))
      
