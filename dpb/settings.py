@@ -175,10 +175,13 @@ MARKDOWNIFY = {
             'h5',
             'h6',
             'br',
+            'div',
+            'span'
         ],
         "MARKDOWN_EXTENSIONS": [
             'markdown.extensions.fenced_code',
             'markdown.extensions.extra',
+            'markdown.extensions.md_in_html'
         ],
         "WHITELIST_ATTRS": [
             'href',
