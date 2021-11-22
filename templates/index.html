@@ -108,41 +108,19 @@
     </div>
 
     <div class="col-md-6">
-      <h3>Präventionsarbeit</h3>
+      <h3>Präventionsarbeit im DPB</h3>
+      <p class="mb-0">
+        Unser Pfadfindergesetz und unsere Versprechen verpflichten uns zur Achtung gegenüber den uns Anvertrauten und Treue zu halten unseren Schwestern und Brüder. 
+        Das schließt grenzverletzendes Verhalten klar aus! Zur stetigen Arbeit an diesem Thema hat sich ein Präventionsrat gebildet, der nach innen und außen tätig ist.
+      </p>
+      <a class="btn btn-link" href="/arbeitskreis">Mehr</a>
       <div class="row">
         <div class="col-md-4">
-          <a href="{% url 'arbeitskreis' %}">
+          <a class="d-flex" href="{% url 'arbeitskreis' %}">
             <img src="{% static 'img/arbeitskreis/arbeitskreis_header.png' %}"
                  class="img-thumbnail img-fluid margin-top-10px"
-                 alt="Präventionsrat"/>
+                 alt="Schlaglicht Illustration mit der Aufschrift: Der Wölfling folgt dem Altworlf nach,... doch nicht überall hin!"/>
           </a>
-        </div>
-
-        <div class="col-md-8">
-          {% get_pages '/arbeitskreis/' as pages %}
-          {% for page in pages %}
-            <article>
-              <h4>{{ page.title }}</h4>
-              <p>
-                {{ page.content|striptags|truncatewords:15 }}<br>
-                <a class="btn btn-sm btn-link" href="{{ page.url }}">Mehr</a>
-              </p>
-            </article>
-          {% endfor %}
-          <article>
-            <h4>Schutzkonzept</h4>
-            <p>
-              <a class="btn btn-link"
-                 href="https://deutscher-pfadfinderbund.de/filer/filer/1578778455/765/">
-                Klicken Sie hier</a>, um unser Schutzkonzept herunterzuladen.
-            </p>
-          </article>
-          <article>
-            <h4>Aufarbeitungsinitiative</h4>
-            <p>Die Aufarbeitungsinitiative „Schlaglicht“ im Deutschen Pfadfinderbund hat es sich zum Ziel gesetzt, einen
-              Blick auf die Zustände und Stimmungen zu werfen, welche es in der Vergangenheit ermöglicht haben ...</p>
-            <a class="btn btn-sm btn-link" href="/schlaglicht">Mehr</a>
-          </article>
         </div>
       </div>
     </div>
