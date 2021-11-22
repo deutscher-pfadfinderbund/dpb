@@ -1,40 +1,40 @@
 {% load static %}
 
-<div id="dpb-carousel" class="carousel lazy slide" data-ride="carousel">
+<section id="dpb-carousel" class="carousel lazy slide" data-ride="carousel" aria-roledescription="carousel" aria-label="Bilder mit Pfadfinder Thema">
 
   <div class="carousel-inner">
-    <div class="carousel-item active">
+    <div class="carousel-item active" aria-roledescription="slide">
       <img class="d-block w-100"
            src="{% static 'img/carousel/grossfahrt_001_280px.jpg' %}"
-           alt="Auf Großfahrt">
+           alt="Blick auf ein Berge und ein Tal. Pfadfinder wandern mit Rucksack.">
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item" aria-roledescription="slide">
       <img class="d-block w-100"
            src="{% static 'img/carousel/grossfahrt_002_280px.jpg' %}"
-           alt="Auf Großfahrt">
+           alt="Blick in ein Tal. Jemand sitzt im Gras.">
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item" aria-roledescription="slide">
       <img class="d-block w-100"
            src="{% static 'img/carousel/bundeslager2015_280px.jpg' %}"
-           alt="Bundeslager 2015">
+           alt="Blick auf das Bundeslager 2015">
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item" aria-roledescription="slide">
       <img class="d-block w-100"
            src="{% static 'img/carousel/bundeslager2015_feuer_280px.jpg' %}"
-           alt="Bundeslagerfeuer 2015">
+           alt="Bundeslagerfeuer 2015 in der Nacht.">
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item" aria-roledescription="slide">
       <img class="d-block w-100"
            src="{% static 'img/carousel/irland2012_280px.jpg' %}"
-           alt="Irland 2012, JS Hohenstaufen und MS Sturmvögel">
+           alt="Wandernde Pfadfinder entlang einer Straße in Irland 2012.">
     </div>
   </div>
   <ol class="carousel-indicators">
-    <li data-target="#dpb-carousel" data-slide-to="0" class="active"></li>
-    <li data-target="#dpb-carousel" data-slide-to="1"></li>
-    <li data-target="#dpb-carousel" data-slide-to="2"></li>
-    <li data-target="#dpb-carousel" data-slide-to="3"></li>
-    <li data-target="#dpb-carousel" data-slide-to="4"></li>
+    <li data-target="#dpb-carousel" data-slide-to="0" class="active" role="button" aria-label="Springe zu Bild 1"></li>
+    <li data-target="#dpb-carousel" data-slide-to="1" role="button" aria-label="Springe zu Bild 2"></li>
+    <li data-target="#dpb-carousel" data-slide-to="2" role="button" aria-label="Springe zu Bild 3"></li>
+    <li data-target="#dpb-carousel" data-slide-to="3" role="button" aria-label="Springe zu Bild 4"></li>
+    <li data-target="#dpb-carousel" data-slide-to="4" role="button" aria-label="Springe zu Bild 5"></li>
   </ol>
   {% comment %}
   <a class="carousel-control-prev" href="#dpb-carousel" role="button" data-slide="prev">
@@ -46,4 +46,4 @@
     <span class="sr-only">Next</span>
   </a>
   {% endcomment %}
-</div>
+</section>
