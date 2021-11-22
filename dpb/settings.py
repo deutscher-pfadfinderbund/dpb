@@ -111,6 +111,7 @@ STATICFILES_FINDERS = (
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'templates/dpb'),
     os.path.join(BASE_DIR, 'contact/templates/contact'),
+    ("node_modules", os.path.join(BASE_DIR, 'node_modules')),
     ("bootstrap", os.path.join(BASE_DIR, 'node_modules/bootstrap/dist/js')),
     ("jquery", os.path.join(BASE_DIR, 'node_modules/jquery/dist')),
     ("styles", os.path.join(BASE_DIR, 'styles')),
