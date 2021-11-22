@@ -34,7 +34,7 @@
   {# Preview Row 1 #}
   <div class="row" style="padding-bottom:0;">
     {# Der Deutsche Pfadfinderbund #}
-    <div class="col-md-6">
+    <section class="col-md-6">
       <h3>Unsere Bundesordnung</h3>
       <div class="row">
         <div class="col-md-4 col-sm-5 col-xs-6">
@@ -55,12 +55,12 @@
           {% endfor %}
         </div>
       </div>
-    </div>
+    </section>
 
     {# Was sind bündische Pfadfinder? #}
     <div class="col-md-6">
       <h3>Pfadfinder und bündische Jugend</h3>
-      <div class="row" style="padding-bottom: 0;">
+      <section class="row" style="padding-bottom: 0;">
         <div class="col-md-4 col-sm-5 col-xs-6">
           <a href="{% url 'pfadfinder' %}">
             <img src="{% static 'img/schweden2011_200px.jpg' %}" class="img-thumbnail img-fluid margin-top-10px"
@@ -78,13 +78,13 @@
             </p>
           {% endfor %}
         </div>
-      </div>
+      </section>
     </div>
   </div>
 
   {# Preview Row 2 #}
   <div class="row">
-    <div class="col-md-6">
+    <section class="col-md-6">
       <h3>Der Deutsche Pfadfinderbund</h3>
       <div class="row">
         <div class="col-md-4 col-sm-5 col-xs-6">
@@ -105,9 +105,9 @@
           {% endfor %}
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="col-md-6">
+    <section class="col-md-6">
       <h3>Präventionsarbeit im DPB</h3>
       <p class="mb-0">
         Unser Pfadfindergesetz und unsere Versprechen verpflichten uns zur Achtung gegenüber den uns Anvertrauten und Treue zu halten unseren Schwestern und Brüder. 
@@ -123,6 +123,6 @@
           </a>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 {% endblock %}
