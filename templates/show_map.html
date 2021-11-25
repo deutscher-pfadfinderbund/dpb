@@ -7,10 +7,10 @@
   </p>
 {% else %}
   {# Load files for OSM #}
-  <script src="{% static 'mapbox.js/dist/mapbox.js' %}"></script>
-  <link href="{% static 'mapbox.js/dist/mapbox.css' %}" rel='stylesheet'/>
-  <script src="{% static 'leaflet-fullscreen/dist/Leaflet.fullscreen.min.js' %}"></script>
-  <link href="{% static 'leaflet-fullscreen/dist/Leaflet.fullscreen.css' %}" rel='stylesheet'/>
+  <script src="{% static 'mapbox/mapbox.js' %}"></script>
+  <link href="{% static 'mapbox/mapbox.css' %}" rel='stylesheet'/>
+  <script src="{% static 'leaflet-fullscreen/Leaflet.fullscreen.min.js' %}"></script>
+  <link href="{% static 'leaflet-fullscreen/Leaflet.fullscreen.css' %}" rel='stylesheet'/>
 
   <style>
     {% if height %}
@@ -43,10 +43,11 @@
 
           // Group layers
           var baseMaps = {
-              "Mapbox": L.mapbox.tileLayer('mapbox.streets'),
-              "OSM": L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"),
-              "Satellit mit Straßen": L.mapbox.tileLayer('mapbox.streets-satellite'),
-              "Zum Wandern und Fahrrad fahren": L.mapbox.tileLayer('mapbox.run-bike-hike')
+              "Mapbox": L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'),
+              // "OSM": L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"),
+              "Zum Wandern und Fahrrad fahren": L.mapbox.styleLayer('mapbox://styles/mapbox/outdoors-v11'),
+              "Satellit mit Straßen": L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-streets-v11')
+
           };
 
           // Add group layers to map
