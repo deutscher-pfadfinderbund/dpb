@@ -7,14 +7,10 @@
   </p>
 {% else %}
   {# Load files for OSM #}
-  <link rel="stylesheet" href="{% static 'assets/leaflet/leaflet.css' %}"/>
-  <script src="{% static 'assets/leaflet/leaflet.js' %}"></script>
-
-  <script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
-  <link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet'/>
-  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js'></script>
-  <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css'
-        rel='stylesheet'/>
+  <script src="{% static 'mapbox/mapbox.js' %}"></script>
+  <link href="{% static 'mapbox/mapbox.css' %}" rel='stylesheet'/>
+  <script src="{% static 'leaflet-fullscreen/Leaflet.fullscreen.min.js' %}"></script>
+  <link href="{% static 'leaflet-fullscreen/Leaflet.fullscreen.css' %}" rel='stylesheet'/>
 
   <style>
     {% if height %}
@@ -38,7 +34,8 @@
               zoom: 16,
               layers: [L.mapbox.tileLayer('mapbox.streets')],  // Set default map
               maxZoom: 19,
-              minZoom: 0
+              minZoom: 0,
+              fullscreenControl: true,
           });
 
           // Add marker
@@ -46,17 +43,15 @@
 
           // Group layers
           var baseMaps = {
-              "Mapbox": L.mapbox.tileLayer('mapbox.streets'),
-              "OSM": L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"),
-              "Satellit mit Straßen": L.mapbox.tileLayer('mapbox.streets-satellite'),
-              "Zum Wandern und Fahrrad fahren": L.mapbox.tileLayer('mapbox.run-bike-hike')
+              "Mapbox": L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'),
+              // "OSM": L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"),
+              "Zum Wandern und Fahrrad fahren": L.mapbox.styleLayer('mapbox://styles/mapbox/outdoors-v11'),
+              "Satellit mit Straßen": L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-streets-v11')
+
           };
 
           // Add group layers to map
           L.control.layers(baseMaps).addTo(map);
-
-          // Enable fullscreen toggle
-          L.control.fullscreen().addTo(map);
 
           $("#map_location").html("Berechneter Standort: " + display_name);
       }
