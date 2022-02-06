@@ -16,6 +16,7 @@ class Page(models.Model):
     image = FilerImageField(null=True, blank=True, related_name="image", on_delete=models.CASCADE)
     attachment = FilerFileField(null=True, blank=True, related_name="attachment", on_delete=models.CASCADE)
     enable_comments = models.BooleanField(_('enable comments'), default=False)
+    archived = models.BooleanField(_('is archived?'), default=False)
     template_name = models.CharField(_('template name'), max_length=70, blank=True,
                                      help_text=_(
                                          "Example: 'pages/contact_page.html'. If this isn't provided, "

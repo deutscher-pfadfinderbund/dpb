@@ -9,4 +9,4 @@ class PageSitemap(Sitemap):
             raise ImproperlyConfigured("PageSitemap requires django.contrib.sites, which isn't installed.")
         site = django_apps.get_model('sites.Site')
         current_site = site.objects.get_current()
-        return current_site.page_set.filter(registration_required=False)
+        return current_site.page_set.filter(registration_required=False).exclude(archived=True)
