@@ -32,11 +32,9 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.frontend.rule=Host:deutscher-pfadfinderbund.de,www.deutscher-pfadfinderbund.de,jungenbund.de,www.jungenbund.de,maedchenbund.de,www.maedchenbund.de"
-      - "traefik.frontend.redirect.regex=^https?://www.deutscher-pfadfinderbund.de/(.*)"
-      - "traefik.frontend.redirect.replacement=https://deutscher-pfadfinderbund.de/$${1}"
-      - "traefik.port=80"
-      - "traefik.docker.network=web"
+      - "traefik.http.routers.dpb-main.rule=Host(`deutscher-pfadfinderbund.de`) || Host(`www.deutscher-pfadfinderbund.de`)"
+      - "traefik.http.routers.dpb-main.middlewares=redirect-www-to-non-www@file"
+      - "traefik.http.routers.dpb-main.entrypoints=websecure"
     networks:
       - web
       - dpb
