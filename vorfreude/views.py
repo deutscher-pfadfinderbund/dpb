@@ -6,13 +6,12 @@ from vorfreude.forms import PostForm
 from vorfreude.models import Post
 
 
-def index(request: HttpRequest, success: bool = False):
+def index(request: HttpRequest):
     posts = Post.objects.all()
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             Post(**form.cleaned_data).save()
-            return HttpResponseRedirect(reverse('vorfreude:index', args=(True,)))
+            return HttpResponseRedirect(reverse('vorfreude:index'))
     return render(request, "vorfreude/index.html", {"posts": posts,
-                                                    "post_form": PostForm(),
-                                                    "success": success})
+                                                    "post_form": PostForm()})
