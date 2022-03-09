@@ -1,10 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="DB" type="docker-deploy" factoryName="docker-image" server-name="Docker for Mac">
+  <configuration default="false" name="DB" type="docker-deploy" factoryName="docker-image" server-name="Docker">
     <deployment type="docker-image">
       <settings>
-        <option name="command" value="" />
+        <option name="imageTag" value="postgres:11-alpine" />
         <option name="containerName" value="dpbdb" />
-        <option name="entrypoint" value="" />
         <option name="envVars">
           <list>
             <DockerEnvVarImpl>
@@ -25,7 +24,6 @@
             </DockerEnvVarImpl>
           </list>
         </option>
-        <option name="imageTag" value="postgres:11-alpine" />
         <option name="portBindings">
           <list>
             <DockerPortBindingImpl>
@@ -34,7 +32,6 @@
             </DockerPortBindingImpl>
           </list>
         </option>
-        <option name="commandLineOptions" value="" />
         <option name="volumeBindings">
           <list>
             <DockerVolumeBindingImpl>

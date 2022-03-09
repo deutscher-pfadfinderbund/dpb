@@ -23,7 +23,7 @@
       <excludeFolder url="file://$MODULE_DIR$/adressverzeichnis/clj-migrate" />
     </content>
     <content url="file://$MODULE_DIR$/node_modules" />
-    <orderEntry type="jdk" jdkName="Pipenv (dpb)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Poetry (dpb)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PackageRequirementsSettings">
