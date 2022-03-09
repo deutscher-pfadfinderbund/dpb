@@ -22,6 +22,7 @@ urlpatterns = [url(r'^$', views.index, name='index'),
                url(r'^links/', include('links.urls')),
                url(r'^filer/', include('filer.urls')),
                url(r'^l/', include('permalink.urls')),
+               url(r'^vorfreude/', include('vorfreude.urls')),
 
                # Members Area
                url(r'^intern/', include('intern.urls')),
