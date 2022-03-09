@@ -10,25 +10,50 @@
 {% endblock heading %}
 
 {% block content %}
+  <p>
+    Nach so langer Zeit ist es wieder Zeit – Zeit gemeinsam als Bund zusammen zu treffen, zusammen am Feuer zu stehen,
+    und zusammen unsere Lieder zu singen. Jahre sind ins Land gezogen. Umso intensiver werden unsere Begegnungen sein.
+  </p>
+
+  <p>
+    Schreibe hier gerne einen persönlichen Beitrag, von dir oder euch an den Bund und lasst uns teilhaben an euren
+    Gedanken und eurer Vorfreude auf dieses große Lager!
+  </p>
+
+  <a class="btn btn-primary mb-3" data-toggle="collapse" href="#collapse-form" role="button" aria-expanded="false"
+     aria-controls="collapse-form">
+    Eigenen Beitrag verfassen
+  </a>
+  <div class="row collapse" id="collapse-form">
+    <div class="col-8">
+      <form action="/vorfreude/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ post_form|as_bootstrap }}
+        <input class="btn btn-primary" type="submit" value="Beitrag abschicken">
+      </form>
+    </div>
+  </div>
+
   {% if posts %}
     {% for post in posts %}
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">
-            {{ post.title }}
-            <small class="pull-right">Erstellt von {{ post.fahrtenname }} am {{ post.created }}</small>
-          </h3>
-        </div>
-        <div class="panel-body">
-          {{ post.gedanken|markdownify|safe }}
-          {% if post.file %}
-            <a href="{{ post.foto.url }}">
-              {{ post.foto|extension|fa_attachment|safe }}
-              {{ post.foto|filename }}
-            </a>
+      <div class="card shadow my-3">
+        <div class="card-body">
+          {% if post.foto %}
+            <img class="img-fluid pull-right img-thumbnail" style="max-width: 300px" src="{{ post.foto.url }}"
+                 alt="Foto von {{ post.fahrtenname }}">
           {% endif %}
+          <p>Erstellt von {{ post.fahrtenname }} am {{ post.created }}</p>
+          <h4>Wenn ich an den Bund denke, dann...</h4>
+          {{ post.gedanken|markdownify|safe }}
+          <h4>Und was ich / wir noch sagen möchte...</h4>
+          {{ post.sagen|markdownify|safe }}
         </div>
       </div>
     {% endfor %}
   {% endif %}
+
+  <a href="#" class="btn btn-link">Nach oben springen</a> Dort kannst du auch einen Beitrag verfassen :-)
+
+  <div class="pb-5"></div>
+
 {% endblock content %}
