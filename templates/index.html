@@ -8,6 +8,14 @@
 {% endblock %}
 
 {% block content %}
+  {% if user.is_authenticated %}
+    <div class="alert alert-primary" role="alert">
+      <p>
+        Das Bundeslager steht an! Teile nun auch du eine Nachricht mit dem Bund 💚
+      </p>
+      <a class="btn btn-outline-secondary" href="{% url 'vorfreude:index' %}">Los geht's</a>
+    </div>
+  {% endif %}
   <hr>
   <div class="row justify-content-md-center">
     <img class="img-fluid col-md-8" src="{% static 'img/schriftzug-dpb.svg' %}" alt="Schriftzug des DPB">
