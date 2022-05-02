@@ -1,4 +1,4 @@
-FROM python:3.9-alpine
+FROM python:3.10-alpine
 
 # jpeg-dev and zlib-dev are needed by Pillow
 RUN apk update && \
@@ -12,7 +12,7 @@ WORKDIR /code
 COPY Pipfile /code/Pipfile
 COPY Pipfile.lock /code/Pipfile.lock
 
-RUN apk --update add --no-cache --virtual build-deps build-base postgresql-dev && \
+RUN apk --update add --no-cache --virtual build-deps build-base postgresql-dev freetype-dev && \
     pipenv install --system --deploy && \
     apk del build-deps
 
