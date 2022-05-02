@@ -12,7 +12,7 @@ WORKDIR /code
 COPY Pipfile /code/Pipfile
 COPY Pipfile.lock /code/Pipfile.lock
 
-RUN apk --update add --no-cache --virtual build-deps build-base postgresql-dev freetype-dev && \
+RUN apk --update add --no-cache --virtual build-deps build-base postgresql-dev freetype-dev libxml2-dev libxslt-dev && \
     pipenv install --system --deploy && \
     apk del build-deps
 
