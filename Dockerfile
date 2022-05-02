@@ -7,12 +7,15 @@ RUN apk update && \
     pip install -U pipenv pip && \
     apk del build-deps
 
+# Add runtime deps
+RUN apk --update add --no-cache freetype-dev libxml2-dev libxslt-dev
+
 WORKDIR /code
 
 COPY Pipfile /code/Pipfile
 COPY Pipfile.lock /code/Pipfile.lock
 
-RUN apk --update add --no-cache --virtual build-deps build-base postgresql-dev freetype-dev libxml2-dev libxslt-dev && \
+RUN apk --update add --no-cache --virtual build-deps build-base postgresql-dev && \
     pipenv install --system --deploy && \
     apk del build-deps
 
