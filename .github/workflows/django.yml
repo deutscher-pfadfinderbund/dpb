@@ -17,7 +17,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          apt install freetype
+          sudo apt-get install freetype
           python -m pip install --upgrade pip
           pip install pipenv
           pipenv install
