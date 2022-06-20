@@ -6,4 +6,4 @@ class EmailForm(forms.Form):
     email = forms.EmailField(label="E-Mail")
     subject = forms.CharField(label="Betreff", max_length=255)
     message = forms.CharField(label="Deine Nachricht", widget=forms.Textarea)
-    honeypot = forms.CharField(widget = forms.HiddenInput(), required = False)
+    honeypot = forms.CharField(widget=forms.HiddenInput(), required=False)

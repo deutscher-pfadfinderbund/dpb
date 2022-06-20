@@ -16,7 +16,7 @@ def contact(request):
 
             if cd["honeypot"]:
                 return HttpResponseRedirect('/kontakt')
-                
+
             author = str(cd["name"])
             subject = str("[DPB Homepage] " + cd['subject'])
             message = """\
