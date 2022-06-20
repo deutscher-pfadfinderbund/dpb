@@ -95,7 +95,7 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_SSL = True
 EMAIL_PORT = 465
-EMAIL_TIMEOUT = 10 # seconds
+EMAIL_TIMEOUT = 10  # seconds
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
