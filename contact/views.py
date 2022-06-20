@@ -13,7 +13,11 @@ def contact(request):
         form = EmailForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            author = str(cd["firstname"] + " " + cd["lastname"])
+
+            if cd["honeypot"]:
+                return HttpResponseRedirect('/kontakt')
+                
+            author = str(cd["name"])
             subject = str("[DPB Homepage] " + cd['subject'])
             message = """\
 Kontaktanfrage über www.deutscher-pfadfinderbund.de
