@@ -14,7 +14,7 @@ def contact(request):
         if form.is_valid():
             cd = form.cleaned_data
 
-            if cd["honeypot"]:
+            if not cd["captcha_answer"] == 8:
                 return HttpResponseRedirect('/kontakt')
 
             author = str(cd["name"])
