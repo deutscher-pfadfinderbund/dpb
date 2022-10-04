@@ -1,19 +1,7 @@
 from django.contrib import admin
 
 from dpb.admin import PageDownAdmin
-from .models import Date, House, State
-
-
-@admin.register(Date)
-class DateAdmin(admin.ModelAdmin):
-    list_display = ("title", "location", "start", "end")
-    list_filter = ["start"]
-    search_fields = ["title"]
-    readonly_fields = ["latitude", "longitude", "display_name"]
-    fieldsets = [
-        (None, {"fields": ["title", "start", "end", "attachment", "location", "host", "description"]}),
-        ("Erweitert", {"fields": ["created", "latitude", "longitude", "display_name"], "classes": ["collapse"]}),
-    ]
+from .models import House, State
 
 
 @admin.register(House)

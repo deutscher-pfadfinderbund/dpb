@@ -3,7 +3,6 @@
 import requests
 from autoslug import AutoSlugField
 from django.db import models
-from django.urls import reverse
 
 
 class State(models.Model):
@@ -17,44 +16,6 @@ class State(models.Model):
     class Meta:
         verbose_name = "Bundesland"
         verbose_name_plural = "Bundesländer"
-
-
-class Date(models.Model):
-    """ Important dates """
-    title = models.CharField("Titel", max_length=128, blank=False)
-    start = models.DateField("Beginn", null=True, blank=True)
-    end = models.DateField("Ende", null=True, blank=True)
-    location = models.CharField("Ort", max_length=128, blank=True)
-    latitude = models.FloatField("Breitengrad", max_length=128, blank=True, null=True)
-    longitude = models.FloatField("Längengrad", max_length=128, blank=True, null=True)
-    display_name = models.CharField("Berechneter Standort", max_length=512, blank=True, null=True)
-    description = models.TextField("Beschreibung", blank=True)
-    host = models.CharField("Ausrichter", max_length=128, blank=True)
-    attachment = models.FileField(upload_to="termine/", verbose_name="Anhang", null=True, blank=True)
-    created = models.DateTimeField("Erstellt am", auto_now_add=True)
-
-    def clean(self):
-        try:
-            data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(self.location) +
-                                "&format=json&polygon=1&addressdetails=1").json()[0]
-            self.latitude = data["lat"]
-            self.longitude = data["lon"]
-            self.display_name = data["display_name"]
-        except Exception:
-            self.latitude = None
-            self.longitude = None
-            self.display_name = None
-
-    def __str__(self):
-        return self.title
-
-    @staticmethod
-    def get_absolute_url():
-        return reverse('intern:dates')
-
-    class Meta:
-        verbose_name = "Termin"
-        verbose_name_plural = "Termine"
 
 
 class House(models.Model):

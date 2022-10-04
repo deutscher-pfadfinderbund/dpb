@@ -1,15 +1,10 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
-
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import render
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, UpdateView
 from filer.models import File, Folder
 
 from .forms import HouseForm
-from .models import Date, House
+from .models import House
 
 
 def work_group(request):
@@ -21,37 +16,6 @@ def documents(request):
     files = File.objects.all().order_by("-modified_at")
     folders = Folder.objects.all()
     return render(request, 'intern/documents.html', {'files': files, 'folders': folders})
-
-
-@login_required
-def dates(request):
-    dates = Date.objects.filter(end__gte=datetime.now()).order_by("start")
-    return render(request, 'intern/dates.html', {'dates': dates})
-
-
-@login_required
-def date_detail(request, id):
-    date = Date.objects.get(id=id)
-    return render(request, 'intern/date_detail.html', {'date': date})
-
-
-class DateCreate(PermissionRequiredMixin, CreateView):
-    model = Date
-    fields = ["title", "start", "end", "location", "host", "attachment", "description"]
-    permission_required = "intern.can_edit"
-
-
-class DateDelete(PermissionRequiredMixin, DeleteView):
-    model = Date
-    success_url = reverse_lazy('intern:dates')
-    permission_required = "intern.can_edit"
-
-
-class DateUpdate(PermissionRequiredMixin, UpdateView):
-    model = Date
-    fields = ["title", "start", "end", "location", "host", "attachment", "description"]
-    template_name_suffix = "_form"
-    permission_required = "intern.can_edit"
 
 
 @login_required
