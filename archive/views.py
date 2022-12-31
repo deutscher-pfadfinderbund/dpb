@@ -61,7 +61,7 @@ def _vector_based_search(queryset: QuerySet, vector: Union[str, Tuple[str, ...]]
         search_vector = SearchVector(*vector)
     else:
         search_vector = SearchVector(vector)
-    return queryset.annotate(search=SearchVector(search_vector)).filter(search=SearchQuery(query))
+    return queryset.annotate(search=search_vector).filter(search=SearchQuery(query, search_type='websearch'))
 
 
 def _search_extended(items: QuerySet, title: str, author: str, keyword: str, mediatype="alle", doctype="alle") -> \
