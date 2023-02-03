@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bbf7e50c8fa02a0130c6841cdf4d1f691fce9943f9273cbe55c2ab2aee28240f"
+            "sha256": "4cbd62bbb3278f27ac4335c0cd526884a4feb82fa70cd0cb52e5edfcc5429156"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -66,11 +66,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:18ba8efa36b69cfcd4b670d0fa187c6fe7506596f0ababe580e16909bcdec121",
-                "sha256:3adc285124244724a394fa9b9839cc8cd116faf7d159554c43ecdaa8cdf0b94d"
+                "sha256:59c39fc342b242fb42b6b040ad8b1b4c15df438706c1d970d416d63cdd73e7fd",
+                "sha256:644288341f06ebe4938eec6801b6bd59a6534a78e4aedde2a153075d11143894"
             ],
             "index": "pypi",
-            "version": "==3.2.16"
+            "version": "==3.2.17"
         },
         "django-appconf": {
             "hashes": [
@@ -294,11 +294,11 @@
         },
         "packaging": {
             "hashes": [
-                "sha256:2198ec20bd4c017b8f9717e00f0c8714076fc2fd93816750ab48e2c41de2cfd3",
-                "sha256:957e2148ba0e1a3b282772e791ef1d8083648bc131c8ab0c1feba110ce1146c3"
+                "sha256:714ac14496c3e68c99c29b00845f7a2b85f3bb6f1078fd9f72fd20f0570002b2",
+                "sha256:b6ad297f8907de0fa2fe1ccbd26fdaf387f5f47c7275fedf8cce89f99446cf97"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==22.0"
+            "version": "==23.0"
         },
         "pillow": {
             "hashes": [
@@ -501,11 +501,11 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:57f6f22bde4e042978bcd50176fdb381d7c21a9efa4041202288d3737a0c6a54",
-                "sha256:a7620757bf984b58deaf32fc8a4577a9bbc0850cf92c20e1ce41c38c19e5fb75"
+                "sha256:a7687c12b444eaac951ea87a9627c4f904ac757e7abdc5aac32833234af90378",
+                "sha256:e261cdf010c11a41cb5cb5f1bf3338a7433832029f559a6a7614bd42a967c300"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==65.6.3"
+            "version": "==67.1.0"
         },
         "six": {
             "hashes": [
@@ -525,10 +525,10 @@
         },
         "svglib": {
             "hashes": [
-                "sha256:48c24706c23bb4262173b6fa49eabb10afa15b8412f14283120549517ccfa314"
+                "sha256:3ae765d3a9409ee60c0fb4d24c2deb6a80617aa927054f5bcd7fc98f0695e587"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==1.4.1"
+            "version": "==1.5.1"
         },
         "tinycss2": {
             "hashes": [
