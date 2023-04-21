@@ -28,7 +28,7 @@ pytz = "^2021.3"
 reportlab = "^3.6.8"
 requests = "^2.27.1"
 six = "^1.16.0"
-sqlparse = "^0.4.2"
+sqlparse = "^0.4.4"
 urllib3 = "^1.26.8"
 
 [tool.poetry.dev-dependencies]
