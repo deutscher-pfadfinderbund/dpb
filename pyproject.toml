@@ -5,7 +5,7 @@ description = ""
 authors = ["Christian Meter <cmeter@googlemail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.11"
 certifi = "^2023.7.22"
 chardet = "^4.0.0"
 django-appconf = "^1.0.5"
