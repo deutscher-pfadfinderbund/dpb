@@ -1,4 +1,4 @@
-FROM python:3.10-alpine
+FROM python:3.11-alpine
 
 # jpeg-dev and zlib-dev are needed by Pillow
 RUN apk update && \
