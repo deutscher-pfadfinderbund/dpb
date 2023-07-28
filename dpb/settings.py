@@ -48,7 +48,6 @@ INSTALLED_APPS = (
     'pages',
     'archive',
     'contact',
-    'feedback',
     'intern',
     'blog',
     'links',
