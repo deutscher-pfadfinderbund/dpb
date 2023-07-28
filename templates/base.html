@@ -128,7 +128,6 @@
         <li class="nav-item"><a class="nav-link" href="{% url 'links:index' %}">Links</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        {#            <li><a href="{% url 'feedback:index' %}"><button type="button" class="btn btn-primary">Feedback geben</button></a></li>#}
         {% if user.is_authenticated %}
           <li class="dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

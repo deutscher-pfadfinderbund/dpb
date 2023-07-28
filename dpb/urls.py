@@ -16,7 +16,6 @@ urlpatterns = [url(r'^$', views.index, name='index'),
                url(r'^pfadfinder/$', views.PfadfinderView.as_view(), name='pfadfinder'),
 
                # Apps
-               url(r'^feedback/', include('feedback.urls')),
                url(r'^bundesarchiv/', include('archive.urls')),
                url(r'^kontakt/', include('contact.urls')),
                url(r'^links/', include('links.urls')),
