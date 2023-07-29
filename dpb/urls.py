@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.conf.urls import include, url
+from django.http.response import HttpResponsePermanentRedirect
 from django.conf.urls.static import static
 from django.contrib import admin, sitemaps
 from django.contrib.sitemaps.views import sitemap
@@ -38,7 +39,7 @@ urlpatterns = [url(r'^$', views.index, name='index'),
                url(r'^intern/bundesgilde/$', pageviews.page, {'url': '/intern/bundesgilde/'}, name='bundesgilde'),
 
                url(r'^heimabende/', include('evening_program.urls')),
-               url(r'^karten/', include('maps.urls')),
+               url(r'^karten/', view=lambda _: HttpResponsePermanentRedirect('https://karte.deutscher-pfadfinderbund.de')),
 
                url(r'^admin/', admin.site.urls),
                url(r'^tinymce/', include('tinymce.urls')),
