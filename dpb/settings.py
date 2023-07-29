@@ -52,7 +52,6 @@ INSTALLED_APPS = (
     'blog',
     'links',
     'evening_program',
-    'maps',
     'adressverzeichnis',
     'permalink',
     'vorfreude'
