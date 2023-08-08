@@ -1,40 +1,33 @@
 {% load static %}
 
-<section id="dpb-carousel" class="carousel lazy slide" data-ride="carousel" aria-roledescription="carousel" aria-label="Bilder mit Pfadfinder Thema">
+<header id="dpb-carousel" class="carousel lazy slide border-bottom mb-2" data-ride="carousel" aria-label="Bilder mit Pfadfinder Thema">
 
   <div class="carousel-inner">
-    <div class="carousel-item active" aria-roledescription="slide">
-      <img class="d-block w-100"
-           src="{% static 'img/carousel/grossfahrt_001_280px.jpg' %}"
-           alt="Blick auf ein Berge und ein Tal. Pfadfinder wandern mit Rucksack.">
-    </div>
-    <div class="carousel-item" aria-roledescription="slide">
-      <img class="d-block w-100"
-           src="{% static 'img/carousel/grossfahrt_002_280px.jpg' %}"
-           alt="Blick in ein Tal. Jemand sitzt im Gras.">
-    </div>
-    <div class="carousel-item" aria-roledescription="slide">
-      <img class="d-block w-100"
-           src="{% static 'img/carousel/bundeslager2015_280px.jpg' %}"
-           alt="Blick auf das Bundeslager 2015">
-    </div>
-    <div class="carousel-item" aria-roledescription="slide">
-      <img class="d-block w-100"
-           src="{% static 'img/carousel/bundeslager2015_feuer_280px.jpg' %}"
-           alt="Bundeslagerfeuer 2015 in der Nacht.">
-    </div>
-    <div class="carousel-item" aria-roledescription="slide">
-      <img class="d-block w-100"
-           src="{% static 'img/carousel/irland2012_280px.jpg' %}"
-           alt="Wandernde Pfadfinder entlang einer Straße in Irland 2012.">
-    </div>
+    <img class="carousel-item active" aria-hidden="false"
+         src="{% static 'img/carousel/grossfahrt_001_280px.jpg' %}"
+         alt="Berge und ein Tal. Pfadfinderinnen und Pfadfinder wandern mit Rucksäcken.">
+    <img class="carousel-item" aria-hidden="false"
+         src="{% static 'img/carousel/grossfahrt_002_280px.jpg' %}"
+         alt="Ein Tal. Ein Pfadfinder sitzt auf der Seite im Gras.">
+    <img class="carousel-item" aria-hidden="false"
+         src="{% static 'img/carousel/bundeslager2015_280px.jpg' %}"
+         title="Bundeslager 2015"
+         alt="Eine große Ansammlung von Schwarzzelten. Blick auf das Bundeslager 2015">
+    <img class="carousel-item" aria-hidden="false"
+         src="{% static 'img/carousel/bundeslager2015_feuer_280px.jpg' %}"
+         title="Bundeslagerfeuer 2015"
+         alt="Ein großes Feuer in der Nacht. Viele Pfadfinderinnen und Pfadfinder stehen um es herum.">
+    <img class="carousel-item" aria-hidden="false"
+         src="{% static 'img/carousel/irland2012_280px.jpg' %}"
+         title="Irland 2012"
+         alt="Wandernde Pfadfinderinnen und Pfadfinder entlang einer Straße in Irland 2012.">
   </div>
-  <ol class="carousel-indicators">
-    <li data-target="#dpb-carousel" data-slide-to="0" class="active" role="button" aria-label="Springe zu Bild 1"></li>
-    <li data-target="#dpb-carousel" data-slide-to="1" role="button" aria-label="Springe zu Bild 2"></li>
-    <li data-target="#dpb-carousel" data-slide-to="2" role="button" aria-label="Springe zu Bild 3"></li>
-    <li data-target="#dpb-carousel" data-slide-to="3" role="button" aria-label="Springe zu Bild 4"></li>
-    <li data-target="#dpb-carousel" data-slide-to="4" role="button" aria-label="Springe zu Bild 5"></li>
+  <ol class="carousel-indicators m-0" aria-hidden="true">
+    <li data-target="#dpb-carousel" data-slide-to="0" class="active" aria-label="Springe zu Bild 1"></li>
+    <li data-target="#dpb-carousel" data-slide-to="1" aria-label="Springe zu Bild 2"></li>
+    <li data-target="#dpb-carousel" data-slide-to="2" aria-label="Springe zu Bild 3"></li>
+    <li data-target="#dpb-carousel" data-slide-to="3" aria-label="Springe zu Bild 4"></li>
+    <li data-target="#dpb-carousel" data-slide-to="4" aria-label="Springe zu Bild 5"></li>
   </ol>
   {% comment %}
   <a class="carousel-control-prev" href="#dpb-carousel" role="button" data-slide="prev">
@@ -46,4 +39,4 @@
     <span class="sr-only">Next</span>
   </a>
   {% endcomment %}
-</section>
+</header>

@@ -149,19 +149,11 @@
   </div>
 </nav>
 
-<div id="main">
-  <div class="container-xl" id="owl-container">
-    {% block carousel %}{% endblock %}
-  </div>
-
-  <div class="container-xl">
-    {% block heading %}{% endblock %}
-  </div>
-
-  <div class="container-xl" role="main">
-    {% block content %}{% endblock %}
-  </div>
-</div>
+<main id="main" class="container-xl">
+  {% block preamble %}{% endblock %}
+  {% block heading %}{% endblock %}
+  {% block content %}{% endblock %}
+</main>
 
 <div class="footer-wrapper">
   <footer class="stripe">
