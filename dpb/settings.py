@@ -186,7 +186,11 @@ MARKDOWNIFY = {
             'h6',
             'br',
             'div',
-            'span'
+            'span',
+            'section',
+            'article',
+            'details',
+            'summary'
         ],
         "MARKDOWN_EXTENSIONS": [
             'markdown.extensions.fenced_code',
