@@ -3,10 +3,11 @@
 {% load thumbnail %}
 {% load markdownify %}
 
-{% block meta 
+{% block meta %}
   {% if page.archived %}
     <meta name="robots" content="noindex">  
   {% endif %}
+{% endblock %}
 
 {% block heading %}
   <h1>{{ page.title }}</h1>
