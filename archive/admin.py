@@ -6,7 +6,7 @@ from django.db.models.functions import Coalesce, Substr, NullIf, StrIndex, Lengt
 from django.http import HttpRequest
 
 from dpb.admin import PageDownAdmin
-from .models import Feedback, Item, Year
+from .models import Feedback, Item, Year, DocType
 
 
 class AlphanumericSignatureFilter(admin.SimpleListFilter):
@@ -84,7 +84,7 @@ class ItemAdmin(PageDownAdmin):
         ('Allgemein', {'fields': ['signature', 'title', 'author',
                                   ('date', 'year'),
                                   'place',
-                                  ('medartanalog', 'doctype'),
+                                  ('medartanalog', 'document_type'),
                                   'file', 'file2', 'file3',
                                   'keywords', 'location',
                                   'source', 'notes', 'collection', 'amount',
@@ -124,7 +124,18 @@ class FeedbackAdmin(PageDownAdmin):
 
     to_archive.short_description = "Markierte Einträge als bearbeitet markieren"
 
+class ItemInline(admin.TabularInline):
+    model = Item
+    fields = ['title']
+    readonly_fields = ['signature']
+    show_change_link = True
+    extra = 0  # Number of empty forms to display
+
+class DocumentTypeAdmin(admin.ModelAdmin):
+    inlines = [ItemInline]
+
 
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Year, YearAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
+admin.site.register(DocType, DocumentTypeAdmin)

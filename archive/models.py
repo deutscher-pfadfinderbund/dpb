@@ -18,6 +18,18 @@ class Year(models.Model):
         ordering = ['year', ]
 
 
+class DocType(models.Model):
+    name = models.CharField(max_length=100, blank=False, null=False)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Dokument Typ"
+        verbose_name_plural = "Dokument Typen"
+
+
 class Item(models.Model):
     searchable_fields = ("signature", "author", "title", "date", "year", "place", "doctype", "medartanalog",
                          "keywords", "location", "source", "notes", "collection", "amount", "crossreference",
@@ -77,7 +89,8 @@ class Item(models.Model):
     year = models.IntegerField('Jahr', null=True, blank=True)
     place = models.CharField('Ort / Veröffentlichung', max_length=256, blank=True)
     medartanalog = models.CharField('Medienart *', max_length=256, choices=medartanalog_choices, blank=False)
-    doctype = models.CharField('Dokumenttyp', max_length=256, choices=doctype_choices, blank=True)
+    doctype = models.CharField('Dokumenttyp', max_length=256, choices=doctype_choices, blank=True, null=True)
+    document_type = models.ForeignKey(DocType, on_delete=models.SET_NULL, null=True)
 
     file = FilerFileField(null=True, blank=True, related_name="item_file", verbose_name='Datei',
                           on_delete=models.CASCADE)
