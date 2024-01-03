@@ -1,38 +1,46 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.masonry.api"
+
 [tool.poetry]
 name = "dpb"
-version = "0.1.0"
+version = "3.0.0"
 description = ""
-authors = ["Christian Meter <cmeter@googlemail.com>"]
+authors = ["DBP <bbi@deutscher-pfadfinderbund.de>"]
+
+[tool.poetry.scripts]
+server = "gunicorn -b 0.0.0.0:8000 dpb.wsgi"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 certifi = "^2023.7.22"
-chardet = "^4.0.0"
+chardet = "^5.1.0"
+django = "^3"
 django-appconf = "^1.0.5"
 django-autoslug = "^1.9.9"
-django-contact-form = "^1.9"
-django-filer = "^2.1.2"
+django-contact-form = "^2.1"
+django-filer = "^3.0.3"
 django-forms-bootstrap = "^3.1.0"
-django-js-asset = "^2.0.0"
-django-markdownify = "^0.9.0"
-django-mptt = "^0.13.4"
+django-js-asset = "^2.1.0"
+django-markdownify = "^0.9.1"
+django-mptt = "^0.14.0"
 django-pagedown = "^2.2.1"
-django-pipeline = "^2.0.8"
-django-tinymce = "^3.4.0"
-easy-thumbnails = "^2.8.1"
-gunicorn = "^20.1.0"
-idna = "^3.3"
-markdown2 = "^2.4.2"
+django-pipeline = "^2.1.0"
+django-tinymce = "^3.6.1"
+easy-thumbnails = "^2.8.5"
+idna = "^3.4"
+markdown2 = "^2.4.10"
 psycopg2-binary = "^2.9.6"
-pytz = "^2021.3"
-reportlab = "^3.6.8"
+pytz = "^2023.3"
+reportlab = "^4.0.4"
 requests = "^2.31.0"
 six = "^1.16.0"
 sqlparse = "^0.4.4"
-urllib3 = "^1.26.8"
+urllib3 = "^2.1.0"
+setuptools = "^69.0.3"
+
+[tool.poetry.group.runtime.dependencies]
+gunicorn = "^21.2.0"
 
 [tool.poetry.dev-dependencies]
 
-[build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
