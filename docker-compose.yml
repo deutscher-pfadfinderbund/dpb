@@ -5,8 +5,8 @@ services:
     image: ghcr.io/deutscher-pfadfinderbund/dpb:latest
     restart: unless-stopped
     volumes:
-      - ./static/:/code/static
-      - ./media/:/code/media
+      - static:/app/static
+      - ./media/:/app/media
     env_file:
       - production.env
     labels:
@@ -41,7 +41,7 @@ services:
     volumes:
       - ./proxy/conf/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./proxy/conf/domain.conf:/etc/nginx/domain.conf:ro
-      - ./static/:/usr/share/nginx/html/static/:ro
+      - static:/usr/share/nginx/html/static/:ro
       - ./media/:/usr/share/nginx/html/media/:ro
     depends_on:
       - web

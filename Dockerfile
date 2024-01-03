@@ -1,25 +1,45 @@
-FROM python:3.11-alpine
+FROM python:3.12 as builder
 
 # jpeg-dev and zlib-dev are needed by Pillow
-RUN apk update && \
-    apk add --no-cache --virtual build-deps python3-dev && \
-    apk add --no-cache postgresql-libs jpeg-dev zlib-dev && \
-    pip install -U pipenv pip && \
-    apk del build-deps
+RUN pip install -U poetry==1.7.1
 
-# Add runtime deps
-RUN apk --update add --no-cache freetype-dev libxml2-dev libxslt-dev
+ENV POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_IN_PROJECT=1 \
+    POETRY_VIRTUALENVS_CREATE=1 \
+    POETRY_CACHE_DIR=/tmp/poetry_cache
 
-WORKDIR /code
+WORKDIR /app
 
-COPY Pipfile /code/Pipfile
-COPY Pipfile.lock /code/Pipfile.lock
+COPY pyproject.toml poetry.lock ./
 
-RUN apk --update add --no-cache --virtual build-deps build-base postgresql-dev && \
-    pipenv install --system --deploy && \
-    apk del build-deps
+RUN poetry install --without dev --no-directory --compile && rm -rf $POETRY_CACHE_DIR
 
-COPY . /code
+
+FROM node:alpine as npm-deps
+COPY package.json package-lock.json ./
+RUN npm install -g sass && npm install
+COPY styles/ ./
+RUN sass -I . --style=compressed --no-source-map style.sass:style.css
+
+
+FROM python:3.12-slim as runtime
+WORKDIR /app
+
+ENV VIRTUAL_ENV=/app/.venv \
+    PATH="/app/.venv/bin:$PATH"
+
+COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+COPY --from=npm-deps style.css styles/
+COPY --from=npm-deps node_modules node_modules/
+
+COPY . ./
+
+RUN python manage.py collectstatic --noinput && rm -rf node_modules/
+# RUN pip install gunicorn && . $VIRTUAL_ENV/bin/activate
+
+# Install Runtime
+#RUN pip install  -U poetry==1.7.1 &&  \
+#    poetry install --no-interaction --only runtime -vv
 
 EXPOSE 8000
 
