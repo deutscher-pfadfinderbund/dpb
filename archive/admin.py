@@ -68,7 +68,7 @@ def human_key(key):
     :param key:
     :return:
     """
-    parts = re.split('(\d*\.\d+|\d+)', key)
+    parts = re.split(r'(\d*\.\d+|\d+)', key)
     return tuple((e.swapcase() if i % 2 == 0 else float(e))
                  for i, e in enumerate(parts))
 
