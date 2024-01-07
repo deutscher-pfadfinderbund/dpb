@@ -1,6 +1,5 @@
 FROM python:3.12 as builder
 
-# jpeg-dev and zlib-dev are needed by Pillow
 RUN pip install -U poetry==1.7.1
 
 ENV POETRY_NO_INTERACTION=1 \
@@ -35,13 +34,7 @@ COPY --from=npm-deps node_modules node_modules/
 COPY . ./
 
 RUN python manage.py collectstatic --noinput && rm -rf node_modules/
-# RUN pip install gunicorn && . $VIRTUAL_ENV/bin/activate
-
-# Install Runtime
-#RUN pip install  -U poetry==1.7.1 &&  \
-#    poetry install --no-interaction --only runtime -vv
 
 EXPOSE 8000
 
-# Hierfür ist rambo verantwortlich.
 CMD "./run_server.sh"
