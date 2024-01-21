@@ -12,7 +12,7 @@ from archive.forms import FeedbackForm
 from blog.models import Post, Category
 from .models import Item, Feedback
 
-MINIMUM_LENGTH_OF_QUERY = 4
+MINIMUM_LENGTH_OF_QUERY = 2
 
 
 def _parse_form_field(request: HttpRequest, param: str) -> str:
