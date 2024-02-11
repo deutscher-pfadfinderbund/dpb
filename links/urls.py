@@ -1,9 +1,9 @@
-from django.conf.urls import url
+from django.urls import re_path
 
 from . import views
 
 app_name = 'links'
 
 urlpatterns = [
-    url(r'^$', views.links, name='index'),
+    re_path(r'^$', views.links, name='index'),
 ]
