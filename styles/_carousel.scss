@@ -1,12 +1,16 @@
 $indicator-size: 10px;
 
+#dpb-carousel img.carousel-item {
+  aspect-ratio: 1440 / 280;
+}
+
 .carousel-indicators {
   position: static;
+  list-style: none;
 
-  li {
+  [data-bs-target] {
     width: $indicator-size;
     height: $indicator-size;
     border-radius: 50%;
-    background-color: var(--dark);
   }
 }

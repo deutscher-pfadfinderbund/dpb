@@ -20,7 +20,7 @@
     Gedanken und eurer Vorfreude auf dieses große Lager!
   </p>
 
-  <a class="btn btn-primary mb-3" data-toggle="collapse" href="#collapse-form" role="button" aria-expanded="false"
+  <a class="btn btn-primary mb-3" data-bs-toggle="collapse" href="#collapse-form" role="button" aria-expanded="false"
      aria-controls="collapse-form">
     Eigenen Beitrag verfassen
   </a>
@@ -39,7 +39,7 @@
       <div class="card shadow my-3">
         <div class="card-body">
           {% if post.foto %}
-            <img class="img-fluid pull-right img-thumbnail ml-3 mb-3" style="max-width: 300px" src="{{ post.foto.url }}"
+            <img class="img-fluid pull-right img-thumbnail ms-3 mb-3" style="max-width: 300px" src="{{ post.foto.url }}"
                  alt="Foto von {{ post.fahrtenname }}">
           {% endif %}
           <p class="handwritten h4">

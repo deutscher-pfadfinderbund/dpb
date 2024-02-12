@@ -22,7 +22,7 @@
       <h3>{{ folder }}
         <small>
           <a href="{{ folder.get_admin_directory_listing_url_path }}"
-             data-toggle="tooltip" data-placement="top" title="Datei zum Ordner hinzufügen">
+             data-bs-toggle="tooltip" data-placement="top" title="Datei zum Ordner hinzufügen">
             <i class="text-right fa fa-paperclip"></i>
           </a>
         </small>
@@ -51,15 +51,15 @@
               <td>
                 {% if file.description %}
                   {{ file.description|truncatewords_html:10 }}
-                  <a data-toggle="tooltip" data-placement="top" title="{{ file.description }}">mehr</a>
+                  <a data-bs-toggle="tooltip" data-placement="top" title="{{ file.description }}">mehr</a>
                 {% endif %}
               </td>
 
               {% if user.is_staff %}
                 <td>
-                  <a href="{{ file.get_admin_url_path }}" data-toggle="tooltip" data-placement="top"
+                  <a href="{{ file.get_admin_url_path }}" data-bs-toggle="tooltip" data-placement="top"
                      title="Datei bearbeiten"><i class="fa fa-pencil-square-o fa-lg"></i></a>
-                  <a href="{{ file.get_admin_url_path }}delete" data-toggle="tooltip" data-placement="top"
+                  <a href="{{ file.get_admin_url_path }}delete" data-bs-toggle="tooltip" data-placement="top"
                      title="Datei löschen"><i class="fa fa-remove fa-lg"></i></a>
                 </td>
               {% endif %}

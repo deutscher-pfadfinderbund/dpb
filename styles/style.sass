@@ -1,30 +1,14 @@
-@use "node_modules/bootstrap/scss/bootstrap" as b with ($dark: #333333, $enable-responsive-font-sizes: true)
-@use "archive"
-@use "navbar"
-@use "carousel"
-
-
-$grey: #333333
-$background-color: #f6f6f6
+$bs-dark: #333333
+$body-bg: #f6f6f6
+$body-color: $bs-dark
 $footer-height: 146px
+$btn-link-color: #0051a8
 
-//@font-face
-//  font-family: 'Open Sans'
-//  src: url('fonts/open_sans/OpenSans-Regular.ttf')
+@import "node_modules/bootstrap/scss/bootstrap"
 
-body
-  color: $grey
-  background-color: $background-color
-//  font-family: 'Open Sans', sans-serif
-
-p
-  padding-bottom: 0.5em
-
-.btn-link
-  color: #0051a8
-
-h4 a
-  color: $grey
+@import "archive"
+@import "navbar"
+@import "carousel"
 
 .handwritten
   font-family: cursive
@@ -37,13 +21,6 @@ h4 a
 .img-float-left
   float: left
 
-// Paddings
-.padding-bottom
-  padding-bottom: 1em
-
-.padding-bottom-2
-  padding-bottom: 2em
-
 // Header
 header
   h1
@@ -53,20 +30,7 @@ header
 #header-wrapper
   padding: 1em 0
 
-// Images
-.ak-images
-  float: right
-  max-width: 250px
-  margin: 0 0 1em 5em
-
-
 // Container
-.container
-  padding-bottom: 1em
-
-.row
-  padding-bottom: 1em
-
 .stripe
   background-color: white
   border-color: #eeeeee
@@ -77,9 +41,6 @@ header
 // Footer
 .stripe .container
   padding-top: 1em
-
-.footer-wrapper
-  box-shadow: 0 1px 2px #aaa
 
 footer .row
   padding-bottom: 0

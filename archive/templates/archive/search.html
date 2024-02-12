@@ -45,7 +45,7 @@
 
   {% if errors %}
     <div class="alert alert-warning alert-dismissible" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+      <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"><span
           aria-hidden="true">&times;</span></button>
       Deine Eingabe ist leider zu kurz. Du musst mindestens {{ min_length_of_query }} Zeichen angeben.
     </div>
@@ -117,7 +117,7 @@
     </div>
   </form>
   <div>
-    <button class="btn btn-xs btn-outline-dark" data-toggle="collapse" data-target="#extended-search"
+    <button class="btn btn-xs btn-outline-dark" data-bs-toggle="collapse" data-bs-target="#extended-search"
             aria-expanded="false"
             aria-controls="extended-search">Erweiterte Suche
     </button>
