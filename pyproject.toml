@@ -27,7 +27,7 @@ django-tinymce = "^3.6.1"
 markdown2 = "^2.4.10"
 psycopg2-binary = "^2.9.6"
 requests = "^2.31.0"
-setuptools = "^69.0.3" # setuptools is needed by filer during collectstatic
+setuptools = "^69.1.0" # setuptools is needed by filer during collectstatic
 
 [tool.poetry.group.runtime.dependencies]
 gunicorn = "^21.2.0"
