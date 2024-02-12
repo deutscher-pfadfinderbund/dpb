@@ -7,7 +7,7 @@ import datetime
 import django.db.models.deletion
 import filer.fields.file
 from django.db import migrations, models
-from django.utils.timezone import utc
+from datetime import timezone
 
 
 class Migration(migrations.Migration):
@@ -80,7 +80,7 @@ class Migration(migrations.Migration):
                                                   related_name='item_file', to='filer.File', verbose_name='Datei')),
                 ('modified', models.DateTimeField(auto_now=True,
                                                   default=datetime.datetime(2016, 8, 14, 19, 17, 55, 636364,
-                                                                            tzinfo=utc),
+                                                                            tzinfo=timezone.utc),
                                                   verbose_name='Zuletzt geändert')),
             ],
         ),
