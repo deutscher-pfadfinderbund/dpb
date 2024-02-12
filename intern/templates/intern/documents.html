@@ -40,7 +40,7 @@
         </thead>
         <tbody>
         {% for file in files %}
-          {% ifequal file.folder folder %}
+          {% if file.folder == folder %}
             <tr>
               <td align="center">
                 {{ file.extension|fa_attachment|safe }}
@@ -66,7 +66,7 @@
 
               <td>{{ file.size|sizify }}</td>
             </tr>
-          {% endifequal %}
+          {% endif %}
         {% endfor %}
 
         </tbody>
