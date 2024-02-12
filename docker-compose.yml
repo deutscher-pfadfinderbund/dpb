@@ -4,50 +4,51 @@ services:
   web:
     image: ghcr.io/deutscher-pfadfinderbund/dpb:latest
     restart: unless-stopped
+    depends_on:
+      - db
     volumes:
-      - static:/app/static
+      - web_static:/app/static
       - ./media/:/app/media
     env_file:
       - production.env
-    labels:
-      - "traefik.enable=false"
-    networks:
-      - dpb
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      start_period: 30s
+      start_interval: 1s
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   db:
-    image: postgres:11-alpine
+    image: postgres:13-alpine
     restart: unless-stopped
     volumes:
-      - ./db/entrypoint:/docker-entrypoint-initdb.d
-      - ./db/data:/var/lib/postgresql/data
+      - ./db/data_13:/var/lib/postgresql/data
     env_file:
       - production.env
-    labels:
-      - "traefik.enable=false"
-    networks:
-      - dpb
 
   proxy:
     image: nginx:1-alpine
     restart: unless-stopped
+    depends_on:
+      - web
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.dpb-main.rule=Host(`deutscher-pfadfinderbund.de`) || Host(`www.deutscher-pfadfinderbund.de`)"
       - "traefik.http.routers.dpb-main.middlewares=redirect-www-to-non-www@file"
       - "traefik.http.routers.dpb-main.entrypoints=websecure"
     networks:
+      - default
       - web
-      - dpb
     volumes:
       - ./proxy/conf/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./proxy/conf/domain.conf:/etc/nginx/domain.conf:ro
-      - static:/usr/share/nginx/html/static/:ro
+      - web_static:/usr/share/nginx/html/static/:ro
       - ./media/:/usr/share/nginx/html/media/:ro
-    depends_on:
-      - web
 
 networks:
   web:
     external: true
-  dpb:
-    driver: bridge
+
+volumes:
+  web_static:
