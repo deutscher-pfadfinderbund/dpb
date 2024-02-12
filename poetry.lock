@@ -175,19 +175,19 @@ test = ["flake8", "isort", "pytest"]
 
 [[package]]
 name = "django"
-version = "3.2.24"
-description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
+version = "4.2.10"
+description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.8"
 files = [
-    {file = "Django-3.2.24-py3-none-any.whl", hash = "sha256:5dd5b787c3ba39637610fe700f54bf158e33560ea0dba600c19921e7ff926ec5"},
-    {file = "Django-3.2.24.tar.gz", hash = "sha256:aaee9fb0fb4ebd4311520887ad2e33313d368846607f82a9a0ed461cd4c35b18"},
+    {file = "Django-4.2.10-py3-none-any.whl", hash = "sha256:a2d4c4d4ea0b6f0895acde632071aff6400bfc331228fc978b05452a0ff3e9f1"},
+    {file = "Django-4.2.10.tar.gz", hash = "sha256:b1260ed381b10a11753c73444408e19869f3241fc45c985cd55a30177c789d13"},
 ]
 
 [package.dependencies]
-asgiref = ">=3.3.2,<4"
-pytz = "*"
-sqlparse = ">=0.2.2"
+asgiref = ">=3.6.0,<4"
+sqlparse = ">=0.3.1"
+tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 
 [package.extras]
 argon2 = ["argon2-cffi (>=19.1.0)"]
@@ -318,17 +318,6 @@ files = [
 [package.dependencies]
 Django = ">=2.1"
 Pillow = "*"
-
-[[package]]
-name = "django-pipeline"
-version = "2.1.0"
-description = "Pipeline is an asset packaging library for Django."
-optional = false
-python-versions = "*"
-files = [
-    {file = "django-pipeline-2.1.0.tar.gz", hash = "sha256:36a6ce56fdf1d0811e4d51897f534acca35ebb35be699d9d0fd9970e634792a4"},
-    {file = "django_pipeline-2.1.0-py3-none-any.whl", hash = "sha256:e91627faee22c4c65eb7d134ef53a9d97253c99e4dd914af8ea9c8c58c01de93"},
-]
 
 [[package]]
 name = "django-polymorphic"
@@ -518,22 +507,6 @@ docs = ["mdx-gh-links (>=0.2)", "mkdocs (>=1.5)", "mkdocs-gen-files", "mkdocs-li
 testing = ["coverage", "pyyaml"]
 
 [[package]]
-name = "markdown2"
-version = "2.4.12"
-description = "A fast and complete Python implementation of Markdown"
-optional = false
-python-versions = ">=3.5, <4"
-files = [
-    {file = "markdown2-2.4.12-py2.py3-none-any.whl", hash = "sha256:98f47591006f0ace0644cbece03fed6f3845513286f6c6e9f8bcf6a575174e2c"},
-    {file = "markdown2-2.4.12.tar.gz", hash = "sha256:1bc8692696954d597778e0e25713c14ca56d87992070dedd95c17eddaf709204"},
-]
-
-[package.extras]
-all = ["pygments (>=2.7.3)", "wavedrom"]
-code-syntax-highlighting = ["pygments (>=2.7.3)"]
-wavedrom = ["wavedrom"]
-
-[[package]]
 name = "packaging"
 version = "23.2"
 description = "Core utilities for Python packages"
@@ -711,17 +684,6 @@ files = [
 ]
 
 [[package]]
-name = "pytz"
-version = "2024.1"
-description = "World timezone definitions, modern and historical"
-optional = false
-python-versions = "*"
-files = [
-    {file = "pytz-2024.1-py2.py3-none-any.whl", hash = "sha256:328171f4e3623139da4983451950b28e95ac706e13f3f2630a879749e7a8b319"},
-    {file = "pytz-2024.1.tar.gz", hash = "sha256:2a29735ea9c18baf14b448846bde5a48030ed267578472d8955cd0e7443a9812"},
-]
-
-[[package]]
 name = "reportlab"
 version = "4.1.0"
 description = "The Reportlab Toolkit"
@@ -764,18 +726,18 @@ use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "setuptools"
-version = "69.0.3"
+version = "69.1.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "setuptools-69.0.3-py3-none-any.whl", hash = "sha256:385eb4edd9c9d5c17540511303e39a147ce2fc04bc55289c322b9e5904fe2c05"},
-    {file = "setuptools-69.0.3.tar.gz", hash = "sha256:be1af57fc409f93647f2e8e4573a142ed38724b8cdd389706a867bb4efcf1e78"},
+    {file = "setuptools-69.1.0-py3-none-any.whl", hash = "sha256:c054629b81b946d63a9c6e732bc8b2513a7c3ea645f11d0139a2191d735c60c6"},
+    {file = "setuptools-69.1.0.tar.gz", hash = "sha256:850894c4195f09c4ed30dba56213bf7c3f21d86ed6bdaafb5df5972593bfc401"},
 ]
 
 [package.extras]
 docs = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "pygments-github-lexers (==0.0.5)", "rst.linker (>=1.9)", "sphinx (<7.2.5)", "sphinx (>=3.5)", "sphinx-favicon", "sphinx-inline-tabs", "sphinx-lint", "sphinx-notfound-page (>=1,<2)", "sphinx-reredirects", "sphinxcontrib-towncrier"]
-testing = ["build[virtualenv]", "filelock (>=3.4.0)", "flake8-2020", "ini2toml[lite] (>=0.9)", "jaraco.develop (>=7.21)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "pip (>=19.1)", "pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=2.2)", "pytest-mypy (>=0.9.1)", "pytest-perf", "pytest-ruff", "pytest-timeout", "pytest-xdist", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel"]
+testing = ["build[virtualenv]", "filelock (>=3.4.0)", "flake8-2020", "ini2toml[lite] (>=0.9)", "jaraco.develop (>=7.21)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "pip (>=19.1)", "pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=2.2)", "pytest-home (>=0.5)", "pytest-mypy (>=0.9.1)", "pytest-perf", "pytest-ruff (>=0.2.1)", "pytest-timeout", "pytest-xdist", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel"]
 testing-integration = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "packaging (>=23.1)", "pytest", "pytest-enabler", "pytest-xdist", "tomli", "virtualenv (>=13.0.0)", "wheel"]
 
 [[package]]
@@ -840,6 +802,17 @@ doc = ["sphinx", "sphinx_rtd_theme"]
 test = ["flake8", "isort", "pytest"]
 
 [[package]]
+name = "tzdata"
+version = "2024.1"
+description = "Provider of IANA time zone data"
+optional = false
+python-versions = ">=2"
+files = [
+    {file = "tzdata-2024.1-py2.py3-none-any.whl", hash = "sha256:9068bc196136463f5245e51efda838afa15aaeca9903f49050dfa2679db4d252"},
+    {file = "tzdata-2024.1.tar.gz", hash = "sha256:2674120f8d891909751c38abcdfd386ac0a5a1127954fbc332af6b5ceae07efd"},
+]
+
+[[package]]
 name = "urllib3"
 version = "2.2.0"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
@@ -870,4 +843,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "d5ff5f5bafabf57e575d91bffd3ba9ec856006a645ea6b5c8b366c6b85d7bcff"
+content-hash = "13ecf710848dee5e0268c80de350d9a9c248384eb6156eb1cddcea37dbfa2cf5"
