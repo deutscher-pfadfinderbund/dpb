@@ -321,13 +321,13 @@ Pillow = "*"
 
 [[package]]
 name = "django-pipeline"
-version = "2.1.0"
+version = "3.0.0"
 description = "Pipeline is an asset packaging library for Django."
 optional = false
 python-versions = "*"
 files = [
-    {file = "django-pipeline-2.1.0.tar.gz", hash = "sha256:36a6ce56fdf1d0811e4d51897f534acca35ebb35be699d9d0fd9970e634792a4"},
-    {file = "django_pipeline-2.1.0-py3-none-any.whl", hash = "sha256:e91627faee22c4c65eb7d134ef53a9d97253c99e4dd914af8ea9c8c58c01de93"},
+    {file = "django-pipeline-3.0.0.tar.gz", hash = "sha256:49a8bee298668100bb6e8a2144dff8c607baa5297820a2503793c38693f34103"},
+    {file = "django_pipeline-3.0.0-py3-none-any.whl", hash = "sha256:e9e08b084ef3ebf599795510519a8d44f2240b487782bebf4a8fcaf6302c31d1"},
 ]
 
 [[package]]
@@ -870,4 +870,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "d5ff5f5bafabf57e575d91bffd3ba9ec856006a645ea6b5c8b366c6b85d7bcff"
+content-hash = "d464b8e8124cb3324189c1178dcf62afb003371442ba61d83c68bca9ff5e6646"
