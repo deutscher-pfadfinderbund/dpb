@@ -13,7 +13,7 @@ server = "gunicorn -b 0.0.0.0:8000 dpb.wsgi"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-django = "^4"
+django = "^5"
 django-appconf = "^1.0.5"
 django-autoslug = "^1.9.9"
 django-contact-form = "^2.1"
