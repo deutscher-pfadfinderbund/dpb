@@ -22,6 +22,8 @@ ALLOWED_HOSTS = ['*']
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = ['https://deutscher-pfadfinderbund.de']
 
+SESSION_COOKIE_SECURE = True
+
 SITE_ID = 1
 LOGIN_URL = '/login/'
 LOGOUT_REDIRECT_URL = 'index'
