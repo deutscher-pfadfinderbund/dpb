@@ -19,6 +19,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 #                  '127.0.0.1']
 ALLOWED_HOSTS = ['*']
 
+CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = ['https://deutscher-pfadfinderbund.de']
+
 SITE_ID = 1
 LOGIN_URL = '/login/'
 LOGOUT_REDIRECT_URL = 'index'
