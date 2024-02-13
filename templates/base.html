@@ -128,7 +128,11 @@
                 <li role="separator" class="dropdown-divider"></li>
               {% endif %}
               <li class="dropdown-item">Eingeloggt als {{ user }}</li>
-              <li><a class="dropdown-item" href="{% url 'logout' %}">Ausloggen</a></li>
+              <li>
+                <form  class="dropdown-item" method="post" action="{% url 'admin:logout' %}">
+                  {% csrf_token %}
+                  <button class="btn btn-text" type="submit">Ausloggen</button>
+                </form>
             </ul>
           </li>
         {% else %}
