@@ -90,7 +90,7 @@ class Item(models.Model):
     place = models.CharField('Ort / Veröffentlichung', max_length=256, blank=True)
     medartanalog = models.CharField('Medienart *', max_length=256, choices=medartanalog_choices, blank=False)
     doctype = models.CharField('Dokumenttyp', max_length=256, choices=doctype_choices, blank=True, null=True)
-    document_type = models.ForeignKey(DocType, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=DocType.Meta.verbose_name)
+    document_type = models.ForeignKey(DocType, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=DocType._meta.verbose_name)
 
     file = FilerFileField(null=True, blank=True, related_name="item_file", verbose_name='Datei',
                           on_delete=models.CASCADE)
