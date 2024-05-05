@@ -35,7 +35,45 @@
 <nav class="navbar navbar-expand-lg bg-dark mb-3" data-bs-theme="dark">
   <div class="container-xl container-fluid">
     <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}" title="Zurück zur Startseite" aria-label="Zurück zur Startseite">
-      <img height="50" class="me-3" src="{% static 'img/lilie100.png' %}" alt="" aria-hidden="true">
+      <svg height="50px" role="img" aria-hidden="true" class="me-3" width="100%" viewBox="0 0 450 637" xmlns="http://www.w3.org/2000/svg" fill="white" color="rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))" stroke="currentColor" aria-labelledby="title">
+      <title id="title">Lilie des Deutschen Pfadfinderbund</title>
+      <style>
+          :root{color-scheme: only dark;}
+          .outline {stroke: white;}
+          .shaded {
+              stroke-width: 5;
+              fill: currentColor;
+          }
+          [href="#shading"] {mask: url(#outline);} 
+          [mask="url(#mask)"] {stroke-width: 16;}
+          mask {stroke: #000; fill: #FFF}
+      </style> 
+  
+      <mask id="mask">
+          <use href="#center"></use>
+          <use href="#outer"></use>
+      </mask>
+      <mask id="outline" stroke-width="15">
+          <use href="#outer"></use>
+      </mask>
+  
+      <use class="outline" href="#outer" mask="url(#mask)"></use>
+      <use class="outline" href="#outer" mask="url(#mask)" transform="scale(-1,1)" transform-origin="50%"></use>
+  
+      <use class="outline" href="#center" mask="url(#mask)"></use>
+      <use class="outline shaded" href="#center" transform="scale(-1,1)" transform-origin="50%" mask="url(#mask)"></use>
+  
+      <use class="shaded" href="#shading"></use>
+      <use class="shaded" href="#shading" transform="scale(-1,1)" transform-origin="50%"></use>
+  
+      <rect class="outline" fill="currentColor" x="131" y="393" width="188" height="32" stroke-width="10"></rect>
+  
+      <defs>
+          <path id="outer" d="M107.3 166.4a170 266 0 0152 377l-27.5-38.9C156.3 441 159.3 343 118.3 344.3s-1 100-19.4 113.7L0 318.2Z"></path>
+          <path id="center" d="M225 0 121.6 146.2A127 265 0 01173 562.9l52 73.5"></path>
+          <path id="shading" d="M 131.8 504.5 C 156.3 441 159.3 343 118.3 344.3 S 117.3 444.3 98.9 458 C 82 384 54 362 53 335 S 63 279 99 279 S 211 338 146 525 Z"></path>
+      </defs>
+</svg>
       DPB
     </a>
 
