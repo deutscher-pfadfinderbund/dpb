@@ -290,13 +290,13 @@ tests = ["coverage"]
 
 [[package]]
 name = "django-markdownify"
-version = "0.9.4"
+version = "0.9.5"
 description = "Markdown template filter for Django."
 optional = false
 python-versions = "*"
 files = [
-    {file = "django_markdownify-0.9.4-py3-none-any.whl", hash = "sha256:952b1f67d0aa1258986e4962c65ec37104dd99f2fdc7225bee80cdc386243bb7"},
-    {file = "django_markdownify-0.9.4.tar.gz", hash = "sha256:c3b7edcd720ab6cc45666d9df01c80a72d164076911604ffc7a48752199bc0d3"},
+    {file = "django_markdownify-0.9.5-py3-none-any.whl", hash = "sha256:2c4ae44e386c209453caf5e9ea1b74f64535985d338ad2d5ad5e7089cc94be86"},
+    {file = "django_markdownify-0.9.5.tar.gz", hash = "sha256:34c34eba4a797282a5c5bd97b13cec84d6a4c0673ad47ce1c1d000d74dd8d4ab"},
 ]
 
 [package.dependencies]
@@ -830,4 +830,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "af37ba96d863c60db44b71604603d47abfe9857b92ff35b3a049e64e9d924d21"
+content-hash = "343dae426a204d6a14ea9f0bb71df0de5d1d47d6ace7df80be900da2920017b6"
