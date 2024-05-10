@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'markdownify',
 
     # Own apps
+    'dpb',
     'pages',
     'archive',
     'contact',
@@ -120,8 +121,6 @@ STATICFILES_FINDERS = (
 )
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'templates/dpb'),
-    os.path.join(BASE_DIR, 'contact/templates/contact'),
     ("mapbox", os.path.join(BASE_DIR, 'node_modules/mapbox.js/dist')),
     ("leaflet-fullscreen", os.path.join(BASE_DIR, 'node_modules/leaflet-fullscreen/dist')),
     ("bootstrap", os.path.join(BASE_DIR, 'node_modules/bootstrap/dist/js')),

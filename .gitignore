@@ -2,7 +2,7 @@
 /*.iml
 *.bak
 .sass-cache/
-static/
+/static/
 db.sqlite3
 media/
 *.css
