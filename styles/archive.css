@@ -1,0 +1,7 @@
+.archive-items {
+  cursor: pointer;
+}
+
+.archive-items:hover {
+  text-decoration: underline;
+}
