@@ -3,10 +3,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.masonry.api"
 
 [tool.poetry]
-name = "dpb"
-version = "3.0.0"
-description = ""
-authors = ["DBP <bbi@deutscher-pfadfinderbund.de>"]
+package-mode = false
 
 [tool.poetry.scripts]
 server = "gunicorn -b 0.0.0.0:8000 dpb.wsgi"
