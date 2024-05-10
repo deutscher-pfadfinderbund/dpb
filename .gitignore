@@ -5,8 +5,8 @@
 /static/
 db.sqlite3
 media/
-*.css
-*.css.map
+style.css
+style.css.map
 __pycache__/
 .#*
 production.env
