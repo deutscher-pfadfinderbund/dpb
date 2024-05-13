@@ -167,7 +167,7 @@
               {% endif %}
               <li class="dropdown-item">Eingeloggt als {{ user }}</li>
               <li>
-                <form  class="dropdown-item" method="post" action="{% url 'admin:logout' %}">
+                <form  class="dropdown-item" method="post" action="{% url 'logout' %}">
                   {% csrf_token %}
                   <button class="btn btn-text" type="submit">Ausloggen</button>
                 </form>
