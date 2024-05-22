@@ -20,7 +20,7 @@ django-js-asset = "^2.1.0"
 django-markdownify = "^0.9.5"
 django-pagedown = "^2.2.1"
 psycopg2-binary = "^2.9.6"
-requests = "^2.31.0"
+requests = "^2.32.2"
 setuptools = "^69.5.1" # setuptools is needed by filer during collectstatic
 
 [tool.poetry.group.runtime.dependencies]
