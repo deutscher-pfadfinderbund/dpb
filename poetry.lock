@@ -224,22 +224,22 @@ translitcodec = ["translitcodec (>=0.3)"]
 
 [[package]]
 name = "django-contact-form"
-version = "2.1"
-description = "A generic contact-form application for Django"
+version = "5.0.1"
+description = "A generic contact-form application for Django."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django-contact-form-2.1.tar.gz", hash = "sha256:7202488b6f1ba331a1dc9ae052ddd2129760e00ccf5ebb2dd95a42974a6fdb75"},
-    {file = "django_contact_form-2.1-py3-none-any.whl", hash = "sha256:2b68c5d42c64f4ed14379c39f694e1a2be3f691be49be9e621cf6f2cb4d12c88"},
+    {file = "django_contact_form-5.0.1-py3-none-any.whl", hash = "sha256:f7b5c01404f08badc28a7b31aed5df11539b2a5c00a7a6596c0b9faf3743808d"},
+    {file = "django_contact_form-5.0.1.tar.gz", hash = "sha256:45e3dada08c1a56e63a4ab75fe616ca9c528a69a840f946da23dd3cd9a80dc39"},
 ]
 
 [package.dependencies]
-Django = ">=3.2,<4.0.dev0 || >=4.1.dev0"
+Django = ">=4.2"
 
 [package.extras]
-akismet = ["akismet"]
+akismet = ["akismet (>=24.5.0)"]
 docs = ["furo", "sphinx", "sphinx-copybutton", "sphinx-inline-tabs", "sphinx-notfound-page", "sphinxcontrib-django", "sphinxext-opengraph"]
-tests = ["akismet", "coverage", "tomli"]
+tests = ["coverage", "tomli"]
 
 [[package]]
 name = "django-filer"
@@ -829,4 +829,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "09d92ad2bb4edef3948fd3c9032d639b6df2c51ab72ea1c60f33d84b79ce28b1"
+content-hash = "c781d31c204f63cb531905861a919714dc9bf97b9887c33404b5de229521d2e2"
