@@ -1,14 +1,20 @@
 from django.conf import settings
-from django.http.response import HttpResponsePermanentRedirect
 from django.conf.urls.static import static
-from django.contrib import admin, sitemaps
+from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
-from django.urls import path, reverse, re_path, include
+from django.http.response import HttpResponsePermanentRedirect
+from django.urls import path, re_path, include
 
 from blog import views as blogviews
 from pages import views as pageviews
 from pages.sitemaps import PageSitemap
 from . import views
+from .sitemaps import StaticViewSitemap
+
+sitemaps = {
+    'static': StaticViewSitemap,
+    'pages': PageSitemap
+}
 
 urlpatterns = [re_path(r'^$', views.index, name='index'),
                re_path(r'^bundesordnung/$', views.BundesordnungView.as_view(), name='bundesordnung'),
@@ -55,22 +61,6 @@ urlpatterns += [
     re_path(r'^kontakt/$', pageviews.page, {'url': '/kontakt/'}, name='kontakt'),
 
     re_path(r'^(?P<url>.*/)$', pageviews.page, name='page'),
+
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
 ]
-
-
-class StaticViewSitemap(sitemaps.Sitemap):
-    changefreq = None
-
-    def items(self):
-        return ['dpb', 'bundesordnung', 'pfadfinder', 'impressum', 'datenschutz', 'arbeitskreis', 'kontakt']
-
-    def location(self, item):
-        return reverse(item)
-
-
-sitemaps = {
-    'static': StaticViewSitemap,
-    'pages': PageSitemap
-}
-
-urlpatterns.append(path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'))
