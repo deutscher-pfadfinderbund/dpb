@@ -4,6 +4,8 @@ from django.core.exceptions import ImproperlyConfigured
 
 
 class PageSitemap(Sitemap):
+    protocol = "https"
+
     def items(self):
         if not django_apps.is_installed('django.contrib.sites'):
             raise ImproperlyConfigured("PageSitemap requires django.contrib.sites, which isn't installed.")
