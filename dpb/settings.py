@@ -24,6 +24,9 @@ CSRF_TRUSTED_ORIGINS = ['https://deutscher-pfadfinderbund.de']
 
 SESSION_COOKIE_SECURE = True
 
+# NGINX <-> Django is using HTTP
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 SITE_ID = 1
 LOGIN_URL = '/login/'
 LOGOUT_REDIRECT_URL = 'index'
@@ -111,7 +114,7 @@ TIME_ZONE = 'Europe/Berlin'
 USE_I18N = True
 
 # Static files (CSS, JavaScript, Images)
-FILE_UPLOAD_PERMISSIONS = 0o777
+FILE_UPLOAD_PERMISSIONS = 0o644
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
