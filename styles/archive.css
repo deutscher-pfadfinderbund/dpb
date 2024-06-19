@@ -5,3 +5,8 @@
 .archive-items:hover {
   text-decoration: underline;
 }
+
+.bundesarchiv-ergebnisse a:visited {
+  color: green;
+}
+
