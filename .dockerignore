@@ -2,10 +2,13 @@
 .idea/
 .github/
 .flake8/
-__pychache__/
+**/__pychache__/
 .git/
 .gitignore
 db/
 proxy/
+/static/
+/media/
 
 node_modules
+docker-compose.*
