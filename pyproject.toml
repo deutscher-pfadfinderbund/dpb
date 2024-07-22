@@ -23,7 +23,7 @@ django-pagedown = "^2.2.1"
 requests = "^2.32.3"
 
 [tool.poetry.group.install.dependencies]
-setuptools = "^71.0.3" # setuptools is needed by filer during collectstatic
+setuptools = "^71.1.0" # setuptools is needed by filer during collectstatic
 
 [tool.poetry.group.runtime.dependencies]
 gunicorn = "^22.0.0"
