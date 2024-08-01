@@ -365,13 +365,13 @@ Django = ">=2.1"
 
 [[package]]
 name = "easy-thumbnails"
-version = "2.8.5"
+version = "2.9"
 description = "Easy thumbnails for Django"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "easy-thumbnails-2.8.5.tar.gz", hash = "sha256:7e4e912609fc9b60b3a1fef6557ec15ddf9c4f946267a92e6920dfd4dd765e35"},
-    {file = "easy_thumbnails-2.8.5-py3-none-any.whl", hash = "sha256:97f5a5278d8b6c1f5b1b7473f3737d29b18f5c1159cbdf0ab28674fdac2f8c87"},
+    {file = "easy_thumbnails-2.9-py3-none-any.whl", hash = "sha256:532ff633abc5e0d1631b9d0e8e73517c8fa99e37814397fd2ae54c46da244857"},
+    {file = "easy_thumbnails-2.9.tar.gz", hash = "sha256:7a7e83b48c2b6808d58ce101ddb9ea6eae2c5285e608cc337c2e110a7bb442b4"},
 ]
 
 [package.dependencies]
@@ -925,4 +925,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "181c54025d6035bfc29f97b8d70e5744490aeffe15d238407827cff84ba0ed37"
+content-hash = "facf135bebc5c46cf915eef455b0e722a822fd43d1863bd171f8cc6b9a6ad706"
