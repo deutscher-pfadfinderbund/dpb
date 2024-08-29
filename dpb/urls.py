@@ -26,7 +26,7 @@ urlpatterns = [re_path(r'^$', views.index, name='index'),
                re_path(r'^kontakt/', include('contact.urls')),
                re_path(r'^links/', include('links.urls')),
                re_path(r'^filer/', include('filer.urls')),
-               re_path(r'^l/', include('permalink.urls')),
+               re_path(r'^([sx]|[lL](?:ink)?)/', include('permalink.urls')), 
                re_path(r'^vorfreude/', include('vorfreude.urls')),
 
                # Members Area

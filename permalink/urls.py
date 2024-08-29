@@ -5,5 +5,5 @@ from . import views
 app_name = 'permalink'
 
 urlpatterns = [
-    re_path(r'^(?P<slug>[\w-]+)/$', views.redirectPermanent),
+    re_path(r'^<slug:slug>/$', views.redirectPermanent),
 ]
