@@ -1,9 +1,9 @@
-from django.urls import re_path
+from django.urls import path
 
 from . import views
 
 app_name = 'permalink'
 
 urlpatterns = [
-    re_path(r'^<slug:slug>/$', views.redirectPermanent),
+    path('<slug>/', views.redirectPermanent, name='redirectPermanent')
 ]
