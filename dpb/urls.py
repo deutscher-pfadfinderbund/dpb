@@ -61,7 +61,7 @@ urlpatterns += [
 
     path('kontakt/', pageviews.page, {'url': '/kontakt/'}, name='kontakt'),
 
-    path('<path:url>', pageviews.page, name='page'),
+    path('<path:url>/', pageviews.page, name='page'),
 
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
 ]
