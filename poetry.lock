@@ -273,13 +273,13 @@ translitcodec = ["translitcodec (>=0.3)"]
 
 [[package]]
 name = "django-filer"
-version = "3.2.0"
+version = "3.2.1"
 description = "A file management application for django that makes handling of files and images a breeze."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_filer-3.2.0-py3-none-any.whl", hash = "sha256:6c0da802e32b90c6d5e7fcb635a569d2c97cad7d7574de6bb8d02f5a99ca2e98"},
-    {file = "django_filer-3.2.0.tar.gz", hash = "sha256:cc74a84f19cc103963b8bb1242e0140fc8ff3d816ef473cddea62a2a3125168d"},
+    {file = "django_filer-3.2.1-py3-none-any.whl", hash = "sha256:6bea3567a36ea5233acbec5a5829b7ff51f76974de36a60f5594eaa0a0748d8a"},
+    {file = "django_filer-3.2.1.tar.gz", hash = "sha256:5100a60d13023e4d29dc060d087c929e06f83e3ce87ba01abcb8f1d6c1a90ca8"},
 ]
 
 [package.dependencies]
@@ -929,4 +929,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "7cb1e73a42d05adcac4d359da1dcee52b80e5d685c3e696fe22925d6e857cf8f"
+content-hash = "2a10e72668a55d343045169418f06767621d92f1294491cd0b459567fe8935cb"
