@@ -18,7 +18,7 @@ class Program(models.Model):
     file2 = models.FileField(upload_to="heimabende", verbose_name="2. Anhang", blank=True, null=True)
     file3 = models.FileField(upload_to="heimabende", verbose_name="3. Anhang", blank=True, null=True)
     slug = AutoSlugField(populate_from='title', unique=True)
-    created = models.DateTimeField("Erstellt am", default=datetime.now)
+    created = models.DateTimeField("Erstellt am", auto_now_add=True)
     modified = models.DateTimeField("Zuletzt geändert", auto_now=True)
 
     def __str__(self):
