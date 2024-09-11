@@ -7,8 +7,8 @@
   </p>
 {% else %}
   {# Load files for OSM #}
-  <script src="{% static 'mapbox/mapbox.js' %}"></script>
-  <link href="{% static 'mapbox/mapbox.css' %}" rel='stylesheet'/>
+  <script src="{% static 'leaflet/leaflet.js' %}"></script>
+  <link href="{% static 'leaflet/leaflet.css' %}" rel='stylesheet'/>
   <script src="{% static 'leaflet-fullscreen/Leaflet.fullscreen.min.js' %}"></script>
   <link href="{% static 'leaflet-fullscreen/Leaflet.fullscreen.css' %}" rel='stylesheet'/>
 
@@ -25,39 +25,27 @@
   </style>
 
   <script>
-      function mapbox(lat, lon, display_name) {
-          L.mapbox.accessToken = 'pk.eyJ1IjoibjJvIiwiYSI6ImNpZWd6c2NrMDAwMHBzd204NW41bmFsNHUifQ.XstEiEGH9bP2wasGOOVp4g';
-          L.mapbox.config.FORCE_HTTPS = true;
+      document.addEventListener("DOMContentLoaded", () => {
+          const lat = {{ latitude|stringformat:"f" }}
+          const lon = {{ longitude|stringformat:"f" }}
+          const display_name = "{{ display_name }}"
+          const openStreetMap = L.tileLayer("https://tile.openstreetmap.de/{z}/{x}/{y}.png", {
+              maxZoom: 19,
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          });
 
-          var map = L.map('map', {
+          const map = L.map('map', {
               center: [lat, lon],
               zoom: 16,
-              layers: [L.mapbox.tileLayer('mapbox.streets')],  // Set default map
+              layers: [openStreetMap],  // Set default map
               maxZoom: 19,
               minZoom: 0,
               fullscreenControl: true,
           });
 
-          // Add marker
           L.marker([lat, lon]).addTo(map);
 
-          // Group layers
-          var baseMaps = {
-              "Mapbox": L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'),
-              // "OSM": L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"),
-              "Zum Wandern und Fahrrad fahren": L.mapbox.styleLayer('mapbox://styles/mapbox/outdoors-v11'),
-              "Satellit mit Straßen": L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-streets-v11')
-
-          };
-
-          // Add group layers to map
-          L.control.layers(baseMaps).addTo(map);
-
-          $("#map_location").html("Berechneter Standort: " + display_name);
-      }
-
-      $(document).ready(function () {
-          mapbox({{ latitude|stringformat:"f" }}, {{ longitude|stringformat:"f" }}, "{{ display_name }}");
+          document.getElementById("map_location").innerHTML = "Berechneter Standort: " + display_name;
       })
   </script>
 

@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^5",
-    "leaflet-fullscreen": "^1.0.2",
-    "mapbox.js": "^3.3.1"
+    "leaflet": "^1.9.4",
+    "leaflet-fullscreen": "^1.0.2"
   }
 }

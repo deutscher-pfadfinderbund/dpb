@@ -124,7 +124,7 @@ STATICFILES_FINDERS = (
 )
 
 STATICFILES_DIRS = (
-    ("mapbox", os.path.join(BASE_DIR, 'node_modules/mapbox.js/dist')),
+    ("leaflet", os.path.join(BASE_DIR, 'node_modules/leaflet/dist')),
     ("leaflet-fullscreen", os.path.join(BASE_DIR, 'node_modules/leaflet-fullscreen/dist')),
     ("bootstrap", os.path.join(BASE_DIR, 'node_modules/bootstrap/dist/js')),
     ("styles", os.path.join(BASE_DIR, 'styles')),
