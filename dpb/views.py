@@ -8,9 +8,11 @@ from blog.models import Post
 
 
 def index(request):
+    now = timezone.now()
+    one_year_ago = now - datetime.timedelta(days=365)
     news = Post.objects.filter(
-        created__lte=timezone.now(),
-        created__gt=timezone.now() - datetime.timedelta(days=365)).order_by('-created')[:3]
+        created__range=(one_year_ago, now)
+    ).order_by('-created')[:3]
     return render(request, 'index.html', {'news': news})
 
 
