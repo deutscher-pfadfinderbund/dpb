@@ -224,17 +224,17 @@ colorama = {version = ">=0.4.6", markers = "sys_platform == \"win32\""}
 
 [[package]]
 name = "django"
-version = "5.0.9"
+version = "5.1.1"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "Django-5.0.9-py3-none-any.whl", hash = "sha256:f219576ba53be4e83f485130a7283f0efde06a9f2e3a7c3c5180327549f078fa"},
-    {file = "Django-5.0.9.tar.gz", hash = "sha256:6333870d342329b60174da3a60dbd302e533f3b0bb0971516750e974a99b5a39"},
+    {file = "Django-5.1.1-py3-none-any.whl", hash = "sha256:71603f27dac22a6533fb38d83072eea9ddb4017fead6f67f2562a40402d61c3f"},
+    {file = "Django-5.1.1.tar.gz", hash = "sha256:021ffb7fdab3d2d388bc8c7c2434eb9c1f6f4d09e6119010bbb1694dda286bc2"},
 ]
 
 [package.dependencies]
-asgiref = ">=3.7.0,<4"
+asgiref = ">=3.8.1,<4"
 sqlparse = ">=0.3.1"
 tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 
@@ -273,17 +273,17 @@ translitcodec = ["translitcodec (>=0.3)"]
 
 [[package]]
 name = "django-filer"
-version = "3.2.1"
+version = "3.2.2"
 description = "A file management application for django that makes handling of files and images a breeze."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_filer-3.2.1-py3-none-any.whl", hash = "sha256:6bea3567a36ea5233acbec5a5829b7ff51f76974de36a60f5594eaa0a0748d8a"},
-    {file = "django_filer-3.2.1.tar.gz", hash = "sha256:5100a60d13023e4d29dc060d087c929e06f83e3ce87ba01abcb8f1d6c1a90ca8"},
+    {file = "django_filer-3.2.2-py3-none-any.whl", hash = "sha256:37838a3620688ff48d01518a56af9906ab1ff552bba290031b45b357d2a4fcb4"},
+    {file = "django_filer-3.2.2.tar.gz", hash = "sha256:e896aef3ec93b91ff49aa6c27400702eb0aeb3204ae6a98ae3adce28cc784695"},
 ]
 
 [package.dependencies]
-django = ">=3.2,<5.1"
+django = ">=3.2"
 django-polymorphic = "*"
 easy-thumbnails = {version = "*", extras = ["svg"]}
 
