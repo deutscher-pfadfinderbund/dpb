@@ -154,6 +154,7 @@ TEMPLATES = [{
 FILER_CANONICAL_URL = 'filer/'
 
 # Configure Easy Thumbnails
+THUMBNAIL_DEFAULT_STORAGE_ALIAS = "default"
 THUMBNAIL_ALIASES = {
     '': {
         'pages': {'size': (350, 350), 'crop': "scale", 'quality': 100},
