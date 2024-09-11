@@ -12,13 +12,10 @@ server = "gunicorn -b 0.0.0.0:8000 dpb.wsgi"
 [tool.poetry.dependencies]
 python = "^3.12"
 django = "^5"
-django-appconf = "^1.0.5"
 django-autoslug = "^1.9.9"
-# django-contact-form = "^5.0"
 django-filer = "^3.2.1"
 easy-thumbnails = "^2.9" # Used by the archive app
 django-forms-bootstrap = "^3.1.0"
-django-js-asset = "^2.1.0"
 django-markdownify = "^0.9.5"
 django-pagedown = "^2.2.1"
 requests = "^2.32.3"
@@ -34,3 +31,10 @@ psycopg2-binary = "^2.9.6"
 deptry = "^0.20.0"
 
 [tool.poetry.dev-dependencies]
+
+[tool.deptry.per_rule_ignores]
+DEP002 = [
+    # Used in templates
+    "django-markdownify",
+    "django-forms-bootstrap"
+]

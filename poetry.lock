@@ -244,20 +244,6 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
-name = "django-appconf"
-version = "1.0.6"
-description = "A helper class for handling configuration defaults of packaged apps gracefully."
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "django-appconf-1.0.6.tar.gz", hash = "sha256:cfe87ea827c4ee04b9a70fab90b86d704cb02f2981f89da8423cb0fabf88efbf"},
-    {file = "django_appconf-1.0.6-py3-none-any.whl", hash = "sha256:c3ae442fba1ff7ec830412c5184b17169a7a1e71cf0864a4c3f93cf4c98a1993"},
-]
-
-[package.dependencies]
-django = "*"
-
-[[package]]
 name = "django-autoslug"
 version = "1.9.9"
 description = "An automated slug field for Django."
@@ -301,23 +287,6 @@ files = [
     {file = "django-forms-bootstrap-3.1.0.tar.gz", hash = "sha256:ffc6d2b9fba03e2366884e82f613daf1284702e9346746e0e9de299db8138d6f"},
     {file = "django_forms_bootstrap-3.1.0-py2.py3-none-any.whl", hash = "sha256:50d69baf6c6f262f6ae3651096b52c31552cb75d37493f0c917ce2c16d13f0d9"},
 ]
-
-[[package]]
-name = "django-js-asset"
-version = "2.2.0"
-description = "script tag with additional attributes for django.forms.Media"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "django_js_asset-2.2.0-py3-none-any.whl", hash = "sha256:7ef3e858e13d06f10799b56eea62b1e76706f42cf4e709be4e13356bc0ae30d8"},
-    {file = "django_js_asset-2.2.0.tar.gz", hash = "sha256:0c57a82cae2317e83951d956110ce847f58ff0cdc24e314dbc18b35033917e94"},
-]
-
-[package.dependencies]
-django = ">=3.2"
-
-[package.extras]
-tests = ["coverage"]
 
 [[package]]
 name = "django-markdownify"
@@ -937,4 +906,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "ce9853a963fd6d8ca99ad6c5b9f2276b9a2f04782770e15256536698f744b59f"
+content-hash = "b0c91ae4c2b863313a8a8a94e28d9da4e4f403300646d993479d55db286ff24e"
