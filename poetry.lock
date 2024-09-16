@@ -335,17 +335,17 @@ Django = ">=2.1"
 
 [[package]]
 name = "easy-thumbnails"
-version = "2.9"
+version = "2.10"
 description = "Easy thumbnails for Django"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.9"
 files = [
-    {file = "easy_thumbnails-2.9-py3-none-any.whl", hash = "sha256:532ff633abc5e0d1631b9d0e8e73517c8fa99e37814397fd2ae54c46da244857"},
-    {file = "easy_thumbnails-2.9.tar.gz", hash = "sha256:7a7e83b48c2b6808d58ce101ddb9ea6eae2c5285e608cc337c2e110a7bb442b4"},
+    {file = "easy_thumbnails-2.10-py3-none-any.whl", hash = "sha256:9e446fb9da1ca0cbc99bdd1fe8fdd5c38784323d64393a37e16d13cd736980b2"},
+    {file = "easy_thumbnails-2.10.tar.gz", hash = "sha256:d009462fcd791edf2496e5ed46d044712e1a06b7d4600e4cf2812002e9904ef5"},
 ]
 
 [package.dependencies]
-django = ">=2.2"
+django = ">=4.2"
 pillow = "*"
 reportlab = {version = "*", optional = true, markers = "extra == \"svg\""}
 svglib = {version = "*", optional = true, markers = "extra == \"svg\""}
@@ -906,4 +906,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "97c8dfea0c92b10629c788430525bd4cfce108efe1c7f9c4f00dd81aaec98f95"
+content-hash = "e189bba8b4b19e7fb303c1f04baec6c68bef38e5a4a113237f9d6d462bdfa8bd"
