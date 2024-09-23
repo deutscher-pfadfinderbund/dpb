@@ -13,7 +13,7 @@ server = "gunicorn -b 0.0.0.0:8000 dpb.wsgi"
 python = "^3.12"
 django = "^5"
 django-autoslug = "^1.9.9"
-django-filer = "^3.2.1"
+django-filer = "^3.2.3"
 easy-thumbnails = "^2.10" # Used by the archive app
 django-forms-bootstrap = "^3.1.0"
 django-markdownify = "^0.9.5"
@@ -21,7 +21,7 @@ django-pagedown = "^2.2.1"
 requests = "^2.32.3"
 
 [tool.poetry.group.install.dependencies]
-setuptools = "^75.0.0" # setuptools is needed by filer during collectstatic
+setuptools = "^75.1.0" # setuptools is needed by filer during collectstatic
 
 [tool.poetry.group.runtime.dependencies]
 gunicorn = "^23.0.0"

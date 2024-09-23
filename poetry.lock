@@ -260,13 +260,13 @@ translitcodec = ["translitcodec (>=0.3)"]
 
 [[package]]
 name = "django-filer"
-version = "3.2.2"
+version = "3.2.3"
 description = "A file management application for django that makes handling of files and images a breeze."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_filer-3.2.2-py3-none-any.whl", hash = "sha256:37838a3620688ff48d01518a56af9906ab1ff552bba290031b45b357d2a4fcb4"},
-    {file = "django_filer-3.2.2.tar.gz", hash = "sha256:e896aef3ec93b91ff49aa6c27400702eb0aeb3204ae6a98ae3adce28cc784695"},
+    {file = "django_filer-3.2.3-py3-none-any.whl", hash = "sha256:b0501899d2097a5c5e0c263a697071ca64e32b9cbe9172ad41e4d681b5e67377"},
+    {file = "django_filer-3.2.3.tar.gz", hash = "sha256:a7c173484416e5d71f80838b5105213acf119184267e4e17f47ed3f197e3ba1d"},
 ]
 
 [package.dependencies]
@@ -786,13 +786,13 @@ use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "setuptools"
-version = "75.0.0"
+version = "75.1.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "setuptools-75.0.0-py3-none-any.whl", hash = "sha256:791ae94f04f78c880b5e614e560dd32d4b4af5d151bd9e7483e3377846caf90a"},
-    {file = "setuptools-75.0.0.tar.gz", hash = "sha256:25af69c809d9334cd8e653d385277abeb5a102dca255954005a7092d282575ea"},
+    {file = "setuptools-75.1.0-py3-none-any.whl", hash = "sha256:35ab7fd3bcd95e6b7fd704e4a1539513edad446c097797f2985e0e4b960772f2"},
+    {file = "setuptools-75.1.0.tar.gz", hash = "sha256:d59a21b17a275fb872a9c3dae73963160ae079f1049ed956880cd7c09b120538"},
 ]
 
 [package.extras]
@@ -906,4 +906,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "e189bba8b4b19e7fb303c1f04baec6c68bef38e5a4a113237f9d6d462bdfa8bd"
+content-hash = "c7109bfb8f19917092a24d05877ac3a3708781eed1c4813b6b28ab3e10def288"
