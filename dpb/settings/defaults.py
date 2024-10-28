@@ -53,6 +53,8 @@ INSTALLED_APPS = (
     'markdownify',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.openid_connect',
 
     # Own apps
     'dpb',

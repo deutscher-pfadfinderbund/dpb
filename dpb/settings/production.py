@@ -51,11 +51,6 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-INSTALLED_APPS += [
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.openid_connect',
-]
-
 ### E-MAIL ###
 
 DEFAULT_FROM_EMAIL = os.environ["DEFAULT_FROM_EMAIL"]

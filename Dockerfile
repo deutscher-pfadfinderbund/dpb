@@ -33,7 +33,6 @@ COPY --from=npm-deps node_modules node_modules/
 
 COPY . ./
 
-ENV DJANGO_SETTINGS_MODULE=dpb.settings.production
 RUN python manage.py collectstatic --noinput && rm -rf node_modules/
 
 EXPOSE 8000
