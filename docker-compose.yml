@@ -1,31 +1,30 @@
-version: "3.7"
-
 services:
   web:
     image: ghcr.io/deutscher-pfadfinderbund/dpb:latest
     restart: unless-stopped
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
       - web_static:/app/static
       - ./media/:/app/media
     env_file:
       - production.env
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    volumes:
+      - ./db/data_16:/var/lib/postgresql/data
+    env_file:
+      - production.env
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready" ]
+      test: [ "CMD-SHELL", "pg_isready -d dpb -U dpb" ]
       start_period: 30s
       start_interval: 1s
       interval: 10s
       timeout: 5s
       retries: 3
-
-  db:
-    image: postgres:13-alpine
-    restart: unless-stopped
-    volumes:
-      - ./db/data_13:/var/lib/postgresql/data
-    env_file:
-      - production.env
 
   proxy:
     image: nginx:1-alpine
