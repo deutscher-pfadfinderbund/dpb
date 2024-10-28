@@ -50,6 +50,7 @@ urlpatterns = [path("", views.index, name='index'),
                     view=lambda _: HttpResponsePermanentRedirect('https://karte.deutscher-pfadfinderbund.de')),
 
                path('admin/', admin.site.urls),
+               path('accounts/', include('allauth.urls')),
                path('', include('django.contrib.auth.urls')),
                ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

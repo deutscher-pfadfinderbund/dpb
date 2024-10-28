@@ -51,6 +51,8 @@ INSTALLED_APPS = (
     'autoslug',
     'pagedown',
     'markdownify',
+    'allauth',
+    'allauth.account',
 
     # Own apps
     'dpb',
@@ -74,6 +76,7 @@ MIDDLEWARE = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 )
 
 MIDDLEWARE_CLASSES = MIDDLEWARE
