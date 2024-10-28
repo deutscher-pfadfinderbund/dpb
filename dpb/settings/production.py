@@ -52,6 +52,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 INSTALLED_APPS += [
+    'allauth.socialaccount',
     'allauth.socialaccount.providers.openid_connect',
 ]
 
