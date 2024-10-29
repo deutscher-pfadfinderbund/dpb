@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load bootstrap_tags %}
+{% load socialaccount %}
 
 {% block heading %}
   <h1>Login</h1>
@@ -28,6 +29,16 @@
       </form>
     </div>
   </div>
+
+  {% get_providers as socialaccount_providers %}
+  {% if socialaccount_providers %}
+    <h3>oder</h3>
+    <ul>
+      {% for provider in socialaccount_providers %}
+        <li><a href="{% provider_login_url provider.id next=next %}">{{ provider.name }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
   {% comment %}
   <p>
     <br>
