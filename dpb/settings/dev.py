@@ -15,3 +15,21 @@ DATABASES = {
         'PORT': os.getenv("DB_PORT", "5432"),
     }
 }
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    "openid_connect": {
+        "EMAIL_AUTHENTICATION": True,
+        "APPS": [
+            {
+                "provider_id": "keycloak",
+                "name": "DPB Login",
+                "client_id": "website",
+                "secret": "",
+                "settings": {
+                    "server_url": ""
+                },
+            }
+        ]
+    }
+}
