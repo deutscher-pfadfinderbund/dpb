@@ -35,7 +35,13 @@
     <h3>oder</h3>
     <ul>
       {% for provider in socialaccount_providers %}
-        <li><a href="{% provider_login_url provider.id next=next %}" class="btn btn-dark">{{ provider.name }}</a></li>
+        <li>
+          <!-- {{ provider.id }} -->
+          <form method="post" action="{% provider_login_url provider.id next=next %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-dark">{{ provider.name }}</button>
+          </form>
+        </li>
       {% endfor %}
     </ul>
   {% endif %}
