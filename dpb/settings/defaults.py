@@ -91,6 +91,8 @@ WSGI_APPLICATION = 'dpb.wsgi.application'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
+ACCOUNT_ADAPTER = 'dpb.account_adapter.NoNewUsersAccountAdapter'
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
