@@ -28,7 +28,8 @@ SESSION_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 SITE_ID = 1
-LOGIN_URL = '/login/'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
 
 # Application definition
