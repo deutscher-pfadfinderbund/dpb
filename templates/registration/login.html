@@ -3,21 +3,39 @@
 {% load bootstrap_tags %}
 {% load socialaccount %}
 
+{% block title %}Login{% endblock %}
 {% block heading %}
   <h1>Login</h1>
 {% endblock %}
 
 {% block content %}
-  {% if form.errors %}
-    <p>Der Benutzername und das Passwort passen nicht zusammen.</p>
-  {% endif %}
+  {% get_providers as social_providers %}
+  {% for provider in social_providers %}
+    {% if provider.id == "openid_connect" %}
+      <h2>mit <span class="visually-hidden">DPB Login</span></h2>
+      <form method="post" action="{% provider_login_url provider next=next %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-lg btn-dark">{{ provider.name }}</button>
+      </form>
+      <hr/>
+    {% else %} {# This shouldn't show anything, during normal use. #}
+      <a href="{% provider_login_url provider next=next %}" class="btn btn-outline-dark">{{ provider.name }}</a>
+    {% endif %}
+    oder
+  {% endfor %}
 
-  <p>
-    Nach jedem Bundesthing ändern wir das Passwort. Bitte erfragt bei der Kanzlerin oder dem Bundesbeauftragen für
-    Internet das aktuelle Passwort.
-  </p>
+  <h2>ohne DPB Login</h2>
 
   <div class="row">
+    <p>
+      Nach jedem Bundesthing ändern wir das Passwort. Bitte erfragt bei der Kanzlerin oder dem Bundesbeauftragen für
+      Internet das aktuelle Passwort.
+    </p>
+
+    {% if form.errors %}
+      <p>Der Benutzername und das Passwort passen nicht zusammen.</p>
+    {% endif %}
+
     <div class="col-md-6">
       <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
@@ -29,26 +47,4 @@
       </form>
     </div>
   </div>
-
-  {% get_providers as socialaccount_providers %}
-  {% if socialaccount_providers %}
-    <h3>oder</h3>
-    <ul>
-      {% for provider in socialaccount_providers %}
-        <li>
-          <!-- {{ provider.id }} -->
-          <form method="post" action="{% provider_login_url provider.id next=next %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-dark">{{ provider.name }}</button>
-          </form>
-        </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-  {% comment %}
-  <p>
-    <br>
-    <a href="{% url 'login:register' %}">Registrieren</a>
-  </p>
-  {% endcomment %}
 {% endblock %}
