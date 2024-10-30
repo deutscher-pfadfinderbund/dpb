@@ -47,7 +47,7 @@
   </p>
 
   {# Preview Row 1 #}
-  <div class="row" style="padding-bottom:0;">
+  <div class="row g-5">
     {# Der Deutsche Pfadfinderbund #}
     <section class="col-lg-6">
       <h2>Unsere Bundesordnung</h2>
@@ -59,7 +59,7 @@
           </a>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-8 vstack gap-3">
           {% get_pages '/bundesordnung/' as pages %}
           {% for page in pages %}
             <article>
@@ -83,7 +83,7 @@
           </a>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-8 vstack gap-3">
           {% get_pages '/pfadfinder/' as pages %}
           {% for page in pages %}
             <article>
@@ -107,7 +107,7 @@
           </a>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-8 vstack gap-3">
           {% get_pages '/dpb/' as pages %}
           {% for page in pages %}
             <article>
