@@ -14,8 +14,8 @@ def dispatch_file(file: File):
         return _prepare_image(file)
 
     return """
-        <div class='panel panel-default'>
-            <div class='panel-body'>
+        <div class='card mb-3'>
+            <div class='card-body'>
                 <p>{}</p>
                 <a class='btn btn-outline-dark' href='{}' target='_blank'>Datei öffnen</a>
             </div>

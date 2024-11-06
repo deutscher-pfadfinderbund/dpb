@@ -41,14 +41,14 @@
   <br>
   {% if posts %}
     {% for post in posts %}
-      <div class="panel panel-default">
-        <div class="panel-heading">
+      <div class="card mb-3">
+        <div class="card-header">
           <h3 class="panel-title">
             {{ post.title }}
             <small class="pull-right">Erstellt von {{ post.author }} am {{ post.created }}</small>
           </h3>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           {{ post.content|markdownify|safe }}
           {% if post.file %}
             <a href="{{ post.file.url }}">
