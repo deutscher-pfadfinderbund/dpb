@@ -1,6 +1,6 @@
-FROM python:3.12 as builder
+FROM python:3.13 as builder
 
-RUN pip install -U poetry==1.8.2
+RUN pip install -U poetry==1.8.3
 
 ENV POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=1 \
@@ -21,7 +21,7 @@ COPY styles/ ./
 RUN sass -I . --style=compressed --no-source-map style.sass:style.css
 
 
-FROM python:3.12-slim as runtime
+FROM python:3.13-slim as runtime
 WORKDIR /app
 
 ENV VIRTUAL_ENV=/app/.venv \
