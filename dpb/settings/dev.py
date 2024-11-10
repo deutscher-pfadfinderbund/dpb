@@ -7,7 +7,7 @@ SECRET_KEY = "CHANGE_ME"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv("POSTGRES_DB", "dpb"),
         'USER': os.getenv("POSTGRES_USER", "dpb"),
         'PASSWORD': os.getenv("POSTGRES_PASSWORD", "razupaltuff"),

@@ -13,6 +13,8 @@ production.env
 db/entrypoint/*.sql
 db/data/
 
+.venv
+
 /node_modules
 
 output.sql
