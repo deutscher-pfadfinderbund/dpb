@@ -10,7 +10,7 @@ name = "dpb"
 server = "gunicorn -b 0.0.0.0:8000 dpb.wsgi"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.13"
 django = "^5"
 django-autoslug = "^1.9.9"
 django-filer = "^3.2.3"
@@ -28,10 +28,11 @@ setuptools = "^75.3.0" # setuptools is needed by filer during collectstatic
 gunicorn = "^23.0.0"
 psycopg2-binary = "^2.9.10"
 
-[tool.poetry.group.dev.dependencies]
-deptry = "^0.20.0"
+[tool.poetry.group.dev]
+optional = true
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
+deptry = "^0.21.0"
 
 [tool.deptry.per_rule_ignores]
 DEP002 = [
