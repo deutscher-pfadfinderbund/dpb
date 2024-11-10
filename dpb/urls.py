@@ -26,7 +26,6 @@ urlpatterns = [path("", views.index, name='index'),
                path('kontakt/', include('contact.urls')),
                path('links/', include('links.urls')),
                path('filer/', include('filer.urls')),
-               path('l/', include('permalink.urls')),
                re_path(r'^(?:[sx]|[lL](?:ink)?)/', include('permalink.urls')),
                path('vorfreude/', include('vorfreude.urls')),
 
