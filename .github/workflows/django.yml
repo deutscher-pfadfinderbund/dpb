@@ -6,15 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install poetry
-        run: pipx install poetry
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
         with:
-          python-version: 3.13
-          cache: 'poetry'
-      - name: Install dependencies
-        run: poetry install
+          enable-cache: true
+      - name: Set up Python
+        run: uv python install
+      - name: Install the project
+        run: uv sync --all-extras --dev
       - name: Test
-        run: |
-          poetry run python manage.py test
+        run:  uv run python manage.py test

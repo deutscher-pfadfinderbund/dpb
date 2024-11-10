@@ -31,12 +31,15 @@ DB_PORT = os.getenv("DB_PORT", "5432")
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': DB_NAME,
         'USER': DB_USER,
         'PASSWORD': DB_PASS,
         'HOST': DB_HOST,
         'PORT': DB_PORT or "5432",
+        'OPTIONS': {
+            "pool": True,
+        },
     }
 }
 
