@@ -22,7 +22,7 @@ requests = "^2.32.3"
 django-allauth = {extras = ["socialaccount"], version = "^65.4.1"}
 
 [tool.poetry.group.install.dependencies]
-setuptools = "^75.8.0" # setuptools is needed by filer during collectstatic
+setuptools = "^75.8.2" # setuptools is needed by filer during collectstatic
 
 [tool.poetry.group.runtime.dependencies]
 gunicorn = "^23.0.0"
