@@ -20,7 +20,7 @@ jobs:
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
   test:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'push' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v4
       - name: Run tests
@@ -36,9 +36,10 @@ jobs:
   publish:
     # Ensure test job passes before pushing image.
     needs: test
+    environment: production
 
     runs-on: ubuntu-latest
-    if: github.event.workflow_run && github.event.workflow_run.head_branch == 'refs/heads/master'
+    if: ${{ github.event_name == 'push' || github.event.workflow_run.head_branch == 'master' }}
 
     steps:
       - uses: actions/checkout@v4
