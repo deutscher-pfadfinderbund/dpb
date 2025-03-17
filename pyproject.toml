@@ -19,7 +19,7 @@ django-forms-bootstrap = "^3.1.0"
 django-markdownify = "^0.9.5"
 django-pagedown = "^2.2.1"
 requests = "^2.32.3"
-django-allauth = {extras = ["socialaccount"], version = "^65.4.1"}
+django-allauth = {extras = ["socialaccount"], version = "^65.5.0"}
 
 [tool.poetry.group.install.dependencies]
 setuptools = "^76.0.0" # setuptools is needed by filer during collectstatic
