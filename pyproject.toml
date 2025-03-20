@@ -13,15 +13,13 @@ dependencies = [
     "django-pagedown>=2.2.1",
     "requests>=2.32.3",
     "django-allauth[socialaccount]>=65.1.0",
-    "psycopg[binary,pool]>=2.9.10",
+    "setuptools>=75.3.0",
+    "psycopg[binary,pool]>=3"
 ]
 
 [dependency-groups]
 runtime = [
     "gunicorn>=23.0.0"
-]
-dev = [
-    "setuptools>=75.3.0",
 ]
 
 [tool.deptry.per_rule_ignores]
