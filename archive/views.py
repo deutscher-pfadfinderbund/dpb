@@ -79,7 +79,7 @@ def _search_extended(items: QuerySet, title: str, author: str, keyword: str, med
         if author and len(author) != 0:
             items = _vector_based_search(items, "author", author)
         if keyword and len(keyword) != 0:
-            items = _vector_based_search(items, "keyword", keyword)
+            items = _vector_based_search(items, "keywords", keyword)
         return items
     except Item.DoesNotExist:
         return None
