@@ -267,7 +267,7 @@ runtime = [
 
 [package.metadata]
 requires-dist = [
-    { name = "django", specifier = ">=5" },
+    { name = "django", specifier = ">=5,<6" },
     { name = "django-allauth", extras = ["socialaccount"], specifier = ">=65.1.0" },
     { name = "django-autoslug", specifier = ">=1.9.9" },
     { name = "django-filer", specifier = ">=3.2.3" },
