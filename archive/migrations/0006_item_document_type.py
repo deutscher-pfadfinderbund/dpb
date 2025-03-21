@@ -4,7 +4,6 @@ from django.db import migrations, models
 import django.db.models.deletion
 
 def forwards_func(apps, schema_editor):
-    Item = apps.get_model('archive', 'Item')
     DocType = apps.get_model('archive', 'DocType')
 
     existing_doctypes = (

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 
 from autoslug import AutoSlugField
 from django.db import models

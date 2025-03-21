@@ -28,3 +28,7 @@ DEP002 = [
     "django-markdownify",
     "django-forms-bootstrap"
 ]
+
+[tool.ruff.lint.per-file-ignores]
+# Ignore `import *` in settings files, as they are used to "copy" all settings.
+"dpb/settings/**.py" = ["F403"]

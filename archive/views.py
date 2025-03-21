@@ -141,7 +141,7 @@ def search(request):
         errors = True
         results = None
 
-    results = results if results and results is not [] else None
+    results = results if results and results != [] else None
 
     return render(request, 'archive/search.html', {"results": results,
                                                    "query": query,

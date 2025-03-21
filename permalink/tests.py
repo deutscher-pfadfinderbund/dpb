@@ -1,5 +1,5 @@
 from django.test import SimpleTestCase
-from django.urls import reverse, resolve, re_path, include
+from django.urls import resolve
 import permalink.views as views
 
 
