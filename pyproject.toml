@@ -1,38 +1,26 @@
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.masonry.api"
-
-[tool.poetry]
-package-mode = false
+[project]
 name = "dpb"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = "<4.0,>=3.13"
+dependencies = [
+    "django>=5,<6",
+    "django-autoslug>=1.9.9",
+    "django-filer>=3.2.3",
+    "easy-thumbnails>=2.10",
+    "django-forms-bootstrap>=3.1.0",
+    "django-markdownify>=0.9.5",
+    "django-pagedown>=2.2.1",
+    "requests>=2.32.3",
+    "django-allauth[socialaccount]>=65.1.0",
+    "setuptools>=75.3.0",
+    "psycopg[binary,pool]>=3"
+]
 
-[tool.poetry.scripts]
-server = "gunicorn -b 0.0.0.0:8000 dpb.wsgi"
-
-[tool.poetry.dependencies]
-python = "^3.13"
-django = "^5"
-django-autoslug = "^1.9.9"
-django-filer = "^3.3.1"
-easy-thumbnails = "^2.10" # Used by the archive app
-django-forms-bootstrap = "^3.1.0"
-django-markdownify = "^0.9.5"
-django-pagedown = "^2.2.1"
-requests = "^2.32.3"
-django-allauth = {extras = ["socialaccount"], version = "^65.5.0"}
-
-[tool.poetry.group.install.dependencies]
-setuptools = "^76.0.0" # setuptools is needed by filer during collectstatic
-
-[tool.poetry.group.runtime.dependencies]
-gunicorn = "^23.0.0"
-psycopg2-binary = "^2.9.10"
-
-[tool.poetry.group.dev]
-optional = true
-
-[tool.poetry.group.dev.dependencies]
-deptry = "^0.21.0"
+[dependency-groups]
+runtime = [
+    "gunicorn>=23.0.0"
+]
 
 [tool.deptry.per_rule_ignores]
 DEP002 = [

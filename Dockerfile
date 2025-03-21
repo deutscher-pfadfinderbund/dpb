@@ -1,40 +1,62 @@
-FROM python:3.13 as builder
-
-RUN pip install -U poetry==1.8.3
-
-ENV POETRY_NO_INTERACTION=1 \
-    POETRY_VIRTUALENVS_IN_PROJECT=1 \
-    POETRY_VIRTUALENVS_CREATE=1 \
-    POETRY_CACHE_DIR=/tmp/poetry_cache
-
-WORKDIR /app
-
-COPY pyproject.toml poetry.lock ./
-
-RUN poetry install --without dev --no-directory --compile && rm -rf $POETRY_CACHE_DIR
-
-
-FROM node:alpine as npm-deps
+FROM node:alpine AS npm-deps
+# Install npm deps
 COPY package.json package-lock.json ./
-RUN npm install -g sass && npm install
+RUN npm install
+
+# Build CSS
 COPY styles/ ./
-RUN sass -I . --style=compressed --no-source-map style.sass:style.css
+RUN npx sass -I . --style=compressed style.sass:style.css
 
 
-FROM python:3.13-slim as runtime
+
+FROM python:3.13 AS builder
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+ENV UV_COMPILE_BYTECODE=1\
+    UV_LINK_MODE=copy
+
 WORKDIR /app
+
+RUN apt update && apt install -y python3-dev
+
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --frozen --group runtime --no-install-project --no-editable
+
+
+ADD . /app
+
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen --no-dev --inexact --no-editable
+
+COPY --from=npm-deps node_modules node_modules/
+COPY --from=npm-deps style.css styles/
+
+RUN uv run --frozen python manage.py collectstatic  \
+    --noinput  \
+    --link \
+    --ignore *.map  \
+    --ignore *.scss \
+    --ignore *.sass \
+    && ls static
+
+
+
+FROM python:3.13-slim AS runtime
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECOD=1\
+    PYTHONUNBUFFERED=1
 
 ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"
 
-COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
-COPY --from=npm-deps style.css styles/
-COPY --from=npm-deps node_modules node_modules/
+COPY --from=builder --chown=app:app ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+COPY --from=builder --chown=app:app /app/static/ static/
 
-COPY . ./
-
-RUN python manage.py collectstatic --noinput && rm -rf node_modules/
+COPY . .
 
 EXPOSE 8000
 
-CMD "./run_server.sh"
+CMD ["./run_server.sh"]
