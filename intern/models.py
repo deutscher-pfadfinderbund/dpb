@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
+import logging
 import requests
 from autoslug import AutoSlugField
 from django.db import models
 
+logger = logging.getLogger(__name__)
 
 class State(models.Model):
     """ List of the states of Germany """
@@ -107,24 +109,45 @@ class House(models.Model):
     modified = models.DateTimeField("Zuletzt geändert", auto_now=True)
 
     def clean(self):
+        OPENSTREETMAP_URL = "https://nominatim.openstreetmap.org/search"
+        self.latitude = None
+        self.longitude = None
+        self.display_name = None
+
+
+
+        default_params = {
+            "format": "json",
+            "polygon": 1,
+            "addressdetails": 1,
+            "accept-language": "de"
+        }
+
+        query_params = {
+            "amenity": self.name,
+            "street": self.street,
+            "postalcode": self.plz,
+            "city": self.city,
+            "state": self.state,
+        }
         try:
-            data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(self.name) + " " +
-                                str(self.street) + " " + str(self.plz) + " " + str(self.city) + " " +
-                                "&format=json&polygon=1&addressdetails=1").json()[0]
-            self.latitude = data["lat"]
-            self.longitude = data["lon"]
-            self.display_name = data["display_name"]
-        except IndexError:
-            try:
-                data = requests.get("https://nominatim.openstreetmap.org/search?q=" + str(self.street) + " " +
-                                    str(self.city) + " " + "&format=json&polygon=1&addressdetails=1").json()[0]
-                self.latitude = data["lat"]
-                self.longitude = data["lon"]
-                self.display_name = data["display_name"]
-            except IndexError:
-                self.latitude = None
-                self.longitude = None
-                self.display_name = None
+            response = requests.get(OPENSTREETMAP_URL, params=default_params | query_params)
+            if response.status_code != 200:
+                return
+
+            if not response.json():
+                del query_params["amenity"]
+                response = requests.get(OPENSTREETMAP_URL, params=default_params | query_params)
+                if response.status_code != 200 or not response.json():
+                    return
+        except requests.exceptions.RequestException as e:
+            logger.warning(f"Error querying OpenStreetMap", exc_info=e)
+            return
+
+        data = response.json()[0]
+        self.latitude = data["lat"]
+        self.longitude = data["lon"]
+        self.display_name = data["display_name"]
 
     def __str__(self):
         return self.name
