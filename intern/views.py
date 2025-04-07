@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from filer.models import File, Folder
 
 from .forms import HouseForm
@@ -39,7 +39,7 @@ def house_add(request):
 
 @login_required
 def house_detail(request, slug):
-    house = House.objects.get(slug=slug)
+    house = get_object_or_404(House, slug=slug)
     return render(request, 'intern/house_detail.html', {'house': house})
 
 
