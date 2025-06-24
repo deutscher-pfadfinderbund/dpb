@@ -46,7 +46,7 @@ RUN uv run --frozen python manage.py collectstatic  \
 FROM python:3.13-slim AS runtime
 WORKDIR /app
 
-ENV PYTHONDONTWRITEBYTECOD=1\
+ENV PYTHONDONTWRITEBYTECODE=1\
     PYTHONUNBUFFERED=1
 
 ENV VIRTUAL_ENV=/app/.venv \
