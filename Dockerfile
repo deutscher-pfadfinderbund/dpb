@@ -43,7 +43,7 @@ RUN uv run --frozen python manage.py collectstatic  \
 
 
 
-FROM python:3.13-slim AS runtime
+FROM python:3.13.7-slim AS runtime
 WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1\
