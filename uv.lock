@@ -140,16 +140,16 @@ wheels = [
 
 [[package]]
 name = "django"
-version = "5.2.5"
+version = "5.2.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asgiref" },
     { name = "sqlparse" },
     { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/62/9b/779f853c3d2d58b9e08346061ff3e331cdec3fe3f53aae509e256412a593/django-5.2.5.tar.gz", hash = "sha256:0745b25681b129a77aae3d4f6549b62d3913d74407831abaa0d9021a03954bae", size = 10859748, upload-time = "2025-08-06T08:26:29.978Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/4c/8c/2a21594337250a171d45dda926caa96309d5136becd1f48017247f9cdea0/django-5.2.6.tar.gz", hash = "sha256:da5e00372763193d73cecbf71084a3848458cecf4cee36b9a1e8d318d114a87b", size = 10858861, upload-time = "2025-09-03T13:04:03.23Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9d/6e/98a1d23648e0085bb5825326af17612ecd8fc76be0ce96ea4dc35e17b926/django-5.2.5-py3-none-any.whl", hash = "sha256:2b2ada0ee8a5ff743a40e2b9820d1f8e24c11bac9ae6469cd548f0057ea6ddcd", size = 8302999, upload-time = "2025-08-06T08:26:23.562Z" },
+    { url = "https://files.pythonhosted.org/packages/f5/af/6593f6d21404e842007b40fdeb81e73c20b6649b82d020bb0801b270174c/django-5.2.6-py3-none-any.whl", hash = "sha256:60549579b1174a304b77e24a93d8d9fafe6b6c03ac16311f3e25918ea5a20058", size = 8303111, upload-time = "2025-09-03T13:03:47.808Z" },
 ]
 
 [[package]]
@@ -180,16 +180,16 @@ wheels = [
 
 [[package]]
 name = "django-filer"
-version = "3.3.1"
+version = "3.3.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
     { name = "django-polymorphic" },
     { name = "easy-thumbnails", extra = ["svg"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f3/28/651a758dbcf267f6a6d5c6e07c4892e2a2f5d14f271a3984ce415a5e96e4/django_filer-3.3.1.tar.gz", hash = "sha256:397c0b0f313371cc9e0cd92b3f1b0023b8dd213d7ebd038d6e289437df027bd0", size = 1113256, upload-time = "2024-12-08T11:52:53.915Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/3e/2c/e41c70c3fd4d3ddecd2ff7be6c5de95b83f8983159ca243ee5b79d5226ab/django_filer-3.3.2.tar.gz", hash = "sha256:ca3b00fd52ec0abf6323e44480a91ae086e698bed7223cdffef2e29f0e4fb1de", size = 1147765, upload-time = "2025-09-01T10:19:49.547Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/81/36/26af06a5095641144bd23849d004e6bf036f67bdec7c81e5085a5b1a4f2a/django_filer-3.3.1-py3-none-any.whl", hash = "sha256:aeaf7c665728a0e8c1a839612ccd993956006c6b683e002013b561b7da53b087", size = 1292886, upload-time = "2024-12-08T11:52:51.904Z" },
+    { url = "https://files.pythonhosted.org/packages/65/d2/a575bf028754165eed413b2ea4470ace7e185e4e919940dcd00e2c967e90/django_filer-3.3.2-py3-none-any.whl", hash = "sha256:b383646c532848f545ed5cef7ee5cec2fd1999af447612a5efaff604450378f6", size = 1266463, upload-time = "2025-09-01T10:19:47.665Z" },
 ]
 
 [[package]]
