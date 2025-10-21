@@ -9,7 +9,7 @@ RUN npx sass -I . --style=compressed style.sass:style.css
 
 
 
-FROM python:3.13 AS builder
+FROM python:3.14 AS builder
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 ENV UV_COMPILE_BYTECODE=1\
@@ -43,7 +43,7 @@ RUN uv run --frozen python manage.py collectstatic  \
 
 
 
-FROM python:3.13-slim AS runtime
+FROM python:3.14-slim AS runtime
 WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1\
