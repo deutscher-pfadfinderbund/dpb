@@ -57,7 +57,7 @@ class ItemAdmin(PageDownAdmin):
     list_display = (
         'title', 'author', 'yyyymmdd', 'medartanalog', 'signature', 'location', 'has_file', 'reviewed',
     )
-    list_filter = ['medartanalog', 'doctype', 'reviewed', HasFileFilter, YearFilter]
+    list_filter = ['medartanalog', 'document_type', 'reviewed', HasFileFilter, YearFilter]
     search_fields = ['signature', 'title', 'author', 'keywords', 'notes']
 
     fieldsets = [
