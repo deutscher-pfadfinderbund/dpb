@@ -82,7 +82,7 @@ class Item(models.Model):
         ("Überbündisches", "Überbündisches"),
     )
 
-    signature = models.CharField('Signatur', max_length=50, blank=True)
+    signature = models.CharField('Signatur', max_length=50, blank=True, db_collation='alphanumeric')
     author = models.CharField('Autor', max_length=256, blank=True)
     title = models.CharField('Titel *', max_length=256)
     date = models.CharField('Datum (Vorlage)', max_length=256, blank=True)
