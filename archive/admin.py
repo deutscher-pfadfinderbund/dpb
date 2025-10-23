@@ -1,31 +1,9 @@
-import re
-
 from django.contrib import admin
-from django.db.models import QuerySet, Value
-from django.db.models.functions import Coalesce, Substr, NullIf, StrIndex, Length
+from django.db.models import QuerySet
 from django.http import HttpRequest
 
 from dpb.admin import PageDownAdmin
 from .models import Feedback, Item, Year, DocType
-
-
-class AlphanumericSignatureFilter(admin.SimpleListFilter):
-    title = 'Signatur (alphanumerisch)'
-    parameter_name = 'signature_alphanumeric'
-
-    def lookups(self, request, model_admin):
-        return (
-            ('signature', 'Signatur (alphanumerisch)'),
-        )
-
-    def queryset(self, request, queryset):
-        if self.value() == 'signature':
-            return queryset.order_by(
-                Coalesce(Substr('signature', Value(0), NullIf(StrIndex('signature', Value(' ')), Value(0))),
-                         'signature'),
-                Length('signature'),
-                'signature'
-            )
 
 
 class HasFileFilter(admin.SimpleListFilter):
@@ -61,23 +39,11 @@ class HasFileFilter(admin.SimpleListFilter):
         return queryset
 
 
-def human_key(key):
-    """
-    Sort collection as humans would do it.
-
-    :param key:
-    :return:
-    """
-    parts = re.split(r'(\d*\.\d+|\d+)', key)
-    return tuple((e.swapcase() if i % 2 == 0 else float(e))
-                 for i, e in enumerate(parts))
-
-
 class ItemAdmin(PageDownAdmin):
     list_display = (
         'title', 'author', 'year', 'medartanalog', 'signature', 'location', 'has_file', 'reviewed',
     )
-    list_filter = [AlphanumericSignatureFilter, 'medartanalog', 'doctype', 'reviewed', HasFileFilter]
+    list_filter = ['medartanalog', 'doctype', 'reviewed', HasFileFilter]
     search_fields = ['signature', 'title', 'author', 'keywords', 'notes']
 
     fieldsets = [
