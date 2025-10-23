@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.db.models import QuerySet
+from django.db.models.functions import Concat, LPad
 from django.http import HttpRequest
 
 from dpb.admin import PageDownAdmin
@@ -38,17 +39,30 @@ class HasFileFilter(admin.SimpleListFilter):
             return queryset.exclude(file__isnull=False)
         return queryset
 
+class YearFilter(admin.SimpleListFilter):
+    title = 'Jahr'
+    parameter_name = 'year'
+
+    def lookups(self, request: HttpRequest, model_admin):
+        years = Item.objects.values_list('year', flat=True).distinct().order_by('year').reverse()
+        return [(str(year), str(year)) for year in years if year is not None]
+
+    def queryset(self, request: HttpRequest, queryset: QuerySet):
+        if self.value():
+            year = int(self.value())
+            return queryset.filter(year=year)
+        return queryset
 
 class ItemAdmin(PageDownAdmin):
     list_display = (
-        'title', 'author', 'year', 'medartanalog', 'signature', 'location', 'has_file', 'reviewed',
+        'title', 'author', 'yyyymmdd', 'medartanalog', 'signature', 'location', 'has_file', 'reviewed',
     )
-    list_filter = ['medartanalog', 'doctype', 'reviewed', HasFileFilter]
+    list_filter = ['medartanalog', 'doctype', 'reviewed', HasFileFilter, YearFilter]
     search_fields = ['signature', 'title', 'author', 'keywords', 'notes']
 
     fieldsets = [
         ('Allgemein', {'fields': ['signature', 'title', 'author',
-                                  ('date', 'year'),
+                                  ('date', 'year', 'month', 'day'),
                                   'place',
                                   ('medartanalog', 'document_type'),
                                   'file', 'file2', 'file3',
@@ -59,6 +73,19 @@ class ItemAdmin(PageDownAdmin):
     ]
     save_as = True
     readonly_fields = ['pub_date']
+
+    @admin.display(ordering=Concat('year', LPad('month', 2), LPad('day', 2)), description='Datum')
+    def yyyymmdd(self, item: Item) -> str:
+        """Return yyyy, yyyy-mm or yyyy-mm-dd depending on available data"""
+
+        if item.year is not None and item.month and item.day:
+            return f"{item.year:d}-{item.month:02d}-{item.day:02d}"
+        elif item.year is not None and item.month:
+            return f"{item.year:d}-{item.month:02d}"
+        elif item.year is not None:
+            return f"{item.year:d}"
+        else:
+            return ""
 
 
 class YearAdmin(PageDownAdmin):

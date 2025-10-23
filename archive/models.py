@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.html import format_html
@@ -87,6 +88,13 @@ class Item(models.Model):
     title = models.CharField('Titel *', max_length=256)
     date = models.CharField('Datum (Vorlage)', max_length=256, blank=True)
     year = models.IntegerField('Jahr', null=True, blank=True)
+    month = models.PositiveSmallIntegerField('Monat', null=True, blank=True, validators=[MinValueValidator(1), MaxValueValidator(12)])
+    day = models.PositiveSmallIntegerField(
+        "Tag",
+        null=True,
+        blank=True,
+        validators=[MinValueValidator(1), MaxValueValidator(31)],
+    )
     place = models.CharField('Ort / Veröffentlichung', max_length=256, blank=True)
     medartanalog = models.CharField('Medienart *', max_length=256, choices=medartanalog_choices, blank=False)
     doctype = models.CharField('Dokumenttyp', max_length=256, choices=doctype_choices, blank=True, null=True)
