@@ -5,7 +5,7 @@ RUN npm install
 
 # Build CSS
 COPY styles/ ./
-RUN npx sass -I . --style=compressed style.sass:style.css
+RUN npx sass -I . --style=compressed --pkg-importer=node style.sass:style.css
 
 
 
