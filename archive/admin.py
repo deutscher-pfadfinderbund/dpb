@@ -1,6 +1,7 @@
 from django.contrib import admin
-from django.db.models import QuerySet
-from django.db.models.functions import Concat, LPad
+from django.db.models import QuerySet, Value
+from django.db.models.fields import TextField
+from django.db.models.functions import Concat, LPad, Cast
 from django.http import HttpRequest
 
 from dpb.admin import PageDownAdmin
@@ -74,7 +75,7 @@ class ItemAdmin(PageDownAdmin):
     save_as = True
     readonly_fields = ['pub_date']
 
-    @admin.display(ordering=Concat('year', LPad('month', 2), LPad('day', 2)), description='Datum')
+    @admin.display(description='Datum', ordering=Concat('year', LPad(Cast('month', TextField()), 2, Value("0")), LPad(Cast('day', TextField()), 2, Value("0"))))
     def yyyymmdd(self, item: Item) -> str:
         """Return yyyy, yyyy-mm or yyyy-mm-dd depending on available data"""
 
