@@ -7,5 +7,13 @@
     "bootstrap": "^5",
     "leaflet": "^1.9.4",
     "leaflet-fullscreen": "^1.0.2"
+  },
+  "scripts": {
+    "precompile-css": "npm install",
+    "prewatch-css": "npm install",
+    "compile-css": "npx sass --load-path=. --style=compressed --quiet-deps --pkg-importer=node styles/:static/styles/",
+    "watch-css": "npx sass --load-path=. --watch --style=compressed --quiet-deps --pkg-importer=node styles/:static/styles/",
+    "precompile": "npm install",
+    "compile": "uv run manage.py collectstatic --noinput && npm run compile-css"
   }
 }

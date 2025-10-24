@@ -1,14 +1,15 @@
-$bs-dark: #333333
-$body-bg: #f6f6f6
-$body-color: $bs-dark
+@use "pkg:bootstrap" with (
+  $dark: #333333,
+  $body-bg: #f6f6f6,
+  $body-color: #333333,
+  $btn-link-color: #0051a8
+)
+
+@use "archive"
+@use "navbar"
+@use "carousel"
+
 $footer-height: 146px
-$btn-link-color: #0051a8
-
-@import "node_modules/bootstrap/scss/bootstrap"
-
-@import "archive"
-@import "navbar"
-@import "carousel"
 
 p
   max-width: 80ch
