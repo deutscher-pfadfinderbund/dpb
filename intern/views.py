@@ -13,14 +13,16 @@ def work_group(request):
 
 @login_required
 def documents(request):
-    files = File.objects.all().order_by("-modified_at")
-    folders = Folder.objects.all()
+    # Optimize queries with select_related for foreign keys
+    files = File.objects.select_related('owner', 'folder').all().order_by("-modified_at")
+    folders = Folder.objects.select_related('parent', 'owner').all()
     return render(request, 'intern/documents.html', {'files': files, 'folders': folders})
 
 
 @login_required
 def houses(request):
-    houses = House.objects.all().order_by("name")
+    # Optimize queries with select_related for foreign key
+    houses = House.objects.select_related('state').all().order_by("name")
     return render(request, 'intern/houses.html', {'houses': houses})
 
 

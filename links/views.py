@@ -4,13 +4,10 @@ from .models import Link, LinkCategory
 
 
 def links(request):
-    links = Link.objects.all().order_by("state")
-    states = set()
-    for link in links:
-        try:
-            states.add(link.state)
-        except ValueError:
-            pass
+    # Optimize with select_related for foreign keys
+    links = Link.objects.select_related('state', 'category').all().order_by("state")
+    # Use values_list to efficiently get distinct states without iterating
+    states = Link.objects.filter(state__isnull=False).values_list('state', flat=True).distinct()
     cats = LinkCategory.objects.all().order_by("name")
     return render(request, 'links.html', {'links': links,
                                           'cats': cats,
