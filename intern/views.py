@@ -13,9 +13,10 @@ def work_group(request):
 
 @login_required
 def documents(request):
-    # Optimize queries with select_related for foreign keys
-    files = File.objects.select_related('owner', 'folder').all().order_by("-modified_at")
-    folders = Folder.objects.select_related('parent', 'owner').all()
+    # Optimize queries with select_related for foreign keys (owner is a ForeignKey to User)
+    # folder is also a ForeignKey but may not always be present
+    files = File.objects.select_related('owner').all().order_by("-modified_at")
+    folders = Folder.objects.select_related('owner').all()
     return render(request, 'intern/documents.html', {'files': files, 'folders': folders})
 
 

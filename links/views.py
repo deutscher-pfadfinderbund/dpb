@@ -6,8 +6,8 @@ from .models import Link, LinkCategory
 def links(request):
     # Optimize with select_related for foreign keys
     links = Link.objects.select_related('state', 'category').all().order_by("state")
-    # Use values_list to efficiently get distinct states without iterating
-    states = Link.objects.filter(state__isnull=False).values_list('state', flat=True).distinct()
+    # Get distinct state objects for the filter
+    states = Link.objects.filter(state__isnull=False).select_related('state').values_list('state__name', flat=True).distinct()
     cats = LinkCategory.objects.all().order_by("name")
     return render(request, 'links.html', {'links': links,
                                           'cats': cats,

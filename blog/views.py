@@ -41,29 +41,27 @@ class PostDelete(PermissionRequiredMixin, DeleteView):
 
 @login_required
 def blog_overview(request, page=1, category="Aktuelles"):
+    category_obj = Category.objects.filter(name=category).first()
+    if category_obj is None:
+        raise Http404("Diese Kategorie konnte leider nicht gefunden werden.")
+    
+    all_posts = Post.objects.filter(
+        Q(category=category_obj.id),
+        Q(public=True),
+        Q(archive=False),
+    ).select_related('category', 'author').order_by("-created")
+
+    paginator = Paginator(all_posts, 6)
+
     try:
-        category_obj = Category.objects.filter(name=category).first()
-        if category_obj is None:
-            raise Http404("Diese Kategorie konnte leider nicht gefunden werden.")
-        
-        all_posts = Post.objects.filter(
-            Q(category=category_obj.id),
-            Q(public=True),
-            Q(archive=False),
-        ).select_related('category', 'author').order_by("-created")
-
-        paginator = Paginator(all_posts, 6)
-
-        try:
-            posts = paginator.page(page)
-        except PageNotAnInteger:
-            # If page is not an integer, deliver first page.
-            posts = paginator.page(1)
-        except EmptyPage:
-            # If page is out of range (e.g. 9999), deliver last page of results.
-            posts = paginator.page(paginator.num_pages)
-    except Post.DoesNotExist:
-        raise Http404("Diese Beiträge konnten leider nicht gefunden werden.")
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        posts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        posts = paginator.page(paginator.num_pages)
+    
     return render(request, 'blog/list.html',
                   {'posts': pack(posts),
                    'paginator': posts,
