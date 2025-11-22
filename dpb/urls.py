@@ -27,7 +27,6 @@ urlpatterns = [path("", views.index, name='index'),
                path('links/', include('links.urls')),
                path('filer/', include('filer.urls')),
                re_path(r'^(?:[sx]|[lL](?:ink)?)/', include('permalink.urls')),
-               path('vorfreude/', include('vorfreude.urls')),
 
                # Members Area
                path('intern/', include('intern.urls')),
