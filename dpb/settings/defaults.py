@@ -101,6 +101,8 @@ TIME_ZONE = 'Europe/Berlin'
 
 USE_I18N = True
 
+USE_TZ = True
+
 # Static files (CSS, JavaScript, Images)
 FILE_UPLOAD_PERMISSIONS = 0o644
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
