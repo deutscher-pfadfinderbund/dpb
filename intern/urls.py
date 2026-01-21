@@ -5,7 +5,6 @@ from . import views
 app_name = 'intern'
 
 urlpatterns = [
-    re_path(r'arbeitskreis/$', views.work_group, name='arbeitskreis'),
     re_path(r'dokumente/$', views.documents, name='documents'),
 
     re_path(r'haeuser/$', views.houses, name='houses'),

@@ -59,6 +59,7 @@ urlpatterns += [
     path('arbeitskreis/', pageviews.page, {'url': '/arbeitskreis/'}, name='arbeitskreis'),
 
     path('kontakt/', pageviews.page, {'url': '/kontakt/'}, name='kontakt'),
+    path('intern/arbeitskreis/', pageviews.page, {'url': '/intern/arbeitskreis/'}, name='intern_arbeitskreis'),
 
     re_path(r'^(?P<url>.*/)$', pageviews.page, name='page'),
 
