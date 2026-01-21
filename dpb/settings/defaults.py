@@ -82,8 +82,6 @@ MIDDLEWARE = (
     "allauth.account.middleware.AccountMiddleware",
 )
 
-MIDDLEWARE_CLASSES = MIDDLEWARE
-
 ROOT_URLCONF = 'dpb.urls'
 
 WSGI_APPLICATION = 'dpb.wsgi.application'
