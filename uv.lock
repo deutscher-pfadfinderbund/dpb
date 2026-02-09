@@ -209,7 +209,7 @@ wheels = [
 
 [[package]]
 name = "django-filer"
-version = "3.4.3"
+version = "3.4.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
@@ -217,9 +217,9 @@ dependencies = [
     { name = "easy-thumbnails", extra = ["svg"] },
     { name = "svglib" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/33/3a/3b08169bc8219538f152f97c30575e814f17155720f09dcbbbc7012b35c6/django_filer-3.4.3.tar.gz", hash = "sha256:98c9bb1ed1925a06507c5ac87339557af21cd587934281978ea128087d4bd2fd", size = 1113042, upload-time = "2026-01-17T18:54:43.86Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b1/6c/893a6ea17e78a8f2156899af04309a2c4aa61c7548c5153315d956dbc1dc/django_filer-3.4.4.tar.gz", hash = "sha256:465eec9fe63310a5b718267beebe7c348ee44afd16c6b5056a7bab49ee483412", size = 1113129, upload-time = "2026-02-06T20:24:03.433Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/47/c0/745f67ba79852c205b6ad1d4f83e11b75c9de7a978607b8b971679919089/django_filer-3.4.3-py3-none-any.whl", hash = "sha256:11b92238d148a3267e8d51ade1f8d0284b6c3cf6ef6db1013f309103bb30512a", size = 1230443, upload-time = "2026-01-17T18:54:41.51Z" },
+    { url = "https://files.pythonhosted.org/packages/35/65/ebfb3dcc66a8d703bb09706d30a50ddf5b20e2afab89c388d1a35750600b/django_filer-3.4.4-py3-none-any.whl", hash = "sha256:5df64bb144c861ad2c2697bd6a3709282bda6e14f8623ccd934797474d415c4c", size = 1230519, upload-time = "2026-02-06T20:24:01.396Z" },
 ]
 
 [[package]]
