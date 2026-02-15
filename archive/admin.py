@@ -75,6 +75,11 @@ class ItemAdmin(PageDownAdmin):
     save_as = True
     readonly_fields = ['pub_date']
 
+    def get_queryset(self, request):
+        """Optimize queryset with select_related for foreign keys"""
+        queryset = super().get_queryset(request)
+        return queryset.select_related('document_type')
+
     @admin.display(description='Datum', ordering=Concat('year', LPad(Cast('month', TextField()), 2, Value("0")), LPad(Cast('day', TextField()), 2, Value("0"))))
     def yyyymmdd(self, item: Item) -> str:
         """Return yyyy, yyyy-mm or yyyy-mm-dd depending on available data"""
@@ -112,6 +117,11 @@ class FeedbackAdmin(PageDownAdmin):
             'archive', 'created', 'modified'
         ]})
     ]
+
+    def get_queryset(self, request):
+        """Optimize queryset with select_related for foreign keys"""
+        queryset = super().get_queryset(request)
+        return queryset.select_related('item')
 
     def to_archive(self, request, queryset):
         queryset.update(archive=True)
