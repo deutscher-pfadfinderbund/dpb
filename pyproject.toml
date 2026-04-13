@@ -14,7 +14,7 @@ dependencies = [
     "requests>=2.32.3",
     "django-allauth[socialaccount]>=65.1.0",
     "setuptools>=75.3.0",
-    "psycopg[binary,pool]>=3",
+    "psycopg[binary,pool]>=3.3.3",
     "gunicorn>=23.0.0",
 ]
 
