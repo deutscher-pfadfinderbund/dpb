@@ -230,16 +230,16 @@ wheels = [
 
 [[package]]
 name = "django-markdownify"
-version = "0.9.6"
+version = "0.9.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "bleach", extra = ["css"] },
     { name = "django" },
     { name = "markdown" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/45/65/f3630c4cc20511b9c9f222a9005373a7fbd303e3233befd7a163200e631a/django_markdownify-0.9.6.tar.gz", hash = "sha256:edcf47b2026d55a8439049d35c8b54e11066a4856c4fad1060e139cb3d2eee52", size = 8069, upload-time = "2025-12-06T10:25:19.716Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/db/ae/2ecbac028f470ed78b8826413495d5ea60c9d53d7af000729ff3a7663ff8/django_markdownify-0.9.7.tar.gz", hash = "sha256:2e59dfd445ad6362288f7bc1574e45d8356848463e261b878fd70df6a272c47f", size = 8084, upload-time = "2026-05-18T06:51:55.279Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/67/e1/fafee8ffd7b5a1c4fd5eaf303a00c8bbbf38a90eae940823146c38b9a188/django_markdownify-0.9.6-py3-none-any.whl", hash = "sha256:9863b2bfa6d159ad1423dc93bf0d6eadc6413776de304049aa9fcfa5edd2ce1c", size = 10449, upload-time = "2025-12-06T10:25:17.818Z" },
+    { url = "https://files.pythonhosted.org/packages/34/b9/9b1a28f605ad75fa7e4588f51661eb3c7c5feb5ad23e985761e9a14d01c4/django_markdownify-0.9.7-py3-none-any.whl", hash = "sha256:ca3a6361f952d1c1b661c13229f69219a36e745358aa0f377212aef8f09e4cf3", size = 10449, upload-time = "2026-05-18T06:51:53.414Z" },
 ]
 
 [[package]]
@@ -293,12 +293,12 @@ requires-dist = [
     { name = "django-autoslug", specifier = ">=1.9.9" },
     { name = "django-filer", specifier = ">=3.2.3" },
     { name = "django-forms-bootstrap", specifier = ">=3.1.0" },
-    { name = "django-markdownify", specifier = ">=0.9.5" },
+    { name = "django-markdownify", specifier = ">=0.9.7" },
     { name = "django-pagedown", specifier = ">=2.2.1" },
     { name = "easy-thumbnails", specifier = ">=2.10" },
     { name = "gunicorn", specifier = ">=23.0.0" },
     { name = "psycopg", extras = ["binary", "pool"], specifier = ">=3.3.4" },
-    { name = "requests", specifier = ">=2.32.3" },
+    { name = "requests", specifier = ">=2.34.2" },
     { name = "setuptools", specifier = ">=75.3.0" },
 ]
 
@@ -534,7 +534,7 @@ wheels = [
 
 [[package]]
 name = "requests"
-version = "2.33.1"
+version = "2.34.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "certifi" },
@@ -542,9 +542,9 @@ dependencies = [
     { name = "idna" },
     { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5f/a4/98b9c7c6428a668bf7e42ebb7c79d576a1c3c1e3ae2d47e674b468388871/requests-2.33.1.tar.gz", hash = "sha256:18817f8c57c6263968bc123d237e3b8b08ac046f5456bd1e307ee8f4250d3517", size = 134120, upload-time = "2026-03-30T16:09:15.531Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ac/c3/e2a2b89f2d3e2179abd6d00ebd70bff6273f37fb3e0cc209f48b39d00cbf/requests-2.34.2.tar.gz", hash = "sha256:f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed", size = 142856, upload-time = "2026-05-14T19:25:27.735Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d7/8e/7540e8a2036f79a125c1d2ebadf69ed7901608859186c856fa0388ef4197/requests-2.33.1-py3-none-any.whl", hash = "sha256:4e6d1ef462f3626a1f0a0a9c42dd93c63bad33f9f1c1937509b8c5c8718ab56a", size = 64947, upload-time = "2026-03-30T16:09:13.83Z" },
+    { url = "https://files.pythonhosted.org/packages/a0/f4/c67b0b3f1b9245e8d266f0f112c500d50e5b4e83cb6f3b71b6528104182a/requests-2.34.2-py3-none-any.whl", hash = "sha256:2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0", size = 73075, upload-time = "2026-05-14T19:25:26.443Z" },
 ]
 
 [[package]]
