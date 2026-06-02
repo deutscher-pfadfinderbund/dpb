@@ -15,6 +15,11 @@ class PostAdmin(PageDownAdmin):
         ('Erweitert', {'fields': ['created', 'author'], 'classes': ['collapse']}),
     ]
 
+    def get_queryset(self, request):
+        """Optimize queryset with select_related for foreign keys"""
+        queryset = super().get_queryset(request)
+        return queryset.select_related('category', 'author')
+
     def save_model(self, request, obj, form, change):
         # Automatic set author if None is set
         if getattr(obj, 'author', None) is None:
