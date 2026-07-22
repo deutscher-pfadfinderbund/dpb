@@ -9,6 +9,7 @@ from .models import Program
 
 @login_required
 def evening_program(request):
+    # No foreign keys to optimize here, but ensure efficient ordering
     programs = Program.objects.all().order_by("title")
     return render(request, "evening_program/index.html", {"programs": programs})
 
