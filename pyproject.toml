@@ -15,7 +15,7 @@ dependencies = [
     "django-allauth[socialaccount]>=65.19.1",
     "setuptools>=84.0.0",
     "psycopg[binary,pool]>=3.3.4",
-    "gunicorn>=23.0.0",
+    "gunicorn>=26.0.0",
 ]
 
 [tool.deptry.per_rule_ignores]
