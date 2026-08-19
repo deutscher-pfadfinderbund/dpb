@@ -88,15 +88,15 @@ def _search_extended(items: QuerySet, title: str, author: str, keyword: str, med
 @login_required
 def index(request):
     try:
-        category = Category.objects.filter(name="Bundesarchiv")
-        if len(category) == 0:
+        category = Category.objects.filter(name="Bundesarchiv").first()
+        if category is None:
             posts = None
         else:
             posts = Post.objects.filter(
-                Q(category=category[0].id),
+                Q(category=category.id),
                 Q(public=True),
                 Q(archive=False),
-            ).order_by("-created")
+            ).select_related('category', 'author').order_by("-created")
     except Post.DoesNotExist:
         raise Http404("Diese Beiträge konnten leider nicht gefunden werden.")
     return render(request, 'archive/index.html', {"posts": posts})
