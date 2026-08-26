@@ -99,10 +99,17 @@ class PersonAdmin(ErstelltModifiziertAdmin):
 
     aemter.short_description = "Ämter"
 
+    def get_queryset(self, request):
+        """Optimize queryset with prefetch_related for related objects"""
+        queryset = super().get_queryset(request)
+        return queryset.prefetch_related('amt_set__typ', 'amt_set__gruppierung')
+
     def export_as_csv(self, request: HttpRequest, queryset):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename=anschriftenverzeichnis.csv'
 
+        # Prefetch related data to avoid N+1 queries
+        queryset = queryset.prefetch_related('adresse_set', 'telefon_set')
         csv_dicts = [person.legacy_csv_dict() for person in queryset]
 
         master_dict = OrderedDict()
@@ -185,6 +192,16 @@ class GrupppierungAdmin(ErstelltModifiziertAdmin):
     list_display = ("__str__", "obergruppe")
     exclude = ["erstellt_von", "veraendert_von"]
     readonly_fields = ["organigram"]
+
+    def get_queryset(self, request):
+        """Optimize queryset with prefetch_related for recursive relationships"""
+        queryset = super().get_queryset(request)
+        # Prefetch untergruppen recursively for better performance
+        return queryset.prefetch_related(
+            'untergruppen',
+            'untergruppen__untergruppen',
+            'obergruppe'
+        )
 
     def organigram(self, instance: Gruppierung):
         return get_organigram_as_html(instance)
