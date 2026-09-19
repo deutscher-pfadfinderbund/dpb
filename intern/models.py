@@ -141,7 +141,7 @@ class House(models.Model):
                 if response.status_code != 200 or not response.json():
                     return
         except requests.exceptions.RequestException as e:
-            logger.warning(f"Error querying OpenStreetMap", exc_info=e)
+            logger.warning("Error querying OpenStreetMap", exc_info=e)
             return
 
         data = response.json()[0]

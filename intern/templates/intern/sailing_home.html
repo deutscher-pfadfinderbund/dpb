@@ -11,23 +11,23 @@
 
 {% block content %}
   <style>
-      .fa-lg {
+      #sailing-home .fa-lg {
           font-size: 0.9em;
       }
 
-      .fa-external-link {
+      #sailing-home .fa-external-link {
           font-size: 0.8em;
       }
 
-      h4 {
+      #sailing-home .sailing-section {
           padding-top: 1em;
       }
   </style>
 
-  <div class="row">
+  <div id="sailing-home" class="row">
     <div class="col-md-6">
-      <h3>Brigantine Falado von Rhodos gem. e.V.</h3>
-      <h4> Infos zum Zustand und Untergang der Falado</h4>
+      <h2 class="h3">Brigantine Falado von Rhodos gem. e.V.</h2>
+      <h3 class="h4 sailing-section"> Infos zum Zustand und Untergang der Falado</h3>
       <ul>
         <li>
           <a href="https://deutscher-pfadfinderbund.de/media/filer_public/67/e8/67e88e9e-5a24-466a-add3-619ef1cd6b75/gutachten_baykowski_1999.pdf"
@@ -105,10 +105,8 @@
         </li>
       </ul>
 
-      <h4><span style="float:left;"></span>
-        <div> Offene Fragen<br><small>zum Untergang des Schiffs Falado von Rhodos und der Zeit danach, die
-          Vorstandsbesetzung vom "neuen" Verein, zu der Bereitschaft eines Präventionskonzepts</small></div>
-      </h4>
+      <h3 class="h4 sailing-section"> Offene Fragen<br><small>zum Untergang des Schiffs Falado von Rhodos und der Zeit danach, die
+        Vorstandsbesetzung vom "neuen" Verein, zu der Bereitschaft eines Präventionskonzepts</small></h3>
       <ul>
         <li>
           <a href="{% url 'intern:sailing_comments' %}">Kommentare aus dem DPB</a>
@@ -118,7 +116,7 @@
         </li>
       </ul>
 
-      <h4> Infos zur Whydah of Bristol (neues Schiff des Falado e.V.)</h4>
+      <h3 class="h4 sailing-section"> Infos zur Whydah of Bristol (neues Schiff des Falado e.V.)</h3>
       <ul>
         <li>
           <a href="https://deutscher-pfadfinderbund.de/media/filer_public/31/45/31456ab6-ee89-4881-babd-6349a7dc2a71/alles_fur_die_crewgruppen_whydah.pdf"
@@ -140,7 +138,7 @@
 
     {# Second col #}
     <div class="col-md-6">
-      <h3>Mytilus - Verein zur Erhaltung und Nutzung eines historischen Segelschiffes für Pfadfindergruppen e.V.</h3>
+      <h2 class="h3">Mytilus - Verein zur Erhaltung und Nutzung eines historischen Segelschiffes für Pfadfindergruppen e.V.</h2>
       <ul>
         <li>
           <a href="http://www.mytilus.de/download/paedagogisches_konzept.pdf" target="_blank">Pädagogische
@@ -156,7 +154,7 @@
         </li>
       </ul>
 
-      <h3>Segeln auf allen Meeren e.V. </h3>
+      <h2 class="h3">Segeln auf allen Meeren e.V. </h2>
       <ul>
         <li>
           <a href="http://www.segeln-auf-allen-meeren.de/" target="_blank">Homepage zum

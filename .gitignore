@@ -96,3 +96,6 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 
+
+# Compiled stylesheets (built by `npm run compile-css`)
+/dpb/static/styles/

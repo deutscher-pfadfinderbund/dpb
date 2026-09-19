@@ -2,14 +2,12 @@
   $dark: #333333,
   $body-bg: #f6f6f6,
   $body-color: #333333,
-  $btn-link-color: #0051a8
+  $btn-link-color: #0051a8,
+  $table-cell-vertical-align: middle
 )
 
 @use "archive"
-@use "navbar"
 @use "carousel"
-
-$footer-height: 146px
 
 p
   max-width: 80ch
@@ -29,15 +27,6 @@ p
 img
   display: block
   max-width: 100%
-
-// Header
-header
-  h1
-    height: 100%
-    padding-top: 0.4em
-
-#header-wrapper
-  padding: 1em 0
 
 // Container
 .stripe
@@ -62,30 +51,14 @@ ul.no-dot > li
 #toc-panel
   float: right
   width: 300px
+  max-width: 100%
   margin-left: 2em
   margin-bottom: 2em
 
-/* Make footer sticky */
-/* Sticky footer styles */
-html
-  position: relative
-  min-height: 100%
-
-#main
-  /* Margin bottom by footer height */
-  @media only screen and (min-width: 1000px)
-    margin-bottom: $footer-height
-
+/* The sticky footer itself is built from Bootstrap utilities in base.html
+   (d-flex flex-column min-vh-100 / flex-grow-1 / flex-shrink-0). */
 .footer-wrapper
   margin-top: 50px
-
-  @media only screen and (min-width: 1000px)
-    position: absolute
-    bottom: 0
-    width: 100%
-    /* Set the fixed height of the footer here */
-    height: $footer-height
-/* END Make footer sticky */
 
 /* Style images in text */
 .image-inline-right
@@ -99,107 +72,7 @@ html
 .margin-top-10px
   margin-top: 10px
 
-/* Table stylings */
+/* Table stylings. Cells are centred via Bootstrap's own
+   $table-cell-vertical-align above rather than by out-specifying its output. */
 table
-  font-size: 14px
-
-td
-  vertical-align: middle !important
-
-/* Use classical pagination theme */
-.pagination
-  display: inline-block
-  padding-left: 0
-  margin: 20px 0
-  border-radius: 4px
-
-.pagination > li
-  display: inline
-
-.pagination > li > a,
-.pagination > li > span
-  position: relative
-  float: left
-  padding: 6px 12px
-  margin-left: -1px
-  line-height: 1.42857143
-  color: #337ab7
-  text-decoration: none
-  background-color: #fff
-  border: 1px solid #ddd
-
-.pagination > li:first-child > a,
-.pagination > li:first-child > span
-  margin-left: 0
-  border-top-left-radius: 4px
-  border-bottom-left-radius: 4px
-
-.pagination > li:last-child > a,
-.pagination > li:last-child > span
-  border-top-right-radius: 4px
-  border-bottom-right-radius: 4px
-
-.pagination > li > a:hover,
-.pagination > li > span:hover,
-.pagination > li > a:focus,
-.pagination > li > span:focus
-  z-index: 3
-  color: #23527c
-  background-color: #eee
-  border-color: #ddd
-
-.pagination > .active > a,
-.pagination > .active > span,
-.pagination > .active > a:hover,
-.pagination > .active > span:hover,
-.pagination > .active > a:focus,
-.pagination > .active > span:focus
-  z-index: 2
-  color: #fff
-  cursor: default
-  background-color: #337ab7
-  border-color: #337ab7
-
-.pagination > .disabled > span,
-.pagination > .disabled > span:hover,
-.pagination > .disabled > span:focus,
-.pagination > .disabled > a,
-.pagination > .disabled > a:hover,
-.pagination > .disabled > a:focus
-  color: #777
-  cursor: not-allowed
-  background-color: #fff
-  border-color: #ddd
-
-.pagination-lg > li > a,
-.pagination-lg > li > span
-  padding: 10px 16px
-  font-size: 18px
-  line-height: 1.3333333
-
-.pagination-lg > li:first-child > a,
-.pagination-lg > li:first-child > span
-  border-top-left-radius: 6px
-  border-bottom-left-radius: 6px
-
-.pagination-lg > li:last-child > a,
-.pagination-lg > li:last-child > span
-  border-top-right-radius: 6px
-  border-bottom-right-radius: 6px
-
-.pagination-sm > li > a,
-.pagination-sm > li > span
-  padding: 5px 10px
-  font-size: 12px
-  line-height: 1.5
-
-.pagination-sm > li:first-child > a,
-.pagination-sm > li:first-child > span
-  border-top-left-radius: 3px
-  border-bottom-left-radius: 3px
-
-.pagination-sm > li:last-child > a,
-.pagination-sm > li:last-child > span
-  border-top-right-radius: 3px
-  border-bottom-right-radius: 3px
-
+  font-size: 0.875rem

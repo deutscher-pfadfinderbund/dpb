@@ -33,7 +33,7 @@ class PageNode(template.Node):
         # was provided, filter the list to only public pages.
         if self.user:
             user = self.user.resolve(context)
-            if not user.is_authenticated():
+            if not user.is_authenticated:
                 pages = pages.filter(registration_required=False)
         else:
             pages = pages.filter(registration_required=False)

@@ -2,6 +2,15 @@ import os
 
 from django import template
 from django.db.models import FileField
+from django.utils.safestring import mark_safe
+
+from dpb.templatetags.form_tags import (
+    field_errors,
+    field_help_text,
+    field_label,
+    render_widget,
+    widget_css_class,
+)
 
 register = template.Library()
 
@@ -142,33 +151,53 @@ def table_row(value, args):
 @register.filter(is_safe=True)
 def bool_icon(value, text=""):
     if value:
-        icon = "<i class='fa fa-check'></i>"
+        icon = "<i class='fa fa-check' aria-hidden='true'></i>"
     else:
-        icon = "<i class='fa fa-times'></i>"
+        icon = "<i class='fa fa-times' aria-hidden='true'></i>"
     return f"{icon} {text}"
 
 
 @register.filter(is_safe=True)
 def form_item(val):
-    errors = has_errors(val)
-    try:
-        label = val.label_tag()
-    except AttributeError:
-        label = ""
-    return f"""
-        <div class="form-group">
-            {label}
-            {errors}
-            {val}
+    """
+    Render a bound form field as a Bootstrap 5 form group.
+    """
+    if not hasattr(val, "as_widget"):
+        return ""
+
+    css_class = widget_css_class(val.field.widget)
+    if val.errors:
+        css_class += " is-invalid"
+
+    return mark_safe(
+        f"""
+        <div class="mb-3">
+            {field_label(val, "form-label")}
+            {render_widget(val, css_class)}
+            {field_help_text(val)}
+            {field_errors(val)}
         </div>"""
+    )
 
 
 @register.filter(is_safe=True)
 def form_checkbox(val):
-    return f"""
-        <div class="checkbox">
-            {val.errors}
-            <label>
-            {val} {val.label}
-            </label>
+    """
+    Render a bound checkbox field as a Bootstrap 5 form check.
+    """
+    if not hasattr(val, "as_widget"):
+        return ""
+
+    css_class = widget_css_class(val.field.widget)
+    if val.errors:
+        css_class += " is-invalid"
+
+    return mark_safe(
+        f"""
+        <div class="form-check mb-3">
+            {render_widget(val, css_class)}
+            {field_label(val, "form-check-label")}
+            {field_help_text(val)}
+            {field_errors(val)}
         </div>"""
+    )

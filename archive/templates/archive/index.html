@@ -37,15 +37,15 @@
 
   <hr style="margin: 2em 0">
 
-  <h3>Neues aus dem Bundesarchiv</h3>
+  <h2 class="h3">Neues aus dem Bundesarchiv</h2>
   <br>
   {% if posts %}
     {% for post in posts %}
       <div class="card mb-3">
         <div class="card-header">
-          <h3 class="panel-title">
+          <h3 class="card-title">
             {{ post.title }}
-            <small class="pull-right">Erstellt von {{ post.author }} am {{ post.created }}</small>
+            <small class="float-end">Erstellt von {{ post.author }} am {{ post.created }}</small>
           </h3>
         </div>
         <div class="card-body">

@@ -1,7 +1,7 @@
 {% if user.is_staff %}
   {% with model as admin_add %}
   {% with model as admin_change %}
-  <span class="pull-right">
+  <span class="float-end">
     <a href="{% url admin_add %}"><i class="fa fa-plus-square-o"></i></a>
     {% if id %}
       <a href="{% url admin_change id %}"><i class="fa fa-pencil-square-o"></i></a>

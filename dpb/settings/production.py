@@ -44,21 +44,11 @@ DATABASES = {
 }
 
 
-### AUTH ###
-
-AUTHENTICATION_BACKENDS = [
-    # Needed to log in by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by email
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
-
 ### E-MAIL ###
 
 DEFAULT_FROM_EMAIL = os.environ["DEFAULT_FROM_EMAIL"]
 EMAIL_HOST = os.environ["EMAIL_HOST"]
-EMAIL_EMAIL_HOST_USERUSER = os.environ["EMAIL_HOST_USER"]
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
 EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
 
 EMAIL_USE_SSL = True

@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block preamble %}
-  {% include "owlcarousel.html" %}
+  {% include "carousel.html" %}
 {% endblock %}
 
 {% block content %}
@@ -47,7 +47,7 @@
   </p>
 
   {# Preview Row 1 #}
-  <div class="row g-5">
+  <div class="row gy-5 gx-4">
     {# Der Deutsche Pfadfinderbund #}
     <section class="col-lg-6">
       <h2>Unsere Bundesordnung</h2>
@@ -73,7 +73,7 @@
     </section>
 
     {# Was sind bündische Pfadfinder? #}
-    <section class="col-lg-6" style="padding-bottom: 0;">
+    <section class="col-lg-6">
       <h2>Pfadfinder und bündische Jugend</h2>
       <div class="row">
         <div class="col-md-4 col-sm-5 col-6">
@@ -128,7 +128,7 @@
         Das schließt grenzverletzendes Verhalten klar aus! Zur stetigen Arbeit an diesem Thema hat sich ein
         Präventionsrat gebildet, der nach innen und außen tätig ist.
       </p>
-      <a class="btn btn-link" href="/arbeitskreis">Mehr</a>
+      <a class="btn btn-link" href="{% url 'arbeitskreis' %}">Mehr</a>
       <div class="row">
         <div class="col-md-4">
           <a class="d-flex" href="{% url 'arbeitskreis' %}">

@@ -2,8 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
-from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
 
@@ -12,10 +11,7 @@ from .models import Post, Category
 
 @login_required
 def post(request, slug):
-    try:
-        post = Post.objects.get(slug=slug)
-    except Post.DoesNotExist:
-        raise Http404("Dieser Beitrag konnte leider nicht gefunden werden.")
+    post = get_object_or_404(Post, slug=slug)
     return render(request, 'blog/post.html', {'post': post})
 
 
@@ -41,31 +37,29 @@ class PostDelete(PermissionRequiredMixin, DeleteView):
 
 @login_required
 def blog_overview(request, page=1, category="Aktuelles"):
+    category = get_object_or_404(Category, name=category)
+    all_posts = Post.objects.filter(
+        Q(category=category),
+        Q(public=True),
+        Q(archive=False),
+    ).select_related("author").order_by("-created")
+
+    paginator = Paginator(all_posts, 6)
+
     try:
-        category = Category.objects.filter(name=category)
-        all_posts = Post.objects.filter(
-            Q(category=category[0].id),
-            Q(public=True),
-            Q(archive=False),
-        ).order_by("-created")
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        posts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        posts = paginator.page(paginator.num_pages)
 
-        paginator = Paginator(all_posts, 6)
-
-        try:
-            posts = paginator.page(page)
-        except PageNotAnInteger:
-            # If page is not an integer, deliver first page.
-            posts = paginator.page(1)
-        except EmptyPage:
-            # If page is out of range (e.g. 9999), deliver last page of results.
-            posts = paginator.page(paginator.num_pages)
-    except Post.DoesNotExist:
-        raise Http404("Diese Beiträge konnten leider nicht gefunden werden.")
     return render(request, 'blog/list.html',
                   {'posts': pack(posts),
                    'paginator': posts,
                    'length': range(len(posts)),
-                   'category': category[0]})
+                   'category': category})
 
 
 # Aux functions

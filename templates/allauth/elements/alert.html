@@ -1,0 +1,5 @@
+{# Bootstrap 5 flavour of allauth's default alert element. #}
+{% load allauth %}
+<div class="alert {% if 'danger' in attrs.tags or 'error' in attrs.tags %}alert-danger{% elif 'warning' in attrs.tags %}alert-warning{% elif 'success' in attrs.tags %}alert-success{% else %}alert-info{% endif %}" role="alert">
+  {% slot message %}{% endslot %}
+</div>

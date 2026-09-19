@@ -5,6 +5,12 @@ DEBUG = True
 
 SECRET_KEY = "CHANGE_ME"
 
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "[::1]"]
+
+# Development is served over plain http, so the cookies must not be https-only.
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

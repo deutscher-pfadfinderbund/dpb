@@ -8,14 +8,6 @@
   <h1>Häuser und Zeltplätze hinzufügen</h1>
 {% endblock %}
 
-{% block sources %}
-  <style>
-      form .col-md-2, form .col-md-3, form .col-md-4, form .col-md-6 {
-          padding-left: 0;
-      }
-  </style>
-{% endblock %}
-
 {% block content %}
   <p>
     Ja, das ist ein sehr langes Formular. Aber je mehr Informationen du angibst, desto genauer wird unsere Datenbank.
@@ -162,13 +154,4 @@
 
     <input type="submit" value="Abschicken" class="btn btn-outline-dark">
   </form>
-
-  <script type="application/javascript">
-      $(document).ready(function () {
-          $(".form-group input").addClass("form-control");
-          $(".form-group select").addClass("form-control");
-          $(".form-group textarea").addClass("form-control");
-          // $(".footer-wrapper").hide();
-      });
-  </script>
 {% endblock content %}

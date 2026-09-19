@@ -9,8 +9,10 @@ This is a Python3 Django project.
 ### 1. Install frontend dependencies
 
 ```bash
-# Compile SASS to CSS (Bootstrap uses SASS for customization)
-$ npm run compile
+# Install the npm packages and compile SASS to CSS
+# (Bootstrap is customized through SASS; the result lands in dpb/static/styles/)
+$ npm install
+$ npm run compile-css
 
 # (Optional) Watch SASS files for changes and recompile automatically
 $ npm run watch-css
@@ -20,7 +22,7 @@ $ npm run watch-css
 Start a local database with docker:
 
 ```bash
-$ docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=razupaltuff -e POSTGRES_USER=dpb -e POSTGRES_DB=dpb postgres:16
+$ docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=razupaltuff -e POSTGRES_USER=dpb -e POSTGRES_DB=dpb postgres:16-alpine
 
 # Setup the database schema (only needs to be done once)
 $ uv run manage.py migrate
