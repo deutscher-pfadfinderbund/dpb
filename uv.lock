@@ -299,15 +299,6 @@ wheels = [
 ]
 
 [[package]]
-name = "django-forms-bootstrap"
-version = "3.1.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/c2/14/e80f3fefad1e5ec0a7031e6810b0e75b18914250b697a584dd0b8f6c3935/django-forms-bootstrap-3.1.0.tar.gz", hash = "sha256:ffc6d2b9fba03e2366884e82f613daf1284702e9346746e0e9de299db8138d6f", size = 6270, upload-time = "2017-04-17T14:27:18.438Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/f2/bd/6bff32d77e093ed7a5804591b8a4dd46f1ccd621129fdcad84afc6d8be30/django_forms_bootstrap-3.1.0-py2.py3-none-any.whl", hash = "sha256:50d69baf6c6f262f6ae3651096b52c31552cb75d37493f0c917ce2c16d13f0d9", size = 9541, upload-time = "2017-04-17T14:27:20.443Z" },
-]
-
-[[package]]
 name = "django-markdownify"
 version = "0.9.7"
 source = { registry = "https://pypi.org/simple" }
@@ -356,7 +347,6 @@ dependencies = [
     { name = "django-allauth", extra = ["socialaccount"] },
     { name = "django-autoslug" },
     { name = "django-filer" },
-    { name = "django-forms-bootstrap" },
     { name = "django-markdownify" },
     { name = "django-pagedown" },
     { name = "easy-thumbnails" },
@@ -372,7 +362,6 @@ requires-dist = [
     { name = "django-allauth", extras = ["socialaccount"], specifier = ">=65.19.4" },
     { name = "django-autoslug", specifier = ">=1.9.9" },
     { name = "django-filer", specifier = ">=3.6.0" },
-    { name = "django-forms-bootstrap", specifier = ">=3.1.0" },
     { name = "django-markdownify", specifier = ">=0.9.7" },
     { name = "django-pagedown", specifier = ">=2.2.1" },
     { name = "easy-thumbnails", specifier = ">=2.10" },

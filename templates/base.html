@@ -3,6 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script>
+    // Runs before the stylesheet paints anything, so the page never flashes
+    // the wrong colour mode. The toggle at the end of <body> keeps it in sync.
+    (() => {
+      let stored = null;
+      try { stored = localStorage.getItem("dpb-theme"); } catch (e) { /* blocked storage */ }
+      const auto = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute(
+        "data-bs-theme", stored && stored !== "auto" ? stored : auto);
+    })();
+  </script>
   {% block meta %}{% endblock %}
 
   {% load static %}
@@ -153,6 +165,31 @@
         <li class="nav-item"><a class="nav-link" href="{% url 'links:index' %}">Links</a></li>
       </ul>
       <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false" aria-label="Farbschema wählen">
+            <i class="fa fa-adjust" aria-hidden="true"></i>
+            <span class="d-lg-none ms-2">Farbschema</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <button type="button" class="dropdown-item" data-dpb-theme="light">
+                <i class="fa fa-sun-o fa-fw me-2" aria-hidden="true"></i>Hell
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item" data-dpb-theme="dark">
+                <i class="fa fa-moon-o fa-fw me-2" aria-hidden="true"></i>Dunkel
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item" data-dpb-theme="auto">
+                <i class="fa fa-desktop fa-fw me-2" aria-hidden="true"></i>Automatisch
+              </button>
+            </li>
+          </ul>
+        </li>
+
         {% if user.is_authenticated %}
           <li class="nav-item dropdown">
             <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -201,10 +238,40 @@
 <script>
   // Bootstrap tooltips are opt-in, so elements marked up with
   // data-bs-toggle="tooltip" need to be initialised once per page.
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('[data-bs-toggle="tooltip"]')
       .forEach(el => new bootstrap.Tooltip(el));
   });
+
+  // Colour-mode picker. "auto" follows the operating system and keeps
+  // following it while the page is open.
+  (() => {
+    const KEY = "dpb-theme";
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const buttons = document.querySelectorAll("[data-dpb-theme]");
+
+    let choice = "auto";
+    try { choice = localStorage.getItem(KEY) || "auto"; } catch (e) { /* blocked storage */ }
+
+    const apply = () => {
+      document.documentElement.setAttribute(
+        "data-bs-theme", choice === "auto" ? (media.matches ? "dark" : "light") : choice);
+      buttons.forEach(b => {
+        const selected = b.dataset.dpbTheme === choice;
+        b.classList.toggle("active", selected);
+        b.setAttribute("aria-current", selected ? "true" : "false");
+      });
+    };
+
+    media.addEventListener("change", () => { if (choice === "auto") apply(); });
+    buttons.forEach(b => b.addEventListener("click", () => {
+      choice = b.dataset.dpbTheme;
+      try { localStorage.setItem(KEY, choice); } catch (e) { /* blocked storage */ }
+      apply();
+    }));
+
+    apply();
+  })();
 </script>
 
 {% block extra_body %}{% endblock %}

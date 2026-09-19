@@ -33,10 +33,12 @@ urlpatterns = [path("", views.index, name='index'),
                path('infos/', blogviews.blog_overview, {'category': 'Aktuelles'}, name='blog_page'),
                path('infos/seite/<int:page>/', blogviews.blog_overview, {'category': 'Aktuelles'},
                     name='blog_page'),
-               path('infos/<slug:slug>/', blogviews.post, name='blog_detail'),
+               # The slug route has to come last, otherwise it swallows
+               # /infos/neu/ and the "Eintrag hinzufügen" button 404s.
                path('infos/neu/', blogviews.PostCreate.as_view(), name='blog_post_add'),
                path('infos/bearbeiten/<int:pk>/', blogviews.PostUpdate.as_view(), name='blog_post_change'),
                path('infos/entfernen/<int:pk>/', blogviews.PostDelete.as_view(), name='blog_post_delete'),
+               path('infos/<slug:slug>/', blogviews.post, name='blog_detail'),
                path('intern/themen/', blogviews.blog_overview, {'category': 'Themen'}, name='blog_themen'),
                path('intern/arbeitskreis/mitglieder/', pageviews.page,
                     {'url': '/intern/arbeitskreis/mitglieder/'},

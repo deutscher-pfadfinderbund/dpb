@@ -1,8 +1,19 @@
 @use "pkg:bootstrap" with (
+  // One brand colour instead of three: the deep blue that has always been used
+  // for links now also drives buttons, focus rings, pagination and form focus,
+  // so the whole site reads as one palette.
+  $primary: #0051a8,
   $dark: #333333,
+
+  // Light colour mode
   $body-bg: #f6f6f6,
   $body-color: #333333,
-  $btn-link-color: #0051a8,
+
+  // Dark colour mode. Bootstrap derives the rest (links, borders, muted text)
+  // from these and from $primary.
+  $body-bg-dark: #1b1d20,
+  $body-color-dark: #dee2e6,
+
   $table-cell-vertical-align: middle
 )
 
@@ -28,10 +39,49 @@ img
   display: block
   max-width: 100%
 
-// Container
+/* Surfaces that have to stand out against the page background. Bootstrap's own
+   tertiary background is too close to $body-bg to read as a separate band, so
+   this is a project token with a value per colour mode. */
+\:root,
+[data-bs-theme="light"]
+  --dpb-surface-bg: #ffffff
+
+[data-bs-theme="dark"]
+  --dpb-surface-bg: #25282c
+
 .stripe
-  background-color: white
-  border-color: #eeeeee
+  background-color: var(--dpb-surface-bg)
+  border-color: var(--bs-border-color)
+
+/* Black line art on a transparent background disappears on a dark page. */
+[data-bs-theme="dark"] .invert-on-dark
+  filter: invert(1)
+
+/* Bootstrap does not flip its colour utilities per colour mode, so the dark
+   button variants used all over the site vanish against a dark page. Redefine
+   their tokens to the light variants; the light mode keeps its own look. */
+[data-bs-theme="dark"]
+  .btn-dark,
+  .btn-outline-dark
+    --bs-btn-color: #{bootstrap.$gray-900}
+    --bs-btn-bg: #{bootstrap.$gray-200}
+    --bs-btn-border-color: #{bootstrap.$gray-200}
+    --bs-btn-hover-color: #{bootstrap.$gray-900}
+    --bs-btn-hover-bg: #{bootstrap.$white}
+    --bs-btn-hover-border-color: #{bootstrap.$white}
+    --bs-btn-active-color: #{bootstrap.$gray-900}
+    --bs-btn-active-bg: #{bootstrap.$white}
+    --bs-btn-active-border-color: #{bootstrap.$white}
+    --bs-btn-disabled-color: #{bootstrap.$gray-900}
+    --bs-btn-disabled-bg: #{bootstrap.$gray-200}
+    --bs-btn-disabled-border-color: #{bootstrap.$gray-200}
+
+  .btn-outline-dark
+    --bs-btn-color: #{bootstrap.$gray-200}
+    --bs-btn-bg: transparent
+    --bs-btn-border-color: #{bootstrap.$gray-200}
+    --bs-btn-disabled-color: #{bootstrap.$gray-200}
+    --bs-btn-disabled-bg: transparent
 
 .alert
   font-weight: bold

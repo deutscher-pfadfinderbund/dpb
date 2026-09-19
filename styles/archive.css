@@ -6,7 +6,7 @@
   text-decoration: underline;
 }
 
+/* Visited results stay distinguishable, in both colour modes. */
 .bundesarchiv-ergebnisse a:visited {
-  color: green;
+  color: var(--bs-success-text-emphasis);
 }
-

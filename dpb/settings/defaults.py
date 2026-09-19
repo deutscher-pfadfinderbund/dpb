@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     # 3rd party
     'dpb.apps.MyFilerConfig',  # Use Django-Filer with own config for verbose name
     'easy_thumbnails',
-    'django_forms_bootstrap',
     'autoslug',
     'pagedown',
     'markdownify',
