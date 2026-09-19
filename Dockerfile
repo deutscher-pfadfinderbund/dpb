@@ -35,9 +35,10 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 COPY --from=npm-deps /build/node_modules node_modules/
 COPY --from=npm-deps /build/dpb/static/styles/ dpb/static/styles/
 
+# No --link here: collectstatic would write symlinks pointing at paths
+# (node_modules, dpb/static) that the runtime stage does not receive.
 RUN uv run --frozen python manage.py collectstatic  \
     --noinput  \
-    --link \
     --ignore *.map  \
     && ls static
 

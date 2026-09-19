@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -37,7 +38,11 @@ class PostDelete(PermissionRequiredMixin, DeleteView):
 
 @login_required
 def blog_overview(request, page=1, category="Aktuelles"):
-    category = get_object_or_404(Category, name=category)
+    # `Category.name` is not unique, so pick the first match rather than
+    # letting a duplicate name turn into a MultipleObjectsReturned 500.
+    category = Category.objects.filter(name=category).first()
+    if category is None:
+        raise Http404("Diese Beiträge konnten leider nicht gefunden werden.")
     all_posts = Post.objects.filter(
         Q(category=category),
         Q(public=True),
