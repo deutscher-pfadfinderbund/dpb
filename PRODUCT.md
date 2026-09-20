@@ -26,7 +26,7 @@ Offizielle Website des Deutschen Pfadfinderbundes e.V. Sie stellt den Bund nach 
 
 ## Positioning
 
-Der DPB ist ein unabhängiger, konfessionell nicht gebundener und bündisch geprägter Pfadfinderbund, gemeinnützig und ehrenamtlich getragen, Mitglied im Ring junger Bünde (RjB). Zwei Wurzeln: die aus England stammende weltweite Pfadfinderbewegung und die Deutsche Jugendbewegung. Maßstab sind Gesetz und Versprechen der Pfadfinderinnen und Pfadfinder sowie die Meißnerformel. Erklärtes gesellschaftliches Anliegen: demokratische Gesinnung fördern, totalitären Bestrebungen entgegenwirken, das Gemeinsame betonen statt das Trennende. (Wortlaut: `templates/index.html`.)
+Der DPB ist ein unabhängiger, konfessionell nicht gebundener und bündisch geprägter Pfadfinderbund, gemeinnützig und ehrenamtlich getragen, Mitglied im Ring junger Bünde (RjB). Zwei Wurzeln: die aus England stammende weltweite Pfadfinderbewegung und die Deutsche Jugendbewegung. Maßstab sind Gesetz und Versprechen der Pfadfinderinnen und Pfadfinder sowie die Meißnerformel. Erklärtes gesellschaftliches Anliegen: demokratische Gesinnung fördern, totalitären Bestrebungen entgegenwirken, das Gemeinsame betonen statt das Trennende. (Wortlaut: `templates/index.html`; die zwei Wurzeln stehen in `templates/pfadfinder.html`.)
 
 ## Operating Context
 

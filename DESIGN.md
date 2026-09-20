@@ -27,7 +27,7 @@ typography:
     lineHeight: 1.2
   title:
     fontFamily: "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif"
-    fontSize: "1.5rem"
+    fontSize: "calc(1.275rem + 0.3vw)"
     fontWeight: 500
     lineHeight: 1.2
   body:
@@ -59,6 +59,12 @@ components:
     typography: "{typography.body}"
   button-primary-hover:
     backgroundColor: "{colors.bundesblau-tief}"
+  button-outline-dark:
+    backgroundColor: "transparent"
+    textColor: "{colors.anthrazit}"
+    rounded: "{rounded.md}"
+    padding: "0.375rem 0.75rem"
+    typography: "{typography.body}"
   button-outline-dark-sm:
     backgroundColor: "transparent"
     textColor: "{colors.anthrazit}"
@@ -108,7 +114,7 @@ components:
 
 **Creative North Star: "Bootstrap, auf eine Farbe eingekürzt"**
 
-Die Ansage steht im Quelltext: „One brand colour instead of three: the deep blue that has always been used for links now also drives buttons, focus rings, pagination and form focus, so the whole site reads as one palette." (`styles/style.sass`). Das System ist ein Bootstrap 5, dessen Variablenschicht an genau vier Stellen angefasst wurde — Markenfarbe, Dunkelton, Seitengrund hell, Seitengrund dunkel — und das sich ansonsten bewusst nicht verstellt. Es gibt keine eigene Schrift, keine Schatten und keine Animation außer den Zustandsübergängen und dem Karussell.
+Die Ansage steht im Quelltext: „One brand colour instead of three: the deep blue that has always been used for links now also drives buttons, focus rings, pagination and form focus, so the whole site reads as one palette." (`styles/style.sass`). Das System ist ein Bootstrap 5, dessen Variablenschicht an sieben Stellen angefasst wurde — Markenfarbe, Dunkelton, Seitengrund und Textfarbe je Farbmodus, dazu die vertikale Zellenausrichtung der Tabellen — und das sich ansonsten bewusst nicht verstellt. Es gibt keine eigene Schrift, keine Schatten und keine Animation außer den Zustandsübergängen und dem Karussell.
 
 Die Oberfläche tritt hinter den Inhalt zurück. Flächen unterscheiden sich durch Linien und minimale Helligkeitsabstufungen, nicht durch Höhe. Wärme kommt aus den Fotos — Großfahrt, Bundeslager, Schwarzzelte im Karussell — nicht aus der Oberfläche. Der einzige dauerhaft farbige Block der Seite ist die dunkle Navigationsleiste am oberen Rand; darunter beginnt Papier.
 
@@ -127,8 +133,8 @@ Beide Farbmodi sind gleichwertig gebaut, nicht einer als nachgereichte Variante.
 Eine Markenfarbe, sonst Graustufen.
 
 ### Primary
-- **Bundesblau** (`#0051a8`): Die einzige Markenfarbe. Links im Fließtext, `btn-primary`, Fokusring (`0 0 0 0.25rem rgba(0, 81, 168, 0.25)`), Pagination, Formularfokus. Im dunklen Modus tritt sie als **Bundesblau Nacht** (`#6697cb`) auf — dieselbe Farbe, um 40 % aufgehellt, damit sie auf `#1b1d20` den Kontrast hält.
-- **Bundesblau Tief** (`#00458f`): Hover- und Aktivzustand von `btn-primary`. Erscheint nie als Flächenfarbe.
+- **Bundesblau** (`#0051a8`): Die einzige Markenfarbe. Links im Fließtext, `btn-primary`, Pagination. Der Fokusring `0 0 0 0.25rem rgba(0, 81, 168, 0.25)` — dieselbe Farbe bei 25 % — gilt für Formularfelder, Navigations-Links und Pagination; Buttons setzen stattdessen ihre eigene `--bs-btn-focus-shadow-rgb` bei 50 % (`38, 107, 181` bei `btn-primary` und `btn-link`, `51, 51, 51` bei `btn-outline-dark`). Im dunklen Modus tritt sie als **Bundesblau Nacht** (`#6697cb`) auf — dieselbe Farbe, um 40 % aufgehellt, damit sie auf `#1b1d20` den Kontrast hält.
+- **Bundesblau Tief** (`#00458f`): Hoverzustand von `btn-primary`. Der Aktivzustand geht eine Stufe tiefer auf `#004186`. Beide erscheinen nie als Flächenfarbe.
 
 ### Neutral
 - **Anthrazit** (`#333333`): Fließtext im hellen Modus und `$dark` — die Farbe der Navigationsleiste und der `btn-outline-dark`-Umrandung. Kein reines Schwarz.
@@ -142,11 +148,11 @@ Eine Markenfarbe, sonst Graustufen.
 
 ### Named Rules
 
-**Die Ein-Farben-Regel.** Es gibt genau eine Markenfarbe. Alles, was anklickbar ist, trägt sie; alles, was es nicht ist, trägt sie nicht. Eine zweite Akzentfarbe einzuführen heißt, diese Regel aufzukündigen — dann muss das gesamte System neu entschieden werden, nicht nur eine Komponente.
+**Die Ein-Farben-Regel.** Es gibt genau eine Markenfarbe. Alles, was anklickbar ist, trägt sie; alles, was es nicht ist, trägt sie nicht. Eine zweite Akzentfarbe einzuführen heißt, diese Regel aufzukündigen — dann muss das gesamte System neu entschieden werden, nicht nur eine Komponente. Eine Stelle weicht ab: der Bearbeiten-Link für Staff in der Archiv-Detailseite (`archive/templates/archive/detail.html`) trägt `btn-info` und damit Bootstraps Türkis. Bestand, kein Vorbild.
 
 **Die Bundeszeichen-Regel.** Der Schriftzug mit Lilie (`dpb/static/img/schriftzug-dpb.svg`) ist schwarze Line-Art und wird nie umgefärbt, nie invertiert, nie in eine Markenfarbe gesetzt. Im dunklen Modus bekommt er eine helle Fläche unter sich (`.logo-on-light`, Padding `1rem`, Radius `{rounded.md}`), nicht eine Farbumkehr. Im hellen Modus ist diese Fläche unsichtbar, weil sie dem Seitengrund entspricht.
 
-**Die Zwei-Modi-Regel.** Kein Farbwert wird fest geschrieben, wenn ein Bootstrap-Token existiert. Feste Hex-Werte in Templates kippen im dunklen Modus nicht mit und sind der häufigste Fehler in diesem Projekt. Jede neue Fläche wird in beiden Modi geprüft; beide müssen WCAG 2.1 AA erfüllen.
+**Die Zwei-Modi-Regel.** Kein Farbwert wird fest geschrieben, wenn ein Bootstrap-Token existiert. Feste Hex-Werte in Templates kippen im dunklen Modus nicht mit; im aktuellen Bestand gibt es keine. Jede neue Fläche wird in beiden Modi geprüft; beide müssen WCAG 2.1 AA erfüllen.
 
 ## Typography
 
@@ -159,7 +165,7 @@ Eine Markenfarbe, sonst Graustufen.
 ### Hierarchy
 - **Display** (fluid, ab 1200px `2.5rem`): `h1`. Eine pro Seite, gesetzt über den `heading`-Block von `base.html`.
 - **Headline** (fluid, ab 1200px `2rem`): `h2`. Abschnitte auf der Startseite und Kapitelüberschriften.
-- **Title** (`h3` fluid bis `1.75rem`, `h4` fest `1.5rem`): Karten- und Eintragsüberschriften. Auf Listenseiten wird `h2` oft mit der Klasse `h3` gesetzt, damit die Dokumentstruktur stimmt und die Optik trotzdem ruhig bleibt — dieses Muster bleibt.
+- **Title** (fluid, ab 1200px `1.75rem` für `h3` und `1.5rem` für `h4`): Karten- und Eintragsüberschriften. Auf Listenseiten wird `h2` oft mit der Klasse `h3` gesetzt, damit die Dokumentstruktur stimmt und die Optik trotzdem ruhig bleibt — dieses Muster bleibt.
 - **Body**: Fließtext, `text-wrap-style: pretty`.
 - **Label**: Tabellenzellen und `btn-sm`. Die Größe markiert sekundäre, dichte Information.
 
@@ -197,7 +203,7 @@ Ein Grundradius: `0.375rem` (`--bs-border-radius`). Karten, Formularfelder, Bild
 
 Zwei Ausnahmen, beide begründet: die Karussell-Indikatoren sind Kreise (`border-radius: 50%`); das Bundeszeichen ist Line-Art ohne Rahmen.
 
-Rahmen sind immer `1px` und tragen `--bs-border-color`. Es gibt keine doppelten Rahmen, keine gestrichelten Linien, keine Umrandung in Markenfarbe.
+Rahmen sind immer `1px` und tragen `--bs-border-color`. Es gibt keine doppelten Rahmen, keine gestrichelten Linien und keine Umrandung in Markenfarbe — außer am fokussierten Formularfeld, wo der Rahmen auf eine helle Bundesblau-Tönung wechselt.
 
 Bilder im Inhalt tragen `img-thumbnail`: schmaler Innenabstand, Grundfarbe der Seite, `1px`-Linie, derselbe Radius. Das ist der visuelle Ersatz für einen Schatten — ein Passepartout statt einer Erhebung.
 
@@ -205,11 +211,11 @@ Bilder im Inhalt tragen `img-thumbnail`: schmaler Innenabstand, Grundfarbe der S
 
 ### Buttons
 - **Shape:** Radius nach Buttongröße (siehe Shapes). Immer `1px` Rahmen, nie ein Schatten.
-- **Primary:** Bundesblau auf Weiß. Für die eine Handlung, die eine Seite anbietet — „Neues Haus / Zeltplatz hinzufügen", Formular abschicken.
-- **Outline-Dark:** die Arbeitsvariante, meist als `btn-sm`. „Weiterlesen", „Details", Aktionen in Listen. Rahmen und Schrift in Anthrazit, Fläche transparent.
+- **Primary:** Bundesblau auf Weiß. Selten und nur für die eine Handlung, die eine Seite anbietet: vier Stellen im Bestand — „Neues Haus / Zeltplatz hinzufügen", „Heimabendprogramm hinzufügen", „Suchen" im Katalog, „Eintrag löschen".
+- **Outline-Dark:** die Arbeitsvariante und der häufigste Button im Bestand. Vollgroß ist er der Absende-Button fast aller Formulare (Kontakt, Blogeintrag, Haus anlegen, Heimabend, Anmeldung); als `btn-sm` trägt er „Weiterlesen" und „Details" in Listen. Rahmen und Schrift in Anthrazit, Fläche transparent.
 - **Dark in groß:** einmal im Bestand, auf der Anmeldeseite für den externen Anbieter (`btn-lg btn-dark`, Schriftgröße `1.25rem`). Die Größe markiert dort, dass es die einzige Handlung der Seite ist.
 - **Link:** unterstrichener Text in Bundesblau ohne Rahmen. Für Weiterführendes innerhalb eines Textblocks.
-- **Hover / Focus:** Farbwechsel nach Bundesblau Tief bei `btn-primary`, Übergang `0.15s ease-in-out` auf Farbe, Fläche, Rahmen und Schatten. Fokus ist immer der Fokusring — er wird nie entfernt.
+- **Hover / Focus:** Farbwechsel nach Bundesblau Tief bei `btn-primary`, Übergang `0.15s ease-in-out` auf Farbe, Fläche, Rahmen und Schatten. Der Fokusring trägt die Farbe des Buttons, nicht die Markenfarbe (siehe Colors) — er wird nie entfernt.
 
 **Die Dunkelmodus-Umkehr-Regel.** `btn-dark` und `btn-outline-dark` verschwinden im dunklen Modus, weil Bootstrap seine Farb-Utilities nicht pro Modus dreht. Deshalb tauschen beide dort auf helle Tokens (`#e9ecef` als Schrift- und Rahmenfarbe, `$gray-900` beim Hover). Jede neue Verwendung eines `dark`-Utilities muss denselben Tausch mitbringen oder auf ein modusfestes Token ausweichen.
 
@@ -222,7 +228,7 @@ Bilder im Inhalt tragen `img-thumbnail`: schmaler Innenabstand, Grundfarbe der S
 
 ### Inputs / Fields
 - **Style:** Grundfarbe der Seite, `1px`-Linie, Grundradius. Label darüber (`form-label`), nie als Platzhalter im Feld.
-- **Focus:** Rahmen wechselt auf Bundesblau, dazu der Fokusring, mit demselben Übergang wie bei Buttons.
+- **Focus:** Rahmen wechselt auf eine helle Bundesblau-Tönung (`#80a8d4`), dazu der Fokusring in der Markenfarbe, mit demselben Übergang wie bei Buttons.
 - **Error:** als `alert` über dem Formular, fett (`.alert { font-weight: bold }`), nicht als stille rote Umrandung.
 
 ### Navigation
@@ -236,7 +242,7 @@ Bilder im Inhalt tragen `img-thumbnail`: schmaler Innenabstand, Grundfarbe der S
 - **State:** besuchte Treffer bleiben unterscheidbar (`--bs-success-text-emphasis`) — in beiden Farbmodi.
 
 ### Karussell (Signature Component)
-Das Karussell über der Startseite ist die einzige gestaltete Abweichung vom Bootstrap-Standard: die Indikatoren sitzen **unter** dem Bild statt darauf (`position: static`), als `10px`-Kreise in `--bs-secondary-color`. Das Bild bleibt dadurch unverdeckt, und die Punkte bleiben lesbar, egal wie hell das Foto ist. Jedes Bild trägt eine beschreibende `alt`-Angabe; das erste lädt normal, alle weiteren `loading="lazy"`.
+Das Karussell über der Startseite ist die einzige gestaltete Abweichung vom Bootstrap-Standard: die Indikatoren sitzen **unter** dem Bild statt darauf (`position: static`), als `10px`-Kreise in `--bs-secondary-color`. Der `<header>` erzwingt `data-bs-theme="dark"`, deshalb lösen die Punkte immer zum dunklen Wert auf (`rgba(222, 226, 230, 0.75)`) und bleiben hell — auch auf der hellen Seite. Das Bild bleibt unverdeckt. Jedes Bild trägt eine beschreibende `alt`-Angabe; das erste lädt normal, alle weiteren `loading="lazy"`.
 
 ### Farbschema-Umschalter
 Dreiwertig (Hell / Dunkel / Automatisch), im Dropdown rechts in der Leiste, gespeichert unter `dpb-theme` im `localStorage`. Die Auflösung läuft in einem Inline-Skript im `<head>` vor dem Stylesheet, damit nie das falsche Thema aufblitzt. Diese Reihenfolge ist Teil des Designs, nicht eine Optimierung: ein Wechsel dieser Stelle bringt das Flackern zurück.

@@ -24,7 +24,7 @@
         "role": "primary",
         "displayName": "Bundesblau Tief",
         "canonical": "oklch(0.4002 0.1369 256.0)",
-        "purpose": "Hover- und Aktivzustand des Primaerbuttons. Nie als Flaechenfarbe.",
+        "purpose": "Hoverzustand des Primaerbuttons. Der Aktivzustand geht eine Stufe tiefer auf #004186. Nie als Flaechenfarbe.",
         "tonalRamp": [
           "oklch(0.15 0.1369 256.0)",
           "oklch(0.26 0.1369 256.0)",
@@ -208,7 +208,7 @@
       },
       "title": {
         "displayName": "Title",
-        "purpose": "h3/h4, Karten- und Eintragsueberschriften. h3 fluid bis 1.75rem, h4 fest 1.5rem."
+        "purpose": "h3/h4, Karten- und Eintragsueberschriften. Beide fluid, ab 1200px 1.75rem (h3) und 1.5rem (h4)."
       },
       "body": {
         "displayName": "Body",
@@ -221,9 +221,14 @@
     },
     "shadows": [
       {
-        "name": "focus-ring",
+        "name": "focus-ring-field",
         "value": "0 0 0 0.25rem rgba(0, 81, 168, 0.25)",
-        "purpose": "Der einzige Schatten im laufenden Betrieb. Zustand, nicht Hoehe. Wird nie entfernt."
+        "purpose": "Fokus von Formularfeldern, Navigations-Links und Pagination: die Markenfarbe bei 25 %."
+      },
+      {
+        "name": "focus-ring-button",
+        "value": "0 0 0 0.25rem rgba(var(--bs-btn-focus-shadow-rgb), .5)",
+        "purpose": "Fokus von Buttons: die eigene Buttonfarbe bei 50 % (38, 107, 181 bei btn-primary und btn-link; 51, 51, 51 bei btn-outline-dark)."
       }
     ],
     "motion": [
@@ -277,15 +282,15 @@
       "refersTo": "button-primary",
       "description": "Die eine Handlung, die eine Seite anbietet.",
       "html": "<button class=\"ds-btn-primary\" type=\"button\">Neues Haus / Zeltplatz hinzufügen</button>",
-      "css": ".ds-btn-primary { font: 400 1rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #fff; background: var(--bs-primary, #0051a8); border: 1px solid var(--bs-primary, #0051a8); border-radius: .375rem; padding: .375rem .75rem; cursor: pointer; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out; } .ds-btn-primary:hover { background: #00458f; border-color: #004186; } .ds-btn-primary:focus-visible { outline: 0; box-shadow: 0 0 0 .25rem rgba(0, 81, 168, .25); } .ds-btn-primary:active { background: #004186; }"
+      "css": ".ds-btn-primary { font: 400 1rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #fff; background: var(--bs-primary, #0051a8); border: 1px solid var(--bs-primary, #0051a8); border-radius: .375rem; padding: .375rem .75rem; cursor: pointer; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out; } .ds-btn-primary:hover { background: #00458f; border-color: #004186; } .ds-btn-primary:focus-visible { outline: 0; box-shadow: 0 0 0 .25rem rgba(38, 107, 181, .5); } .ds-btn-primary:active { background: #004186; }"
     },
     {
       "name": "Outline Button (klein)",
       "kind": "button",
       "refersTo": "button-outline-dark-sm",
-      "description": "Die Arbeitsvariante in Listen und Vorschauen: Weiterlesen, Details. Als btn-sm zieht der Radius auf .25rem.",
+      "description": "Die Arbeitsvariante und der haeufigste Button im Bestand. Hier als btn-sm (Weiterlesen, Details in Listen); vollgross ist derselbe Button der Absende-Button fast aller Formulare.",
       "html": "<button class=\"ds-btn-outline\" type=\"button\">Weiterlesen</button>",
-      "css": ".ds-btn-outline { font: 400 .875rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #333; background: transparent; border: 1px solid #333; border-radius: .25rem; padding: .25rem .5rem; cursor: pointer; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out; } .ds-btn-outline:hover { color: #fff; background: #333; } .ds-btn-outline:focus-visible { outline: 0; box-shadow: 0 0 0 .25rem rgba(51, 51, 51, .25); }"
+      "css": ".ds-btn-outline { font: 400 .875rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #333; background: transparent; border: 1px solid #333; border-radius: .25rem; padding: .25rem .5rem; cursor: pointer; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out; } .ds-btn-outline:hover { color: #fff; background: #333; } .ds-btn-outline:focus-visible { outline: 0; box-shadow: 0 0 0 .25rem rgba(51, 51, 51, .5); }"
     },
     {
       "name": "Outline Button im dunklen Modus",
@@ -301,7 +306,7 @@
       "refersTo": "button-link",
       "description": "Weiterfuehrendes innerhalb eines Textblocks. Unterstrichen, ohne Rahmen.",
       "html": "<button class=\"ds-btn-link\" type=\"button\">Mehr</button>",
-      "css": ".ds-btn-link { font: 400 1rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--bs-primary, #0051a8); background: transparent; border: 1px solid transparent; border-radius: .375rem; padding: .375rem .75rem; text-decoration: underline; cursor: pointer; transition: color .15s ease-in-out; } .ds-btn-link:hover { color: #004186; } .ds-btn-link:focus-visible { outline: 0; box-shadow: 0 0 0 .25rem rgba(0, 81, 168, .25); }"
+      "css": ".ds-btn-link { font: 400 1rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--bs-primary, #0051a8); background: transparent; border: 1px solid transparent; border-radius: .375rem; padding: .375rem .75rem; text-decoration: underline; cursor: pointer; transition: color .15s ease-in-out; } .ds-btn-link:hover { color: #004186; } .ds-btn-link:focus-visible { outline: 0; box-shadow: 0 0 0 .25rem rgba(38, 107, 181, .5); }"
     },
     {
       "name": "Card",
@@ -325,7 +330,7 @@
       "refersTo": "nav-link",
       "description": "Bleibt dunkel, unabhaengig vom Farbmodus der Seite. Marke links als weisse Lilie, Menuepunkte rechts davon. Das SVG hier ist eine vereinfachte Wiedergabe des Navigations-Zeichens (zwei gespiegelte Haelften ohne die Schattierungsmasken des Originals in templates/base.html).",
       "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-brand\" href=\"#\"><svg viewBox=\"0 0 450 637\" height=\"32\" aria-hidden=\"true\"><g fill=\"#fff\"><path d=\"M107.3 166.4a170 266 0 0152 377l-27.5-38.9C156.3 441 159.3 343 118.3 344.3s-1 100-19.4 113.7L0 318.2Z\"></path><path fill=\"none\" stroke=\"#fff\" stroke-width=\"16\" d=\"M225 0 121.6 146.2A127 265 0 01173 562.9l52 73.5\"></path></g><g fill=\"#fff\" transform=\"translate(450,0) scale(-1,1)\"><path d=\"M107.3 166.4a170 266 0 0152 377l-27.5-38.9C156.3 441 159.3 343 118.3 344.3s-1 100-19.4 113.7L0 318.2Z\"></path><path fill=\"none\" stroke=\"#fff\" stroke-width=\"16\" d=\"M225 0 121.6 146.2A127 265 0 01173 562.9l52 73.5\"></path></g><rect fill=\"#fff\" x=\"131\" y=\"393\" width=\"188\" height=\"32\"></rect></svg><span>DPB</span></a><a class=\"ds-nav-link\" href=\"#\">Über den DPB</a><a class=\"ds-nav-link ds-nav-link-active\" href=\"#\">Kontakt</a><a class=\"ds-nav-link\" href=\"#\">Links</a></nav>",
-      "css": ".ds-nav { display: flex; align-items: center; gap: 1rem; padding: .5rem 1rem; background: #333; border-radius: .375rem; font: 400 1rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; } .ds-nav-brand { display: flex; align-items: center; gap: .75rem; color: #fff; font-size: 1.25rem; text-decoration: none; } .ds-nav-link { padding: .5rem; color: rgba(255, 255, 255, .65); text-decoration: none; transition: color .15s ease-in-out; } .ds-nav-link:hover { color: rgba(255, 255, 255, .8); } .ds-nav-link-active { color: #fff; } .ds-nav-link:focus-visible { outline: 0; border-radius: .375rem; box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25); }"
+      "css": ".ds-nav { display: flex; align-items: center; gap: 1rem; padding: .5rem 1rem; background: #333; border-radius: .375rem; font: 400 1rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; } .ds-nav-brand { display: flex; align-items: center; gap: .75rem; color: #fff; font-size: 1.25rem; text-decoration: none; } .ds-nav-link { padding: .5rem; color: rgba(255, 255, 255, .65); text-decoration: none; transition: color .15s ease-in-out; } .ds-nav-link:hover { color: rgba(255, 255, 255, .8); } .ds-nav-link-active { color: #fff; } .ds-nav-link:focus-visible { outline: 0; border-radius: .375rem; box-shadow: 0 0 0 .25rem rgba(0, 81, 168, .25); }"
     },
     {
       "name": "Trefferliste (Tabelle)",
@@ -333,20 +338,20 @@
       "refersTo": "table-cell",
       "description": "Die Katalogtreffer des Bundesarchivs: 0.875rem, Zellen vertikal zentriert, Zeile auf Hover getoent, besuchte Treffer bleiben unterscheidbar.",
       "html": "<table class=\"ds-table\"><thead><tr><th>Titel</th><th>Jahr</th><th>Standort</th></tr></thead><tbody><tr><td><a class=\"ds-table-link\" href=\"#\">Fahrtenbericht Irland</a></td><td>2012</td><td>Schloss Martinfeld</td></tr><tr><td><a class=\"ds-table-link ds-visited\" href=\"#\">Liederbuch, 3. Auflage</a></td><td>1978</td><td>Schloss Martinfeld</td></tr></tbody></table>",
-      "css": ".ds-table { width: 100%; border-collapse: collapse; font: 400 .875rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #000; } .ds-table th, .ds-table td { padding: .5rem; vertical-align: middle; border-bottom: 1px solid #dee2e6; text-align: left; } .ds-table th { font-weight: 500; } .ds-table tbody tr { transition: background-color .15s ease-in-out; } .ds-table tbody tr:hover { background: rgba(0, 0, 0, .075); cursor: pointer; } .ds-table-link { color: var(--bs-primary, #0051a8); } .ds-visited { color: #0a3622; }"
+      "css": ".ds-table { width: 100%; border-collapse: collapse; font: 400 .875rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #000; } .ds-table th, .ds-table td { padding: .5rem; vertical-align: middle; border-bottom: 1px solid #dee2e6; text-align: left; } .ds-table th { font-weight: 700; } .ds-table tbody tr { transition: background-color .15s ease-in-out; } .ds-table tbody tr:hover { background: rgba(0, 0, 0, .075); cursor: pointer; } .ds-table-link { color: var(--bs-primary, #0051a8); } .ds-visited { color: #0a3622; }"
     },
     {
       "name": "Karussell-Indikatoren",
       "kind": "custom",
       "refersTo": null,
-      "description": "Die einzige gestaltete Abweichung vom Bootstrap-Standard: Punkte unter dem Bild statt darauf, damit das Foto unverdeckt bleibt.",
+      "description": "Die einzige gestaltete Abweichung vom Bootstrap-Standard: Punkte unter dem Bild statt darauf, damit das Foto unverdeckt bleibt. Der <header> erzwingt data-bs-theme=\"dark\", deshalb sind die Punkte immer hell, auch auf der hellen Seite.",
       "html": "<figure class=\"ds-carousel\"><div class=\"ds-carousel-img\">Großfahrt</div><div class=\"ds-carousel-dots\"><button class=\"ds-dot ds-dot-active\" aria-label=\"Springe zu Bild 1\"></button><button class=\"ds-dot\" aria-label=\"Springe zu Bild 2\"></button><button class=\"ds-dot\" aria-label=\"Springe zu Bild 3\"></button></div></figure>",
-      "css": ".ds-carousel { margin: 0; } .ds-carousel-img { aspect-ratio: 3 / 1; display: flex; align-items: center; justify-content: center; background: #495057; color: rgba(255, 255, 255, .65); font: 400 .875rem/1.5 system-ui, sans-serif; } .ds-carousel-dots { display: flex; gap: .5rem; justify-content: center; padding: .75rem 0 0; } .ds-dot { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 50%; background: rgba(51, 51, 51, .5); cursor: pointer; transition: background-color .15s ease-in-out; } .ds-dot-active, .ds-dot:hover { background: #333; }"
+      "css": ".ds-carousel { margin: 0; } .ds-carousel-img { aspect-ratio: 3 / 1; display: flex; align-items: center; justify-content: center; background: #495057; color: rgba(255, 255, 255, .65); font: 400 .875rem/1.5 system-ui, sans-serif; } .ds-carousel-dots { display: flex; gap: .5rem; justify-content: center; padding: .75rem 0 0; } .ds-dot { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 50%; background: rgba(222, 226, 230, .5); cursor: pointer; transition: background-color .15s ease-in-out; } .ds-dot-active, .ds-dot:hover { background: #dee2e6; }"
     }
   ],
   "narrative": {
     "northStar": "Bootstrap, auf eine Farbe eingekürzt",
-    "overview": "Die Ansage steht im Quelltext: „One brand colour instead of three: the deep blue that has always been used for links now also drives buttons, focus rings, pagination and form focus, so the whole site reads as one palette.“ (styles/style.sass). Das System ist ein Bootstrap 5, dessen Variablenschicht an genau vier Stellen angefasst wurde — Markenfarbe, Dunkelton, Seitengrund hell, Seitengrund dunkel — und das sich ansonsten bewusst nicht verstellt. Es gibt keine eigene Schrift, keine Schatten und keine Animation außer den Zustandsübergängen und dem Karussell.\n\nDie Oberfläche tritt hinter den Inhalt zurück. Flächen unterscheiden sich durch Linien und minimale Helligkeitsabstufungen, nicht durch Höhe. Wärme kommt aus den Fotos — Großfahrt, Bundeslager, Schwarzzelte im Karussell — nicht aus der Oberfläche. Der einzige dauerhaft farbige Block der Seite ist die dunkle Navigationsleiste am oberen Rand; darunter beginnt Papier.\n\nBeide Farbmodi sind gleichwertig gebaut, nicht einer als nachgereichte Variante. Jede neue Fläche muss in beiden Modi bestehen.",
+    "overview": "Die Ansage steht im Quelltext: „One brand colour instead of three: the deep blue that has always been used for links now also drives buttons, focus rings, pagination and form focus, so the whole site reads as one palette.“ (styles/style.sass). Das System ist ein Bootstrap 5, dessen Variablenschicht an sieben Stellen angefasst wurde — Markenfarbe, Dunkelton, Seitengrund und Textfarbe je Farbmodus, dazu die vertikale Zellenausrichtung der Tabellen — und das sich ansonsten bewusst nicht verstellt. Es gibt keine eigene Schrift, keine Schatten und keine Animation außer den Zustandsübergängen und dem Karussell.\n\nDie Oberfläche tritt hinter den Inhalt zurück. Flächen unterscheiden sich durch Linien und minimale Helligkeitsabstufungen, nicht durch Höhe. Wärme kommt aus den Fotos — Großfahrt, Bundeslager, Schwarzzelte im Karussell — nicht aus der Oberfläche. Der einzige dauerhaft farbige Block der Seite ist die dunkle Navigationsleiste am oberen Rand; darunter beginnt Papier.\n\nBeide Farbmodi sind gleichwertig gebaut, nicht einer als nachgereichte Variante. Jede neue Fläche muss in beiden Modi bestehen.",
     "keyCharacteristics": [
       "Eine Markenfarbe für alles Anklickbare — Links, Buttons, Fokusring, Pagination, Formularfokus.",
       "Systemschrift des Betriebssystems, kein Webfont, keine Ladezeit für Typografie.",
@@ -358,7 +363,7 @@
     "rules": [
       {
         "name": "Die Ein-Farben-Regel",
-        "body": "Es gibt genau eine Markenfarbe. Alles, was anklickbar ist, trägt sie; alles, was es nicht ist, trägt sie nicht. Eine zweite Akzentfarbe einzuführen heißt, diese Regel aufzukündigen — dann muss das gesamte System neu entschieden werden, nicht nur eine Komponente.",
+        "body": "Es gibt genau eine Markenfarbe. Alles, was anklickbar ist, trägt sie; alles, was es nicht ist, trägt sie nicht. Eine zweite Akzentfarbe einzuführen heißt, diese Regel aufzukündigen — dann muss das gesamte System neu entschieden werden, nicht nur eine Komponente. Eine Stelle weicht ab: der Bearbeiten-Link fuer Staff in der Archiv-Detailseite (archive/templates/archive/detail.html) traegt btn-info und damit Bootstraps Tuerkis. Bestand, kein Vorbild.",
         "section": "colors"
       },
       {
@@ -368,7 +373,7 @@
       },
       {
         "name": "Die Zwei-Modi-Regel",
-        "body": "Kein Farbwert wird fest geschrieben, wenn ein Bootstrap-Token existiert. Feste Hex-Werte in Templates kippen im dunklen Modus nicht mit und sind der häufigste Fehler in diesem Projekt. Jede neue Fläche wird in beiden Modi geprüft; beide müssen WCAG 2.1 AA erfüllen.",
+        "body": "Kein Farbwert wird fest geschrieben, wenn ein Bootstrap-Token existiert. Feste Hex-Werte in Templates kippen im dunklen Modus nicht mit; im aktuellen Bestand gibt es keine. Jede neue Fläche wird in beiden Modi geprüft; beide müssen WCAG 2.1 AA erfüllen.",
         "section": "colors"
       },
       {
