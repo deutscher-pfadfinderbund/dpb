@@ -13,14 +13,14 @@ Zwei gleichrangige Zielgruppen, die sich dieselbe Website teilen:
 - **Außenstehende** — Eltern, Interessierte, Presse. Sie prüfen den Bund, bevor sie Kontakt aufnehmen oder eintreten. Ihr Weg führt über Startseite, Bundesordnung, „Pfadfinderinnen, Pfadfinder und bündische Jugend", Präventionsarbeit, Kontakt und Links.
 - **Mitglieder und Führungskräfte** — eingeloggt über den internen Bereich. Sie erledigen laufende Bundesarbeit: Kalender, Häuser und Zeltplätze, Dokumente, Heimabendprogramme, Aktuelles und Themen, Bündisches Segeln, Präventionsrat, Bundesarchiv.
 
-Die Recherche im Bundesarchiv (Online-Katalog, Uploadbereich) ist ein eigener Nutzungsfall, der beide Gruppen berühren kann. Keine der beiden Hauptgruppen darf die andere verdrängen.
+Die Recherche im Bundesarchiv (Online-Katalog, Uploadbereich) ist ein eigener Nutzungsfall, der beide Gruppen berühren kann.
 
 ## Product Purpose
 
 Offizielle Website des Deutschen Pfadfinderbundes e.V. Sie stellt den Bund nach außen dar und trägt zugleich den internen Betrieb. Erfolg heißt vier Dinge gleichzeitig:
 
 1. **Vertrauen nach außen** — glaubwürdig zeigen, wofür der Bund steht, insbesondere Präventionsarbeit, Präventionsrat und Schutzkonzept.
-2. **Mitgliederservice** — Termine, Häuser und Zeltplätze, Dokumente, Heimabendprogramme und Infos verlässlich bereitstellen.
+2. **Mitgliederservice** — die internen Funktionen verlässlich bereitstellen.
 3. **Bundesarchiv zugänglich machen** — Bestand recherchierbar halten und Einsendungen ermöglichen.
 4. **Kontakt und Nachwuchs** — Interessierte zu einer Kontaktaufnahme bringen.
 
@@ -30,11 +30,10 @@ Der DPB ist ein unabhängiger, konfessionell nicht gebundener und bündisch gepr
 
 ## Operating Context
 
-- Inhalte werden im Bund selbst gepflegt (wer genau, ist nicht bestätigt): Seiten als Markdown über die `pages`-App, Dokumente über Django-Filer, Blogeinträge („Aktuelles", „Themen") direkt im Frontend über Formulare.
+- Inhalte werden im Bund selbst gepflegt (wer genau, ist nicht bestätigt): Seiten als Markdown über die `pages`-App, Dokumente über Django-Filer, Blogeinträge („Aktuelles", „Themen") sowie Häuser und Zeltplätze, Heimabendprogramme und Archiveinsendungen direkt im Frontend über Formulare.
 - Der interne Bereich steht hinter Login (django-allauth, OpenID-Connect-Provider); die Navigation blendet die internen Menüs für anonyme Besucher komplett aus.
-- Häuser und Zeltplätze, Heimabendprogramme und Archiveinsendungen werden von Mitgliedern selbst eingetragen.
 - Die Übersichtskarte liegt als eigener Dienst unter `karte.deutscher-pfadfinderbund.de`; `/karten/` leitet dauerhaft dorthin.
-- Deploy: Image `ghcr.io/deutscher-pfadfinderbund/dpb`, Docker-Compose auf dem Server.
+- Deploy: Image `ghcr.io/deutscher-pfadfinderbund/dpb`, Docker-Compose auf dem Server. Deploy-Falle: `collectstatic` läuft im Image-Build, das Volume `dpbde_web_static` überdeckt neue Assets — nach jedem Deploy muss das Volume entfernt werden (`README.md`).
 
 ## Capabilities and Constraints
 
@@ -42,14 +41,14 @@ Der DPB ist ein unabhängiger, konfessionell nicht gebundener und bündisch gepr
 
 **Technische Randbedingungen:**
 - Stack: Django (Python 3, uv), PostgreSQL, Bootstrap 5 über SASS (`styles/style.sass` → `dpb/static/styles/style.css`), Leaflet für Karten, Font Awesome für Icons. Frontend-Build über npm (`npm run compile-css`).
-- Es existiert eine gewachsene, in sich stimmige Oberfläche mit Farbmodus-Umschalter (hell/dunkel/automatisch, `data-bs-theme`, Speicherung in `localStorage`). Eine DESIGN.md gibt es noch nicht — Dokumentationslücke, keine Freifläche.
-- Deploy-Falle: `collectstatic` läuft im Image-Build; das Volume `dpbde_web_static` überdeckt neue Assets. Nach jedem Deploy muss das Volume entfernt werden (`README.md`). Statische Dateien werden mit `max-age=86400` ausgeliefert.
+- Es existiert eine gewachsene, in sich stimmige Oberfläche mit Farbmodus-Umschalter (hell/dunkel/automatisch, `data-bs-theme`, Speicherung in `localStorage`). Sie ist in `DESIGN.md` festgehalten: bestehendes System, keine Freifläche.
+- Statische Dateien werden mit `max-age=86400` ausgeliefert.
 - Sprache der Oberfläche ist durchgängig Deutsch (`lang="de"`).
 
 ## Brand Commitments
 
 - **Name:** Deutscher Pfadfinderbund e.V., Kurzform DPB.
-- **Bundeszeichen:** Der Schriftzug mit Lilie (`dpb/static/img/schriftzug-dpb.svg`) ist schwarze Line-Art. Er wird nie umgefärbt und nie invertiert — auch nicht im dunklen Farbmodus; dort bekommt er eine helle Fläche statt einer Farbumkehr (`.logo-on-light` in `styles/style.sass`). Bestätigt und bindend. Davon unberührt: die separate, weiße Inline-Darstellung der Lilie in der dunklen Navigationsleiste (`templates/base.html`) — bestehender Stand.
+- **Bundeszeichen:** Der Schriftzug mit Lilie (`dpb/static/img/schriftzug-dpb.svg`) ist schwarze Line-Art und wird nie umgefärbt und nie invertiert — auch nicht im dunklen Farbmodus. Bestätigt und bindend. Wie das technisch gelöst ist, steht als Bundeszeichen-Regel in `DESIGN.md`.
 - **Tonfall** (aus den vorhandenen Texten abgelesen, nicht bestätigt): sachlich, erklärend, bündische Begriffe ohne Anbiederung (Bundesordnung, Heimabend, Bundesgilde, Meißnerformel).
 
 ## Evidence on Hand
@@ -69,9 +68,8 @@ Vorhandenes, echtes Material:
 
 1. **Zwei Zielgruppen, ein Haus.** Außendarstellung und Mitgliederbereich sind gleichrangig; keine Änderung darf eine der beiden Seiten zugunsten der anderen schwächen.
 2. **Präventionsarbeit ist sichtbar, nicht versteckt.** Sie gehört zum öffentlichen Kern des Bundes und bleibt von außen auffindbar.
-3. **Inhalte bleiben redigierbar.** Seiten, Dokumente, Blogeinträge, Häuser und Heimabende laufen über Admin, Filer und Frontend-Formulare; neue Arbeit hält diese Wege offen.
-4. **Das Bundeszeichen ist gesetzt.** Es wird eingebunden, nicht interpretiert.
-5. **Nichts erfinden** (abgeleitet, nicht bestätigt): Es gibt keine Testimonials, Zahlen oder Pressestimmen — fehlende Belege werden weggelassen, nicht ersetzt.
+3. **Inhalte bleiben redigierbar.** Neue Arbeit hält die bestehenden Redaktionswege offen.
+4. **Nichts erfinden** (abgeleitet, nicht bestätigt): Fehlende Belege werden weggelassen, nicht ersetzt.
 
 ## Accessibility & Inclusion
 

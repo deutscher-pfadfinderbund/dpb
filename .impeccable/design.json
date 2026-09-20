@@ -346,13 +346,13 @@
   ],
   "narrative": {
     "northStar": "Bootstrap, auf eine Farbe eingekürzt",
-    "overview": "Das ist kein erfundenes Bild, sondern die Ansage, die im Quelltext steht: „One brand colour instead of three: the deep blue that has always been used for links now also drives buttons, focus rings, pagination and form focus, so the whole site reads as one palette.“ (styles/style.sass). Das System ist ein Bootstrap 5, dessen Variablenschicht an genau vier Stellen angefasst wurde — Markenfarbe, Dunkelton, Seitengrund hell, Seitengrund dunkel — und das sich ansonsten bewusst nicht verstellt. Es gibt keine eigene Schrift, keine Schatten, keine Animation, kein zweites Akzentfeld.\n\nDie Oberfläche tritt hinter den Inhalt zurück. Flächen unterscheiden sich durch Linien und minimale Helligkeitsabstufungen, nicht durch Höhe. Wärme kommt aus den Fotos — Großfahrt, Bundeslager, Schwarzzelte im Karussell — nicht aus der Oberfläche. Der einzige dauerhaft farbige Block der Seite ist die dunkle Navigationsleiste am oberen Rand; darunter beginnt Papier.\n\nBeide Farbmodi sind gleichwertig gebaut, nicht einer als nachgereichte Variante. Die Umschaltung (hell / dunkel / automatisch) läuft vor dem ersten Paint, damit nie das falsche Thema aufblitzt. Jede neue Fläche muss in beiden Modi bestehen.",
+    "overview": "Die Ansage steht im Quelltext: „One brand colour instead of three: the deep blue that has always been used for links now also drives buttons, focus rings, pagination and form focus, so the whole site reads as one palette.“ (styles/style.sass). Das System ist ein Bootstrap 5, dessen Variablenschicht an genau vier Stellen angefasst wurde — Markenfarbe, Dunkelton, Seitengrund hell, Seitengrund dunkel — und das sich ansonsten bewusst nicht verstellt. Es gibt keine eigene Schrift, keine Schatten und keine Animation außer den Zustandsübergängen und dem Karussell.\n\nDie Oberfläche tritt hinter den Inhalt zurück. Flächen unterscheiden sich durch Linien und minimale Helligkeitsabstufungen, nicht durch Höhe. Wärme kommt aus den Fotos — Großfahrt, Bundeslager, Schwarzzelte im Karussell — nicht aus der Oberfläche. Der einzige dauerhaft farbige Block der Seite ist die dunkle Navigationsleiste am oberen Rand; darunter beginnt Papier.\n\nBeide Farbmodi sind gleichwertig gebaut, nicht einer als nachgereichte Variante. Jede neue Fläche muss in beiden Modi bestehen.",
     "keyCharacteristics": [
-      "Eine Markenfarbe (#0051a8) für alles Anklickbare — Links, Buttons, Fokusring, Pagination, Formularfokus.",
+      "Eine Markenfarbe für alles Anklickbare — Links, Buttons, Fokusring, Pagination, Formularfokus.",
       "Systemschrift des Betriebssystems, kein Webfont, keine Ladezeit für Typografie.",
       "Flach: keine Schatten auf Seitenflächen, Trennung über Linien und Tonwert.",
-      "Zwei gleichrangige Farbmodi mit eigenen Tokens, vor dem Paint aufgelöst.",
-      "Fließtext auf Lesebreite begrenzt (80ch global, 68ch für Absatzkolumnen).",
+      "Zwei gleichrangige Farbmodi mit eigenen Tokens.",
+      "Fließtext auf Lesebreite begrenzt.",
       "Fotos bekommen einen schmalen Rahmen statt einer Effektbehandlung."
     ],
     "rules": [
@@ -393,24 +393,21 @@
       }
     ],
     "dos": [
-      "Do alles Anklickbare in Bundesblau (#0051a8) setzen — und sonst nichts.",
       "Do Farbwerte über Bootstrap-Tokens beziehen (var(--bs-body-bg), var(--bs-border-color)), damit sie mit dem Farbmodus kippen.",
       "Do neue Flächen in beiden Farbmodi prüfen, mit WCAG 2.1 AA als Untergrenze.",
-      "Do Fließtext begrenzen: 80ch global, .text-measure (68ch) für Kolumnen im Raster.",
-      "Do Tiefe über Linie und Tonwert herstellen, nicht über Schatten.",
+      "Do Fließtext auf das Zeilenmaß begrenzen, Kolumnen im Raster mit .text-measure.",
       "Do Bilder mit img-thumbnail rahmen und mit beschreibendem alt versehen.",
       "Do die Überschriftenebene am Dokument ausrichten und die Optik über .h3-artige Klassen nachziehen.",
       "Do bei jeder Verwendung eines dark-Utilities den Dunkelmodus-Tausch mitliefern."
     ],
     "donts": [
       "Don't eine zweite Akzentfarbe einführen — keine farbigen Badges, keine Statusfarben jenseits der Bootstrap-Alerts, keine Verläufe.",
-      "Don't feste Hex-Werte in Templates schreiben; sie kippen im dunklen Modus nicht mit.",
       "Don't das Bundeszeichen umfärben, invertieren oder auf eine farbige Fläche setzen.",
       "Don't box-shadow für Ebenen einsetzen; Schatten sind Zuständen vorbehalten.",
+      "Don't einen Webfont nachrüsten — der Bestand lädt keinen; wer einen einführt, ändert das System, nicht eine Seite.",
+      "Don't einen vierten Radius einführen; es gibt drei, und sie hängen an der Buttongröße (siehe Shapes). Kreise nur an den Karussell-Indikatoren.",
       "Don't den Fokusring entfernen oder abschwächen.",
-      "Don't das Inline-Skript zur Farbmodus-Auflösung aus dem <head> verschieben oder es defer geben.",
-      "Don't einen Webfont nachruesten — der Bestand laedt keinen; wer einen einfuehrt, aendert das System, nicht eine Seite.",
-      "Don't einen vierten Radius einfuehren; 0.375rem ist der Normalfall, 0.25rem und 0.5rem haengen an btn-sm und btn-lg, Kreise nur an den Karussell-Indikatoren."
+      "Don't das Inline-Skript zur Farbmodus-Auflösung aus dem <head> verschieben oder es defer geben."
     ]
   }
 }
