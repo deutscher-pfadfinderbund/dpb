@@ -1,0 +1,416 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-20T14:48:00Z",
+  "title": "Design System: Deutscher Pfadfinderbund",
+  "extensions": {
+    "colorMeta": {
+      "bundesblau": {
+        "role": "primary",
+        "displayName": "Bundesblau",
+        "canonical": "oklch(0.4476 0.1556 256.5)",
+        "purpose": "Die einzige Markenfarbe: Links, Primaerbutton, Fokusring, Pagination, Formularfokus.",
+        "tonalRamp": [
+          "oklch(0.15 0.1556 256.5)",
+          "oklch(0.26 0.1556 256.5)",
+          "oklch(0.37 0.1556 256.5)",
+          "oklch(0.48 0.1556 256.5)",
+          "oklch(0.59 0.1556 256.5)",
+          "oklch(0.7 0.1556 256.5)",
+          "oklch(0.82 0.1556 256.5)",
+          "oklch(0.95 0.1556 256.5)"
+        ]
+      },
+      "bundesblau-tief": {
+        "role": "primary",
+        "displayName": "Bundesblau Tief",
+        "canonical": "oklch(0.4002 0.1369 256.0)",
+        "purpose": "Hover- und Aktivzustand des Primaerbuttons. Nie als Flaechenfarbe.",
+        "tonalRamp": [
+          "oklch(0.15 0.1369 256.0)",
+          "oklch(0.26 0.1369 256.0)",
+          "oklch(0.37 0.1369 256.0)",
+          "oklch(0.48 0.1369 256.0)",
+          "oklch(0.59 0.1369 256.0)",
+          "oklch(0.7 0.1369 256.0)",
+          "oklch(0.82 0.1369 256.0)",
+          "oklch(0.95 0.1369 256.0)"
+        ]
+      },
+      "bundesblau-nacht": {
+        "role": "primary",
+        "displayName": "Bundesblau Nacht",
+        "canonical": "oklch(0.6627 0.0942 250.8)",
+        "purpose": "Dieselbe Markenfarbe, um 40 % aufgehellt, fuer Links im dunklen Farbmodus.",
+        "tonalRamp": [
+          "oklch(0.15 0.0942 250.8)",
+          "oklch(0.26 0.0942 250.8)",
+          "oklch(0.37 0.0942 250.8)",
+          "oklch(0.48 0.0942 250.8)",
+          "oklch(0.59 0.0942 250.8)",
+          "oklch(0.7 0.0942 250.8)",
+          "oklch(0.82 0.0942 250.8)",
+          "oklch(0.95 0.0942 250.8)"
+        ]
+      },
+      "anthrazit": {
+        "role": "neutral",
+        "displayName": "Anthrazit",
+        "canonical": "oklch(0.3211 0.0 89.9)",
+        "purpose": "Fliesstext im hellen Modus und $dark: Navigationsleiste, Outline-Buttons. Kein reines Schwarz.",
+        "tonalRamp": [
+          "oklch(0.15 0.0 89.9)",
+          "oklch(0.26 0.0 89.9)",
+          "oklch(0.37 0.0 89.9)",
+          "oklch(0.48 0.0 89.9)",
+          "oklch(0.59 0.0 89.9)",
+          "oklch(0.7 0.0 89.9)",
+          "oklch(0.82 0.0 89.9)",
+          "oklch(0.95 0.0 89.9)"
+        ]
+      },
+      "seitengrund": {
+        "role": "neutral",
+        "displayName": "Seitengrund",
+        "canonical": "oklch(0.9731 0.0 89.9)",
+        "purpose": "Hintergrund der hellen Seite.",
+        "tonalRamp": [
+          "oklch(0.15 0.0 89.9)",
+          "oklch(0.26 0.0 89.9)",
+          "oklch(0.37 0.0 89.9)",
+          "oklch(0.48 0.0 89.9)",
+          "oklch(0.59 0.0 89.9)",
+          "oklch(0.7 0.0 89.9)",
+          "oklch(0.82 0.0 89.9)",
+          "oklch(0.95 0.0 89.9)"
+        ]
+      },
+      "flaeche": {
+        "role": "neutral",
+        "displayName": "Flaeche",
+        "canonical": "oklch(1.0 0.0 89.9)",
+        "purpose": "Projekttoken --dpb-surface-bg: Flaechen, die sich vom Seitengrund abheben muessen (Footer-Streifen).",
+        "tonalRamp": [
+          "oklch(0.15 0.0 89.9)",
+          "oklch(0.26 0.0 89.9)",
+          "oklch(0.37 0.0 89.9)",
+          "oklch(0.48 0.0 89.9)",
+          "oklch(0.59 0.0 89.9)",
+          "oklch(0.7 0.0 89.9)",
+          "oklch(0.82 0.0 89.9)",
+          "oklch(0.95 0.0 89.9)"
+        ]
+      },
+      "seitengrund-nacht": {
+        "role": "neutral",
+        "displayName": "Seitengrund Nacht",
+        "canonical": "oklch(0.2299 0.0065 258.4)",
+        "purpose": "Hintergrund der dunklen Seite.",
+        "tonalRamp": [
+          "oklch(0.15 0.0065 258.4)",
+          "oklch(0.26 0.0065 258.4)",
+          "oklch(0.37 0.0065 258.4)",
+          "oklch(0.48 0.0065 258.4)",
+          "oklch(0.59 0.0065 258.4)",
+          "oklch(0.7 0.0065 258.4)",
+          "oklch(0.82 0.0065 258.4)",
+          "oklch(0.95 0.0065 258.4)"
+        ]
+      },
+      "flaeche-nacht": {
+        "role": "neutral",
+        "displayName": "Flaeche Nacht",
+        "canonical": "oklch(0.2754 0.0086 255.6)",
+        "purpose": "--dpb-surface-bg im dunklen Farbmodus.",
+        "tonalRamp": [
+          "oklch(0.15 0.0086 255.6)",
+          "oklch(0.26 0.0086 255.6)",
+          "oklch(0.37 0.0086 255.6)",
+          "oklch(0.48 0.0086 255.6)",
+          "oklch(0.59 0.0086 255.6)",
+          "oklch(0.7 0.0086 255.6)",
+          "oklch(0.82 0.0086 255.6)",
+          "oklch(0.95 0.0086 255.6)"
+        ]
+      },
+      "text-nacht": {
+        "role": "neutral",
+        "displayName": "Text Nacht",
+        "canonical": "oklch(0.9109 0.007 247.9)",
+        "purpose": "Fliesstext im dunklen Modus. Kein reines Weiss.",
+        "tonalRamp": [
+          "oklch(0.15 0.007 247.9)",
+          "oklch(0.26 0.007 247.9)",
+          "oklch(0.37 0.007 247.9)",
+          "oklch(0.48 0.007 247.9)",
+          "oklch(0.59 0.007 247.9)",
+          "oklch(0.7 0.007 247.9)",
+          "oklch(0.82 0.007 247.9)",
+          "oklch(0.95 0.007 247.9)"
+        ]
+      },
+      "linie": {
+        "role": "neutral",
+        "displayName": "Linie",
+        "canonical": "oklch(0.9109 0.007 247.9)",
+        "purpose": "Rahmen, Trenner, Tabellenlinien, Bildrahmen im hellen Modus.",
+        "tonalRamp": [
+          "oklch(0.15 0.007 247.9)",
+          "oklch(0.26 0.007 247.9)",
+          "oklch(0.37 0.007 247.9)",
+          "oklch(0.48 0.007 247.9)",
+          "oklch(0.59 0.007 247.9)",
+          "oklch(0.7 0.007 247.9)",
+          "oklch(0.82 0.007 247.9)",
+          "oklch(0.95 0.007 247.9)"
+        ]
+      },
+      "linie-nacht": {
+        "role": "neutral",
+        "displayName": "Linie Nacht",
+        "canonical": "oklch(0.4276 0.0147 248.2)",
+        "purpose": "Dieselbe Rolle im dunklen Modus.",
+        "tonalRamp": [
+          "oklch(0.15 0.0147 248.2)",
+          "oklch(0.26 0.0147 248.2)",
+          "oklch(0.37 0.0147 248.2)",
+          "oklch(0.48 0.0147 248.2)",
+          "oklch(0.59 0.0147 248.2)",
+          "oklch(0.7 0.0147 248.2)",
+          "oklch(0.82 0.0147 248.2)",
+          "oklch(0.95 0.0147 248.2)"
+        ]
+      },
+      "kontrast-nacht": {
+        "role": "neutral",
+        "displayName": "Kontrast Nacht",
+        "canonical": "oklch(0.9417 0.0052 247.9)",
+        "purpose": "Ersatztoken fuer die Dark-Variante der dark-Buttons.",
+        "tonalRamp": [
+          "oklch(0.15 0.0052 247.9)",
+          "oklch(0.26 0.0052 247.9)",
+          "oklch(0.37 0.0052 247.9)",
+          "oklch(0.48 0.0052 247.9)",
+          "oklch(0.59 0.0052 247.9)",
+          "oklch(0.7 0.0052 247.9)",
+          "oklch(0.82 0.0052 247.9)",
+          "oklch(0.95 0.0052 247.9)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "h1, eine pro Seite. Fluid calc(1.375rem + 1.5vw), ab 1200px 2.5rem."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "h2, Abschnitte und Kapitel. Fluid calc(1.325rem + 0.9vw), ab 1200px 2rem."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "h3/h4, Karten- und Eintragsueberschriften. h3 fluid bis 1.75rem, h4 fest 1.5rem."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Fliesstext, 1rem/1.5, Zeilenlaenge max. 80ch (Kolumnen 68ch)."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Tabellenzellen und btn-sm, 0.875rem. Markiert dichte Sekundaerinformation."
+      }
+    },
+    "shadows": [
+      {
+        "name": "focus-ring",
+        "value": "0 0 0 0.25rem rgba(0, 81, 168, 0.25)",
+        "purpose": "Der einzige Schatten im laufenden Betrieb. Zustand, nicht Hoehe. Wird nie entfernt."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-transition",
+        "value": "0.15s ease-in-out",
+        "purpose": "Farbe, Flaeche, Rahmen und Fokusring bei Buttons und Formularfeldern. Die einzige Bewegung im System ausser dem Karussell."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "576px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "992px"
+      },
+      {
+        "name": "xl",
+        "value": "1200px"
+      },
+      {
+        "name": "xxl",
+        "value": "1400px"
+      }
+    ],
+    "radiusMeta": {
+      "sm": {
+        "value": "0.25rem",
+        "purpose": "btn-sm — die Arbeitsbuttons in Listen (Weiterlesen, Details)."
+      },
+      "md": {
+        "value": "0.375rem",
+        "purpose": "Normalfall: Karten, Formularfelder, Bildrahmen, Standardbuttons, Flaeche unter dem Schriftzug."
+      },
+      "lg": {
+        "value": "0.5rem",
+        "purpose": "btn-lg — einmal im Bestand, Anmeldung ueber den externen Anbieter."
+      }
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Die eine Handlung, die eine Seite anbietet.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\">Neues Haus / Zeltplatz hinzufügen</button>",
+      "css": ".ds-btn-primary { font: 400 1rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #fff; background: var(--bs-primary, #0051a8); border: 1px solid var(--bs-primary, #0051a8); border-radius: .375rem; padding: .375rem .75rem; cursor: pointer; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out; } .ds-btn-primary:hover { background: #00458f; border-color: #004186; } .ds-btn-primary:focus-visible { outline: 0; box-shadow: 0 0 0 .25rem rgba(0, 81, 168, .25); } .ds-btn-primary:active { background: #004186; }"
+    },
+    {
+      "name": "Outline Button (klein)",
+      "kind": "button",
+      "refersTo": "button-outline-dark-sm",
+      "description": "Die Arbeitsvariante in Listen und Vorschauen: Weiterlesen, Details. Als btn-sm zieht der Radius auf .25rem.",
+      "html": "<button class=\"ds-btn-outline\" type=\"button\">Weiterlesen</button>",
+      "css": ".ds-btn-outline { font: 400 .875rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #333; background: transparent; border: 1px solid #333; border-radius: .25rem; padding: .25rem .5rem; cursor: pointer; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out; } .ds-btn-outline:hover { color: #fff; background: #333; } .ds-btn-outline:focus-visible { outline: 0; box-shadow: 0 0 0 .25rem rgba(51, 51, 51, .25); }"
+    },
+    {
+      "name": "Outline Button im dunklen Modus",
+      "kind": "button",
+      "refersTo": "button-outline-dark-sm-nacht",
+      "description": "Derselbe Button auf dunklem Grund. Bootstrap dreht dark-Utilities nicht mit, deshalb der Tokentausch auf helle Werte.",
+      "html": "<div class=\"ds-night\"><button class=\"ds-btn-outline-night\" type=\"button\">Weiterlesen</button></div>",
+      "css": ".ds-night { background: #1b1d20; padding: 1rem; border-radius: .375rem; } .ds-btn-outline-night { font: 400 .875rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #e9ecef; background: transparent; border: 1px solid #e9ecef; border-radius: .25rem; padding: .25rem .5rem; cursor: pointer; transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out; } .ds-btn-outline-night:hover { color: #212529; background: #fff; border-color: #fff; }"
+    },
+    {
+      "name": "Link Button",
+      "kind": "button",
+      "refersTo": "button-link",
+      "description": "Weiterfuehrendes innerhalb eines Textblocks. Unterstrichen, ohne Rahmen.",
+      "html": "<button class=\"ds-btn-link\" type=\"button\">Mehr</button>",
+      "css": ".ds-btn-link { font: 400 1rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--bs-primary, #0051a8); background: transparent; border: 1px solid transparent; border-radius: .375rem; padding: .375rem .75rem; text-decoration: underline; cursor: pointer; transition: color .15s ease-in-out; } .ds-btn-link:hover { color: #004186; } .ds-btn-link:focus-visible { outline: 0; box-shadow: 0 0 0 .25rem rgba(0, 81, 168, .25); }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Eintrag in Listen (Haeuser, Archivbestaende). Steht auf demselben Grund wie die Seite und existiert nur durch den Rahmen.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-header\"><h3 class=\"ds-card-title\"><a href=\"#\">Baueshof</a></h3></div><div class=\"ds-card-body\"><p>Marksuhl, Thüringen<br><a href=\"#\">Details</a></p></div></div>",
+      "css": ".ds-card { background: #f6f6f6; border: 1px solid rgba(0, 0, 0, .175); border-radius: .375rem; margin-bottom: 1rem; overflow: hidden; } .ds-card-header { padding: .5rem 1rem; background: rgba(51, 51, 51, .03); border-bottom: 1px solid rgba(0, 0, 0, .175); } .ds-card-title { margin: 0; font: 500 1.75rem/1.2 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; } .ds-card-title a { color: var(--bs-primary, #0051a8); text-decoration: underline; } .ds-card-body { padding: 1rem; font: 400 1rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #333; } .ds-card-body p { margin: 0; } .ds-card-body a { color: var(--bs-primary, #0051a8); }"
+    },
+    {
+      "name": "Formularfeld mit Label",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Label immer ueber dem Feld, nie als Platzhalter darin.",
+      "html": "<label class=\"ds-label\" for=\"ds-suche\">Suchbegriff</label><input class=\"ds-input\" id=\"ds-suche\" type=\"text\" placeholder=\"Kompassnadel\">",
+      "css": ".ds-label { display: block; margin-bottom: .5rem; font: 400 1rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #333; } .ds-input { display: block; width: 100%; box-sizing: border-box; padding: .375rem .75rem; font: 400 1rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #333; background: #f6f6f6; border: 1px solid #dee2e6; border-radius: .375rem; transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out; } .ds-input:focus { outline: 0; border-color: #80a8d4; box-shadow: 0 0 0 .25rem rgba(0, 81, 168, .25); }"
+    },
+    {
+      "name": "Navigationsleiste",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Bleibt dunkel, unabhaengig vom Farbmodus der Seite. Marke links als weisse Lilie, Menuepunkte rechts davon. Das SVG hier ist eine vereinfachte Wiedergabe des Navigations-Zeichens (zwei gespiegelte Haelften ohne die Schattierungsmasken des Originals in templates/base.html).",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-brand\" href=\"#\"><svg viewBox=\"0 0 450 637\" height=\"32\" aria-hidden=\"true\"><g fill=\"#fff\"><path d=\"M107.3 166.4a170 266 0 0152 377l-27.5-38.9C156.3 441 159.3 343 118.3 344.3s-1 100-19.4 113.7L0 318.2Z\"></path><path fill=\"none\" stroke=\"#fff\" stroke-width=\"16\" d=\"M225 0 121.6 146.2A127 265 0 01173 562.9l52 73.5\"></path></g><g fill=\"#fff\" transform=\"translate(450,0) scale(-1,1)\"><path d=\"M107.3 166.4a170 266 0 0152 377l-27.5-38.9C156.3 441 159.3 343 118.3 344.3s-1 100-19.4 113.7L0 318.2Z\"></path><path fill=\"none\" stroke=\"#fff\" stroke-width=\"16\" d=\"M225 0 121.6 146.2A127 265 0 01173 562.9l52 73.5\"></path></g><rect fill=\"#fff\" x=\"131\" y=\"393\" width=\"188\" height=\"32\"></rect></svg><span>DPB</span></a><a class=\"ds-nav-link\" href=\"#\">Über den DPB</a><a class=\"ds-nav-link ds-nav-link-active\" href=\"#\">Kontakt</a><a class=\"ds-nav-link\" href=\"#\">Links</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 1rem; padding: .5rem 1rem; background: #333; border-radius: .375rem; font: 400 1rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; } .ds-nav-brand { display: flex; align-items: center; gap: .75rem; color: #fff; font-size: 1.25rem; text-decoration: none; } .ds-nav-link { padding: .5rem; color: rgba(255, 255, 255, .65); text-decoration: none; transition: color .15s ease-in-out; } .ds-nav-link:hover { color: rgba(255, 255, 255, .8); } .ds-nav-link-active { color: #fff; } .ds-nav-link:focus-visible { outline: 0; border-radius: .375rem; box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25); }"
+    },
+    {
+      "name": "Trefferliste (Tabelle)",
+      "kind": "custom",
+      "refersTo": "table-cell",
+      "description": "Die Katalogtreffer des Bundesarchivs: 0.875rem, Zellen vertikal zentriert, Zeile auf Hover getoent, besuchte Treffer bleiben unterscheidbar.",
+      "html": "<table class=\"ds-table\"><thead><tr><th>Titel</th><th>Jahr</th><th>Standort</th></tr></thead><tbody><tr><td><a class=\"ds-table-link\" href=\"#\">Fahrtenbericht Irland</a></td><td>2012</td><td>Schloss Martinfeld</td></tr><tr><td><a class=\"ds-table-link ds-visited\" href=\"#\">Liederbuch, 3. Auflage</a></td><td>1978</td><td>Schloss Martinfeld</td></tr></tbody></table>",
+      "css": ".ds-table { width: 100%; border-collapse: collapse; font: 400 .875rem/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #000; } .ds-table th, .ds-table td { padding: .5rem; vertical-align: middle; border-bottom: 1px solid #dee2e6; text-align: left; } .ds-table th { font-weight: 500; } .ds-table tbody tr { transition: background-color .15s ease-in-out; } .ds-table tbody tr:hover { background: rgba(0, 0, 0, .075); cursor: pointer; } .ds-table-link { color: var(--bs-primary, #0051a8); } .ds-visited { color: #0a3622; }"
+    },
+    {
+      "name": "Karussell-Indikatoren",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Die einzige gestaltete Abweichung vom Bootstrap-Standard: Punkte unter dem Bild statt darauf, damit das Foto unverdeckt bleibt.",
+      "html": "<figure class=\"ds-carousel\"><div class=\"ds-carousel-img\">Großfahrt</div><div class=\"ds-carousel-dots\"><button class=\"ds-dot ds-dot-active\" aria-label=\"Springe zu Bild 1\"></button><button class=\"ds-dot\" aria-label=\"Springe zu Bild 2\"></button><button class=\"ds-dot\" aria-label=\"Springe zu Bild 3\"></button></div></figure>",
+      "css": ".ds-carousel { margin: 0; } .ds-carousel-img { aspect-ratio: 3 / 1; display: flex; align-items: center; justify-content: center; background: #495057; color: rgba(255, 255, 255, .65); font: 400 .875rem/1.5 system-ui, sans-serif; } .ds-carousel-dots { display: flex; gap: .5rem; justify-content: center; padding: .75rem 0 0; } .ds-dot { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 50%; background: rgba(51, 51, 51, .5); cursor: pointer; transition: background-color .15s ease-in-out; } .ds-dot-active, .ds-dot:hover { background: #333; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Bootstrap, auf eine Farbe eingekürzt",
+    "overview": "Das ist kein erfundenes Bild, sondern die Ansage, die im Quelltext steht: „One brand colour instead of three: the deep blue that has always been used for links now also drives buttons, focus rings, pagination and form focus, so the whole site reads as one palette.“ (styles/style.sass). Das System ist ein Bootstrap 5, dessen Variablenschicht an genau vier Stellen angefasst wurde — Markenfarbe, Dunkelton, Seitengrund hell, Seitengrund dunkel — und das sich ansonsten bewusst nicht verstellt. Es gibt keine eigene Schrift, keine Schatten, keine Animation, kein zweites Akzentfeld.\n\nDie Oberfläche tritt hinter den Inhalt zurück. Flächen unterscheiden sich durch Linien und minimale Helligkeitsabstufungen, nicht durch Höhe. Wärme kommt aus den Fotos — Großfahrt, Bundeslager, Schwarzzelte im Karussell — nicht aus der Oberfläche. Der einzige dauerhaft farbige Block der Seite ist die dunkle Navigationsleiste am oberen Rand; darunter beginnt Papier.\n\nBeide Farbmodi sind gleichwertig gebaut, nicht einer als nachgereichte Variante. Die Umschaltung (hell / dunkel / automatisch) läuft vor dem ersten Paint, damit nie das falsche Thema aufblitzt. Jede neue Fläche muss in beiden Modi bestehen.",
+    "keyCharacteristics": [
+      "Eine Markenfarbe (#0051a8) für alles Anklickbare — Links, Buttons, Fokusring, Pagination, Formularfokus.",
+      "Systemschrift des Betriebssystems, kein Webfont, keine Ladezeit für Typografie.",
+      "Flach: keine Schatten auf Seitenflächen, Trennung über Linien und Tonwert.",
+      "Zwei gleichrangige Farbmodi mit eigenen Tokens, vor dem Paint aufgelöst.",
+      "Fließtext auf Lesebreite begrenzt (80ch global, 68ch für Absatzkolumnen).",
+      "Fotos bekommen einen schmalen Rahmen statt einer Effektbehandlung."
+    ],
+    "rules": [
+      {
+        "name": "Die Ein-Farben-Regel",
+        "body": "Es gibt genau eine Markenfarbe. Alles, was anklickbar ist, trägt sie; alles, was es nicht ist, trägt sie nicht. Eine zweite Akzentfarbe einzuführen heißt, diese Regel aufzukündigen — dann muss das gesamte System neu entschieden werden, nicht nur eine Komponente.",
+        "section": "colors"
+      },
+      {
+        "name": "Die Bundeszeichen-Regel",
+        "body": "Der Schriftzug mit Lilie (dpb/static/img/schriftzug-dpb.svg) ist schwarze Line-Art und wird nie umgefärbt, nie invertiert, nie in eine Markenfarbe gesetzt. Im dunklen Modus bekommt er eine helle Fläche unter sich (.logo-on-light, Padding 1rem, Radius 0.375rem), nicht eine Farbumkehr. Im hellen Modus ist diese Fläche unsichtbar, weil sie dem Seitengrund entspricht.",
+        "section": "colors"
+      },
+      {
+        "name": "Die Zwei-Modi-Regel",
+        "body": "Kein Farbwert wird fest geschrieben, wenn ein Bootstrap-Token existiert. Feste Hex-Werte in Templates kippen im dunklen Modus nicht mit und sind der häufigste Fehler in diesem Projekt. Jede neue Fläche wird in beiden Modi geprüft; beide müssen WCAG 2.1 AA erfüllen.",
+        "section": "colors"
+      },
+      {
+        "name": "Die Zeilenmaß-Regel",
+        "body": "Absätze laufen nie über rund 80 Zeichen; Textkolumnen, die neben dem Raster stehen, bekommen .text-measure (68ch). Die Breite wird über die Textbreite begrenzt, nicht über die Spaltenbreite — die linke Kante bleibt am Raster stehen.",
+        "section": "typography"
+      },
+      {
+        "name": "Die Struktur-vor-Optik-Regel",
+        "body": "Die Überschriftenebene folgt dem Dokument, die Größe folgt dem Blick. Wenn beides kollidiert, gewinnt die Ebene (<h2 class=\"h3\">), nie umgekehrt.",
+        "section": "typography"
+      },
+      {
+        "name": "Die Flach-von-Haus-aus-Regel",
+        "body": "Flächen liegen auf der Seite, nicht darüber. Wer Tiefe braucht, nimmt eine Linie oder einen Tonwert — box-shadow ist Zuständen vorbehalten (Fokus), nicht Ebenen.",
+        "section": "elevation"
+      },
+      {
+        "name": "Die Dunkelmodus-Umkehr-Regel",
+        "body": "btn-dark und btn-outline-dark verschwinden im dunklen Modus, weil Bootstrap seine Farb-Utilities nicht pro Modus dreht. Deshalb tauschen beide dort auf helle Tokens (#e9ecef als Schrift- und Rahmenfarbe, $gray-900 beim Hover). Jede neue Verwendung eines dark-Utilities muss denselben Tausch mitbringen oder auf ein modusfestes Token ausweichen.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do alles Anklickbare in Bundesblau (#0051a8) setzen — und sonst nichts.",
+      "Do Farbwerte über Bootstrap-Tokens beziehen (var(--bs-body-bg), var(--bs-border-color)), damit sie mit dem Farbmodus kippen.",
+      "Do neue Flächen in beiden Farbmodi prüfen, mit WCAG 2.1 AA als Untergrenze.",
+      "Do Fließtext begrenzen: 80ch global, .text-measure (68ch) für Kolumnen im Raster.",
+      "Do Tiefe über Linie und Tonwert herstellen, nicht über Schatten.",
+      "Do Bilder mit img-thumbnail rahmen und mit beschreibendem alt versehen.",
+      "Do die Überschriftenebene am Dokument ausrichten und die Optik über .h3-artige Klassen nachziehen.",
+      "Do bei jeder Verwendung eines dark-Utilities den Dunkelmodus-Tausch mitliefern."
+    ],
+    "donts": [
+      "Don't eine zweite Akzentfarbe einführen — keine farbigen Badges, keine Statusfarben jenseits der Bootstrap-Alerts, keine Verläufe.",
+      "Don't feste Hex-Werte in Templates schreiben; sie kippen im dunklen Modus nicht mit.",
+      "Don't das Bundeszeichen umfärben, invertieren oder auf eine farbige Fläche setzen.",
+      "Don't box-shadow für Ebenen einsetzen; Schatten sind Zuständen vorbehalten.",
+      "Don't den Fokusring entfernen oder abschwächen.",
+      "Don't das Inline-Skript zur Farbmodus-Auflösung aus dem <head> verschieben oder es defer geben.",
+      "Don't einen Webfont nachruesten — der Bestand laedt keinen; wer einen einfuehrt, aendert das System, nicht eine Seite.",
+      "Don't einen vierten Radius einfuehren; 0.375rem ist der Normalfall, 0.25rem und 0.5rem haengen an btn-sm und btn-lg, Kreise nur an den Karussell-Indikatoren."
+    ]
+  }
+}
