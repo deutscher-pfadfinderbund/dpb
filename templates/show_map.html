@@ -10,7 +10,7 @@
   <script src="{% static 'leaflet/leaflet.js' %}"></script>
   <link href="{% static 'leaflet/leaflet.css' %}" rel='stylesheet'/>
   <script src="{% static 'leaflet-fullscreen/Leaflet.fullscreen.min.js' %}"></script>
-  <link href="{% static 'leaflet-fullscreen/Leaflet.fullscreen.css' %}" rel='stylesheet'/>
+  <link href="{% static 'leaflet-fullscreen/leaflet.fullscreen.css' %}" rel='stylesheet'/>
 
   <style>
     {% if height %}
@@ -24,11 +24,13 @@
     {% endif %}
   </style>
 
+  {{ display_name|json_script:"map-display-name" }}
+
   <script>
       document.addEventListener("DOMContentLoaded", () => {
           const lat = {{ latitude|stringformat:"f" }}
           const lon = {{ longitude|stringformat:"f" }}
-          const display_name = "{{ display_name }}"
+          const display_name = JSON.parse(document.getElementById("map-display-name").textContent)
           const openStreetMap = L.tileLayer("https://tile.openstreetmap.de/{z}/{x}/{y}.png", {
               maxZoom: 19,
               attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -40,12 +42,21 @@
               layers: [openStreetMap],  // Set default map
               maxZoom: 19,
               minZoom: 0,
-              fullscreenControl: true,
+              fullscreenControl: {
+                  title: "Vollbild",
+                  titleCancel: "Vollbild beenden",
+              },
           });
 
           L.marker([lat, lon]).addTo(map);
 
-          document.getElementById("map_location").innerHTML = "Berechneter Standort: " + display_name;
+          openStreetMap.on("tileerror", () => {
+              document.getElementById("map_location").textContent =
+                  "Das Kartenmaterial konnte nicht geladen werden.";
+          });
+
+          document.getElementById("map_location").textContent =
+              "Berechneter Standort: " + (display_name || "unbekannt");
       })
   </script>
 

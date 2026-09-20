@@ -7,6 +7,11 @@ from django.db import models
 
 logger = logging.getLogger(__name__)
 
+NOMINATIM_URL = "https://nominatim.openstreetmap.org/search"
+NOMINATIM_TIMEOUT = 10  # seconds
+# Nominatim rejects requests that do not identify their client.
+NOMINATIM_USER_AGENT = "dpb-website (website@deutscher-pfadfinderbund.de)"
+
 class State(models.Model):
     """ List of the states of Germany """
     name = models.CharField("Name", max_length=1024, blank=False)
@@ -108,46 +113,75 @@ class House(models.Model):
     created = models.DateTimeField("Erstellt am", auto_now_add=True)
     modified = models.DateTimeField("Zuletzt geändert", auto_now=True)
 
-    def clean(self):
-        OPENSTREETMAP_URL = "https://nominatim.openstreetmap.org/search"
-        self.latitude = None
-        self.longitude = None
-        self.display_name = None
+    def address_fields(self):
+        """The fields the geocoding result depends on."""
+        return (self.name, self.street, self.plz, self.city, self.state_id)
 
+    def geocode(self):
+        """
+        Look the address up with Nominatim and return (lat, lon, display_name),
+        or None when it cannot be resolved.
 
-
+        Nominatim's usage policy requires every client to identify itself; a
+        request sent with the requests library's default user agent is answered
+        with 403, so the header below is not optional.
+        https://operations.osmfoundation.org/policies/nominatim/
+        """
+        headers = {"User-Agent": NOMINATIM_USER_AGENT}
         default_params = {
             "format": "json",
             "polygon": 1,
             "addressdetails": 1,
-            "accept-language": "de"
+            "accept-language": "de",
         }
-
         query_params = {
             "amenity": self.name,
             "street": self.street,
             "postalcode": self.plz,
             "city": self.city,
-            "state": self.state,
+            "state": str(self.state) if self.state else None,
         }
-        try:
-            response = requests.get(OPENSTREETMAP_URL, params=default_params | query_params)
-            if response.status_code != 200:
-                return
 
-            if not response.json():
-                del query_params["amenity"]
-                response = requests.get(OPENSTREETMAP_URL, params=default_params | query_params)
-                if response.status_code != 200 or not response.json():
-                    return
+        try:
+            for params in (query_params, {**query_params, "amenity": None}):
+                response = requests.get(
+                    NOMINATIM_URL,
+                    params=default_params | params,
+                    headers=headers,
+                    timeout=NOMINATIM_TIMEOUT,
+                )
+                if response.status_code != 200:
+                    logger.warning(
+                        "Nominatim answered %s for %r", response.status_code, self.name
+                    )
+                    return None
+                results = response.json()
+                if results:
+                    data = results[0]
+                    return data["lat"], data["lon"], data["display_name"]
         except requests.exceptions.RequestException as e:
-            logger.warning("Error querying OpenStreetMap", exc_info=e)
+            logger.warning("Error querying OpenStreetMap for %r", self.name, exc_info=e)
+            return None
+
+        logger.info("Nominatim found no match for %r", self.name)
+        return None
+
+    def clean(self):
+        # Only ask Nominatim when the address actually changed, or when we have
+        # no coordinates yet. Geocoding on every save would both hammer a
+        # rate-limited service and, on any hiccup, drop coordinates that were
+        # already correct just because somebody fixed a typo elsewhere.
+        previous = House.objects.filter(pk=self.pk).first() if self.pk else None
+        unchanged = previous is not None and previous.address_fields() == self.address_fields()
+        if unchanged and self.latitude is not None and self.longitude is not None:
             return
 
-        data = response.json()[0]
-        self.latitude = data["lat"]
-        self.longitude = data["lon"]
-        self.display_name = data["display_name"]
+        location = self.geocode()
+        if location is None:
+            # Keep whatever we had rather than blanking a working map.
+            return
+
+        self.latitude, self.longitude, self.display_name = location
 
     def __str__(self):
         return self.name
