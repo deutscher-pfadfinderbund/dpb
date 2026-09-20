@@ -62,6 +62,13 @@ img
   padding: 1rem
   border-radius: var(--bs-border-radius)
 
+/* Gesetzte Spaltenbreiten richten sich nach dem Raster, nicht nach der
+   Lesbarkeit. Fliesstext bekommt darum eine eigene Obergrenze, damit die Zeile
+   nicht ueber die rund 80 Zeichen hinauslaeuft, ab denen das Auge die naechste
+   Zeile schlechter findet. Die linke Kante bleibt dabei am Raster. */
+.text-measure
+  max-width: 68ch
+
 /* Bootstrap does not flip its colour utilities per colour mode, so the dark
    button variants used all over the site vanish against a dark page. Swap in
    the light tokens there; the light mode keeps its own look. */

@@ -28,23 +28,33 @@
     <img class="img-fluid col-md-8 logo-on-light" src="{% static 'img/schriftzug-dpb.svg' %}" style="aspect-ratio: 1301 / 271" alt="Deutscher Pfadfinderbund">
   </h1>
 
-  <p>
-    Der Deutsche Pfadfinderbund (DPB) ist ein unabhängiger, konfessionell nicht gebundener und bündisch geprägter
-    Pfadfinderbund.
-    Er dient gemeinnützigen Zwecken und wird ehrenamtlich getragen. Der Bund ist Mitglied des Ringes junger Bünde (RjB).
-  </p>
-  <p>
-    Der Deutsche Pfadfinderbund will seine jungen Menschen vor einseitiger Beeinflussung bewahren, sie jedoch zur
-    Kritikfähigkeit erziehen und ihnen zur Selbstentwicklung ihrer Anlagen Wege weisen, die sie zu weltoffenen,
-    selbständig denkenden Menschen und mündigen Staatsbürgern werden lässt. Wegweiser hierfür bilden Gesetz und
-    Versprechen der Pfadfinder sowie die Meißnerformel.
-  </p>
-  <p>
-    In der Erkenntnis, dass das Wesentliche im Zusammenleben der Menschen nicht die Betonung des Trennenden, sondern die
-    des Gemeinsamen und die Achtung vor der freien, menschlichen Persönlichkeit ist, sieht der Deutsche Pfadfinderbund
-    eine seiner gesellschaftlichen Aufgaben darin, eine demokratische Gesinnung zu fördern und totalitären Bestrebungen
-    entgegenzuwirken.
-  </p>
+  {# Teilt sich die Spalte mit dem Schriftzug darüber: eine gemeinsame linke Kante. #}
+  <div class="row justify-content-md-center">
+    <div class="col-md-8">
+      <div class="text-measure">
+        <p>
+          Der Deutsche Pfadfinderbund (DPB) ist ein unabhängiger, konfessionell nicht gebundener und bündisch
+          geprägter Pfadfinderbund. Er dient gemeinnützigen Zwecken und wird ehrenamtlich getragen. Der Bund ist
+          Mitglied des Ringes junger Bünde (RjB).
+        </p>
+        <p>
+          Der Deutsche Pfadfinderbund will seine jungen Menschen vor einseitiger Beeinflussung bewahren, sie jedoch
+          zur Kritikfähigkeit erziehen und ihnen zur Selbstentwicklung ihrer Anlagen Wege weisen, die sie zu
+          weltoffenen, selbständig denkenden Menschen und mündigen Staatsbürgern werden lässt. Wegweiser hierfür
+          bilden Gesetz und Versprechen der Pfadfinderinnen und Pfadfinder sowie die Meißnerformel.
+        </p>
+        <p class="mb-0">
+          In der Erkenntnis, dass das Wesentliche im Zusammenleben der Menschen nicht die Betonung des Trennenden,
+          sondern die des Gemeinsamen und die Achtung vor der freien, menschlichen Persönlichkeit ist, sieht der
+          Deutsche Pfadfinderbund eine seiner gesellschaftlichen Aufgaben darin, eine demokratische Gesinnung zu
+          fördern und totalitären Bestrebungen entgegenzuwirken.
+        </p>
+      </div>
+
+      {# Schliesst den Block aus Zeichen und Text ab, bevor die Übersicht folgt. #}
+      <hr class="mt-5 mb-0">
+    </div>
+  </div>
 
   {# Preview Row 1 #}
   <div class="row gy-5 gx-4 mt-5">
@@ -72,9 +82,9 @@
       </div>
     </section>
 
-    {# Was sind bündische Pfadfinder? #}
+    {# Was sind bündische Pfadfinderinnen und Pfadfinder? #}
     <section class="col-lg-6">
-      <h2>Pfadfinder und bündische Jugend</h2>
+      <h2>Pfadfinderinnen, Pfadfinder und bündische Jugend</h2>
       <div class="row">
         <div class="col-md-4 col-sm-5 col-6">
           <a href="{% url 'pfadfinder' %}">
@@ -123,8 +133,8 @@
     <section class="col-lg-6">
       <h2>Präventionsarbeit im DPB</h2>
       <p class="mb-0">
-        Unser Pfadfindergesetz und unsere Versprechen verpflichten uns zur Achtung gegenüber den uns Anvertrauten und
-        Treue zu halten unseren Schwestern und Brüder.
+        Das Gesetz der Pfadfinderinnen und Pfadfinder und unsere Versprechen verpflichten uns zur Achtung gegenüber
+        den uns Anvertrauten und Treue zu halten unseren Schwestern und Brüdern.
         Das schließt grenzverletzendes Verhalten klar aus! Zur stetigen Arbeit an diesem Thema hat sich ein
         Präventionsrat gebildet, der nach innen und außen tätig ist.
       </p>

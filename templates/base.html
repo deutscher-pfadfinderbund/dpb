@@ -121,8 +121,9 @@
             <li><a class="dropdown-item" href="{% url 'dpb' %}">Der Deutsche Pfadfinderbund</a></li>
             <li><a class="dropdown-item" href="{% url 'bundesordnung' %}">Bundesordnung</a>
             </li>
-            <li><a class="dropdown-item" href="{% url 'pfadfinder' %}">Pfadfinder und
-              bündische Jugend</a></li>
+            {# dropdown-item schneidet lange Titel sonst ab, statt umzubrechen. #}
+            <li><a class="dropdown-item text-wrap" href="{% url 'pfadfinder' %}">Pfadfinderinnen,
+              Pfadfinder und bündische Jugend</a></li>
             <li><a class="dropdown-item" href="{% url 'arbeitskreis' %}">Präventionsarbeit</a>
             </li>
           </ul>

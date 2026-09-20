@@ -98,7 +98,7 @@ class House(models.Model):
     location_special = models.TextField("Besonderheiten", max_length=4096, blank=True)
 
     # Kosten
-    price_intern = models.CharField("Preise für Pfadfinder", max_length=4096, blank=True, null=True)
+    price_intern = models.CharField("Preise für Pfadfinderinnen und Pfadfinder", max_length=4096, blank=True, null=True)
     price_extern = models.CharField("Preise für Externe", max_length=4096, blank=True, null=True)
     price_other = models.TextField("Sonstige Kosten", max_length=4096, blank=True)
 
