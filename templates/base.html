@@ -5,14 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <script>
-    // Runs before the stylesheet paints anything, so the page never flashes
-    // the wrong colour mode. The toggle at the end of <body> keeps it in sync.
-    (() => {
-      let stored = null;
-      try { stored = localStorage.getItem("dpb-theme"); } catch (e) { /* blocked storage */ }
-      const auto = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-      document.documentElement.setAttribute(
-        "data-bs-theme", stored && stored !== "auto" ? stored : auto);
+    // Colour mode, resolved before the stylesheet paints anything so the page
+    // never flashes the wrong theme. This is the only place the rule lives;
+    // the picker at the end of <body> just calls set().
+    window.dpbTheme = (() => {
+      const KEY = "dpb-theme";
+      const media = window.matchMedia("(prefers-color-scheme: dark)");
+      const read = () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
+
+      let choice = read() || "auto";
+      const listeners = [];
+
+      const apply = () => {
+        document.documentElement.setAttribute(
+          "data-bs-theme", choice === "auto" ? (media.matches ? "dark" : "light") : choice);
+        listeners.forEach(fn => fn(choice));
+      };
+
+      media.addEventListener("change", () => { if (choice === "auto") apply(); });
+      apply();
+
+      return {
+        get: () => choice,
+        set: value => {
+          choice = value;
+          try { localStorage.setItem(KEY, value); } catch (e) { /* blocked storage */ }
+          apply();
+        },
+        onChange: fn => { listeners.push(fn); fn(choice); },
+      };
     })();
   </script>
   {% block meta %}{% endblock %}
@@ -216,7 +237,7 @@
   </div>
 </nav>
 
-<main id="main" class="container-xl flex-grow-1">
+<main id="main" class="container-xl flex-grow-1 pt-4 pb-5">
   {% block preamble %}{% endblock %}
   {% if messages %}
     {% for message in messages %}
@@ -243,34 +264,16 @@
       .forEach(el => new bootstrap.Tooltip(el));
   });
 
-  // Colour-mode picker. "auto" follows the operating system and keeps
-  // following it while the page is open.
+  // Colour-mode picker. The rule for what "auto" means lives in the head
+  // script; this only reflects the current choice and hands over new ones.
   (() => {
-    const KEY = "dpb-theme";
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
     const buttons = document.querySelectorAll("[data-dpb-theme]");
-
-    let choice = "auto";
-    try { choice = localStorage.getItem(KEY) || "auto"; } catch (e) { /* blocked storage */ }
-
-    const apply = () => {
-      document.documentElement.setAttribute(
-        "data-bs-theme", choice === "auto" ? (media.matches ? "dark" : "light") : choice);
-      buttons.forEach(b => {
-        const selected = b.dataset.dpbTheme === choice;
-        b.classList.toggle("active", selected);
-        b.setAttribute("aria-current", selected ? "true" : "false");
-      });
-    };
-
-    media.addEventListener("change", () => { if (choice === "auto") apply(); });
-    buttons.forEach(b => b.addEventListener("click", () => {
-      choice = b.dataset.dpbTheme;
-      try { localStorage.setItem(KEY, choice); } catch (e) { /* blocked storage */ }
-      apply();
+    buttons.forEach(b => b.addEventListener("click", () => window.dpbTheme.set(b.dataset.dpbTheme)));
+    window.dpbTheme.onChange(choice => buttons.forEach(b => {
+      const selected = b.dataset.dpbTheme === choice;
+      b.classList.toggle("active", selected);
+      b.setAttribute("aria-current", selected ? "true" : "false");
     }));
-
-    apply();
   })();
 </script>
 

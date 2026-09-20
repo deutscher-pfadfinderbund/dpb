@@ -8,7 +8,7 @@ from django.db import models
 logger = logging.getLogger(__name__)
 
 NOMINATIM_URL = "https://nominatim.openstreetmap.org/search"
-NOMINATIM_TIMEOUT = 10  # seconds
+NOMINATIM_TIMEOUT = 5  # seconds; geocode() may spend two of these in one request
 # Nominatim rejects requests that do not identify their client.
 NOMINATIM_USER_AGENT = "dpb-website (website@deutscher-pfadfinderbund.de)"
 
@@ -172,13 +172,22 @@ class House(models.Model):
         # rate-limited service and, on any hiccup, drop coordinates that were
         # already correct just because somebody fixed a typo elsewhere.
         previous = House.objects.filter(pk=self.pk).first() if self.pk else None
-        unchanged = previous is not None and previous.address_fields() == self.address_fields()
-        if unchanged and self.latitude is not None and self.longitude is not None:
-            return
+        if previous is not None and previous.latitude is not None:
+            if previous.address_fields() == self.address_fields():
+                # Nothing to look up, and the form does not render the
+                # coordinates, so carry the stored ones over.
+                self.latitude = previous.latitude
+                self.longitude = previous.longitude
+                self.display_name = previous.display_name
+                return
 
         location = self.geocode()
         if location is None:
             # Keep whatever we had rather than blanking a working map.
+            if previous is not None:
+                self.latitude = previous.latitude
+                self.longitude = previous.longitude
+                self.display_name = previous.display_name
             return
 
         self.latitude, self.longitude, self.display_name = location

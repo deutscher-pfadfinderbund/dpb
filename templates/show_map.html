@@ -24,13 +24,10 @@
     {% endif %}
   </style>
 
-  {{ display_name|json_script:"map-display-name" }}
-
   <script>
       document.addEventListener("DOMContentLoaded", () => {
           const lat = {{ latitude|stringformat:"f" }}
           const lon = {{ longitude|stringformat:"f" }}
-          const display_name = JSON.parse(document.getElementById("map-display-name").textContent)
           const openStreetMap = L.tileLayer("https://tile.openstreetmap.de/{z}/{x}/{y}.png", {
               maxZoom: 19,
               attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -50,13 +47,9 @@
 
           L.marker([lat, lon]).addTo(map);
 
-          openStreetMap.on("tileerror", () => {
-              document.getElementById("map_location").textContent =
-                  "Das Kartenmaterial konnte nicht geladen werden.";
+          openStreetMap.once("tileerror", () => {
+              document.getElementById("map-tile-error").classList.remove("d-none");
           });
-
-          document.getElementById("map_location").textContent =
-              "Berechneter Standort: " + (display_name || "unbekannt");
       })
   </script>
 
@@ -65,8 +58,9 @@
     berechnet wird.
   </p>
   <div id="map"></div>
-  <p>
-    <span id="map_location"><i class="fa fa-refresh fa-spin"></i> Karte wird geladen...</span>
-  </p>
+  <div id="map-tile-error" class="alert alert-warning d-none mt-2" role="alert">
+    Das Kartenmaterial konnte nicht geladen werden.
+  </div>
+  <p class="mt-2">Berechneter Standort: {{ display_name|default:"unbekannt" }}</p>
 {% endif %}
 

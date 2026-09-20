@@ -14,11 +14,7 @@
   $body-bg-dark: #1b1d20,
   $body-color-dark: #dee2e6,
 
-  $table-cell-vertical-align: middle,
-
-  // A heading that sits 8px above its text reads as part of the paragraph.
-  // Lifting this one value loosens every heading on the site at once.
-  $headings-margin-bottom: .75rem
+  $table-cell-vertical-align: middle
 )
 
 @use "archive"
@@ -62,20 +58,22 @@ img
   filter: invert(1)
 
 /* Bootstrap does not flip its colour utilities per colour mode, so the dark
-   button variants used all over the site vanish against a dark page. Redefine
-   their tokens to the light variants; the light mode keeps its own look. */
+   button variants used all over the site vanish against a dark page. Swap in
+   the light tokens there; the light mode keeps its own look. */
 [data-bs-theme="dark"]
   .btn-dark,
   .btn-outline-dark
-    --bs-btn-color: #{bootstrap.$gray-900}
-    --bs-btn-bg: #{bootstrap.$gray-200}
-    --bs-btn-border-color: #{bootstrap.$gray-200}
     --bs-btn-hover-color: #{bootstrap.$gray-900}
     --bs-btn-hover-bg: #{bootstrap.$white}
     --bs-btn-hover-border-color: #{bootstrap.$white}
     --bs-btn-active-color: #{bootstrap.$gray-900}
     --bs-btn-active-bg: #{bootstrap.$white}
     --bs-btn-active-border-color: #{bootstrap.$white}
+
+  .btn-dark
+    --bs-btn-color: #{bootstrap.$gray-900}
+    --bs-btn-bg: #{bootstrap.$gray-200}
+    --bs-btn-border-color: #{bootstrap.$gray-200}
     --bs-btn-disabled-color: #{bootstrap.$gray-900}
     --bs-btn-disabled-bg: #{bootstrap.$gray-200}
     --bs-btn-disabled-border-color: #{bootstrap.$gray-200}
@@ -105,17 +103,6 @@ ul.no-dot > li
   max-width: 100%
   margin-left: 2em
   margin-bottom: 2em
-
-/* Vertical rhythm of the page shell. #main owns the distance to the navbar and
-   to the footer band, so no page has to remember to add its own; the navbar and
-   the footer only own what is inside them. */
-#main
-  padding-block: 1.5rem 4rem
-
-/* The sticky footer itself is built from Bootstrap utilities in base.html
-   (d-flex flex-column min-vh-100 / flex-grow-1 / flex-shrink-0). */
-.footer-wrapper
-  margin-top: 0
 
 /* Style images in text */
 .image-inline-right

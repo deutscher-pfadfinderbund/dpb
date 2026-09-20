@@ -29,7 +29,7 @@ class Command(BaseCommand):
             houses = houses.filter(latitude__isnull=True)
 
         found = missing = 0
-        for house in houses:
+        for index, house in enumerate(houses):
             location = house.geocode()
             if location is None:
                 missing += 1
@@ -39,6 +39,7 @@ class Command(BaseCommand):
                 house.save(update_fields=["latitude", "longitude", "display_name"])
                 found += 1
                 self.stdout.write(self.style.SUCCESS(f"{house.name}: {house.display_name}"))
-            time.sleep(options["delay"])
+            if index < len(houses) - 1:
+                time.sleep(options["delay"])
 
         self.stdout.write(f"\n{found} Häuser verortet, {missing} ohne Treffer.")

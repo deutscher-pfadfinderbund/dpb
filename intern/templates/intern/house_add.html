@@ -54,16 +54,16 @@
 
     <h2>Ausstattung der Küche</h2>
     <fieldset class="row">
-      <div class="col-md-3">{{ form.kitchen_stove|form_checkbox|safe }}</div>
-      <div class="col-md-3">{{ form.kitchen_oven|form_checkbox|safe }}</div>
-      <div class="col-md-3">{{ form.kitchen_fridge|form_checkbox|safe }}</div>
-      <div class="col-md-3">{{ form.kitchen_sink|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_stove|form_item|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_oven|form_item|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_fridge|form_item|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_sink|form_item|safe }}</div>
     </fieldset>
     <fieldset class="row">
-      <div class="col-md-3">{{ form.kitchen_dishwasher|form_checkbox|safe }}</div>
-      <div class="col-md-3">{{ form.kitchen_dishes|form_checkbox|safe }}</div>
-      <div class="col-md-3">{{ form.kitchen_pots|form_checkbox|safe }}</div>
-      <div class="col-md-3">{{ form.kitchen_hot_water|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_dishwasher|form_item|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_dishes|form_item|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_pots|form_item|safe }}</div>
+      <div class="col-md-3">{{ form.kitchen_hot_water|form_item|safe }}</div>
     </fieldset>
     <fieldset>
       {{ form.kitchen_other|form_item|safe }}
@@ -71,7 +71,7 @@
 
     <h2>Bad</h2>
     <fieldset class="row">
-      <div class="col-md-3">{{ form.toilets_separate|form_checkbox|safe }}</div>
+      <div class="col-md-3">{{ form.toilets_separate|form_item|safe }}</div>
     </fieldset>
     <fieldset class="row">
       <div class="col-md-4">{{ form.toilets_total|form_item|safe }}</div>
@@ -112,8 +112,8 @@
 
     <h2>Lage</h2>
     <fieldset class="row">
-      <div class="col-md-4">{{ form.location_urban|form_checkbox|safe }}</div>
-      <div class="col-md-4">{{ form.location_country|form_checkbox|safe }}</div>
+      <div class="col-md-4">{{ form.location_urban|form_item|safe }}</div>
+      <div class="col-md-4">{{ form.location_country|form_item|safe }}</div>
     </fieldset>
     <fieldset>
       {{ form.location_special|form_item|safe }}

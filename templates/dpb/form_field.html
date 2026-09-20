@@ -6,44 +6,38 @@
 
 {% if field.is_hidden %}
   {{ field }}
-{% else %}
+{% else %}{% with kind=field|field_kind %}
   <div id="div_{{ field.auto_id }}" class="mb-3{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
 
-    {% if field.label and not field|field_kind == "checkbox" %}
+    {% if field.label and kind != "checkbox" %}
       <label for="{{ field.auto_id }}"
              class="form-label{% if css_classes.label %} {{ css_classes.label }}{% endif %}">
         {{ field.label|safe }}{% if field.field.required %} <span class="text-danger" aria-hidden="true">*</span>{% endif %}
       </label>
     {% endif %}
 
-    {% if field|field_kind == "choice_group" %}
-      <div class="{{ css_classes.wrap }}">
-        {% include "dpb/_field_errors.html" %}
-        {% for subwidget in field.subwidgets %}
-          <div class="form-check">
-            {{ subwidget|bootstrap_widget }}
-            <label class="form-check-label" for="{{ subwidget.id_for_label }}">{{ subwidget.choice_label }}</label>
-          </div>
-        {% endfor %}
-        {% include "dpb/_field_help_text.html" %}
-      </div>
-    {% elif field|field_kind == "checkbox" %}
-      <div class="{{ css_classes.single_container }}">
+    {% if kind == "choice_group" %}
+      {% include "dpb/_field_errors.html" %}
+      {% for subwidget in field.subwidgets %}
         <div class="form-check">
-          {{ field|bootstrap_widget }}
-          <label class="form-check-label" for="{{ field.auto_id }}">
-            {{ field.label|safe }}{% if field.field.required %} <span class="text-danger" aria-hidden="true">*</span>{% endif %}
-          </label>
+          {{ subwidget|bootstrap_widget }}
+          <label class="form-check-label" for="{{ subwidget.id_for_label }}">{{ subwidget.choice_label }}</label>
         </div>
-        {% include "dpb/_field_errors.html" %}
-        {% include "dpb/_field_help_text.html" %}
-      </div>
-    {% else %}
-      <div class="{{ css_classes.wrap }}">
+      {% endfor %}
+      {% include "dpb/_field_help_text.html" %}
+    {% elif kind == "checkbox" %}
+      <div class="form-check">
         {{ field|bootstrap_widget }}
-        {% include "dpb/_field_errors.html" %}
-        {% include "dpb/_field_help_text.html" %}
+        <label class="form-check-label" for="{{ field.auto_id }}">
+          {{ field.label|safe }}{% if field.field.required %} <span class="text-danger" aria-hidden="true">*</span>{% endif %}
+        </label>
       </div>
+      {% include "dpb/_field_errors.html" %}
+      {% include "dpb/_field_help_text.html" %}
+    {% else %}
+      {{ field|bootstrap_widget }}
+      {% include "dpb/_field_errors.html" %}
+      {% include "dpb/_field_help_text.html" %}
     {% endif %}
   </div>
-{% endif %}
+{% endwith %}{% endif %}

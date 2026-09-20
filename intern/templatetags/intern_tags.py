@@ -2,15 +2,8 @@ import os
 
 from django import template
 from django.db.models import FileField
-from django.utils.safestring import mark_safe
 
-from dpb.templatetags.form_tags import (
-    field_errors,
-    field_help_text,
-    field_label,
-    render_widget,
-    widget_css_class,
-)
+from dpb.templatetags.form_tags import render_field
 
 register = template.Library()
 
@@ -161,43 +154,8 @@ def bool_icon(value, text=""):
 def form_item(val):
     """
     Render a bound form field as a Bootstrap 5 form group.
+
+    house_add.html places fields one by one inside its own grid, so it cannot
+    use `as_bootstrap`; this is the per-field entry point to the same template.
     """
-    if not hasattr(val, "as_widget"):
-        return ""
-
-    css_class = widget_css_class(val.field.widget)
-    if val.errors:
-        css_class += " is-invalid"
-
-    return mark_safe(
-        f"""
-        <div class="mb-3">
-            {field_label(val, "form-label")}
-            {render_widget(val, css_class)}
-            {field_help_text(val)}
-            {field_errors(val)}
-        </div>"""
-    )
-
-
-@register.filter(is_safe=True)
-def form_checkbox(val):
-    """
-    Render a bound checkbox field as a Bootstrap 5 form check.
-    """
-    if not hasattr(val, "as_widget"):
-        return ""
-
-    css_class = widget_css_class(val.field.widget)
-    if val.errors:
-        css_class += " is-invalid"
-
-    return mark_safe(
-        f"""
-        <div class="form-check mb-3">
-            {render_widget(val, css_class)}
-            {field_label(val, "form-check-label")}
-            {field_help_text(val)}
-            {field_errors(val)}
-        </div>"""
-    )
+    return render_field(val)
