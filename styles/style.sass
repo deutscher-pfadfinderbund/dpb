@@ -53,9 +53,14 @@ img
   background-color: var(--dpb-surface-bg)
   border-color: var(--bs-border-color)
 
-/* Black line art on a transparent background disappears on a dark page. */
-[data-bs-theme="dark"] .invert-on-dark
-  filter: invert(1)
+/* The wordmark is black line art on transparency, and the lily next to it is a
+   solid black badge -- the Bundeszeichen. It must never be recoloured, so it
+   keeps a light surface under it instead of being inverted for dark mode. In
+   light mode the surface matches the page and is invisible. */
+.logo-on-light
+  background-color: #{bootstrap.$body-bg}
+  padding: 1rem
+  border-radius: var(--bs-border-radius)
 
 /* Bootstrap does not flip its colour utilities per colour mode, so the dark
    button variants used all over the site vanish against a dark page. Swap in
