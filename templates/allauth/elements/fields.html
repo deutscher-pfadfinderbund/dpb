@@ -1,0 +1,5 @@
+{# Upstream renders `{{ attrs.form.as_p }}`, which produces no Bootstrap markup. #}
+{# Reuse the same field template the rest of the site's forms go through. #}
+{% for field in attrs.form %}
+  {% include "dpb/form_field.html" %}
+{% endfor %}

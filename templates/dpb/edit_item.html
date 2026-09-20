@@ -1,7 +1,7 @@
 {% if user.is_staff %}
   {% with "admin:"|add:model|add:"_add" as admin_add %}
   {% with "admin:"|add:model|add:"_change" as admin_change %}
-  <span class="pull-right">
+  <span class="float-end">
     {% if not noadd %}
       <a href="{% url admin_add %}"><i class="fa fa-plus-square-o"></i></a>
     {% endif %}

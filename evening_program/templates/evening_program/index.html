@@ -25,18 +25,18 @@
         <div class="col-md-8">
           <div class="card mb-3">
             <div class="card-header">
-              <h3 class="panel-title">
+              <h2 class="h3 card-title">
                 <a href="{% url 'evening_program:details' slug=program.slug %}">{{ program.title }}</a>
-              </h3>
+              </h2>
             </div>
             <div class="card-body">
               <div class="row">
                 <div class="col-md-8">
-                  <h5>Was haben wir gemacht?</h5>
+                  <h3 class="h5">Was haben wir gemacht?</h3>
                   {{ program.execution|markdownify|truncatewords_html:50 }}
                 </div>
                 <div class="col-md-4">
-                  <h5>Wie alt sind meine Mädchen / Jungen?</h5>
+                  <h3 class="h5">Wie alt sind meine Mädchen / Jungen?</h3>
                   {{ program.target }}
                 </div>
               </div>

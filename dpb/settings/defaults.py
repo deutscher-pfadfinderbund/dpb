@@ -2,30 +2,21 @@
 Django settings for dpb project.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/1.7/topics/settings/
+https://docs.djangoproject.com/en/stable/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
+https://docs.djangoproject.com/en/stable/ref/settings/
 """
 import os
 
+# DEBUG and the settings derived from it deliberately live in dev.py /
+# production.py only. Defining them here would be read at import time, before
+# the environment module gets to override them.
+
 SECRET_KEY = os.getenv("SECRET_KEY", "CHANGE_ME")
-DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-
-# ALLOWED_HOSTS = ['.deutscher-pfadfinderbund.de', 'deutscher-pfadfinderbund.de', '.jungenbund.de', '.maedchenbund.de',
-#                  '127.0.0.1']
-ALLOWED_HOSTS = ['*']
-
-CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = ['https://deutscher-pfadfinderbund.de']
-
-SESSION_COOKIE_SECURE = True
-
-# NGINX <-> Django is using HTTP
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 SITE_ID = 1
 LOGIN_URL = 'login'
@@ -49,7 +40,6 @@ INSTALLED_APPS = (
     # 3rd party
     'dpb.apps.MyFilerConfig',  # Use Django-Filer with own config for verbose name
     'easy_thumbnails',
-    'django_forms_bootstrap',
     'autoslug',
     'pagedown',
     'markdownify',
@@ -82,8 +72,6 @@ MIDDLEWARE = (
     "allauth.account.middleware.AccountMiddleware",
 )
 
-MIDDLEWARE_CLASSES = MIDDLEWARE
-
 ROOT_URLCONF = 'dpb.urls'
 
 WSGI_APPLICATION = 'dpb.wsgi.application'
@@ -94,14 +82,24 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 ACCOUNT_ADAPTER = 'dpb.account_adapter.NoNewUsersAccountAdapter'
 
+AUTHENTICATION_BACKENDS = [
+    # Needed to log in by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 # Internationalization
-# https://docs.djangoproject.com/en/1.7/topics/i18n/
+# https://docs.djangoproject.com/en/stable/topics/i18n/
 
 LANGUAGE_CODE = 'de'
 
 TIME_ZONE = 'Europe/Berlin'
 
 USE_I18N = True
+
+USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 FILE_UPLOAD_PERMISSIONS = 0o644
@@ -113,11 +111,13 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+# The compiled stylesheet is written to dpb/static/styles/ by `npm run compile-css`
+# and picked up by the AppDirectoriesFinder, so the SASS sources in styles/ are
+# never exposed as static files.
 STATICFILES_DIRS = (
     ("leaflet", os.path.join(BASE_DIR, 'node_modules/leaflet/dist')),
     ("leaflet-fullscreen", os.path.join(BASE_DIR, 'node_modules/leaflet-fullscreen/dist')),
     ("bootstrap", os.path.join(BASE_DIR, 'node_modules/bootstrap/dist/js')),
-    ("styles", os.path.join(BASE_DIR, 'styles')),
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -135,7 +135,9 @@ TEMPLATES = [{
             'django.contrib.auth.context_processors.auth',
             'django.contrib.messages.context_processors.messages',
         ],
-        'debug': DEBUG,
+        # 'debug' deliberately left out: Django defaults it to the DEBUG setting
+        # at runtime. Pinning it here froze it to defaults.py's value, which made
+        # the dev server silently use the cached template loader.
     },
 },
 ]

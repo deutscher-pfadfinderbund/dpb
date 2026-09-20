@@ -1,11 +1,13 @@
-FROM node:alpine AS npm-deps
+FROM node:24-alpine AS npm-deps
+WORKDIR /build
+
 # Install npm deps
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm ci
 
-# Build CSS
-COPY styles/ ./
-RUN npx sass -I . --style=compressed --pkg-importer=node style.sass:style.css
+# Build CSS with the very same command developers run locally
+COPY styles/ styles/
+RUN npm run compile-css
 
 
 
@@ -30,15 +32,14 @@ ADD . /app
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev --inexact --no-editable
 
-COPY --from=npm-deps node_modules node_modules/
-COPY --from=npm-deps style.css styles/
+COPY --from=npm-deps /build/node_modules node_modules/
+COPY --from=npm-deps /build/dpb/static/styles/ dpb/static/styles/
 
+# No --link here: collectstatic would write symlinks pointing at paths
+# (node_modules, dpb/static) that the runtime stage does not receive.
 RUN uv run --frozen python manage.py collectstatic  \
     --noinput  \
-    --link \
     --ignore *.map  \
-    --ignore *.scss \
-    --ignore *.sass \
     && ls static
 
 

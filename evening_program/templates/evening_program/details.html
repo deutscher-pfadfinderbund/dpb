@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% load intern_tags %}
-{% load bootstrap_tags %}
 {% load markdownify %}
 
 {% block heading %}
@@ -10,27 +9,27 @@
 
 {% block content %}
   {% if program.target %}
-    <h4>Wie alt sind meine Mädchen / Jungen?</h4>
+    <h2 class="h4">Wie alt sind meine Mädchen / Jungen?</h2>
     {{ program.target }}
   {% endif %}
 
   {% if program.preparation %}
-    <h4>Was habe ich vorbereitet?</h4>
+    <h2 class="h4">Was habe ich vorbereitet?</h2>
     {{ program.preparation|markdownify|safe }}
   {% endif %}
 
   {% if program.execution %}
-    <h4>Was haben wir gemacht?</h4>
+    <h2 class="h4">Was haben wir gemacht?</h2>
     {{ program.execution|markdownify|safe }}
   {% endif %}
 
   {% if program.greatness %}
-    <h4>Was war daran so toll?</h4>
+    <h2 class="h4">Was war daran so toll?</h2>
     {{ program.greatness|markdownify|safe }}
   {% endif %}
 
   {% if program.file1 or program.file2 or program.file3 %}
-    <h3>Material</h3>
+    <h2 class="h3">Material</h2>
     <ul>
       {% if program.file1 %}
         <li><a href="{{ program.file1.url }}">{{ program.file1 }}</a></li>
@@ -45,21 +44,21 @@
   {% endif %}
 
   {% if program.contact_name %}
-    <h3>Ansprechpartner</h3>
+    <h2 class="h3">Ansprechpartner</h2>
     <div class="row">
       <div class="col-md-4">
-        <h5>Name</h5>
+        <h3 class="h5">Name</h3>
         {{ program.contact_name }}
       </div>
       {% if program.contact_group %}
         <div class="col-md-4">
-          <h5>Gruppe</h5>
+          <h3 class="h5">Gruppe</h3>
           {{ program.contact_group }}
         </div>
       {% endif %}
       {% if program.contact_mail %}
         <div class="col-md-4">
-          <h5>E-Mail</h5>
+          <h3 class="h5">E-Mail</h3>
           <a href="mailto:{{ program.contact_mail }}">{{ program.contact_mail }}</a>
         </div>
       {% endif %}

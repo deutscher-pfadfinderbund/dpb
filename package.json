@@ -4,16 +4,17 @@
   "version": "v1.0.0",
   "private": true,
   "dependencies": {
-    "bootstrap": "^5",
+    "bootstrap": "^5.3.8",
     "leaflet": "^1.9.4",
     "leaflet-fullscreen": "^1.0.2"
   },
+  "devDependencies": {
+    "sass": "^1.104.1"
+  },
   "scripts": {
-    "precompile-css": "npm install",
-    "prewatch-css": "npm install",
-    "compile-css": "npx sass --load-path=. --style=compressed --quiet-deps --pkg-importer=node styles/:static/styles/",
-    "watch-css": "npx sass --load-path=. --watch --style=compressed --quiet-deps --pkg-importer=node styles/:static/styles/",
+    "compile-css": "sass --load-path=. --style=compressed --quiet-deps --pkg-importer=node styles/style.sass:dpb/static/styles/style.css",
+    "watch-css": "npm run compile-css -- --watch",
     "precompile": "npm install",
-    "compile": "uv run manage.py collectstatic --noinput && npm run compile-css"
+    "compile": "npm run compile-css && uv run manage.py collectstatic --noinput"
   }
 }

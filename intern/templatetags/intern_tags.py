@@ -3,6 +3,8 @@ import os
 from django import template
 from django.db.models import FileField
 
+from dpb.templatetags.form_tags import render_field
+
 register = template.Library()
 
 
@@ -142,33 +144,18 @@ def table_row(value, args):
 @register.filter(is_safe=True)
 def bool_icon(value, text=""):
     if value:
-        icon = "<i class='fa fa-check'></i>"
+        icon = "<i class='fa fa-check' aria-hidden='true'></i>"
     else:
-        icon = "<i class='fa fa-times'></i>"
+        icon = "<i class='fa fa-times' aria-hidden='true'></i>"
     return f"{icon} {text}"
 
 
 @register.filter(is_safe=True)
 def form_item(val):
-    errors = has_errors(val)
-    try:
-        label = val.label_tag()
-    except AttributeError:
-        label = ""
-    return f"""
-        <div class="form-group">
-            {label}
-            {errors}
-            {val}
-        </div>"""
+    """
+    Render a bound form field as a Bootstrap 5 form group.
 
-
-@register.filter(is_safe=True)
-def form_checkbox(val):
-    return f"""
-        <div class="checkbox">
-            {val.errors}
-            <label>
-            {val} {val.label}
-            </label>
-        </div>"""
+    house_add.html places fields one by one inside its own grid, so it cannot
+    use `as_bootstrap`; this is the per-field entry point to the same template.
+    """
+    return render_field(val)

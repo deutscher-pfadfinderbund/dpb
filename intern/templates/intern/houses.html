@@ -7,14 +7,6 @@
   <h1>Häuser und Zeltplätze</h1>
 {% endblock %}
 
-{% block sources %}
-  <style>
-      .col-md-6 {
-          padding-left: 0;
-      }
-  </style>
-{% endblock %}
-
 {% block content %}
   <p>
     Hier findest du eine Liste von Häusern und Zeltplätzen, die vielleicht auch für euch interessant sein könnten.
@@ -33,8 +25,8 @@
         <div class="col-md-8">
           <div class="card mb-3">
             <div class="card-header">
-              <h3 class="panel-title"><a href="{% url 'intern:house_detail' slug=house.slug %}">{{ house.name }}</a>
-              </h3>
+              <h2 class="h3 card-title"><a href="{% url 'intern:house_detail' slug=house.slug %}">{{ house.name }}</a>
+              </h2>
             </div>
             <div class="card-body">
               <p style="margin-bottom: 0; padding-bottom: 0;">

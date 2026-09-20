@@ -1,0 +1,15 @@
+{# Stacked Bootstrap 5 form, rendered by the form_tags `as_bootstrap*` filters. #}
+
+{% if form.non_field_errors %}
+    <div class="alert alert-danger">
+        {% if form.non_field_errors|length == 1 %}
+        {{ form.non_field_errors|first }}
+        {% else %}
+        {{ form.non_field_errors }}
+        {% endif %}
+    </div>
+{% endif %}
+
+{% for field in form %}
+    {% include "dpb/form_field.html" %}
+{% endfor %}

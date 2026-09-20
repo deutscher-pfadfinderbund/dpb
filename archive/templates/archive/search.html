@@ -9,11 +9,25 @@
 
 {% block content %}
   <script>
-      $(document).ready(function () {
-          $('#reset-button').click(function () {
-              $(':input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
-          });
-      })
+      document.addEventListener('DOMContentLoaded', function () {
+          var resetButton = document.getElementById('reset-button');
+          if (resetButton) {
+              resetButton.addEventListener('click', function () {
+                  var form = document.getElementById('search-form');
+                  form.querySelectorAll('input, select, textarea').forEach(function (field) {
+                      var type = (field.getAttribute('type') || '').toLowerCase();
+                      if (['button', 'submit', 'reset', 'hidden', 'checkbox', 'radio'].indexOf(type) !== -1) {
+                          return;
+                      }
+                      if (field.tagName === 'SELECT') {
+                          field.selectedIndex = 0;
+                      } else {
+                          field.value = '';
+                      }
+                  });
+              });
+          }
+      });
   </script>
 
   <p>
@@ -45,15 +59,14 @@
 
   {% if errors %}
     <div class="alert alert-warning alert-dismissible" role="alert">
-      <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"><span
-          aria-hidden="true">&times;</span></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       Deine Eingabe ist leider zu kurz. Du musst mindestens {{ min_length_of_query }} Zeichen angeben.
     </div>
   {% endif %}
 
-  <form action="" class="form-horizontal" id="search-form">
-    <div class="form-group">
-      <label for="id_q" class="col-sm-2 control-label">Volltextsuche</label>
+  <form action="" id="search-form">
+    <div class="row mb-3">
+      <label for="id_q" class="col-sm-2 col-form-label">Volltextsuche</label>
       <div class="col-sm-10">
         <input type="text" name="q" id="id_q" value="{{ query|default_if_none:'' }}" class="form-control"
                placeholder="z.B. Kompassnadel, ..."/>
@@ -61,36 +74,36 @@
     </div>
 
     <div
-        class="collapse {% if title and title != "" or author and author != "" or keyword and keyword != "" or doctype and doctype != "" %}in{% endif %}"
+        class="collapse {% if title and title != "" or author and author != "" or keyword and keyword != "" or doctype and doctype != "" %}show{% endif %}"
         id="extended-search">
-      <div class="form-group">
-        <label for="id_title" class="col-sm-2 control-label">Titel</label>
+      <div class="row mb-3">
+        <label for="id_title" class="col-sm-2 col-form-label">Titel</label>
         <div class="col-sm-10">
           <input type="text" name="titel" id="id_title" value="{{ title|default_if_none:'' }}" class="form-control"
                  placeholder="z.B. Kompassnadel"/>
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="id_author" class="col-sm-2 control-label">Autor</label>
+      <div class="row mb-3">
+        <label for="id_author" class="col-sm-2 col-form-label">Autor</label>
         <div class="col-sm-10">
           <input type="text" name="autor" id="id_author" value="{{ author|default_if_none:'' }}" class="form-control"
                  placeholder="z.B. Deutscher Pfadfinderbund"/>
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="id_keyword" class="col-sm-2 control-label">Schlagwort</label>
+      <div class="row mb-3">
+        <label for="id_keyword" class="col-sm-2 col-form-label">Schlagwort</label>
         <div class="col-sm-10">
           <input type="text" name="schlagwort" id="id_keyword" value="{{ keyword|default_if_none:'' }}"
                  class="form-control" placeholder="Schlagwort"/>
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="id_mediatype" class="col-sm-2 control-label">Medienart</label>
+      <div class="row mb-3">
+        <label for="id_mediatype" class="col-sm-2 col-form-label">Medienart</label>
         <div class="col-sm-10">
-          <select id="id_mediatype" name="medientyp" class="form-control">
+          <select id="id_mediatype" name="medientyp" class="form-select">
             <option value="alle" {% if mediatype == "" %}selected{% endif %}>-- Alle --</option>
             {% for key, label in mediatypes %}
               <option value="{{ key }}" {% if mediatype == key %}selected{% endif %}>{{ label }}</option>
@@ -99,10 +112,10 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="id_doctype" class="col-sm-2 control-label">Dokumenttyp</label>
+      <div class="row mb-3">
+        <label for="id_doctype" class="col-sm-2 col-form-label">Dokumenttyp</label>
         <div class="col-sm-10">
-          <select id="id_doctype" name="dokumenttyp" class="form-control">
+          <select id="id_doctype" name="dokumenttyp" class="form-select">
             <option value="alle" {% if doctype == "" %}selected{% endif %}>-- Alle --</option>
             {% for key, label in doctypes %}
               <option value="{{ key }}" {% if doctype == key %}selected{% endif %}>{{ label }}</option>
@@ -112,26 +125,29 @@
       </div>
     </div>
 
-    <div class="pull-right">
+    <div class="float-end">
       <input type="submit" value="Suchen" class="btn btn-primary"/>
     </div>
   </form>
   <div>
-    <button class="btn btn-xs btn-outline-dark" data-bs-toggle="collapse" data-bs-target="#extended-search"
+    <button class="btn btn-sm btn-outline-dark" data-bs-toggle="collapse" data-bs-target="#extended-search"
             aria-expanded="false"
             aria-controls="extended-search">Erweiterte Suche
     </button>
-    <button class="btn btn-xs btn-outline-dark" id="reset-button">Formular leeren</button>
+    <button type="button" class="btn btn-sm btn-outline-dark" id="reset-button">Formular leeren</button>
   </div>
 
   <hr>
 
   <p>
     {% if results %}
-      <table class="table table-striped table-hover datatable bundesarchiv-ergebnisse">
+      <table class="table table-striped table-hover bundesarchiv-ergebnisse">
+        <colgroup>
+          <col style="width: 60%">
+        </colgroup>
         <thead>
         <tr>
-          <th width="60%">Titel</th>
+          <th>Titel</th>
           <th>Autor</th>
           <th>Medienart</th>
           <th>Dokumenttyp</th>

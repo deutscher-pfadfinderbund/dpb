@@ -1,0 +1,10 @@
+{# django-allauth renders its own pages (social login errors, e-mail confirmation, #}
+{# ...) through this layout. Extending the project base keeps them inside the site #}
+{# chrome instead of falling back to allauth's unstyled default page. #}
+{# allauth's page templates fill `content` and `extra_body` themselves, and #}
+{# base.html already provides both slots, so only the head blocks need mapping. #}
+{% extends "base.html" %}
+
+{% block title %}{% block head_title %}{% endblock head_title %}{% endblock %}
+
+{% block sources %}{% block extra_head %}{% endblock extra_head %}{% endblock %}

@@ -48,5 +48,5 @@ def row_if_exists(field, name):
 @register.filter(is_safe=True)
 def check_or_cross(check: bool) -> str:
     if check:
-        return '<span class="glyphicon glyphicon-ok text-success" aria-hidden="true">✓</span>'
-    return '<span class="glyphicon glyphicon-remove text-muted" aria-hidden="true">✘</span>'
+        return '<span class="text-success" title="ja">✓<span class="visually-hidden">ja</span></span>'
+    return '<span class="text-muted" title="nein">✘<span class="visually-hidden">nein</span></span>'

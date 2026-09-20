@@ -12,66 +12,79 @@
 {% block content %}
   {% if user.is_staff %}
     <p>
-      <a href="/admin/filer/folder/"><i class="fa fa-paperclip fa-lg"></i> Weitere Dokumente hochladen</a>
+      <a href="/admin/filer/folder/"><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i> Weitere Dokumente hochladen</a>
     </p>
   {% endif %}
 
   {% for folder in folders %}
     {# Compare to folder.parent.name to get the string #}
     {% if folder.parent.name == "Dokumente" and folder.file_count > 0 %}
-      <h3>{{ folder }}
+      <h2 class="h3">{{ folder }}
         <small>
           <a href="{{ folder.get_admin_directory_listing_url_path }}"
-             data-bs-toggle="tooltip" data-placement="top" title="Datei zum Ordner hinzufügen">
-            <i class="text-right fa fa-paperclip"></i>
+             data-bs-toggle="tooltip" data-bs-placement="top" title="Datei zum Ordner hinzufügen">
+            <i class="fa fa-paperclip" aria-hidden="true"></i>
           </a>
         </small>
-      </h3>
+      </h2>
 
-      <table class="table table-hover table-striped table-condensed table-responsive datatable">
-        <thead>
-        <th width="5%" class="text-center">Typ</th>
-        <th width="35%">Name</th>
-        <th width="40%">Beschreibung</th>
-        {% if user.is_staff %}
-          <th width="5%"></th>
-        {% endif %}
-        <th width="10%">Größe</th>
-        </thead>
-        <tbody>
-        {% for file in files %}
-          {% if file.folder == folder %}
-            <tr>
-              <td align="center">
-                {{ file.extension|fa_attachment|safe }}
-              </td>
-              <td>
-                <a href="{{ file.url }}">{% if file.name %}{{ file.name }}{% else %}{{ file }}{% endif %}</a>
-              </td>
-              <td>
-                {% if file.description %}
-                  {{ file.description|truncatewords_html:10 }}
-                  <a data-bs-toggle="tooltip" data-placement="top" title="{{ file.description }}">mehr</a>
-                {% endif %}
-              </td>
-
-              {% if user.is_staff %}
-                <td>
-                  <a href="{{ file.get_admin_url_path }}" data-bs-toggle="tooltip" data-placement="top"
-                     title="Datei bearbeiten"><i class="fa fa-pencil-square-o fa-lg"></i></a>
-                  <a href="{{ file.get_admin_url_path }}delete" data-bs-toggle="tooltip" data-placement="top"
-                     title="Datei löschen"><i class="fa fa-remove fa-lg"></i></a>
+      <div class="table-responsive">
+        <table class="table table-hover table-striped table-sm">
+          <colgroup>
+            <col style="width: 5%">
+            <col style="width: 35%">
+            <col style="width: 40%">
+            {% if user.is_staff %}
+              <col style="width: 5%">
+            {% endif %}
+            <col style="width: 10%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="text-center">Typ</th>
+            <th>Name</th>
+            <th>Beschreibung</th>
+            {% if user.is_staff %}
+              <th></th>
+            {% endif %}
+            <th>Größe</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for file in files %}
+            {% if file.folder == folder %}
+              <tr>
+                <td class="text-center">
+                  {{ file.extension|fa_attachment|safe }}
                 </td>
-              {% endif %}
+                <td>
+                  <a href="{{ file.url }}">{% if file.name %}{{ file.name }}{% else %}{{ file }}{% endif %}</a>
+                </td>
+                <td>
+                  {% if file.description %}
+                    {{ file.description|truncatewords_html:10 }}
+                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="{{ file.description }}">mehr</span>
+                  {% endif %}
+                </td>
 
-              <td>{{ file.size|sizify }}</td>
-            </tr>
-          {% endif %}
-        {% endfor %}
+                {% if user.is_staff %}
+                  <td>
+                    <a href="{{ file.get_admin_url_path }}" data-bs-toggle="tooltip" data-bs-placement="top"
+                       title="Datei bearbeiten"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
+                    <a href="{{ file.get_admin_url_path }}delete" data-bs-toggle="tooltip" data-bs-placement="top"
+                       title="Datei löschen"><i class="fa fa-remove fa-lg" aria-hidden="true"></i></a>
+                  </td>
+                {% endif %}
 
-        </tbody>
+                <td>{{ file.size|sizify }}</td>
+              </tr>
+            {% endif %}
+          {% endfor %}
 
-      </table>
+          </tbody>
+
+        </table>
+      </div>
     {% endif %}
   {% endfor %}
 {% endblock %}

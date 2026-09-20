@@ -1,0 +1,43 @@
+{# Renders one bound field as a Bootstrap 5 form group: a label, the widget with #}
+{# the Bootstrap class its type needs, then errors and help text. `css_classes`  #}
+{# is optional and only set by the `as_bootstrap_inline` filter, which uses it to #}
+{# hide the labels visually and repeat them as placeholders instead.             #}
+{% load form_tags %}
+
+{% if field.is_hidden %}
+  {{ field }}
+{% else %}{% with kind=field|field_kind %}
+  <div id="div_{{ field.auto_id }}" class="mb-3{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+
+    {% if field.label and kind != "checkbox" %}
+      <label for="{{ field.auto_id }}"
+             class="form-label{% if css_classes.label %} {{ css_classes.label }}{% endif %}">
+        {{ field.label|safe }}{% if field.field.required %} <span class="text-danger" aria-hidden="true">*</span>{% endif %}
+      </label>
+    {% endif %}
+
+    {% if kind == "choice_group" %}
+      {% include "dpb/_field_errors.html" %}
+      {% for subwidget in field.subwidgets %}
+        <div class="form-check">
+          {{ subwidget|bootstrap_widget }}
+          <label class="form-check-label" for="{{ subwidget.id_for_label }}">{{ subwidget.choice_label }}</label>
+        </div>
+      {% endfor %}
+      {% include "dpb/_field_help_text.html" %}
+    {% elif kind == "checkbox" %}
+      <div class="form-check">
+        {{ field|bootstrap_widget }}
+        <label class="form-check-label" for="{{ field.auto_id }}">
+          {{ field.label|safe }}{% if field.field.required %} <span class="text-danger" aria-hidden="true">*</span>{% endif %}
+        </label>
+      </div>
+      {% include "dpb/_field_errors.html" %}
+      {% include "dpb/_field_help_text.html" %}
+    {% else %}
+      {{ field|bootstrap_widget }}
+      {% include "dpb/_field_errors.html" %}
+      {% include "dpb/_field_help_text.html" %}
+    {% endif %}
+  </div>
+{% endwith %}{% endif %}
