@@ -133,7 +133,7 @@ Beide Farbmodi sind gleichwertig gebaut, nicht einer als nachgereichte Variante.
 Eine Markenfarbe, sonst Graustufen.
 
 ### Primary
-- **Bundesblau** (`#0051a8`): Die einzige Markenfarbe. Links im Fließtext, `btn-primary`, Pagination. Der Fokusring `0 0 0 0.25rem rgba(0, 81, 168, 0.25)` — dieselbe Farbe bei 25 % — gilt für Formularfelder, Navigations-Links und Pagination; Buttons setzen stattdessen ihre eigene `--bs-btn-focus-shadow-rgb` bei 50 % (`38, 107, 181` bei `btn-primary` und `btn-link`, `51, 51, 51` bei `btn-outline-dark`). Im dunklen Modus tritt sie als **Bundesblau Nacht** (`#6697cb`) auf — dieselbe Farbe, um 40 % aufgehellt, damit sie auf `#1b1d20` den Kontrast hält.
+- **Bundesblau** (`#0051a8`): Die einzige Markenfarbe. Links im Fließtext, `btn-primary`, Pagination. Als Fokusring bei 25 % (`0 0 0 0.25rem rgba(0, 81, 168, 0.25)`) an Formularfeldern, Navigations-Links und Pagination — Buttons bringen ihren eigenen Ring mit (siehe Components → Buttons). Im dunklen Modus tritt sie als **Bundesblau Nacht** (`#6697cb`) auf — dieselbe Farbe, um 40 % aufgehellt, damit sie auf `#1b1d20` den Kontrast hält.
 - **Bundesblau Tief** (`#00458f`): Hoverzustand von `btn-primary`. Der Aktivzustand geht eine Stufe tiefer auf `#004186`. Beide erscheinen nie als Flächenfarbe.
 
 ### Neutral
@@ -203,7 +203,7 @@ Ein Grundradius: `0.375rem` (`--bs-border-radius`). Karten, Formularfelder, Bild
 
 Zwei Ausnahmen, beide begründet: die Karussell-Indikatoren sind Kreise (`border-radius: 50%`); das Bundeszeichen ist Line-Art ohne Rahmen.
 
-Rahmen sind immer `1px` und tragen `--bs-border-color`. Es gibt keine doppelten Rahmen, keine gestrichelten Linien und keine Umrandung in Markenfarbe — außer am fokussierten Formularfeld, wo der Rahmen auf eine helle Bundesblau-Tönung wechselt.
+Rahmen sind immer `1px` und tragen `--bs-border-color`. Es gibt keine doppelten Rahmen, keine gestrichelten Linien und keine Umrandung in Markenfarbe. Die einzige Ausnahme vom neutralen Rahmen ist die helle Bundesblau-Tönung am fokussierten Formularfeld (siehe Inputs / Fields).
 
 Bilder im Inhalt tragen `img-thumbnail`: schmaler Innenabstand, Grundfarbe der Seite, `1px`-Linie, derselbe Radius. Das ist der visuelle Ersatz für einen Schatten — ein Passepartout statt einer Erhebung.
 
@@ -215,9 +215,10 @@ Bilder im Inhalt tragen `img-thumbnail`: schmaler Innenabstand, Grundfarbe der S
 - **Outline-Dark:** die Arbeitsvariante und der häufigste Button im Bestand. Vollgroß ist er der Absende-Button fast aller Formulare (Kontakt, Blogeintrag, Haus anlegen, Heimabend, Anmeldung); als `btn-sm` trägt er „Weiterlesen" und „Details" in Listen. Rahmen und Schrift in Anthrazit, Fläche transparent.
 - **Dark in groß:** einmal im Bestand, auf der Anmeldeseite für den externen Anbieter (`btn-lg btn-dark`, Schriftgröße `1.25rem`). Die Größe markiert dort, dass es die einzige Handlung der Seite ist.
 - **Link:** unterstrichener Text in Bundesblau ohne Rahmen. Für Weiterführendes innerhalb eines Textblocks.
-- **Hover / Focus:** Farbwechsel nach Bundesblau Tief bei `btn-primary`, Übergang `0.15s ease-in-out` auf Farbe, Fläche, Rahmen und Schatten. Der Fokusring trägt die Farbe des Buttons, nicht die Markenfarbe (siehe Colors) — er wird nie entfernt.
+- **Hover:** Farbwechsel nach Bundesblau Tief bei `btn-primary`, Übergang `0.15s ease-in-out` auf Farbe, Fläche, Rahmen und Schatten.
+- **Focus:** Der Ring trägt die Farbe des Buttons selbst bei 50 % (`--bs-btn-focus-shadow-rgb`: `38, 107, 181` bei `btn-primary` und `btn-link`, `51, 51, 51` bei `btn-outline-dark`), nicht die Markenfarbe. Er wird nie entfernt.
 
-**Die Dunkelmodus-Umkehr-Regel.** `btn-dark` und `btn-outline-dark` verschwinden im dunklen Modus, weil Bootstrap seine Farb-Utilities nicht pro Modus dreht. Deshalb tauschen beide dort auf helle Tokens (`#e9ecef` als Schrift- und Rahmenfarbe, `$gray-900` beim Hover). Jede neue Verwendung eines `dark`-Utilities muss denselben Tausch mitbringen oder auf ein modusfestes Token ausweichen.
+**Die Dunkelmodus-Umkehr-Regel.** `btn-dark` und `btn-outline-dark` verschwinden im dunklen Modus, weil Bootstrap seine Farb-Utilities nicht pro Modus dreht. Deshalb tauschen beide dort auf helle Tokens, jeder an seiner Stelle: `btn-dark` nimmt `#e9ecef` als Fläche und Rahmen mit dunkler Schrift, `btn-outline-dark` nimmt `#e9ecef` als Schrift und Rahmen bei transparenter Fläche. Im Hover gehen beide auf Weiß mit dunkler Schrift. Jede neue Verwendung eines `dark`-Utilities muss denselben Tausch mitbringen oder auf ein modusfestes Token ausweichen.
 
 ### Cards / Containers
 - **Corner Style:** Grundradius (siehe Shapes).
@@ -242,7 +243,7 @@ Bilder im Inhalt tragen `img-thumbnail`: schmaler Innenabstand, Grundfarbe der S
 - **State:** besuchte Treffer bleiben unterscheidbar (`--bs-success-text-emphasis`) — in beiden Farbmodi.
 
 ### Karussell (Signature Component)
-Das Karussell über der Startseite ist die einzige gestaltete Abweichung vom Bootstrap-Standard: die Indikatoren sitzen **unter** dem Bild statt darauf (`position: static`), als `10px`-Kreise in `--bs-secondary-color`. Der `<header>` erzwingt `data-bs-theme="dark"`, deshalb lösen die Punkte immer zum dunklen Wert auf (`rgba(222, 226, 230, 0.75)`) und bleiben hell — auch auf der hellen Seite. Das Bild bleibt unverdeckt. Jedes Bild trägt eine beschreibende `alt`-Angabe; das erste lädt normal, alle weiteren `loading="lazy"`.
+Das Karussell über der Startseite ist die einzige gestaltete Abweichung vom Bootstrap-Standard: die Indikatoren sitzen **unter** dem Bild statt darauf (`position: static`), als `10px`-Kreise in `--bs-secondary-color`. Der `<header>` erzwingt `data-bs-theme="dark"`, deshalb löst dieses Token immer zum Dunkelmodus-Wert auf (`rgba(222, 226, 230, 0.75)`) — die Punkte bleiben hell, auch auf der hellen Seite. Das Bild bleibt unverdeckt. Jedes Bild trägt eine beschreibende `alt`-Angabe; das erste lädt normal, alle weiteren `loading="lazy"`.
 
 ### Farbschema-Umschalter
 Dreiwertig (Hell / Dunkel / Automatisch), im Dropdown rechts in der Leiste, gespeichert unter `dpb-theme` im `localStorage`. Die Auflösung läuft in einem Inline-Skript im `<head>` vor dem Stylesheet, damit nie das falsche Thema aufblitzt. Diese Reihenfolge ist Teil des Designs, nicht eine Optimierung: ein Wechsel dieser Stelle bringt das Flackern zurück.

@@ -363,7 +363,7 @@
     "rules": [
       {
         "name": "Die Ein-Farben-Regel",
-        "body": "Es gibt genau eine Markenfarbe. Alles, was anklickbar ist, trägt sie; alles, was es nicht ist, trägt sie nicht. Eine zweite Akzentfarbe einzuführen heißt, diese Regel aufzukündigen — dann muss das gesamte System neu entschieden werden, nicht nur eine Komponente. Eine Stelle weicht ab: der Bearbeiten-Link fuer Staff in der Archiv-Detailseite (archive/templates/archive/detail.html) traegt btn-info und damit Bootstraps Tuerkis. Bestand, kein Vorbild.",
+        "body": "Es gibt genau eine Markenfarbe. Alles, was anklickbar ist, trägt sie; alles, was es nicht ist, trägt sie nicht. Eine zweite Akzentfarbe einzuführen heißt, diese Regel aufzukündigen — dann muss das gesamte System neu entschieden werden, nicht nur eine Komponente. Eine Stelle weicht ab: der Bearbeiten-Link für Staff in der Archiv-Detailseite (archive/templates/archive/detail.html) trägt btn-info und damit Bootstraps Türkis. Bestand, kein Vorbild.",
         "section": "colors"
       },
       {
@@ -393,7 +393,7 @@
       },
       {
         "name": "Die Dunkelmodus-Umkehr-Regel",
-        "body": "btn-dark und btn-outline-dark verschwinden im dunklen Modus, weil Bootstrap seine Farb-Utilities nicht pro Modus dreht. Deshalb tauschen beide dort auf helle Tokens (#e9ecef als Schrift- und Rahmenfarbe, $gray-900 beim Hover). Jede neue Verwendung eines dark-Utilities muss denselben Tausch mitbringen oder auf ein modusfestes Token ausweichen.",
+        "body": "btn-dark und btn-outline-dark verschwinden im dunklen Modus, weil Bootstrap seine Farb-Utilities nicht pro Modus dreht. Deshalb tauschen beide dort auf helle Tokens, jeder an seiner Stelle: btn-dark nimmt #e9ecef als Fläche und Rahmen mit dunkler Schrift, btn-outline-dark nimmt #e9ecef als Schrift und Rahmen bei transparenter Fläche. Im Hover gehen beide auf Weiß mit dunkler Schrift. Jede neue Verwendung eines dark-Utilities muss denselben Tausch mitbringen oder auf ein modusfestes Token ausweichen.",
         "section": "components"
       }
     ],
