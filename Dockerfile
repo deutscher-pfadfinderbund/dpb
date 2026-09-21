@@ -1,4 +1,4 @@
-FROM node:24-alpine AS npm-deps
+FROM node:26-alpine AS npm-deps
 WORKDIR /build
 
 # Install npm deps
