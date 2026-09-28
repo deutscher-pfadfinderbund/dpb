@@ -9,7 +9,7 @@
     "leaflet-fullscreen": "^1.0.2"
   },
   "devDependencies": {
-    "sass": "^1.104.1"
+    "sass": "^1.105.0"
   },
   "scripts": {
     "compile-css": "sass --load-path=. --style=compressed --quiet-deps --pkg-importer=node styles/style.sass:dpb/static/styles/style.css",
